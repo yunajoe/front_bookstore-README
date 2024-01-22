@@ -8,12 +8,13 @@ params:
   - isError: required, boolean
   - pattern: optional,
   - validate: optional, 
-  
+
 returns: component
 */
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { ValidationRule } from 'react-hook-form';
 
 interface InputProps {
   id: string;
@@ -21,8 +22,8 @@ interface InputProps {
   register: any;
   isRequired: boolean;
   isError: boolean;
-  pattern?: any;
-  validate?: any;
+  pattern?: ValidationRule<RegExp>;
+  validate?: { check: () => string | undefined };
 }
 
 function TextInput({
@@ -31,8 +32,8 @@ function TextInput({
   register,
   isRequired,
   isError,
-  pattern = {},
-  validate = {},
+  pattern,
+  validate,
 }: InputProps) {
   return (
     <div className="relative w-full">
