@@ -42,7 +42,7 @@ function SigninForm() {
       <form
         onSubmit={handleSubmit(handleValidSubmit, handleInvalidSubmit)}
         className="flex flex-col gap-[40px] justify-center items-start  w-[300px]">
-        <div className="flex flex-col gap-[13px]">
+        <div className="flex flex-col gap-[13px] w-full">
           <TextInput
             id="email"
             placeholder="이메일"
