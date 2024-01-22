@@ -1,4 +1,6 @@
+import RegisterButton from '@/components/button/RegisterButton';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 function SignIn() {
@@ -37,19 +39,19 @@ function SignIn() {
           </label>
           <p className="mx-2 font-[15px] text-[#363636]">로그인 상태 유지</p>
         </div>
-        <button className="h-[50px] w-full text-center bg-[#66C57B] rounded-[5px] text-[17px] text-[#FFF]">
-          로그인
-        </button>
+        <RegisterButton>로그인</RegisterButton>
         <div className="flex gap-x-1">
           <p className="text-[#767676]">아이디가 없으신가요?</p>
-          <p className="text-[#66C57B] font-[500]">회원가입</p>
+          <Link href="/signup" className="text-[#66C57B] font-[500]">
+            회원가입
+          </Link>
         </div>
         <div className="flex flex-col gap-y-[20px] text-[#767676] ">
           <p className="text-center text-xs">SNS로 로그인/회원가입</p>
           <div className="w-[184px] flex justify-between">
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]"></div>
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]"></div>
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]"></div>
+            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]" />
+            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]" />
+            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]" />
           </div>
         </div>
       </div>

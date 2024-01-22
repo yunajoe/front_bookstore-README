@@ -1,3 +1,4 @@
+import RegisterButton from '@/components/button/RegisterButton';
 import Link from 'next/link';
 
 function SignUp() {
@@ -18,9 +19,7 @@ function SignUp() {
         </div>
         {/* TODO: input ID, 비밀번호, 비밀번호 확인, 닉네임 */}
         {/* TODO: 약관동의  */}
-        <button className="h-[50px] w-full text-center bg-[#66C57B] rounded-[5px] text-[17px] text-[#FFF]">
-          회원가입
-        </button>
+        <RegisterButton>회원가입</RegisterButton>
         <div className="flex gap-x-1">
           <p className="text-[#767676]">이미 아이디가 있으신가요?</p>
           <Link href="/signin" className="text-[#66C57B] font-[500]">
