@@ -1,4 +1,5 @@
 import RegisterButton from '@/components/button/RegisterButton';
+import SocialCircle from '@/components/socialCircle/SocialCircle';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -49,9 +50,9 @@ function SignIn() {
         <div className="flex flex-col gap-y-[20px] text-[#767676] ">
           <p className="text-center text-xs">SNS로 로그인/회원가입</p>
           <div className="w-[184px] flex justify-between">
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]" />
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]" />
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]" />
+            <SocialCircle />
+            <SocialCircle />
+            <SocialCircle />
           </div>
         </div>
       </div>

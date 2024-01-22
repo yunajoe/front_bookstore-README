@@ -1,4 +1,5 @@
 import RegisterButton from '@/components/button/RegisterButton';
+import SocialCircle from '@/components/socialCircle/SocialCircle';
 import Link from 'next/link';
 
 function SignUp() {
@@ -12,9 +13,9 @@ function SignUp() {
         <div className="w-full flex flex-col items-center  gap-y-[20px] text-[#767676] rounded-[10px] border-solid border-2 border-[#DBDBDB] py-5">
           <p className="text-center text-xs">SNS로 간편하게 로그인/회원가입</p>
           <div className="w-[184px] flex justify-between">
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]"></div>
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]"></div>
-            <div className="w-[48px] h-[48px] rounded-full border-solid border-2 border-[#DBDBDB]"></div>
+            <SocialCircle />
+            <SocialCircle />
+            <SocialCircle />
           </div>
         </div>
         {/* TODO: input ID, 비밀번호, 비밀번호 확인, 닉네임 */}
