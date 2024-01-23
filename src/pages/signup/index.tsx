@@ -23,11 +23,8 @@ function SignUp() {
     getValues,
     formState: { errors },
   } = method;
-
   const passwordValue = getValues('password');
   const rePasswordValue = getValues('repassword');
-
-  console.log('pasdsfdsf', passwordValue, rePasswordValue);
   const onSubmit = () => {
     setError('email', {
       type: 'manual',
