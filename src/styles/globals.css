@@ -50,12 +50,3 @@ body {
     @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
   }
 }
-
-@layer utilities {
-  .checkIcon {
-    background-image: url('/public/icons/checkIcon.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-}

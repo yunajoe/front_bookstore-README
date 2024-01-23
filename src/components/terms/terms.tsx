@@ -10,14 +10,15 @@ const TERMS_TITLES = [
   '개인정보 수집 및 이용동의',
 ];
 
+interface CheckedStates {
+  [key: string]: boolean;
+}
+
 export default function TermsCheckbox() {
   const { register, setValue } = useFormContext();
   const [checkedStates, setCheckedStates] = useState<CheckedStates>(
     TERMS_TITLES.reduce((acc, title) => ({ ...acc, [title]: false }), {}),
   );
-  interface CheckedStates {
-    [key: string]: boolean;
-  }
 
   const handleSelectAll = (e: FormEvent<HTMLInputElement>) => {
     const isChecked = e.currentTarget.checked;
