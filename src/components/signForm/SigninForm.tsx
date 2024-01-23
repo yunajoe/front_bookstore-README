@@ -5,6 +5,7 @@ returns: component
 */
 
 import { useForm } from 'react-hook-form';
+import Image from 'next/image';
 
 import { PasswordInput, TextInput } from '@/components/signInput/SignInput';
 
@@ -41,8 +42,8 @@ function SigninForm() {
     <div>
       <form
         onSubmit={handleSubmit(handleValidSubmit, handleInvalidSubmit)}
-        className="flex flex-col gap-[40px] justify-center items-start  w-[300px]">
-        <div className="flex flex-col gap-[13px] w-full">
+        className="flex flex-col gap-40 justify-center items-start w-300">
+        <div className="flex flex-col gap-14 w-full">
           <TextInput
             id="email"
             placeholder="이메일"
@@ -60,24 +61,32 @@ function SigninForm() {
         </div>
         <div className="relative">
           {errors.password && (
-            <p className="text-rose-500 absolute bottom-8 text-sm	whitespace-nowrap">
+            <p className="text-red absolute bottom-36 text-14	whitespace-nowrap">
               {errors.password?.message}
             </p>
           )}
-          <input
-            id="signinMaintainCheckbox"
-            type="checkbox"
-            className="p-1 relative float-left mr-1 mt-0.5 w-[20px] h-[20px] rounded-full
-             border-2 border-solid border-neutral-300 checked:bg-lime-500 
-             appearance-none"
-          />
-          <label className="text-black" htmlFor="signinMaintainCheckbox">
-            로그인 상태 유지
-          </label>
+
+          <div className="relative">
+            <label htmlFor="signinMaintainCheckbox">
+              로그인 상태 유지
+              <Image
+                src="/icons/check-icon.svg"
+                alt=""
+                width={10}
+                height={6}
+                className="absolute z-10 top-6 left-5"
+              />
+            </label>
+            <input
+              id="signinMaintainCheckbox"
+              type="checkbox"
+              className="p-1 relative float-left mr-5 mt-0.5 w-20 h-20 rounded-full
+            border-2 border-solid border-gray-3 checked:bg-green checked:border-0
+            appearance-none"
+            />
+          </div>
         </div>
-        <button className="text-white w-[300px] bg-lime-500 py-3 border">
-          로그인
-        </button>
+        <button className="text-white bg-green py-12">로그인</button>
       </form>
     </div>
   );

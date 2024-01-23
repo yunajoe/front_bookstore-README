@@ -20,8 +20,8 @@ interface InputProps {
   id: string;
   placeholder: string;
   register: any;
-  isRequired: boolean;
-  isError: boolean;
+  isRequired?: boolean;
+  isError?: boolean;
   pattern?: ValidationRule<RegExp>;
   validate?: { check: () => string | undefined };
 }
@@ -46,10 +46,9 @@ function TextInput({
           pattern: { ...pattern },
           validate: { ...validate },
         })}
-        className={`py-3.5 w-full
-        text-black
+        className={`py-12 w-full
         autofill:bg-white 
-        border-b focus:border-lime-500 ${isError ? 'border-rose-500' : ''}
+        border-b border-gray-3 focus:border-green ${isError ? 'border-red' : ''}
         outline-none`}
       />
     </div>
@@ -69,7 +68,7 @@ function PasswordInput({
 
   return (
     <div className="relative  w-full">
-      <button type="button" className="absolute top-[19px] right-[14px]">
+      <button type="button" className="absolute top-18 right-14">
         <Image
           onClick={() => setIsView(!isView)}
           src={isView ? 'icons/eye-open.svg' : 'icons/eye-close.svg'}
@@ -87,10 +86,9 @@ function PasswordInput({
           pattern: { ...pattern },
           validate: { ...validate },
         })}
-        className={`py-3.5 w-full
-        text-black
+        className={`py-12 w-full
         autofill:bg-white 
-        border-b focus:border-lime-500 ${isError ? 'border-rose-500' : ''}
+        border-b border-gray-3 focus:border-green ${isError ? 'border-red' : ''}
         outline-none`}
       />
     </div>

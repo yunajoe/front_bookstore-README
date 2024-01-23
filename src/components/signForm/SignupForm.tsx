@@ -67,9 +67,9 @@ function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(handleValidSubmit, handleInvalidSubmit)}
-      className="flex flex-col gap-[40px] justify-center items-start w-[300px]">
-      <div className="relative flex flex-col gap-[12px] w-full">
-        <label htmlFor="email" className="text-black font-bold	">
+      className="flex flex-col gap-40 justify-center items-start max-w-360 min-w-300">
+      <div className="relative flex flex-col gap-12 w-full">
+        <label htmlFor="email" className="font-bold">
           이메일
         </label>
         <TextInput
@@ -81,16 +81,16 @@ function SignupForm() {
           pattern={emailPattern}
         />
         {errors.email && (
-          <p className="text-rose-500 absolute text-sm -bottom-6 whitespace-nowrap">
+          <p className="text-red absolute -bottom-24 text-14	whitespace-nowrap">
             {errors.email.message}
           </p>
         )}
       </div>
-      <div className="relative flex flex-col gap-[5px] w-full">
-        <label htmlFor="password" className="text-black font-bold	">
+      <div className="relative flex flex-col gap-6 w-full">
+        <label htmlFor="password" className="font-bold	">
           비밀번호
         </label>
-        <p className="text-gray-500 text-sm	">
+        <p className="text-gray-4 text-14">
           영문, 숫자를 포함한 8자 이상의 비밀번호
         </p>
         <PasswordInput
@@ -102,13 +102,13 @@ function SignupForm() {
           pattern={passwordPattern}
         />
         {errors.password && (
-          <p className="text-rose-500 absolute -bottom-6 text-sm	whitespace-nowrap">
+          <p className="text-red absolute -bottom-24 text-14	whitespace-nowrap">
             {errors.password.message}
           </p>
         )}
       </div>
-      <div className="relative flex flex-col gap-[12px] w-full">
-        <label htmlFor="passwordRepeat" className="text-black font-bold	">
+      <div className="relative flex flex-col gap-12 w-full">
+        <label htmlFor="passwordRepeat" className="font-bold	">
           비밀번호 확인
         </label>
         <PasswordInput
@@ -120,18 +120,16 @@ function SignupForm() {
           validate={passwordRepeatValidate}
         />
         {errors.passwordRepeat && (
-          <p className="text-rose-500 absolute -bottom-6 text-sm	whitespace-nowrap">
+          <p className="text-red absolute -bottom-24 text-14	whitespace-nowrap">
             {errors.passwordRepeat.message}
           </p>
         )}
       </div>
-      <div className="relative flex flex-col gap-[5px] w-full">
-        <label htmlFor="nickname" className="text-black font-bold	">
+      <div className="relative flex flex-col gap-6 w-full">
+        <label htmlFor="nickname" className="font-bold	">
           닉네임
         </label>
-        <p className="text-gray-500 text-sm	">
-          다른 유저와 중복되지 않는 닉네임
-        </p>
+        <p className="text-gray-4 text-14">다른 유저와 중복되지 않는 닉네임</p>
         <TextInput
           id="nickname"
           placeholder="닉네임"
@@ -141,14 +139,12 @@ function SignupForm() {
           pattern={nicknamePattern}
         />
         {errors.nickname && (
-          <p className="text-rose-500 absolute -bottom-6 text-sm	whitespace-nowrap">
+          <p className="text-red absolute -bottom-24 text-14	whitespace-nowrap">
             {errors.nickname.message}
           </p>
         )}
       </div>
-      <button className="text-white w-[300px] bg-lime-500 py-3 border">
-        회원가입
-      </button>
+      <button className="text-white bg-green py-12">회원가입</button>
     </form>
   );
 }
