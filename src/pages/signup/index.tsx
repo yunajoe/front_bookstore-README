@@ -69,7 +69,6 @@ function SignUp() {
               <SocialCircle />
             </div>
           </div>
-          {/* TODO: input ID, 비밀번호, 비밀번호 확인, 닉네임 */}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full flex flex-col items-center gap-y-10">
@@ -88,7 +87,6 @@ function SignUp() {
                 {errors.email.message}
               </p>
             )}
-            {/* 비밀번호 */}
             <label className="text-[#363636] text-16 font-bold text-left w-full">
               비밀번호
             </label>
@@ -108,7 +106,6 @@ function SignUp() {
                 {errors.password.message}
               </p>
             )}
-            {/* 비밀번호확인 */}
             <label className="text-[#363636] text-16 font-bold text-left w-full">
               비밀번호확인
             </label>
@@ -124,7 +121,6 @@ function SignUp() {
                 {errors.repassword.message}
               </p>
             )}
-            {/* 닉네임 */}
             <label className="text-[#363636] text-16 font-bold text-left w-full">
               닉네임
             </label>

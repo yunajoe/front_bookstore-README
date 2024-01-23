@@ -14,5 +14,4 @@ function RegisterButton({ onClick, children }: ButtonProps) {
     </button>
   );
 }
-
 export default RegisterButton;
