@@ -1,4 +1,5 @@
 /* Text input 컴포넌트와 Password input 컴포넌트
+react hook form의 register과 isError, pattern, validate를 옵셔널 인자로 넘겨줘서 사용.
 
 params: 
   - id: required, string
@@ -14,16 +15,15 @@ returns: component
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ValidationRule } from 'react-hook-form';
 
 interface InputProps {
   id: string;
   placeholder: string;
   register: any;
-  isRequired?: boolean;
-  isError?: boolean;
-  pattern?: ValidationRule<RegExp>;
-  validate?: { check: () => string | undefined };
+  isRequired?: any;
+  isError?: any;
+  pattern?: any;
+  validate?: any;
 }
 
 function TextInput({
