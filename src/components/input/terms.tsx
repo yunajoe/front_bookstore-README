@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -12,7 +13,6 @@ export default function TermsCheckbox() {
   const [checkedStates, setCheckedStates] = useState<CheckedStates>(
     TERMS_TITLES.reduce((acc, title) => ({ ...acc, [title]: false }), {}),
   );
-  console.log(checkedStates);
   interface CheckedStates {
     [key: string]: boolean;
   }
@@ -42,34 +42,45 @@ export default function TermsCheckbox() {
 
   return (
     <div className="w-[360px] mobile:w-[330px] ">
-      <label className="font-bold inline-block pb-1">약관동의</label>
-      <div className="h-[48px] flex items-center border-0 border-b-2 border-b-[#DBDBDB]">
+      <label className="font-bold inline-block pb-2">약관동의</label>
+      <div className="h-[48px] flex items-center border-0 border-b-[1px] border-b-[#DBDBDB] gap-2">
         <input
           type="checkbox"
           {...register('selectAll')}
           checked={Object.values(checkedStates).every(Boolean)}
           onChange={handleSelectAll}
-          className="w-4 h-4 rounded-full border border-[#DBDBDB] appearance-none cursor-pointer transition-colors duration-200 checked:bg-green-600 checked:border-[3.5px] checked:border-[#DBDBDB] mr-2"
+          className="w-4 h-4 rounded-full border border-[#DBDBDB] appearance-none cursor-pointer transition-colors duration-200 checked:bg-[url('/icons/checkIcon.svg')] checked:bg-cover "
         />
-        <label htmlFor="selectAll">{'전체 동의'}</label>
+        <label htmlFor="selectAll" className="text-[15px] font-medium">
+          전체 동의
+        </label>
       </div>
       <div>
         {TERMS_TITLES.map((termsTitle) => (
-          <div key={termsTitle} className="h-[48px] flex items-center">
-            <input
-              {...register(`id.${termsTitle}`)}
-              type="checkbox"
-              checked={checkedStates[termsTitle]}
-              onChange={() => handleIndividualCheck(termsTitle)}
-              className="w-4 h-4 rounded-full border border-[#DBDBDB] appearance-none cursor-pointer transition-colors duration-200 checked:bg-green-600 checked:border-[3.5px] checked:border-[#DBDBDB] mr-2"
-            />
-            <label
-              htmlFor={`id.${termsTitle}`}
-              className="text-[#767676] text-sm">
-              {termsTitle}
-            </label>
-            <button className="pl-2" onClick={handleOpenModal}>
-              {'👉'}
+          <div
+            key={termsTitle}
+            className="h-[48px] flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <input
+                {...register(`id.${termsTitle}`)}
+                type="checkbox"
+                checked={checkedStates[termsTitle]}
+                onChange={() => handleIndividualCheck(termsTitle)}
+                className="w-4 h-4 rounded-full border border-[#DBDBDB] appearance-none cursor-pointer transition-colors duration-200 checked:bg-green-600 checked:border-[3.5px] checked:border-[#DBDBDB]"
+              />
+              <label
+                htmlFor={`id.${termsTitle}`}
+                className="text-[#767676] text-[15px]">
+                {termsTitle}
+              </label>
+            </div>
+            <button className="pr-2" onClick={handleOpenModal}>
+              <Image
+                src="icons/rightArrow.svg"
+                width={18}
+                height={18}
+                alt="약관내용 전체보기 버튼"
+              />
             </button>
           </div>
         ))}

@@ -30,11 +30,15 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
-/* @layer utilities {
-  .text-balance {
+@layer utilities {
+  /* .text-balance {
     text-wrap: balance;
+  } */
+
+  .custom-check-icon {
+    background-image: url('/icons/checkIcon.svg');
   }
-} */
+}
 
 @layer base {
   button {
