@@ -19,21 +19,29 @@
   --gray-7: 51 50 54;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255 255 255;
     --background-start-rgb: 0 0 0;
     --background-end-rgb: 0 0 0;
   }
-}
-
+} */
+/* 
 body {
   @apply text-black;
 }
 
 @layer utilities {
-  .text-balance {
+  /* .text-balance {
     text-wrap: balance;
+  } */
+
+@layer base {
+  button {
+    text-align: left;
+  }
+  input::placeholder {
+    color: black;
   }
   .flex-center {
     @apply flex items-center justify-center;
