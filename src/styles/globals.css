@@ -23,11 +23,11 @@
     --background-end-rgb: 0 0 0;
   }
 } */
-/* 
+
 body {
   @apply text-black;
-}
-
+} 
+/* 
 @layer utilities {
   /* .text-balance {
     text-wrap: balance;
