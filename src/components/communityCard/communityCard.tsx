@@ -1,11 +1,8 @@
 import Image from 'next/image';
 import EmojiButtonContainer from '@/components/communityCard/emoji/emojiButtonContainer';
-import KebabImg from '@/public/icons/Kebab.svg';
 import ProfileImg from '@/public/images/SampleBookCover1.jpeg';
 import SampleBookCoverImg from '@/public/images/SampleBookCover3.jpeg';
-import useShowDropDown from '@/hooks/useShowDropDown';
-import { MutableRefObject, useRef } from 'react';
-import KebabDropDownButton from '../button/kebabDropDownButton';
+import KebabButton from '../button/kebabButton/kebabButton';
 
 interface CommunityCardProps {
   profileImg: string;
@@ -24,12 +21,6 @@ function CommunityCard({
   bookTitle,
   review,
 }: CommunityCardProps) {
-  const ref = useRef() as MutableRefObject<HTMLImageElement>;
-  const [showOptions, setShowOptions] = useShowDropDown(ref, false);
-
-  const handleKebabClick = () => {
-    setShowOptions(!showOptions);
-  };
 
   return (
     <div
@@ -43,16 +34,7 @@ function CommunityCard({
           <p className="text-14 font-bold text-[#505050]">{userNickname}</p>
           <p className="text-12 font-normal text-[#767676]">{createAt}</p>
         </div>
-        <Image
-          className="absolute top-23 right-20"
-          src={KebabImg}
-          alt="케밥버튼"
-          onClick={handleKebabClick}
-          ref={ref}
-        />
-        {showOptions && (
-          <KebabDropDownButton title1='수정하기' title2='삭제하기'/>
-        )}
+        <KebabButton title1='수정하기' title2='삭제하기' />
       </div>
       <div className="flex-center w-345 h-180 bg-[#f5f5f5]">
         <Image
