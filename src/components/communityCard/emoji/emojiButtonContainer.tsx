@@ -8,7 +8,7 @@ import CryEmojiImg from "@/public/images/CryEmoji.png";
 function EmojiButtonContainer({count = 0}) {
 
   return (
-    <div className="flex-center gap-8">
+    <div className="flex items-center justify-start gap-8 px-20">
       <EmojiButton emoji={RedHeartEmojiImg} count={count}/>
       <EmojiButton emoji={HappyEmojiImg} count={count}/>
       <EmojiButton emoji={ExitedEmojiImg} count={count}/>

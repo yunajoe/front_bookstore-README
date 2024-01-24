@@ -45,7 +45,7 @@ function CommunityCard({
       </div>
       <div className="flex flex-col px-20">
         <p className="text-16 font-bold text-[#505050]">{bookTitle}</p>
-        <p className="text-14 font-light text-[#767676]">{review}</p>
+        <p className="text-14 font-light text-[#767676] h-60">{review}</p>
       </div>
       <EmojiButtonContainer />
     </div>
