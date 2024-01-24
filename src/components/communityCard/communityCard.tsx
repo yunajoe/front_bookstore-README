@@ -5,6 +5,7 @@ import ProfileImg from '@/public/images/SampleBookCover1.jpeg';
 import SampleBookCoverImg from '@/public/images/SampleBookCover3.jpeg';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import { MutableRefObject, useRef } from 'react';
+import KebabDropDownButton from '../button/kebabDropDownButton';
 
 interface CommunityCardProps {
   profileImg: string;
@@ -50,10 +51,7 @@ function CommunityCard({
           ref={ref}
         />
         {showOptions && (
-          <div className="flex-center flex-col absolute top-43 right-20">
-            <div className="">수정하기</div>
-            <div>삭제하기</div>
-          </div>
+          <KebabDropDownButton title1='수정하기' title2='삭제하기'/>
         )}
       </div>
       <div className="flex-center w-345 h-180 bg-[#f5f5f5]">
