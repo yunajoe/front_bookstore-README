@@ -3,8 +3,8 @@ import CartButton from './cartButton'
 import SearchInput from './searchInput';
 import MyPageButton from './myPageButton';
 import CategoryButton from './categoryButton';
-import LoginButton from './loginButton';
-import LogOutButton from './logOutButton';
+import SignInButton from './signInButton';
+import SignOutButton from './signOutButton';
 import SignUpButton from './signUpButton';
 interface HeaderProps {
   isLoggedIn: boolean;
@@ -25,7 +25,7 @@ function NonLoggedInHeader() {
         </div>
         <SearchInput />
         <div className="inline-flex items-center tablet:gap-40 pc:gap-40">
-          <LoginButton/>
+          <SignInButton/>
           <Seperator />
           <SignUpButton/>
         </div>
@@ -43,7 +43,7 @@ function LoggedInHeader({ numItemsOfCart }: { numItemsOfCart: number }) {
         <div className="text-18 pc:text-24 text-green font-bold tablet:text-24">Read Me</div>
         <SearchInput />
         <div className="inline-flex gap-26 items-center">
-          <LogOutButton/>
+          <SignOutButton/>
           <Seperator/>
           <CartButton numItemsOfCart={numItemsOfCart} />
           <MyPageButton />

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import IconProfile from '@/public/icons/ProfileIcon.svg'
-function LoginButton(){
+function SignInButton(){
   return(
   <Link href="/signin">
   <div className="cursor-pointer text-15 mobile:hidden ">로그인</div>
@@ -9,4 +9,4 @@ function LoginButton(){
 </Link>)
 }
 
-export default LoginButton;
+export default SignInButton;
