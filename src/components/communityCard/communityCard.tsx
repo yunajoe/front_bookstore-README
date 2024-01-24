@@ -34,7 +34,7 @@ function CommunityCard({
         <Image className='absolute top-23 right-20' src={KebabImg} alt="케밥버튼" />
       </div>
       <div className='flex-center w-345 h-180 bg-[#f5f5f5] '>
-        <Image src={SampleBookCoverImg} alt="책표지" className='h-full w-auto'  />
+        <Image src={SampleBookCoverImg} alt="책표지" className='h-auto w-auto'  />
       </div>
       <div className='flex flex-col px-20'>
         <p className='text-16 font-bold text-[#505050]'>{bookTitle}</p>
