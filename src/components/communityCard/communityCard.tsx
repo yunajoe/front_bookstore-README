@@ -29,7 +29,7 @@ function CommunityCard({
         </div>
         <div className='flex flex-col justify-start py-5 pl-12'>
           <p className='text-14 font-bold text-[#505050]'>{userNickname}</p>
-          <p className='text-12 font- text-[#767676]'>{createAt}</p>
+          <p className='text-12 font-normal text-[#767676]'>{createAt}</p>
         </div>
         <Image className='absolute top-23 right-20' src={KebabImg} alt="케밥버튼" />
       </div>
