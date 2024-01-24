@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import EmojiButtonContainer from '@/components/communityCard/emoji/emojiButtonContainer';
-import ProfileImg from '@/public/images/SampleBookCover1.jpeg';
-import SampleBookCoverImg from '@/public/images/SampleBookCover3.jpeg';
 import KebabButton from '@/components/button/kebabButton/kebabButton';
 
 interface CommunityCardProps {
@@ -28,7 +26,7 @@ function CommunityCard({
         rounded-[10px] py-20 gap-20">
       <div className="flex items-center px-20">
         <div className="relative w-48 h-48 overflow-hidden rounded-full">
-          <Image src={ProfileImg} alt="프로필이미지" fill />
+          <Image src={profileImg} alt="프로필이미지" fill />
         </div>
         <div className="flex flex-col justify-start py-5 pl-12">
           <p className="text-14 font-bold text-[#505050]">{userNickname}</p>
@@ -38,9 +36,9 @@ function CommunityCard({
       </div>
       <div className="flex-center w-full h-180 bg-[#f5f5f5]">
         <Image
-          src={SampleBookCoverImg}
+          src={bookCover}
           alt="책표지"
-          className="h-auto w-auto"
+          className="h-180 w-auto"
         />
       </div>
       <div className="flex flex-col px-20">
