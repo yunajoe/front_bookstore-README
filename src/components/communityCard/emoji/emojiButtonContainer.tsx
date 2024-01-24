@@ -5,14 +5,15 @@ import ExitedEmojiImg from "@/public/images/ExitedEmoji.png";
 import AngryEmojiImg from "@/public/images/AngryEmoji.png";
 import CryEmojiImg from "@/public/images/CryEmoji.png";
 
-function EmojiButtonContainer() {
+function EmojiButtonContainer({count = 0}) {
+
   return (
     <div className="flex-center gap-8">
-      <EmojiButton emoji={RedHeartEmojiImg} count={0}/>
-      <EmojiButton emoji={HappyEmojiImg} count={0}/>
-      <EmojiButton emoji={ExitedEmojiImg} count={0}/>
-      <EmojiButton emoji={AngryEmojiImg} count={0}/>
-      <EmojiButton emoji={CryEmojiImg} count={0}/>
+      <EmojiButton emoji={RedHeartEmojiImg} count={count}/>
+      <EmojiButton emoji={HappyEmojiImg} count={count}/>
+      <EmojiButton emoji={ExitedEmojiImg} count={count}/>
+      <EmojiButton emoji={AngryEmojiImg} count={count}/>
+      <EmojiButton emoji={CryEmojiImg} count={count}/>
     </div>
   )
 }
