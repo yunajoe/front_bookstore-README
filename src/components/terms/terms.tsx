@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import checkIcon from '@/public/icons/check-icon.svg';
-import rightArrowIcon from '@/public/icons/right-Arrow.svg';
+import CheckIcon from '@/public/icons/CheckIcon.svg';
+import RightArrowIcon from '@/public/icons/RightArrow.svg';
 
 const TERMS_TITLES = [
   '만 14세이상 입니다',
@@ -49,7 +49,7 @@ function TermsCheckbox() {
       <div className="h-48 flex items-center border-0 border-b-[1px] border-b-[#DBDBDB] gap-8 relative">
         <label htmlFor="selectAll" className="text-15 font-medium">
           <Image
-            src={checkIcon}
+            src={CheckIcon}
             alt="체크아이콘"
             width={10}
             height={6}
@@ -79,7 +79,7 @@ function TermsCheckbox() {
                 htmlFor={`id.${termsTitle}`}
                 className="text-[#767676] text-15">
                 <Image
-                  src={checkIcon}
+                  src={CheckIcon}
                   alt="체크아이콘"
                   width={10}
                   height={6}
@@ -100,7 +100,7 @@ function TermsCheckbox() {
             </div>
             <button className="pr-4" onClick={handleOpenModal}>
               <Image
-                src={rightArrowIcon}
+                src={RightArrowIcon}
                 width={18}
                 height={18}
                 alt="약관내용 전체보기 버튼"
