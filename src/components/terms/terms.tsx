@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import checkIcon from '@/public/icons/check-icon.svg';
-import rightArrowIcon from '@/public/icons/rightArrow.svg';
+import rightArrowIcon from '@/public/icons/right-Arrow.svg';
 
 const TERMS_TITLES = [
   '만 14세이상 입니다',
@@ -14,7 +14,7 @@ interface CheckedStates {
   [key: string]: boolean;
 }
 
-export default function TermsCheckbox() {
+function TermsCheckbox() {
   const { register, setValue } = useFormContext();
   const [checkedStates, setCheckedStates] = useState<CheckedStates>(
     TERMS_TITLES.reduce((acc, title) => ({ ...acc, [title]: false }), {}),
@@ -112,3 +112,5 @@ export default function TermsCheckbox() {
     </div>
   );
 }
+
+export default TermsCheckbox;
