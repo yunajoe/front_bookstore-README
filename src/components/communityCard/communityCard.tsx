@@ -2,7 +2,7 @@ import Image from 'next/image';
 import EmojiButtonContainer from '@/components/communityCard/emoji/emojiButtonContainer';
 import ProfileImg from '@/public/images/SampleBookCover1.jpeg';
 import SampleBookCoverImg from '@/public/images/SampleBookCover3.jpeg';
-import KebabButton from '../button/kebabButton/kebabButton';
+import KebabButton from '@/components/button/kebabButton/kebabButton';
 
 interface CommunityCardProps {
   profileImg: string;
@@ -36,7 +36,7 @@ function CommunityCard({
         </div>
         <KebabButton title1='수정하기' title2='삭제하기' />
       </div>
-      <div className="flex-center w-345 h-180 bg-[#f5f5f5]">
+      <div className="flex-center w-full h-180 bg-[#f5f5f5]">
         <Image
           src={SampleBookCoverImg}
           alt="책표지"
