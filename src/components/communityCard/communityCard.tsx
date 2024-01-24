@@ -1,10 +1,10 @@
-import Image from "next/image";
-import EmojiButtonContainer from "@/components/communityCard/emoji/emojiButtonContainer";
-import KebabImg from "@/public/icons/Kebab.svg";
-import ProfileImg from "@/public/images/SampleBookCover1.jpeg";
-import SampleBookCoverImg from "@/public/images/SampleBookCover3.jpeg";
-import useShowDropDown from "@/hooks/useShowDropDown";
-import { MutableRefObject, useRef } from "react";
+import Image from 'next/image';
+import EmojiButtonContainer from '@/components/communityCard/emoji/emojiButtonContainer';
+import KebabImg from '@/public/icons/Kebab.svg';
+import ProfileImg from '@/public/images/SampleBookCover1.jpeg';
+import SampleBookCoverImg from '@/public/images/SampleBookCover3.jpeg';
+import useShowDropDown from '@/hooks/useShowDropDown';
+import { MutableRefObject, useRef } from 'react';
 
 interface CommunityCardProps {
   profileImg: string;
@@ -23,7 +23,7 @@ function CommunityCard({
   bookTitle,
   review,
 }: CommunityCardProps) {
-  const ref = useRef() as MutableRefObject<HTMLDivElement>;
+  const ref = useRef() as MutableRefObject<HTMLImageElement>;
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
 
   const handleKebabClick = () => {
@@ -31,7 +31,9 @@ function CommunityCard({
   };
 
   return (
-    <div className="relative flex flex-col w-347 h-439 border-[1px] border-solid border-[#dbdbdb] rounded-[10px] py-20 gap-20">
+    <div
+      className="relative flex flex-col w-347 h-439 border-[1px] border-solid border-[#dbdbdb]
+        rounded-[10px] py-20 gap-20">
       <div className="flex items-center px-20">
         <div className="relative w-48 h-48 overflow-hidden rounded-full">
           <Image src={ProfileImg} alt="프로필이미지" fill />
@@ -54,7 +56,7 @@ function CommunityCard({
           </div>
         )}
       </div>
-      <div className="flex-center w-345 h-180 bg-[#f5f5f5] ">
+      <div className="flex-center w-345 h-180 bg-[#f5f5f5]">
         <Image
           src={SampleBookCoverImg}
           alt="책표지"
