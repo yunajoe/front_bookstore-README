@@ -13,27 +13,30 @@ params:
 returns: component
 */
 
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import Image from 'next/image';
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  placeholder: string;
-  register: any;
-  isRequired?: any;
+  placeholder?: string;
+  register?: any;
+  requiredMessage?: string;
   isError?: any;
   pattern?: any;
   validate?: any;
+  classNames?: string;
 }
 
 function TextInput({
   id,
   placeholder,
   register,
-  isRequired,
+  requiredMessage,
   isError,
   pattern,
   validate,
+  classNames,
+  ...props
 }: InputProps) {
   return (
     <div className="relative w-full">
@@ -42,14 +45,13 @@ function TextInput({
         type="text"
         placeholder={placeholder}
         {...register(id, {
-          required: { isRequired },
-          pattern: { ...pattern },
-          validate: { ...validate },
+          required: requiredMessage,
+          pattern: pattern,
+          validate: validate,
         })}
-        className={`py-12 w-full
-        autofill:bg-white 
-        border-b border-gray-3 focus:border-green ${isError ? 'border-red' : ''}
-        outline-none`}
+        className={`py-12 w-full autofill:bg-white border-b border-gray-3 focus:border-green
+          ${isError && 'border-red focus:border-red'} outline-none ${classNames}`}
+        {...props}
       />
     </div>
   );
@@ -59,22 +61,23 @@ function PasswordInput({
   id,
   placeholder,
   register,
-  isRequired,
+  requiredMessage,
   isError,
   pattern,
   validate,
+  classNames,
+  ...props
 }: InputProps) {
   const [isView, setIsView] = useState(false);
-
   return (
-    <div className="relative  w-full">
+    <div className="relative w-full">
       <button type="button" className="absolute top-18 right-14">
         <Image
           onClick={() => setIsView(!isView)}
-          src={isView ? 'icons/eye-open.svg' : 'icons/eye-close.svg'}
+          src={isView ? 'icons/EyeOpen.svg' : 'icons/EyeClose.svg'}
           alt="eye"
-          width={16}
-          height={16}
+          width={24}
+          height={24}
         />
       </button>
       <input
@@ -82,14 +85,13 @@ function PasswordInput({
         type={isView ? 'text' : 'password'}
         placeholder={placeholder}
         {...register(id, {
-          required: { isRequired },
-          pattern: { ...pattern },
-          validate: { ...validate },
+          required: requiredMessage,
+          pattern: pattern,
+          validate: validate,
         })}
-        className={`py-12 w-full
-        autofill:bg-white 
-        border-b border-gray-3 focus:border-green ${isError ? 'border-red' : ''}
-        outline-none`}
+        className={`py-12 w-full autofill:bg-white border-b border-gray-3 focus:border-green
+          ${isError ? 'border-red' : ''} outline-none ${classNames}`}
+        {...props}
       />
     </div>
   );
