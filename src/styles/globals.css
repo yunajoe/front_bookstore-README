@@ -17,6 +17,7 @@
   --gray-5: 120 116 134;
   --gray-6: 75 75 75;
   --gray-7: 51 50 54;
+  /* --gray-8: 219 219 219; */
 }
 
 @media (prefers-color-scheme: dark) {
