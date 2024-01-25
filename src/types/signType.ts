@@ -4,4 +4,3 @@ export type SignValueType = {
   repassword?: string;
   nickname?: string;
 };
-// }  border-b border-gray-3 focus:border-green ${isError ? 'border-red' : ''}

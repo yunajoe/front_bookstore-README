@@ -1,7 +1,9 @@
 import RegisterButton from '@/components/button/RegisterButton';
+import SignError from '@/components/errors/SignError';
 import { PasswordInput, TextInput } from '@/components/signInput/SignInput';
 import SocialCircle from '@/components/socialCircle/SocialCircle';
 import { SignValueType } from '@/types/signType';
+import { checkEmail } from '@/utils/checkSignInSignOut';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -26,8 +28,7 @@ function SignIn() {
       type: 'manual',
       message: '아이디나 비밀번호가 일치하지 않습니다.',
     });
-  };
-
+  };   
   return (
     <div className="w-full min-h-dvh flex-center bg-white">
       <div className="max-w-[300px] flex-1 flex flex-col items-center gap-y-10 ">
@@ -43,7 +44,7 @@ function SignIn() {
               placeholder="이메일"
               register={register}
               isRequired={true}
-              pattern={/[a-z0-9]+@[a-z]+.[a-z]{2,3}/i}
+              pattern={checkEmail}
             />
             <PasswordInput
               id="password"
@@ -52,9 +53,7 @@ function SignIn() {
               isRequired={true}
               isError={errors.password}
             />
-            {errors.password?.message && (
-              <p className="text-14 text-red">{errors.password.message}</p>
-            )}
+            <SignError errors={errors} id="password" />           
           </div>
           <div className="w-full flex">
             <input
@@ -69,7 +68,7 @@ function SignIn() {
                 {isClick && (
                   <Image
                     alt=""
-                    src="/images/ico_checkbox_active@2x.png"
+                    src="/icons/CheckIcon.svg"
                     width={10}
                     height={7}
                   />

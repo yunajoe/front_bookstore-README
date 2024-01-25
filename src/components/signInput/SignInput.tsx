@@ -70,7 +70,7 @@ function PasswordInput({
       <button type="button" className="absolute top-18 right-14">
         <Image
           onClick={() => setIsView(!isView)}
-          src={isView ? 'icons/eye-open.svg' : 'icons/eye-close.svg'}
+          src={isView ? 'icons/EyeOpen.svg' : 'icons/EyeClose.svg'}
           alt="eye"
           width={16}
           height={16}

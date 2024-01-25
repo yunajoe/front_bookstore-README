@@ -1,8 +1,10 @@
 import RegisterButton from '@/components/button/RegisterButton';
+import SignError from '@/components/errors/SignError';
 import { PasswordInput, TextInput } from '@/components/signInput/SignInput';
 import SocialCircle from '@/components/socialCircle/SocialCircle';
 import TermsCheckbox from '@/components/terms/terms';
 import { SignValueType } from '@/types/signType';
+import { checkNickName, checkPassword } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -79,11 +81,7 @@ function SignUp() {
               isRequired={true}
               pattern={/[a-z0-9]+@[a-z]+.[a-z]{2,3}/i}
             />
-            {errors.email?.message && (
-              <p className="text-14 text-red w-full text-left">
-                {errors.email.message}
-              </p>
-            )}
+            <SignError errors={errors} id="email" />        
             <label className="text-[#363636] text-16 font-bold text-left w-full">
               비밀번호
             </label>
@@ -95,14 +93,10 @@ function SignUp() {
               placeholder="비밀번호"
               register={register}
               isRequired={true}
-              pattern={/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/i}
+              pattern={checkPassword}
               isError={errors.password}
             />
-            {errors.password?.message && (
-              <p className="text-14 text-red w-full text-left">
-                {errors.password.message}
-              </p>
-            )}
+            <SignError errors={errors} id="password" />           
             <label className="text-[#363636] text-16 font-bold text-left w-full">
               비밀번호확인
             </label>
@@ -113,11 +107,7 @@ function SignUp() {
               isRequired={true}
               isError={errors.repassword}
             />
-            {errors.repassword?.message && (
-              <p className="text-14 text-red w-full text-left">
-                {errors.repassword.message}
-              </p>
-            )}
+            <SignError errors={errors} id="repassword" />    
             <label className="text-[#363636] text-16 font-bold text-left w-full">
               닉네임
             </label>
@@ -129,14 +119,10 @@ function SignUp() {
               placeholder="닉네임"
               register={register}
               isRequired={true}
-              pattern={/^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]{3,8}$/i}
+              pattern={checkNickName}
               isError={errors.nickname}
             />
-            {errors.nickname?.message && (
-              <p className="text-14 text-red w-full text-left">
-                {errors.nickname.message}
-              </p>
-            )}
+           <SignError errors={errors} id="nickname" />       
             <TermsCheckbox />
             <RegisterButton>회원가입</RegisterButton>
           </form>
