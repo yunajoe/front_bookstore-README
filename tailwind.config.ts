@@ -25,8 +25,8 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      mobile: '360px',
-      tablet: '768px',
+      mobile: { min: '375px', max: '767px' },
+      tablet: { min: '768px', max: '1199px' },
       pc: '1200px',
     },
     extend: {
@@ -69,11 +69,6 @@ const config: Config = {
         4: 'rgb(var(--gray-4) / <alpha-value>)',
         5: 'rgb(var(--gray-5) / <alpha-value>)',
         6: 'rgb(var(--gray-6) / <alpha-value>)',
-        7: 'rgb(var(--gray-7) / <alpha-value>)',
-        8: 'rgb(var(--gray-8) / <alpha-value>)',
-        9: 'rgb(var(--gray-9) / <alpha-value>)',
-        10: 'rgb(var(--gray-10) / <alpha-value>)',
-        11: 'rgb(var(--gray-11) / <alpha-value>)',
       },
     },
   },
