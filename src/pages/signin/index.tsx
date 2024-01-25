@@ -32,7 +32,7 @@ function SignIn() {
   return (
     <div className="w-full min-h-dvh flex-center bg-white">
       <div className="max-w-300 flex-1 flex flex-col items-center gap-y-10 ">
-        <div className="h-[64px] flex-center">
+        <div className="h-64 flex-center">
           <p className="text-green font-bold text-2xl">Read Me</p>
         </div>
         <form
@@ -59,12 +59,12 @@ function SignIn() {
             <input
               id="loginSaved"
               type="checkbox"
-              className="invisible w-1 h-1 m-[-1px]"
+              className="invisible w-1 h-1"
             />
             <label htmlFor="loginSaved " className="flex-center">
               <div
                 onClick={() => setIsClick(!isClick)}
-                className={`flex-center ${isClick ? 'bg-green' : ''} rounded-full w-20 h-20 border-solid border-2  border-[#DBDBDB] cursor-pointer`}>
+                className={`flex-center ${isClick ? 'bg-green' : ''} rounded-full w-20 h-20 border-solid border-2  border-gray-1 cursor-pointer`}>
                 {isClick && (
                   <Image
                     alt=""
@@ -75,19 +75,19 @@ function SignIn() {
                 )}
               </div>
             </label>
-            <p className="mx-2 text-15 text-[#363636]">로그인 상태 유지</p>
+            <p className="mx-2 text-15 text-black">로그인 상태 유지</p>
           </div>
           <RegisterButton>로그인</RegisterButton>
         </form>
         <div className="flex gap-x-1">
-          <p className="text-[#767676]">아이디가 없으신가요?</p>
+          <p className="text-gray-3">아이디가 없으신가요?</p>
           <Link href="/signup" className="text-green font-normal">
             회원가입
           </Link>
         </div>
-        <div className="flex flex-col gap-y-[20px] text-[#767676]">
-          <p className="text-center text-xs">SNS로 로그인/회원가입</p>
-          <div className="w-[184px] flex justify-between">
+        <div className="flex flex-col gap-y-20">
+          <p className="text-center text-xs text-gray-3">SNS로 로그인/회원가입</p>
+          <div className="w-184 flex justify-between">
             <SocialCircle />
             <SocialCircle />
             <SocialCircle />

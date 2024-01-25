@@ -56,10 +56,10 @@ function SignUp() {
       <div className="w-full min-h-dvh bg-white flex-center">
         <div className="max-w-390 flex-1 flex flex-col items-center gap-y-10 px-15 ">
           <div className="h-64 flex-center">
-            <p className="text-green font-bold text-2xl ">Read Me</p>
+            <p className="text-green font-bold text-2xl">Read Me</p>
           </div>
-          <p className="text-[#363636] font-bold text-xl">회원가입</p>
-          <div className="w-full flex flex-col items-center  gap-y-20 text-[#767676] rounded-[10px] border-solid border-2 border-[#DBDBDB] py-5">
+          <p className="text-black font-bold text-xl">회원가입</p>
+          <div className="w-full flex flex-col items-center gap-y-20 text-gray-3 rounded-[10px] border-solid border-2 border-gray-1 py-5">
             <p className="text-center text-xs">
               SNS로 간편하게 로그인/회원가입
             </p>
@@ -72,7 +72,7 @@ function SignUp() {
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full flex flex-col items-center gap-y-10">
-            <label className="text-[#363636] text-16 font-bold text-left w-full">
+            <label className="text-gray-6 text-16 font-bold text-left w-full">
               이메일
             </label>
             <TextInput
@@ -83,10 +83,10 @@ function SignUp() {
               pattern={checkEmail}
             />
             <SignError errors={errors} id="email" />        
-            <label className="text-[#363636] text-16 font-bold text-left w-full">
+            <label className="text-black text-16 font-bold text-left w-full">
               비밀번호
             </label>
-            <p className="text-[#0e0d0d] text-15 text-left w-full">
+            <p className="text-gray-3 text-15 text-left w-full">
               영문, 숫자를 포함한 8자 이상의 비밀번호
             </p>
             <PasswordInput
@@ -98,7 +98,7 @@ function SignUp() {
               isError={errors.password}
             />
             <SignError errors={errors} id="password" />           
-            <label className="text-[#363636] text-16 font-bold text-left w-full">
+            <label className="text-black text-16 font-bold text-left w-full">
               비밀번호확인
             </label>
             <PasswordInput
@@ -109,10 +109,10 @@ function SignUp() {
               isError={errors.repassword}
             />
             <SignError errors={errors} id="repassword" />    
-            <label className="text-[#363636] text-16 font-bold text-left w-full">
+            <label className="text-gray-6 text-16 font-bold text-left w-full">
               닉네임
             </label>
-            <p className="text-[#767676] text-15 text-left w-full">
+            <p className="text-gray-3 text-15 text-left w-full">
               다른 유저와 중복되지 않는 닉네임
             </p>
             <TextInput
@@ -128,7 +128,7 @@ function SignUp() {
             <RegisterButton>회원가입</RegisterButton>
           </form>
           <div className="flex gap-x-1">
-            <p className="text-[#767676]">이미 아이디가 있으신가요?</p>
+            <p className="text-gray-3">이미 아이디가 있으신가요?</p>
             <Link href="/signin" className="text-green font-normal">
               로그인
             </Link>
