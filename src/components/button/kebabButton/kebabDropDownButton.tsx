@@ -2,14 +2,14 @@ export interface KebabDropDownButtonProps {
   title1: string;
   title2: string;
 }
-//TODO : 디자인 및 드롭다운 펼쳐졌을때 위치 수정필요함
+
 function KebabDropDownButton({ title1, title2 }: KebabDropDownButtonProps) {
   return (
-    <div className="flex-center flex-col absolute top-43 right-20">
-      <div className="border-[1px] border-solid border-black hover:bg-red">
+    <div className="flex-center flex-col absolute top-48 right-20 w-108 h-84 border-[1px] border-solid border-gray-10 rounded-[5px] bg-white">
+      <div className="hover:text-green text-gray-11 flex-center w-full text-14 h-full border-[1px] border-solid border-gray-10">
         {title1}
       </div>
-      <div className="border-[1px] border-solid border-black hover:bg-red">
+      <div className="hover:text-green text-gray-11 flex-center w-full h-full text-14">
         {title2}
       </div>
     </div>

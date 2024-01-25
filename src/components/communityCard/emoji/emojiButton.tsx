@@ -11,8 +11,8 @@ function EmojiButton({ emoji, count }: EmojiButtonProps) {
   const [isClick, setIsClick] = useState(false);
 
   const handleCountToggle = () => {
-    setIsClick((prevIsClick) => !prevIsClick);
-    setIsCount((prevIsCount) => (isClick ? prevIsCount - 1 : prevIsCount + 1));
+    setIsClick(!isClick);
+    setIsCount((isClick ? isCount - 1 : isCount + 1));
   };
 
   return (

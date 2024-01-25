@@ -4,7 +4,7 @@ function useShowDropDown(
   ref: MutableRefObject<HTMLDivElement | null>,
   initialBoolean: boolean,
 ): [boolean, Dispatch<SetStateAction<boolean>>] {
-  const [showOptions, setShowOptions] = useState<boolean>(initialBoolean);
+  const [showOptions, setShowOptions] = useState(initialBoolean);
 
   useEffect(() => {
     const onClick = (e: BaseSyntheticEvent | MouseEvent) => {
