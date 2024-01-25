@@ -1,4 +1,4 @@
-import RegisterButton from '@/components/button/RegisterButton';
+import RegisterButton from '@/components/buttons/registerButton.tsx/RegisterButton';
 import SignError from '@/components/errors/SignError';
 import { PasswordInput, TextInput } from '@/components/signInput/SignInput';
 import SocialCircle from '@/components/socialCircle/SocialCircle';
@@ -31,7 +31,7 @@ function SignIn() {
   };   
   return (
     <div className="w-full min-h-dvh flex-center bg-white">
-      <div className="max-w-[300px] flex-1 flex flex-col items-center gap-y-10 ">
+      <div className="max-w-300 flex-1 flex flex-col items-center gap-y-10 ">
         <div className="h-[64px] flex-center">
           <p className="text-green font-bold text-2xl">Read Me</p>
         </div>
@@ -59,7 +59,7 @@ function SignIn() {
             <input
               id="loginSaved"
               type="checkbox"
-              className="invisible w-[1px] h-[1px] m-[-1px]"
+              className="invisible w-1 h-1 m-[-1px]"
             />
             <label htmlFor="loginSaved " className="flex-center">
               <div

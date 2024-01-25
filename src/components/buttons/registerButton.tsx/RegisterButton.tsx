@@ -8,7 +8,7 @@ type ButtonProps = {
 function RegisterButton({ onClick, children }: ButtonProps) {
   return (
     <button
-      className="h-[50px] w-full text-center bg-[#66C57B] rounded-[5px] text-[17px] text-[#FFF]"
+      className="h-50 w-full text-center bg-green rounded-[5px] text-[17px] text-white"
       onClick={onClick}>
       {children}
     </button>

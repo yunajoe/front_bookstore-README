@@ -1,10 +1,11 @@
-import RegisterButton from '@/components/button/RegisterButton';
+
+import RegisterButton from '@/components/buttons/registerButton.tsx/RegisterButton';
 import SignError from '@/components/errors/SignError';
 import { PasswordInput, TextInput } from '@/components/signInput/SignInput';
 import SocialCircle from '@/components/socialCircle/SocialCircle';
 import TermsCheckbox from '@/components/terms/terms';
 import { SignValueType } from '@/types/signType';
-import { checkNickName, checkPassword } from '@/utils/checkSignInSignOut';
+import { checkEmail, checkNickName, checkPassword } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -53,16 +54,16 @@ function SignUp() {
   return (
     <FormProvider {...method}>
       <div className="w-full min-h-dvh bg-white flex-center">
-        <div className="max-w-[390px] flex-1 flex flex-col items-center gap-y-10 px-[15px] ">
-          <div className="h-[64px] flex-center">
+        <div className="max-w-390 flex-1 flex flex-col items-center gap-y-10 px-15 ">
+          <div className="h-64 flex-center">
             <p className="text-green font-bold text-2xl ">Read Me</p>
           </div>
           <p className="text-[#363636] font-bold text-xl">회원가입</p>
-          <div className="w-full flex flex-col items-center  gap-y-[20px] text-[#767676] rounded-[10px] border-solid border-2 border-[#DBDBDB] py-5">
+          <div className="w-full flex flex-col items-center  gap-y-20 text-[#767676] rounded-[10px] border-solid border-2 border-[#DBDBDB] py-5">
             <p className="text-center text-xs">
               SNS로 간편하게 로그인/회원가입
             </p>
-            <div className="w-[184px] flex justify-between">
+            <div className="w-184 flex justify-between">
               <SocialCircle />
               <SocialCircle />
               <SocialCircle />
@@ -79,7 +80,7 @@ function SignUp() {
               placeholder="이메일"
               register={register}
               isRequired={true}
-              pattern={/[a-z0-9]+@[a-z]+.[a-z]{2,3}/i}
+              pattern={checkEmail}
             />
             <SignError errors={errors} id="email" />        
             <label className="text-[#363636] text-16 font-bold text-left w-full">
