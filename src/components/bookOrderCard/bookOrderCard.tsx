@@ -13,9 +13,9 @@ function BookOrderCard({ book, order }: BookOrderType) {
         role="book-img"
         className="min-w-102 h-102 bg-gray-1 text-center mobile:min-w-75 mobile:h-75">
         {book.imageUrl ? (
-          <Image src={book.imageUrl} alt="book sample image" layout="fill" />
+          <Image src={book.imageUrl} alt="책 표지 이미지" layout="fill" />
         ) : (
-          <>이미지 없음</>
+          <></>
         )}
       </div>
       <div className="flex flex-col justify-start items-start gap-4 w-full">
