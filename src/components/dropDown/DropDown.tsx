@@ -32,7 +32,7 @@ function DropDown() {
           </div>
         </div>
         {isClick && (
-          <ul className="w-[140px] border-solid border-2 border-[#DBDBDB] ">
+          <ul className="w-[140px] border-solid border-2 border-[#DBDBDB] absolute">
             <DropDownItem
               menu="전체보기"
               setSeltedItem={setSeltedItem}
@@ -66,7 +66,7 @@ function DropDown() {
           </ul>
         )}
       </div>  
-      <div className="flex-center absolute left-[10rem]">
+      <div className="flex-center">
         <OrderDate pastDate={seletedItem} setSeltedItem={setSeltedItem} />
       </div>
     </div>
