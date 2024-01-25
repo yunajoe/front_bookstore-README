@@ -21,8 +21,8 @@ type OrderDateProps = {
 const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
   return (
     <div className="border-solid border-2 border-[#DBDBDB] flex-center rounded-[5px]">
-      <input {...props} ref={ref} className="focus:outline-none" readOnly />
-      <Image src="/images/calendar.svg" width={20} height={20} alt="calendar" />
+      <input {...props} ref={ref} className="focus:outline-none w-[135px]" readOnly/>
+      <Image src="/images/calendar.svg" width={20} height={20} alt="calendar" className="" />
     </div>
   );
 });
@@ -75,7 +75,7 @@ function OrderDate({ pastDate, setSeltedItem }: OrderDateProps) {
         }}
         customInput={<CustomOrderInput ref={startDateRef} />}
       />
-      <span> ~ </span>
+      <span className=""> ~ </span>
       <DatePicker
         locale={ko}
         selected={endDate}
