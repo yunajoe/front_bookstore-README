@@ -2,9 +2,11 @@ import Image from 'next/image';
 import KebabImg from '@/public/icons/Kebab.svg';
 import { MutableRefObject, useRef } from 'react';
 import useShowDropDown from '@/hooks/useShowDropDown';
-import KebabDropDownButton, { KebabDropDownButtonProps } from '@/components/button/kebabButton/kebabDropDownButton';
+import KebabDropDownButton, {
+  KebabDropDownButtonProps,
+} from '@/components/buttons/kebabButton/kebabDropDownButton';
 
-function KebabButton({title1, title2} : KebabDropDownButtonProps) {
+function KebabButton({ title1, title2 }: KebabDropDownButtonProps) {
   const ref = useRef() as MutableRefObject<HTMLImageElement>;
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
 
@@ -21,9 +23,7 @@ function KebabButton({title1, title2} : KebabDropDownButtonProps) {
         onClick={handleKebabClick}
         ref={ref}
       />
-      {showOptions && (
-        <KebabDropDownButton title1={title1} title2={title2} />
-      )}
+      {showOptions && <KebabDropDownButton title1={title1} title2={title2} />}
     </>
   );
 }

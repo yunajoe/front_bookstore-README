@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import EmojiButtonContainer from '@/components/communityCard/emoji/emojiButtonContainer';
-import KebabButton from '@/components/button/kebabButton/kebabButton';
+import KebabButton from '@/components/buttons/kebabButton/kebabButton';
 interface CommunityCardProps {
   profileImg: string;
   userNickname: string;
@@ -18,7 +18,6 @@ function CommunityCard({
   bookTitle,
   review,
 }: CommunityCardProps) {
-
   return (
     <div
       className="relative flex flex-col w-347 h-439 border-[1px] border-solid border-[#dbdbdb]
@@ -31,14 +30,10 @@ function CommunityCard({
           <p className="text-14 font-bold text-gray-4">{userNickname}</p>
           <p className="text-12 font-normal tex-gray-3">{createAt}</p>
         </div>
-        <KebabButton title1='수정하기' title2='삭제하기' />
+        <KebabButton title1="수정하기" title2="삭제하기" />
       </div>
       <div className="flex-center w-full h-180 bg-gray-5">
-        <Image
-          src={bookCover}
-          alt="책표지"
-          className="h-180 w-auto"
-        />
+        <Image src={bookCover} alt="책표지" className="h-180 w-auto" />
       </div>
       <div className="flex flex-col px-20">
         <p className="text-16 font-bold text-gray-4">{bookTitle}</p>
