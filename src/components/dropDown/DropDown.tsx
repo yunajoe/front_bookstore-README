@@ -19,7 +19,7 @@ function DropDown() {
         <div className="flex relative w-[10rem]">
           <button
             onClick={handleClick}
-            className="flex justify-between flex-row items-center px-5 border-solid border-2 border-[#DBDBDB] w-[150px] h-[42px] text-left">
+            className="flex justify-between flex-row items-center px-5 border-solid border-2 border-[#DBDBDB] w-150 h-42 text-left">
             {seletedItem}
             <div>            
             <Image
