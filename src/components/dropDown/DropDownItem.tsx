@@ -13,7 +13,7 @@ function DropDownItem({ menu, setSeltedItem, setIsClick }: DropDownItemProps) {
   return (
     <div>
       <li
-        className="hover:bg-[#F5F5F5]"
+        className="hover:bg-gray-5"
         onClick={() => handleSelectItem(menu)}>
         {menu}
       </li>

@@ -1,71 +1,57 @@
 import { useRef, useState } from 'react';
-import useOutSideClick from '@/hooks/useOutsideClick';
-import Image from 'next/image';
+import useShowDropDown from '@/hooks/useShowDropDown';
 import DropDownItem from './DropDownItem';
 import OrderDate from '@/components/orderDate/OrderDate';
+import Image from 'next/image';
 
 function DropDown() {
   const [seletedItem, setSeltedItem] = useState('전체보기');
-  const [isClick, setIsClick] = useState(false);
-
-  const handleClick = () => setIsClick(!isClick);
   const ref = useRef(null);
+  const [showOptions, setShowOptions] = useShowDropDown(ref, false);
+  const handleClick = () => setShowOptions(!showOptions);
 
-  useOutSideClick(ref, () => setIsClick(false));
+  const menus = [
+    '전체보기',
+    '최근 1개월',
+    '최근 3개월',
+    '최근 6개월',
+    '최근 1년',
+  ];
 
   return (
     <div className="flex relative">
       <div ref={ref}>
-        <div className="flex relative w-[10rem]">
+        <div className="flex relative w-180">
           <button
             onClick={handleClick}
-            className="flex justify-between flex-row items-center px-5 border-solid border-2 border-[#DBDBDB] w-150 h-42 text-left">
+            className="flex justify-between flex-row items-center px-5 border-solid border-2
+              border-gray-1 w-150 h-42 text-left">
             {seletedItem}
-            <div>            
-            <Image
-              src={isClick ? 'icons/upArrow.svg' : 'icons/downArrow.svg'}
-              alt=""
-              width={20}
-              height={20}
-            />
-          </div>
-          </button>        
+            <div>
+              <Image
+                src={showOptions ? 'icons/UpArrow.svg' : 'icons/DownArrow.svg'}
+                alt=""
+                width={20}
+                height={20}
+              />
+            </div>
+          </button>
         </div>
-        {isClick && (
-          <ul className="w-[150px] border-solid border-2 border-[#DBDBDB] absolute">
-            <DropDownItem
-              menu="전체보기"
-              setSeltedItem={setSeltedItem}
-              setIsClick={setIsClick}
-            />
-            <DropDownItem
-              menu="최근 1개월"
-              setSeltedItem={setSeltedItem}
-              setIsClick={setIsClick}
-            />
-            <DropDownItem
-              menu="최근 3개월"
-              setSeltedItem={setSeltedItem}
-              setIsClick={setIsClick}
-            />
-            <DropDownItem
-              menu="최근 6개월"
-              setSeltedItem={setSeltedItem}
-              setIsClick={setIsClick}
-            />
-            <DropDownItem
-              menu="최근 1년"
-              setSeltedItem={setSeltedItem}
-              setIsClick={setIsClick}
-            />
-            <DropDownItem
-              menu="직접 입력"
-              setSeltedItem={setSeltedItem}
-              setIsClick={setIsClick}
-            />
+        {showOptions && (
+          <ul className="w-150 border-solid border-2 border-gray-1 absolute">
+            {menus.map((menu) => {
+              return (
+                <DropDownItem
+                  key={menu}
+                  menu={menu}
+                  setSeltedItem={setSeltedItem}
+                  setIsClick={setShowOptions}
+                />
+              );
+            })}
           </ul>
         )}
-      </div>  
+      </div>
       <div className="flex-center">
         <OrderDate pastDate={seletedItem} setSeltedItem={setSeltedItem} />
       </div>

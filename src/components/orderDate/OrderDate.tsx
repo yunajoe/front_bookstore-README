@@ -20,7 +20,7 @@ type OrderDateProps = {
 
 const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
   return (
-    <div className="border-solid border-2 border-[#DBDBDB] w-[135px] h-[42px]  flex-center px-9 rounded-[5px]">
+    <div className="border-solid border-2 border-gray-1 w-135 h-42  flex-center px-9 rounded-[5px]">
       <input {...props} ref={ref} className="focus:outline-none w-1 text-center flex-1" readOnly/>
       <Image src="/images/calendar.svg" width={20} height={20} alt="calendar" className="" />
     </div>
