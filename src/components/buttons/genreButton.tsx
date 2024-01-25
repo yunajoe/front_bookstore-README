@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { GenreButtonProps } from '@/pages/api/mock';
+import { GenreProps } from '@/pages/api/mock';
+export interface GenreButtonProps extends GenreProps {
+  editMode: boolean;
+}
 
 function GenreButton({
   title,

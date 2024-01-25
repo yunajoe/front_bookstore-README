@@ -4,8 +4,12 @@ import MyPageButton from '@/components/header/myPageButton';
 import SignInButton from '@/components/header/signInButton';
 import SignOutButton from '@/components/header/signOutButton';
 import SignUpButton from '@/components/buttons/signUpButton';
-import { HeaderProps } from '@/pages/api/mock';
 import HeaderLayout from '@/containers/HeaderLayout';
+
+export interface HeaderProps {
+  isLoggedIn: boolean;
+  numItemsOfCart?: number;
+}
 
 function Separator() {
   return (

@@ -8,10 +8,6 @@ export interface GenreProps {
   selected: boolean;
 }
 
-export interface GenreButtonProps extends GenreProps {
-  editMode: boolean;
-}
-
 export interface GenreList {
   genreList: GenreProps[];
 }
