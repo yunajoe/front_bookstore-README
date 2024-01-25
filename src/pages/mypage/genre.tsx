@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import GenreButton from '@/components/genreButton';
+import GenreButton from '@/components/buttons/genreButton';
 import { ReadMeGenreList } from '../api/mock';
 
 export default function Genre() {

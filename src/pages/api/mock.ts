@@ -1,3 +1,8 @@
+export interface HeaderProps {
+  isLoggedIn: boolean;
+  numItemsOfCart?: number;
+}
+
 export interface GenreProps {
   title: string;
   selected: boolean;
