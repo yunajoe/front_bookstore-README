@@ -19,10 +19,9 @@ function DropDown() {
         <div className="flex relative w-[10rem]">
           <button
             onClick={handleClick}
-            className="border-solid border-2 border-[#DBDBDB] w-[150px] text-left">
+            className="flex justify-between flex-row items-center px-5 border-solid border-2 border-[#DBDBDB] w-[150px] h-[42px] text-left">
             {seletedItem}
-          </button>
-          <div className=" relative top-4 right-30">
+            <div>            
             <Image
               src={isClick ? 'icons/upArrow.svg' : 'icons/downArrow.svg'}
               alt=""
@@ -30,9 +29,10 @@ function DropDown() {
               height={20}
             />
           </div>
+          </button>        
         </div>
         {isClick && (
-          <ul className="w-[140px] border-solid border-2 border-[#DBDBDB] absolute">
+          <ul className="w-[150px] border-solid border-2 border-[#DBDBDB] absolute">
             <DropDownItem
               menu="전체보기"
               setSeltedItem={setSeltedItem}
