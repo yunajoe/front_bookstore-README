@@ -12,7 +12,7 @@ function BookRating({ rating }: BookRatingProps) {
         <Image
           src="/icons/FilledStar.svg"
           key={`fill${i}`}
-          alt=""
+          alt="별점"
           width={15}
           height={15}
         />,
@@ -23,7 +23,7 @@ function BookRating({ rating }: BookRatingProps) {
         <Image
           src="/icons/UnfilledStar.svg"
           key={`unfill${i}`}
-          alt=""
+          alt="별점"
           width={15}
           height={15}
         />,

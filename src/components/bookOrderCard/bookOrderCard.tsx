@@ -43,7 +43,7 @@ function BookOrderCard({ book, order }: BookOrderType) {
           src="/icons/RightArrow.svg"
           width={15}
           height={15}
-          alt="arrow button"
+          alt="화살표 버튼"
         />
       </button>
 
