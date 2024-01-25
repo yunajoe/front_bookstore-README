@@ -1,7 +1,6 @@
 import { Inter } from 'next/font/google';
 import { countAtom } from '@/store/count';
 import { useAtom } from 'jotai';
-import CommunityCard from '@/components/communityCard/communityCard';
 
 const inter = Inter({
   subsets: ['latin'],
