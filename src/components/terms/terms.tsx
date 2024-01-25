@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import checkIcon from '@/public/icons/check-icon.svg';
-import rightArrowIcon from '@/public/icons/rightArrow.svg';
+import CheckIcon from '@/public/icons/CheckIcon.svg';
+import RightArrowIcon from '@/public/icons/RightArrow.svg';
 
 const TERMS_TITLES = [
   '만 14세이상 입니다',
@@ -14,7 +14,7 @@ interface CheckedStates {
   [key: string]: boolean;
 }
 
-export default function TermsCheckbox() {
+function TermsCheckbox() {
   const { register, setValue } = useFormContext();
   const [checkedStates, setCheckedStates] = useState<CheckedStates>(
     TERMS_TITLES.reduce((acc, title) => ({ ...acc, [title]: false }), {}),
@@ -44,12 +44,12 @@ export default function TermsCheckbox() {
   }, [checkedStates, setValue]);
 
   return (
-    <div className="mobile:w-360 w-330">
+    <div className="w-360 mobile:w-330 ">
       <span className="font-bold inline-block pb-8">약관동의</span>
       <div className="h-48 flex items-center border-0 border-b-[1px] border-b-[#DBDBDB] gap-8 relative">
         <label htmlFor="selectAll" className="text-15 font-medium">
           <Image
-            src={checkIcon}
+            src={CheckIcon}
             alt="체크아이콘"
             width={10}
             height={6}
@@ -79,7 +79,7 @@ export default function TermsCheckbox() {
                 htmlFor={`id.${termsTitle}`}
                 className="text-[#767676] text-15">
                 <Image
-                  src={checkIcon}
+                  src={CheckIcon}
                   alt="체크아이콘"
                   width={10}
                   height={6}
@@ -100,7 +100,7 @@ export default function TermsCheckbox() {
             </div>
             <button className="pr-4" onClick={handleOpenModal}>
               <Image
-                src={rightArrowIcon}
+                src={RightArrowIcon}
                 width={18}
                 height={18}
                 alt="약관내용 전체보기 버튼"
@@ -112,3 +112,5 @@ export default function TermsCheckbox() {
     </div>
   );
 }
+
+export default TermsCheckbox;
