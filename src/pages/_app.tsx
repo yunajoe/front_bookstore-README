@@ -12,6 +12,7 @@ import type { NextPage } from 'next';
 const queryClient = new QueryClient();
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  // eslint-disable-next-line no-unused-vars
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
@@ -20,7 +21,6 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  // eslint-disable-next-line no-unused-vars
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
