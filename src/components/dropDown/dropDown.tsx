@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import useShowDropDown from '@/hooks/useShowDropDown';
-import DropDownItem from '@/components/dropDown/dropDownItem'; 
+import DropDownItem from '@/components/dropDown/dropDownItem';
 import OrderDate from '@/components/container/orderDate/orderDate';
 import Image from 'next/image';
 
@@ -44,7 +44,7 @@ function DropDown() {
                 <DropDownItem
                   key={menu}
                   menu={menu}
-                  setSelectedItem={setSelectedItem }
+                  setSelectedItem={setSelectedItem}
                   setIsClick={setShowOptions}
                 />
               );
