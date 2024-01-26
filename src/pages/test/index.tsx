@@ -1,4 +1,4 @@
-import DropDown from '@/components/dropDown/DropDown';
+import DropDown from '@/components/dropDown/dropDown';
 
 function TestPage() {
   return (
