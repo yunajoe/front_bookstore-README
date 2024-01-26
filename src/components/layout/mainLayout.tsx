@@ -9,7 +9,7 @@ interface MainLayoutProps {
 function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
-      <Header />
+      <Header isLoggedIn={true} numItemsOfCart={1} />
       <div className="relative grid auto-rows-auto place-items-center tablet:max-w-[768px]">
         {children}
         <ScrollToTopButton />
