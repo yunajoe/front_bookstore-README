@@ -2,8 +2,8 @@ import { useRef, useState } from 'react';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import Image from 'next/image';
 
-import DropDownItem from './dropDownItem';
-import OrderDate from '../orderDate/orderDate';
+import OrderDate from '@/components/orderDate/orderDate';
+import DropDownItem from '@/components/dropDown/dropDownItem';
 
 function DropDown() {
   const [seletedItem, setSelectedItem] = useState('전체보기');
