@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 import useShowDropDown from '@/hooks/useShowDropDown';
-import DropDownItem from './DropDownItem';
-import OrderDate from '@/components/orderDate/OrderDate';
+import DropDownItem from '@/components/dropDown/dropDownItem'; 
+import OrderDate from '@/components/container/orderDate/orderDate';
 import Image from 'next/image';
 
 function DropDown() {
-  const [seletedItem, setSeltedItem] = useState('전체보기');
+  const [selectedItem, setSelectedItem] = useState('전체보기');
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const handleClick = () => setShowOptions(!showOptions);
@@ -26,7 +26,7 @@ function DropDown() {
             onClick={handleClick}
             className="flex justify-between flex-row items-center px-5 border-solid border-2
               border-gray-1 w-150 h-42 text-left">
-            {seletedItem}
+            {selectedItem}
             <div>
               <Image
                 src={showOptions ? 'icons/UpArrow.svg' : 'icons/DownArrow.svg'}
@@ -44,7 +44,7 @@ function DropDown() {
                 <DropDownItem
                   key={menu}
                   menu={menu}
-                  setSeltedItem={setSeltedItem}
+                  setSelectedItem={setSelectedItem }
                   setIsClick={setShowOptions}
                 />
               );
@@ -53,7 +53,7 @@ function DropDown() {
         )}
       </div>
       <div className="flex-center">
-        <OrderDate pastDate={seletedItem} setSeltedItem={setSeltedItem} />
+        <OrderDate pastDate={selectedItem} setSelectedItem={setSelectedItem} />
       </div>
     </div>
   );

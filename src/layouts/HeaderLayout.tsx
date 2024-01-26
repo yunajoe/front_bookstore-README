@@ -1,4 +1,4 @@
-import NavigationTab from '@/components/header/NavigationTab';
+import NavigationTab from '@/components/header/navigationTab';
 import { ReactElement } from 'react';
 function HeaderLayout({ children }: { children: ReactElement }) {
   return (

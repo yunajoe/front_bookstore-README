@@ -1,4 +1,4 @@
-import CategoryButton from './categoryButton';
+import CategoryButton from '@/components/button/categoryButton'
 import Link from 'next/link';
 // 카테고리를 포함한 NavigationTab
 function NavigationTab() {
