@@ -32,7 +32,7 @@ const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
         width={20}
         height={20}
         alt="calendar"
-        className=""
+      
       />
     </div>
   );
