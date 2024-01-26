@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 
 function useInfinite() {
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>();
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
