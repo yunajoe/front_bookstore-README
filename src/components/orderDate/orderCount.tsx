@@ -18,7 +18,7 @@ function OrderCount({ orderDate, orderCount }: OrderCountProps) {
         <span>주문상세</span>
         <Image
           src="/icons/RightArrow.svg"
-          alt="rightArrow"
+          alt="화살표버튼"
           width={20}
           height={20}
         />
