@@ -20,6 +20,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  // eslint-disable-next-line no-unused-vars
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (

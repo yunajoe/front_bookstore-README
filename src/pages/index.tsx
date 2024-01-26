@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import MainLayout from '@/components/layout/mainLayout';
-import { NextPageWithLayout } from '@/pages/_app';
 
 function Home() {
   return (
