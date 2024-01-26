@@ -10,7 +10,7 @@ function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
       <Header />
-      <div className="relative grid auto-rows-auto place-items-center">
+      <div className="relative grid auto-rows-auto place-items-center tablet:max-w-[768px]">
         {children}
         <ScrollToTopButton />
       </div>
