@@ -4,7 +4,7 @@ import MyPageButton from '@/components/button/myPageButton';
 import SignInButton from '@/components/button/signInButton';
 import SignOutButton from '@/components/button/signOutButton';
 import SignUpButton from '@/components/button/signUpButton';
-import HeaderLayout from '@/containers/headerLayout';
+import HeaderLayout from '@/layouts/headerLayout';
 
 export interface HeaderProps {
   isLoggedIn: boolean;
