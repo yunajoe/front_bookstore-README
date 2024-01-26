@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { LegacyRef, RefObject, useEffect, useRef, useState } from 'react';
 
-function useInfinite() {
-  const ref = useRef<HTMLDivElement>();
+function useInfinite(): [LegacyRef<HTMLDivElement>, boolean] {
+  const ref = useRef<HTMLDivElement>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
@@ -10,20 +10,20 @@ function useInfinite() {
         if (entry.isIntersecting) {
           setIsIntersecting(true);
         } else {
-          setIsIntersecting(false)
+          setIsIntersecting(false);
         }
-      })
+      });
     });
     if (ref.current) {
-      io.observe(ref.current)
+      io.observe(ref.current);
     }
 
     return () => {
       io.disconnect();
-    }
-  }, [ref])
-  
-  return [ref, isIntersecting]
+    };
+  }, [ref]);
+
+  return [ref, isIntersecting];
 }
 
-export default useInfinite
+export default useInfinite;
