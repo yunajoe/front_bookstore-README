@@ -4,7 +4,7 @@ import Image from 'next/image';
 import BookRating from '@/components/book/bookRating/bookRating';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import { BookReviewType } from '@/types/bookReviewType';
-import KebabButton from '../../button/kebab/kebabButton';
+import KebabButton from '@/components/button/kebab/kebabButton';
 
 function BookReviewCard({ book, review }: BookReviewType) {
   const [isSummarized, setIsSummarized] = useState(true);
