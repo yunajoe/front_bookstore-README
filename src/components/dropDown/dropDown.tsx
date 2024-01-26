@@ -16,6 +16,7 @@ function DropDown() {
     '최근 3개월',
     '최근 6개월',
     '최근 1년',
+    '직접 입력',
   ];
 
   return (
@@ -25,7 +26,7 @@ function DropDown() {
           <button
             onClick={handleClick}
             className="flex justify-between flex-row items-center px-5 border-solid border-2
-              border-gray-1 w-150 h-42 text-left">
+              border-gray-1 w-150 h-42 text-left rounded-[5px]">
             {selectedItem}
             <div>
               <Image
