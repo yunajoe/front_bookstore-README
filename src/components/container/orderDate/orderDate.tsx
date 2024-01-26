@@ -28,7 +28,7 @@ const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
         readOnly
       />
       <Image
-        src="/images/calendar.svg"
+        src="/icons/Calendar.svg"
         width={20}
         height={20}
         alt="calendar"
