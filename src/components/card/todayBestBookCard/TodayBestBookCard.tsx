@@ -11,7 +11,7 @@ function TodayBestBook({ ...bookData }: TodayBestBookCardType) {
   return (
     <div
       role="card-container"
-      className="bg-white max-w-350 h-240 px-40 pt-40 rounded-xl border-2 border-gray-1
+      className="bg-white max-w-350 h-240 px-40 pt-40 rounded-xl border-2 border-gray-1 tablet:pt-30 tablet:px-30 tablet:h-220
         mobile:w-300 mobile:h-181 mobile:px-20 mobile:pt-20">
       <Link
         href={`/book/${bookData.productId}`}
