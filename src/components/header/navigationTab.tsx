@@ -1,7 +1,7 @@
 import CategoryButton from '@/components/button/categoryButton';
 import Link from 'next/link';
 // 카테고리를 포함한 NavigationTab
-function Navigation() {
+function NavigationTab() {
   return (
     <div className="flex items-center border-gray-3 border-y w-full h-40 tablet:h-70 pc:h-70">
       <div className="mx-16 tablet:mx-90 pc:mx-110">
@@ -19,4 +19,4 @@ function Navigation() {
     </div>
   );
 }
-export default Navigation;
+export default NavigationTab;
