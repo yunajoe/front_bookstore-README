@@ -1,3 +1,5 @@
+import React from "react";
+
 const isTouchScreen =
   typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
@@ -5,8 +7,8 @@ export default function registDragEvent({
   onDragChange,
   onDragEnd,
 }: {
-  onDragChange?: (x: number, y: number) => void;
-  onDragEnd?: (x: number, y: number) => void;
+  onDragChange?: any;
+  onDragEnd?: any;
   }) {
   // 모바일 환경에서 사용될 regist
   if (isTouchScreen) {
