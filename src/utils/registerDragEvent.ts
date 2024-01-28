@@ -1,9 +1,8 @@
-import type { TouchEvent } from 'react';
-
 const isTouchScreen =
   typeof window !== 'undefined' &&
   window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
+// lint
 type onDragChangeType = (deltaX: number, deltaY: number) => void;
 type onDragEndType = (deltaX: number, deltaY: number) => void;
 
@@ -15,8 +14,8 @@ type registDeagEventType = {
 function registDragEvent({ onDragChange, onDragEnd }: registDeagEventType) {
   if (isTouchScreen) {
     return {
-      onTouchStart: (touchEvent: TouchEvent<HTMLDivElement>) => {
-        const touchMoveHandler = (moveEvent: Rea.TouchEvent) => {
+      onTouchStart: (touchEvent: TouchEvent) => {
+        const touchMoveHandler = (moveEvent: TouchEvent) => {
           if (moveEvent.cancelable) moveEvent.preventDefault();
 
           const deltaX =
@@ -26,7 +25,7 @@ function registDragEvent({ onDragChange, onDragEnd }: registDeagEventType) {
           onDragChange?.(deltaX, deltaY);
         };
 
-        const touchEndHandler = (moveEvent: React.TouchEvent) => {
+        const touchEndHandler = (moveEvent: TouchEvent) => {
           const deltaX =
             moveEvent.changedTouches[0].pageX -
             touchEvent.changedTouches[0].pageX;
@@ -46,7 +45,7 @@ function registDragEvent({ onDragChange, onDragEnd }: registDeagEventType) {
   }
 
   return {
-    onMouseDown: (clickEvent: MouseEvent<Element, MouseEvent>) => {
+    onMouseDown: (clickEvent: MouseEvent) => {
       const mouseMoveHandler = (moveEvent: MouseEvent) => {
         const deltaX = moveEvent.pageX - clickEvent.pageX;
         const deltaY = moveEvent.pageY - clickEvent.pageY;

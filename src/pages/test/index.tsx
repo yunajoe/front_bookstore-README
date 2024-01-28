@@ -1,5 +1,5 @@
-import CarouselTest from '@/components/carousel/carouseTest';
 import Carousel from '@/components/carousel/carousel';
+import { responsive } from '@/utils/checkRespinsiveEnv';
 
 // 데스크탑 6개  카드 이미지 163
 // tablet  4개  카드 이미지 157
@@ -72,20 +72,6 @@ function TestPage() {
       authorname: 'yuna',
     },
   ];
-  const responsive = {
-    desktop: {
-      breakpoint: { min: 1200, max: 3000 },
-      imageSize: { width: 160, height: 160 },
-    },
-    tablet: {
-      breakpoint: { max: 768, min: 1199 },
-      imageSize: { width: 157, height: 160 },
-    },
-    mobile: {
-      breakpoint: { max: 375, min: 767 },
-      imageSize: { width: 142, height: 160 },
-    },
-  };
 
   return (
     <>

@@ -1,13 +1,20 @@
+import { EnvType } from '@/types/carouselType';
 import React from 'react';
 
-export default function CarouselCard(props) {
+export type CarouselCardProps = {
+  imageUrl: string;
+  title: string;
+  authorname: string;
+  env: EnvType;
+};
+
+export default function CarouselCard(props: CarouselCardProps) {
   const { imageUrl, title, authorname, env } = props;
   const sizeVariants = {
     desktop: 'w-160 h-246',
     tablet: 'w-157 h-237',
     mobile: 'w-142 h-202',
   };
-
   return (
     <div>
       <div

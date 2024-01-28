@@ -1,10 +1,16 @@
 import CarouselCard from '@/components/carousel/carouselCard';
+import { EnvType, NewBook, ResponSive } from '@/types/carouselType';
 import registDragEvent from '@/utils/registerDragEvent';
 import { useCallback, useEffect, useRef, useState } from 'react';
-
 const CARD_MARGIN_VALUE = 20;
-function Carousel({ data, responsive }) {
-  const [carouselElement, setCarouselElement] = useState(null);
+
+type CarouselProps = {
+  data: NewBook[];
+  responsive: ResponSive;
+};
+
+function Carousel({ data, responsive }: CarouselProps) {
+  const [carouselElement, setCarouselElement] = useState<HTMLDivElement>('');
 
   // for 반응형에 따른 이미지 사이즈 구하는 용도
   const [carouselContainer, setCarouselContainer] = useState({
@@ -12,19 +18,19 @@ function Carousel({ data, responsive }) {
     height: 0,
   });
   // 환경 env
-  const [env, setEnv] = useState('');
+  const [env, setEnv] = useState<EnvType>('desktop');
   const [transDelta, setTransDelta] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const CONTENT_WIDTH = responsive[env]?.imageSize.width;
+  const CONTENT_WIDTH = responsive[env]?.imageSize.width!;
+  const ref = useRef<HTMLDivElement | null>(null);
 
-  const ref = useRef(null);
   useEffect(() => {
     const element = ref.current!;
     if (ref.current) {
       // 요소도 따로 저장
       setCarouselElement(element);
       // width, hegiht도 따로 저장 (for반응형)
-      const { width, height } = element.getBoundingClientRect();
+      const { width, height } = element?.getBoundingClientRect() || {};
       setCarouselContainer({ width, height });
     }
   }, []);
@@ -34,33 +40,25 @@ function Carousel({ data, responsive }) {
   }, [env]);
 
   const moveRightSlide = () => {
-    console.log('오른쪾 슬라이드 펑션');
-    const calcWidth = Math.floor(
-      responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
-    );
+    const calcWidth = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
     carouselElement.style.transform = `translateX(${(currentIndex + 1) * (calcWidth * -1)}px)`;
   };
 
   const moveLeftSlide = () => {
-    console.log('왼쪽 슬라이드 펑션');
-    const calcWidth = Math.floor(
-      responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
-    );
+    const calcWidth = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
     carouselElement.style.transform = `translateX(${(currentIndex - 1) * (calcWidth * -1)}px)`;
   };
 
   const btnpressprev = () => {
-    console.log('prev버튼클릭');
     if (currentIndex === 0) return;
     const prevIndex = currentIndex - 1;
     setCurrentIndex(prevIndex);
     moveLeftSlide();
   };
   const btnpressnext = () => {
-    console.log('next버튼클릭');
     let width = carouselElement.clientWidth;
     const visibleItemsCount = Math.floor(
-      width / (responsive[env]?.imageSize.width + CARD_MARGIN_VALUE),
+      width / (CONTENT_WIDTH + CARD_MARGIN_VALUE),
     );
     const maxPageValue = data.length - visibleItemsCount;
     if (currentIndex === maxPageValue) return;
@@ -90,7 +88,6 @@ function Carousel({ data, responsive }) {
   useEffect(() => {
     calculateEnv(carouselContainer);
   }, [carouselContainer, calculateEnv]);
-
   const inrange = (v: number, min: number, max: number) => {
     if (v < min) return min;
     if (v > max) return max;
@@ -117,20 +114,16 @@ function Carousel({ data, responsive }) {
         </button>
         <div className="mx-26 tablet:mx-16 mobile:mx-0 overflow-x-hidden scroll-smooth">
           <div
-            className={'flex scroll-smooth transition-transform'}
+            className="flex scroll-smooth transition-transform"
             ref={ref}
             {...registDragEvent({
               onDragChange: (deltaX) => {
-                // (carouselContainer.width + deltaX) * currentIndex
                 const boundaryDelta = inrange(
                   deltaX,
-                  -(responsive[env]?.imageSize.width + CARD_MARGIN_VALUE),
-                  responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+                  -(CONTENT_WIDTH + CARD_MARGIN_VALUE),
+                  CONTENT_WIDTH + CARD_MARGIN_VALUE,
                 );
-
-                const calcWidth = Math.floor(
-                  responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
-                );
+                const calcWidth = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
                 carouselElement.style.transform = `translateX(${transDelta + calcWidth * -currentIndex}px)`;
                 setTransDelta(boundaryDelta);
               },
@@ -141,7 +134,7 @@ function Carousel({ data, responsive }) {
                   const boundaryIndex = inrange(currentIndex + 1, 0, maxIndex);
                   setCurrentIndex(boundaryIndex);
                   const calcWidth = Math.floor(
-                    responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
                   );
                   carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
                 }
@@ -149,7 +142,7 @@ function Carousel({ data, responsive }) {
                   const boundaryIndex = inrange(currentIndex - 1, 0, maxIndex);
                   setCurrentIndex(boundaryIndex);
                   const calcWidth = Math.floor(
-                    responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
                   );
                   carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
                 }
