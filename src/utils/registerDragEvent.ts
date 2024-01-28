@@ -44,25 +44,25 @@ function registDragEvent({ onDragChange, onDragEnd }: registDeagEventType) {
     };
   }
 
-  return {
-    onMouseDown: (clickEvent: MouseEvent) => {
-      const mouseMoveHandler = (moveEvent: MouseEvent) => {
-        const deltaX = moveEvent.pageX - clickEvent.pageX;
-        const deltaY = moveEvent.pageY - clickEvent.pageY;
-        onDragChange?.(deltaX, deltaY);
-      };
+  // return {
+  //   onMouseDown: (clickEvent: MouseEvent) => {
+  //     const mouseMoveHandler = (moveEvent: MouseEvent) => {
+  //       const deltaX = moveEvent.pageX - clickEvent.pageX;
+  //       const deltaY = moveEvent.pageY - clickEvent.pageY;
+  //       onDragChange?.(deltaX, deltaY);
+  //     };
 
-      const mouseUpHandler = (moveEvent: MouseEvent) => {
-        const deltaX = moveEvent.pageX - clickEvent.pageX;
-        const deltaY = moveEvent.pageY - clickEvent.pageY;
-        onDragEnd?.(deltaX, deltaY);
-        document.removeEventListener('mousemove', mouseMoveHandler);
-      };
+  //     const mouseUpHandler = (moveEvent: MouseEvent) => {
+  //       const deltaX = moveEvent.pageX - clickEvent.pageX;
+  //       const deltaY = moveEvent.pageY - clickEvent.pageY;
+  //       onDragEnd?.(deltaX, deltaY);
+  //       document.removeEventListener('mousemove', mouseMoveHandler);
+  //     };
 
-      document.addEventListener('mousemove', mouseMoveHandler);
-      document.addEventListener('mouseup', mouseUpHandler, { once: true });
-    },
-  };
+  //     document.addEventListener('mousemove', mouseMoveHandler);
+  //     document.addEventListener('mouseup', mouseUpHandler, { once: true });
+  //   },
+  // };
 }
 
 export default registDragEvent;
