@@ -14,7 +14,7 @@ returns: component
 
 import { useEffect, useState } from 'react';
 
-import registDragEvent from '@/utils/registDragEvent';
+import registDragEvent from '@/components/todayBestCorner/registDragEvent';
 
 export default function withSlider(
   InnerComponent: any,
