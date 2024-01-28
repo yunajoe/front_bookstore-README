@@ -91,7 +91,7 @@ function Carousel({ data, responsive }: CarouselProps) {
 
   useEffect(calculateEnv, [calculateEnv]);
   useEffect(resetCurrentIndex, [env]);
-  
+
   useEffect(() => {
     const element = ref.current!;
     if (ref.current) {
@@ -99,8 +99,6 @@ function Carousel({ data, responsive }: CarouselProps) {
       setCarouselContainer({ width, height });
     }
   }, []);
-
-
 
   return (
     <div className="bg-white relative overflow-hidden w-[1200px] tablet:w-[768px] mobile:w-360">
@@ -133,38 +131,52 @@ function Carousel({ data, responsive }: CarouselProps) {
             ref={ref}
             {...registDragEvent({
               onDragChange: (deltaX) => {
-                const boundaryDelta = inrange(
-                  deltaX,
-                  -(CONTENT_WIDTH + CARD_MARGIN_VALUE),
-                  CONTENT_WIDTH + CARD_MARGIN_VALUE,
-                );
-                const calcWidth = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
-                if (carouselElement) {
-                  carouselElement.style.transform = `translateX(${transDelta + calcWidth * -currentIndex}px)`;
-                  setTransDelta(boundaryDelta);
+                if (env !== 'desktop') {
+                  const boundaryDelta = inrange(
+                    deltaX,
+                    -(CONTENT_WIDTH + CARD_MARGIN_VALUE),
+                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
+                  );
+                  const calcWidth = Math.floor(
+                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
+                  );
+                  if (carouselElement) {
+                    carouselElement.style.transform = `translateX(${transDelta + calcWidth * -currentIndex}px)`;
+                    setTransDelta(boundaryDelta);
+                  }
                 }
               },
               onDragEnd: (deltaX) => {
-                const maxIndex =
-                  env === 'tablet' ? data.length - 4 : data.length - 2;
-                if (deltaX < 0) {
-                  const boundaryIndex = inrange(currentIndex + 1, 0, maxIndex);
-                  setCurrentIndex(boundaryIndex);
-                  const calcWidth = Math.floor(
-                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
-                  );
-                  if (carouselElement) {
-                    carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
+                if (env !== 'desktop') {
+                  const maxIndex =
+                    env === 'tablet' ? data.length - 4 : data.length - 2;
+                  if (deltaX < 0) {
+                    const boundaryIndex = inrange(
+                      currentIndex + 1,
+                      0,
+                      maxIndex,
+                    );
+                    setCurrentIndex(boundaryIndex);
+                    const calcWidth = Math.floor(
+                      CONTENT_WIDTH + CARD_MARGIN_VALUE,
+                    );
+                    if (carouselElement) {
+                      carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
+                    }
                   }
-                }
-                if (deltaX > 0) {
-                  const boundaryIndex = inrange(currentIndex - 1, 0, maxIndex);
-                  setCurrentIndex(boundaryIndex);
-                  const calcWidth = Math.floor(
-                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
-                  );
-                  if (carouselElement) {
-                    carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
+                  if (deltaX > 0) {
+                    const boundaryIndex = inrange(
+                      currentIndex - 1,
+                      0,
+                      maxIndex,
+                    );
+                    setCurrentIndex(boundaryIndex);
+                    const calcWidth = Math.floor(
+                      CONTENT_WIDTH + CARD_MARGIN_VALUE,
+                    );
+                    if (carouselElement) {
+                      carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
+                    }
                   }
                 }
               },
