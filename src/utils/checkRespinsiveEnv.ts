@@ -1,7 +1,7 @@
 export const responsive = {
   desktop: {
     breakpoint: { min: 1200, max: 3000 },
-    imageSize: { width: 160, height: 246 },
+    imageSize: { width: 163, height: 246 },
   },
   tablet: {
     breakpoint: { max: 768, min: 1199 },

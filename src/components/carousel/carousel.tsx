@@ -2,12 +2,18 @@ import CarouselCard from '@/components/carousel/carouselCard';
 import { EnvType, NewBook, ResponSive } from '@/types/carouselType';
 import registDragEvent from '@/utils/registerDragEvent';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 const CARD_MARGIN_VALUE = 20;
 
 type CarouselProps = {
   data: NewBook[];
   responsive: ResponSive;
+};
+
+const inrange = (v: number, min: number, max: number) => {
+  if (v < min) return min;
+  if (v > max) return max;
+  return v;
 };
 
 function Carousel({ data, responsive }: CarouselProps) {
@@ -18,61 +24,54 @@ function Carousel({ data, responsive }: CarouselProps) {
   const [env, setEnv] = useState<EnvType>('desktop');
   const [transDelta, setTransDelta] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [maxPage, setMaxPage] = useState(0);
   const CONTENT_WIDTH = responsive[env]?.imageSize.width!;
   const ref = useRef<HTMLDivElement>(null);
   const carouselElement = ref.current;
 
-  useEffect(() => {
-    const element = ref.current!;
-    if (ref.current) {
-      const { width, height } = element?.getBoundingClientRect() || {};
-      setCarouselContainer({ width, height });
-    }
-  }, []);
+  const calcContentWidthValue = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
 
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [env]);
-
-  const moveRightSlide = () => {
-    const calcWidth = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
+  const transformCarousel = (currentIndex: number) => {
     if (carouselElement) {
-      carouselElement.style.transform = `translateX(${(currentIndex + 1) * (calcWidth * -1)}px)`;
-    }
-  };
-
-  const moveLeftSlide = () => {
-    const calcWidth = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
-    if (carouselElement) {
-      carouselElement.style.transform = `translateX(${(currentIndex - 1) * (calcWidth * -1)}px)`;
+      carouselElement.style.transform = `translateX(${currentIndex * (calcContentWidthValue * -1)}px)`;
     }
   };
 
   const btnpressprev = () => {
-    if (currentIndex === 0) return;
+    if (currentIndex < 1) return;
     const prevIndex = currentIndex - 1;
     setCurrentIndex(prevIndex);
-    moveLeftSlide();
+    transformCarousel(prevIndex);
   };
-  const btnpressnext = () => {
+
+  const calcMaxPageValue = () => {
     let width = carouselElement?.clientWidth!;
-    const visibleItemsCount = Math.floor(
+    const visibleItemsCount = Math.ceil(
       width / (CONTENT_WIDTH + CARD_MARGIN_VALUE),
     );
-    const maxPageValue = data.length - visibleItemsCount;
+    console.log(visibleItemsCount);
+    return data.length - visibleItemsCount;
+  };
 
+  const maxPage = useMemo(() => {
+    try {
+      return calcMaxPageValue();
+    } catch (e) {
+      return 0;
+    }
+  }, [env, currentIndex]);
+
+  const btnpressnext = () => {
+    const maxPageValue = calcMaxPageValue();
     if (currentIndex === maxPageValue) return;
     const nextIndex = currentIndex + 1;
     setCurrentIndex(nextIndex);
-    setMaxPage(maxPageValue);
-    moveRightSlide();
+    transformCarousel(nextIndex);
   };
 
-  const calculateEnv = useCallback((carouselContainer: any) => {
+  const calculateEnv = useCallback(() => {
     let w = carouselContainer.width;
     switch (w) {
-      case 1080:
+      case 1078:
         setEnv('desktop');
         break;
       case 688:
@@ -84,17 +83,24 @@ function Carousel({ data, responsive }: CarouselProps) {
       default:
         return;
     }
-    return env;
+  }, [carouselContainer]);
+
+  const resetCurrentIndex = useCallback(() => {
+    setCurrentIndex(0);
   }, []);
 
+  useEffect(calculateEnv, [calculateEnv]);
+  useEffect(resetCurrentIndex, [env]);
+  
   useEffect(() => {
-    calculateEnv(carouselContainer);
-  }, [carouselContainer, calculateEnv]);
-  const inrange = (v: number, min: number, max: number) => {
-    if (v < min) return min;
-    if (v > max) return max;
-    return v;
-  };
+    const element = ref.current!;
+    if (ref.current) {
+      const { width, height } = element?.getBoundingClientRect() || {};
+      setCarouselContainer({ width, height });
+    }
+  }, []);
+
+
 
   return (
     <div className="bg-white relative overflow-hidden w-[1200px] tablet:w-[768px] mobile:w-360">
@@ -108,19 +114,20 @@ function Carousel({ data, responsive }: CarouselProps) {
         <button
           onClick={btnpressprev}
           className="w-10 h-full flex justify-center items-center bg-transparent mobile:hidden">
-          <Image
-            src={
-              currentIndex === 0
-                ? '/icons/CarouselLeftInActivateArrow.svg'
-                : '/icons/CarouselLeftActivateArrow.svg'
-            }
-            alt="rightArrow"
-            width={10}
-            height={20}
-          />
+          <div className="w-10 h-16 relative">
+            <Image
+              className="cursor-pointer"
+              src={
+                currentIndex === 0
+                  ? '/icons/CarouselLeftInActivateArrow.svg'
+                  : '/icons/CarouselLeftActivateArrow.svg'
+              }
+              alt="왼쪽화살표"
+              fill
+            />
+          </div>
         </button>
-        <div className="mx-26 tablet:mx-16 mobile:mx-0 overflow-x-hidden scroll-smooth">
-          {/* 리액트 touch  */}
+        <div className="mx-27 tablet:mx-16 mobile:mx-0 overflow-x-hidden scroll-smooth">
           <div
             className="flex scroll-smooth transition-transform"
             ref={ref}
@@ -171,16 +178,17 @@ function Carousel({ data, responsive }: CarouselProps) {
           onClick={btnpressnext}
           className="w-10 h-full flex justify-center items-center bg-transparent right-0
             mobile:hidden">
-          <Image
-            src={
-              currentIndex === maxPage && maxPage !== 0
-                ? '/icons/CarouselRightInActivateArrow.svg'
-                : '/icons/CarouselRightActivateArrow.svg'
-            }
-            alt="rightArrow"
-            width={10}
-            height={20}
-          />
+          <div className="w-10 h-16 relative">
+            <Image
+              src={
+                currentIndex === maxPage && maxPage !== 0
+                  ? '/icons/CarouselRightInActivateArrow.svg'
+                  : '/icons/CarouselRightActivateArrow.svg'
+              }
+              alt="오른쪽화살표"
+              fill
+            />
+          </div>
         </button>
       </div>
     </div>

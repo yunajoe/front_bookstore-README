@@ -1,23 +1,23 @@
+import type React from 'react';
+
 const isTouchScreen =
   typeof window !== 'undefined' &&
   window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-// lint
-type onDragChangeType = (deltaX: number, deltaY: number) => void;
-type onDragEndType = (deltaX: number, deltaY: number) => void;
-
-type registDeagEventType = {
-  onDragChange: onDragChangeType;
-  onDragEnd: onDragEndType;
-};
-
-function registDragEvent({ onDragChange, onDragEnd }: registDeagEventType) {
+export default function registDragEvent({
+  onDragChange,
+  onDragEnd,
+}: {
+  onDragChange?: (x: number, y: number) => void;
+  onDragEnd?: (x: number, y: number) => void;
+}) {
   if (isTouchScreen) {
     return {
-      onTouchStart: (touchEvent: TouchEvent) => {
+      onTouchStart: (touchEvent: React.TouchEvent<HTMLDivElement>) => {
         const touchMoveHandler = (moveEvent: TouchEvent) => {
-          if (moveEvent.cancelable) moveEvent.preventDefault();
-
+          if (moveEvent.cancelable) {
+            moveEvent.preventDefault();
+          }
           const deltaX =
             moveEvent.touches[0].pageX - touchEvent.touches[0].pageX;
           const deltaY =
@@ -44,25 +44,23 @@ function registDragEvent({ onDragChange, onDragEnd }: registDeagEventType) {
     };
   }
 
-  // return {
-  //   onMouseDown: (clickEvent: MouseEvent) => {
-  //     const mouseMoveHandler = (moveEvent: MouseEvent) => {
-  //       const deltaX = moveEvent.pageX - clickEvent.pageX;
-  //       const deltaY = moveEvent.pageY - clickEvent.pageY;
-  //       onDragChange?.(deltaX, deltaY);
-  //     };
+  return {
+    onMouseDown: (clickEvent: React.MouseEvent<Element, MouseEvent>) => {
+      const mouseMoveHandler = (moveEvent: MouseEvent) => {
+        const deltaX = moveEvent.pageX - clickEvent.pageX;
+        const deltaY = moveEvent.pageY - clickEvent.pageY;
+        onDragChange?.(deltaX, deltaY);
+      };
 
-  //     const mouseUpHandler = (moveEvent: MouseEvent) => {
-  //       const deltaX = moveEvent.pageX - clickEvent.pageX;
-  //       const deltaY = moveEvent.pageY - clickEvent.pageY;
-  //       onDragEnd?.(deltaX, deltaY);
-  //       document.removeEventListener('mousemove', mouseMoveHandler);
-  //     };
+      const mouseUpHandler = (moveEvent: MouseEvent) => {
+        const deltaX = moveEvent.pageX - clickEvent.pageX;
+        const deltaY = moveEvent.pageY - clickEvent.pageY;
+        onDragEnd?.(deltaX, deltaY);
+        document.removeEventListener('mousemove', mouseMoveHandler);
+      };
 
-  //     document.addEventListener('mousemove', mouseMoveHandler);
-  //     document.addEventListener('mouseup', mouseUpHandler, { once: true });
-  //   },
-  // };
+      document.addEventListener('mousemove', mouseMoveHandler);
+      document.addEventListener('mouseup', mouseUpHandler, { once: true });
+    },
+  };
 }
-
-export default registDragEvent;

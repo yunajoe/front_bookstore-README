@@ -11,7 +11,7 @@ export type CarouselCardProps = {
 export default function CarouselCard(props: CarouselCardProps) {
   const { imageUrl, title, authorname, env } = props;
   const sizeVariants = {
-    desktop: 'w-160 h-246',
+    desktop: 'w-163 h-246',
     tablet: 'w-157 h-237',
     mobile: 'w-142 h-202',
   };
