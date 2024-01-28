@@ -9,10 +9,6 @@ const Mycard = (props) => {
 };
 
 function CarouselTest() {
-  //   offsetWidth: border를 포함한 width
-  // scrollWidth: scroll할 수 있는 숨겨진 영역을 합한 width
-  // clientWidth: width(border, scroll bar 포함하지 않음)
-
   const [box, setBox] = useState();
   const ref = useRef(null);
 

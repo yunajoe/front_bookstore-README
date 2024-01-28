@@ -1,64 +1,175 @@
 import CarouselCard from '@/components/carousel/carouselCard';
-import { useEffect, useRef, useState } from 'react';
+import registDragEvent from '@/utils/registerDragEvent';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-function Carousel({ data, responsive, responsiveImages }) {
-  // tablet:h-12 mobile:h-12'/
-  const [box, setBox] = useState();
+const CARD_MARGIN_VALUE = 20;
+function Carousel({ data, responsive }) {
+  const [carouselElement, setCarouselElement] = useState(null);
+
+  // for 반응형에 따른 이미지 사이즈 구하는 용도
+  const [carouselContainer, setCarouselContainer] = useState({
+    width: 0,
+    height: 0,
+  });
+  // 환경 env
+  const [env, setEnv] = useState('');
+  const [transDelta, setTransDelta] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const CONTENT_WIDTH = responsive[env]?.imageSize.width;
+
   const ref = useRef(null);
   useEffect(() => {
     const element = ref.current!;
-
-    setBox(element);
+    if (ref.current) {
+      // 요소도 따로 저장
+      setCarouselElement(element);
+      // width, hegiht도 따로 저장 (for반응형)
+      const { width, height } = element.getBoundingClientRect();
+      setCarouselContainer({ width, height });
+    }
   }, []);
 
-  const btnpressprev = () => {
-    let width = box!.clientWidth;
-    console.log('왼쪽 스크롤', box.scrollLeft, width);
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [env]);
 
-    box.scrollLeft = box.scrollLeft - width;
+  const moveRightSlide = () => {
+    console.log('오른쪾 슬라이드 펑션');
+    const calcWidth = Math.floor(
+      responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+    );
+    carouselElement.style.transform = `translateX(${(currentIndex + 1) * (calcWidth * -1)}px)`;
+  };
+
+  const moveLeftSlide = () => {
+    console.log('왼쪽 슬라이드 펑션');
+    const calcWidth = Math.floor(
+      responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+    );
+    carouselElement.style.transform = `translateX(${(currentIndex - 1) * (calcWidth * -1)}px)`;
+  };
+
+  const btnpressprev = () => {
+    console.log('prev버튼클릭');
+    if (currentIndex === 0) return;
+    const prevIndex = currentIndex - 1;
+    setCurrentIndex(prevIndex);
+    moveLeftSlide();
   };
   const btnpressnext = () => {
-    let width = box.clientWidth;
-    console.log('오른쪽 스크롤', box.scrollLeft, width);
-    box.scrollLeft = box.scrollLeft + width;
+    console.log('next버튼클릭');
+    let width = carouselElement.clientWidth;
+    const visibleItemsCount = Math.floor(
+      width / (responsive[env]?.imageSize.width + CARD_MARGIN_VALUE),
+    );
+    const maxPageValue = data.length - visibleItemsCount;
+    if (currentIndex === maxPageValue) return;
+    const nextIndex = currentIndex + 1;
+    setCurrentIndex(nextIndex);
+    moveRightSlide();
   };
 
-  console.log('res', responsive);
-  console.log('aaa', responsiveImages);
+  const calculateEnv = useCallback((carouselContainer) => {
+    let w = carouselContainer.width;
+    switch (w) {
+      case 1080:
+        setEnv('desktop');
+        break;
+      case 688:
+        setEnv('tablet');
+        break;
+      case 330:
+        setEnv('mobile');
+        break;
+      default:
+        return;
+    }
+    return env;
+  }, []);
+
+  useEffect(() => {
+    calculateEnv(carouselContainer);
+  }, [carouselContainer, calculateEnv]);
+
+  const inrange = (v: number, min: number, max: number) => {
+    if (v < min) return min;
+    if (v > max) return max;
+    return v;
+  };
+
   return (
-    <div
-      className="relative overflow-hidden p-26 w-[1200px] bg-white border-solid border-2
-        border-[black] px-60 py-60">
-      <button
-        onClick={btnpressprev}
-        className="absolute top-0 w-16 h-full flex justify-center items-center bg-transparent">
-        <p
-          className="text-2xl bg-opacity-40 bg-white shadow-md rounded-lg text-black w-14 h-14
-            cursor-pointer">
-          &lt;
-        </p>
-      </button>
-      <button
-        onClick={btnpressnext}
-        className="absolute top-0 w-16 h-full flex justify-center items-center bg-transparent
-          right-0">
-        <p
-          className="text-2xl bg-opacity-40 bg-white shadow-md rounded-lg text-black w-14 h-14
-            cursor-pointer">
-          &gt;
-        </p>
-      </button>
-      <div className="flex justify-between border-solid border-2 border-[black] mb-40">
+    <div className="bg-white relative overflow-hidden w-[1200px] tablet:w-[768px] mobile:w-360">
+      <div
+        className="flex justify-between border-solid border-2 border-[black] mx-60 tablet:mx-40
+          mobile:mx-15 mb-40 mobile:mb-20">
         <span>신간도서</span>
         <span className="text-green">더보기</span>
       </div>
-      <div
-        ref={ref}
-        className="p-0 sm:p-10 flex overflow-x-hidden scroll-smooth border-solid border-2
-          border-red w-1080 h-321">
-        {data.map((item, index) => (
-          <CarouselCard key={index} {...item} />
-        ))}
+      <div className="flex flex-row items-center mx-24 tablet:mx-14 mobile:mx-15">
+        <button
+          onClick={btnpressprev}
+          className="w-10 h-full flex justify-center items-center bg-transparent mobile:hidden">
+          <p
+            className="text-2xl bg-opacity-40 bg-white shadow-md rounded-lg text-black w-10 h-10
+              cursor-pointer">
+            &lt;
+          </p>
+        </button>
+        <div className="mx-26 tablet:mx-16 mobile:mx-0 overflow-x-hidden scroll-smooth">
+          <div
+            className={'flex scroll-smooth transition-transform'}
+            ref={ref}
+            {...registDragEvent({
+              onDragChange: (deltaX) => {
+                // (carouselContainer.width + deltaX) * currentIndex
+                const boundaryDelta = inrange(
+                  deltaX,
+                  -(responsive[env]?.imageSize.width + CARD_MARGIN_VALUE),
+                  responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+                );
+
+                const calcWidth = Math.floor(
+                  responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+                );
+                carouselElement.style.transform = `translateX(${transDelta + calcWidth * -currentIndex}px)`;
+                setTransDelta(boundaryDelta);
+              },
+              onDragEnd: (deltaX) => {
+                const maxIndex = data.length - 2;
+
+                if (deltaX < 0) {
+                  const boundaryIndex = inrange(currentIndex + 1, 0, maxIndex);
+                  setCurrentIndex(boundaryIndex);
+                  const calcWidth = Math.floor(
+                    responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+                  );
+                  carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
+                }
+                if (deltaX > 0) {
+                  const boundaryIndex = inrange(currentIndex - 1, 0, maxIndex);
+                  setCurrentIndex(boundaryIndex);
+                  const calcWidth = Math.floor(
+                    responsive[env]?.imageSize.width + CARD_MARGIN_VALUE,
+                  );
+                  carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
+                }
+              },
+            })}>
+            {data.map((item, index) => (
+              <CarouselCard key={index} {...item} env={env} />
+            ))}
+          </div>
+        </div>
+        <button
+          onClick={btnpressnext}
+          className="w-10 h-full flex justify-center items-center bg-transparent right-0
+            mobile:hidden">
+          <p
+            className="text-2xl bg-opacity-40 bg-white shadow-md rounded-lg text-black w-10 h-10
+              cursor-pointer">
+            &gt;
+          </p>
+        </button>
       </div>
     </div>
   );

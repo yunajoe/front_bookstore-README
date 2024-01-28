@@ -1,9 +1,14 @@
+import CarouselTest from '@/components/carousel/carouseTest';
 import Carousel from '@/components/carousel/carousel';
-// mobile: { min: '375px', max: '767px' },
-// tablet: { min: '768px', max: '1199px' },
+
 // 데스크탑 6개  카드 이미지 163
 // tablet  4개  카드 이미지 157
 // mobile  2개   카드 이미지 142
+
+// 데스크탑 1200px  padding이 60   즉, container 1080px;  //  6.62576687117 개
+// 태블릿  768px  padding이 40, 즉 container  688px   // 4.328 개
+// 모바일 360px padding 15, 즉 container 330px // 2.32... 개
+
 function TestPage() {
   const data = [
     {
@@ -45,64 +50,46 @@ function TestPage() {
     {
       imageUrl:
         'https://cdn.pixabay.com/photo/2023/12/19/20/23/hazelnut-8458335_1280.jpg',
-      title: '책6',
+      title: '책7',
       authorname: 'yuna',
     },
     {
       imageUrl:
         'https://cdn.pixabay.com/photo/2023/12/19/20/23/hazelnut-8458335_1280.jpg',
-      title: '책6',
+      title: '책8',
       authorname: 'yuna',
     },
     {
       imageUrl:
         'https://cdn.pixabay.com/photo/2023/12/19/20/23/hazelnut-8458335_1280.jpg',
-      title: '책6',
+      title: '책9',
       authorname: 'yuna',
     },
     {
       imageUrl:
         'https://cdn.pixabay.com/photo/2023/12/19/20/23/hazelnut-8458335_1280.jpg',
-      title: '책6',
+      title: '책10',
       authorname: 'yuna',
     },
   ];
   const responsive = {
     desktop: {
       breakpoint: { min: 1200, max: 3000 },
-      items: 6,
+      imageSize: { width: 160, height: 160 },
     },
     tablet: {
       breakpoint: { max: 768, min: 1199 },
-      items: 4,
+      imageSize: { width: 157, height: 160 },
     },
     mobile: {
       breakpoint: { max: 375, min: 767 },
-      items: 2,
+      imageSize: { width: 142, height: 160 },
     },
   };
 
-  const responsiveImageSize = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 1,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
   return (
     <>
-      <Carousel
-        data={data}
-        responsive={responsive}
-        responsiveImages={responsiveImageSize}
-      />
+      <Carousel data={data} responsive={responsive} />
     </>
   );
 }
