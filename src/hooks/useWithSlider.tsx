@@ -1,4 +1,4 @@
-/* 캐러셀 HOC
+/* 캐러셀 hook
 
 params: 
   - InnerComponent: required, 컴포넌트, 캐러셀 안에 들어갈 컴포넌트
@@ -12,11 +12,12 @@ params:
 returns: component
 */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import registDragEvent from '@/components/todayBestCorner/registDragEvent';
+// TODO 코드 수정 예정
+import registDragEvent from '@/components/todayBestCorner/tempRegistEvent';
 
-export default function withSlider(
+export default function useWithSlider(
   InnerComponent: any,
   dataList: Array<any>,
   sliderWidth: number,
@@ -25,11 +26,13 @@ export default function withSlider(
   auto = false,
   sec = 0,
 ) {
-  const slideList = [dataList.at(-1), ...dataList, dataList.at(0)];
+  const slideList = useMemo(
+    () => [dataList.at(-1), ...dataList, dataList.at(0)],
+    [dataList],
+  );
   const [currentIndex, setCurrentIndex] = useState(1);
   const [transX, setTransX] = useState(0);
   const [animate, setAnimate] = useState(false);
-  const custom = 'w-' + String(componentWidth) + ' flex-center';
 
   const inrange = (v: number, min: number, max: number) => {
     if (v < min) return min;
@@ -56,7 +59,7 @@ export default function withSlider(
         clearInterval(time);
       };
     }
-  }, [currentIndex]);
+  }, [currentIndex, sec, auto, slideList]);
 
   if (dataList.length < 2) return;
 
@@ -102,7 +105,12 @@ export default function withSlider(
             }
           }}>
           {slideList.map((el, i) => (
-            <div key={i} className={custom}>
+            <div
+              key={i}
+              className="flex-center"
+              style={{
+                width: componentWidth,
+              }}>
               <InnerComponent {...el} />
             </div>
           ))}
