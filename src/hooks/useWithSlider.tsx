@@ -78,12 +78,12 @@ export default function useWithSlider(
             transition: `transform ${animate ? 300 : 0}ms ease-in-out 0s`,
           }}
           {...registDragEvent({
-            onDragChange: (deltaX) => {
+            onDragChange: (deltaX: number) => {
               setTransX(
                 inrange(deltaX, -componentWidth + 10, componentWidth - 10),
               );
             },
-            onDragEnd: (deltaX) => {
+            onDragEnd: (deltaX: number) => {
               const maxIndex = slideList.length - 1;
 
               if (deltaX < -100)
