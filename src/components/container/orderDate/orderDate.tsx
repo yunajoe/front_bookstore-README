@@ -12,10 +12,12 @@ import { forwardRef } from 'react';
 import ko from 'date-fns/locale/ko';
 import Image from 'next/image';
 import { getDateAgo } from '@/utils/getTimeAgo';
+import { Person } from '@/types/orderDateType';
 
 type OrderDateProps = {
   pastDate: string;
   setSelectedItem: Dispatch<SetStateAction<string>>;
+  person: Person;
 };
 
 const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
@@ -27,18 +29,12 @@ const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
         className="focus:outline-none w-1 text-center flex-1"
         readOnly
       />
-      <Image
-        src="/images/calendar.svg"
-        width={20}
-        height={20}
-        alt="calendar"
-        className=""
-      />
+      <Image src="/icons/Calendar.svg" width={20} height={20} alt="달력" />
     </div>
   );
 });
 
-function OrderDate({ pastDate, setSelectedItem }: OrderDateProps) {
+function OrderDate({ person, pastDate, setSelectedItem }: OrderDateProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const startDateRef = useRef<HTMLInputElement>(null);
@@ -66,6 +62,19 @@ function OrderDate({ pastDate, setSelectedItem }: OrderDateProps) {
     if (pastDate !== '직접 입력') {
       setStartDate(new Date(findMonthAgo));
       setEndDate(new Date());
+    }
+    if (pastDate === '직접 입력') {
+      setStartDate(new Date());
+      setEndDate(endDate);
+    }
+    if (pastDate === '전체보기') {
+      if (!person.isPurchased) {
+        setStartDate(new Date());
+        setEndDate(new Date());
+      } else if (person.isPurchased === true) {
+        setStartDate(new Date(person.firstPurchasedDate));
+        setEndDate(new Date());
+      }
     }
   }, [pastDate]);
 
