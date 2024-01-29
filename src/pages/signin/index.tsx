@@ -35,9 +35,10 @@ function SignIn() {
   return (
     <div className="w-full min-h-dvh flex-center bg-white">
       <div className="max-w-300 flex-1 flex flex-col items-center gap-y-10">
-        <div className="h-64 flex-center">
-          <p className="text-green font-bold text-2xl">Read Me</p>
+        <div className="h-64 flex-center mb-40 border">
+          <p className="text-green text-24 font-bold">Read Me</p>
         </div>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col items-center gap-y-10">
