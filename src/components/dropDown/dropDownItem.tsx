@@ -5,14 +5,20 @@ type DropDownItemProps = {
   setIsClick: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function DropDownItem({ menu, setSelectedItem, setIsClick }: DropDownItemProps) {
+function DropDownItem({
+  menu,
+  setSelectedItem,
+  setIsClick,
+}: DropDownItemProps) {
   const handleSelectItem = useCallback((text: string) => {
     setSelectedItem(text);
     setIsClick(false);
   }, []);
   return (
     <div>
-      <li className="hover:bg-gray-5" onClick={() => handleSelectItem(menu)}>
+      <li
+        className="h-42 text-14 hover:bg-gray-5 flex items-center pl-16 pr-10"
+        onClick={() => handleSelectItem(menu)}>
         {menu}
       </li>
     </div>
