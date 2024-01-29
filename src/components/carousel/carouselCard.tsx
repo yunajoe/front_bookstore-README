@@ -15,6 +15,7 @@ export default function CarouselCard(props: CarouselCardProps) {
     tablet: 'w-157 h-237',
     mobile: 'w-142 h-202',
   };
+
   return (
     <div>
       <div

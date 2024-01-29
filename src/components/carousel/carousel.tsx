@@ -69,20 +69,16 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
 
   const calculateEnv = useCallback(() => {
-    let w = carouselContainer.width;
-    switch (w) {
-      case 1078:
-        setEnv('desktop');
-        break;
-      case 688:
-        setEnv('tablet');
-        break;
-      case 330:
+    window.addEventListener('resize', () => {
+      let w = window.innerWidth;
+      if (w < 768) {
         setEnv('mobile');
-        break;
-      default:
-        return;
-    }
+      } else if (w < 1200) {
+        setEnv('tablet');
+      } else {
+        setEnv('desktop');
+      }
+    });
   }, [carouselContainer]);
 
   const resetCurrentIndex = useCallback(() => {
@@ -131,52 +127,37 @@ function Carousel({ data, responsive }: CarouselProps) {
             ref={ref}
             {...registDragEvent({
               onDragChange: (deltaX) => {
-                if (env !== 'desktop') {
-                  const boundaryDelta = inrange(
-                    deltaX,
-                    -(CONTENT_WIDTH + CARD_MARGIN_VALUE),
-                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
-                  );
+                const boundaryDelta = inrange(
+                  deltaX,
+                  -(CONTENT_WIDTH + CARD_MARGIN_VALUE),
+                  CONTENT_WIDTH + CARD_MARGIN_VALUE,
+                );
+                const calcWidth = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
+                if (carouselElement) {
+                  carouselElement.style.transform = `translateX(${transDelta + calcWidth * -currentIndex}px)`;
+                  setTransDelta(boundaryDelta);
+                }
+              },
+              onDragEnd: (deltaX) => {
+                const maxIndex = maxPage;
+                if (deltaX < 0) {
+                  const boundaryIndex = inrange(currentIndex + 1, 0, maxIndex);
+                  setCurrentIndex(boundaryIndex);
                   const calcWidth = Math.floor(
                     CONTENT_WIDTH + CARD_MARGIN_VALUE,
                   );
                   if (carouselElement) {
-                    carouselElement.style.transform = `translateX(${transDelta + calcWidth * -currentIndex}px)`;
-                    setTransDelta(boundaryDelta);
+                    carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
                   }
                 }
-              },
-              onDragEnd: (deltaX) => {
-                if (env !== 'desktop') {
-                  const maxIndex =
-                    env === 'tablet' ? data.length - 4 : data.length - 2;
-                  if (deltaX < 0) {
-                    const boundaryIndex = inrange(
-                      currentIndex + 1,
-                      0,
-                      maxIndex,
-                    );
-                    setCurrentIndex(boundaryIndex);
-                    const calcWidth = Math.floor(
-                      CONTENT_WIDTH + CARD_MARGIN_VALUE,
-                    );
-                    if (carouselElement) {
-                      carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
-                    }
-                  }
-                  if (deltaX > 0) {
-                    const boundaryIndex = inrange(
-                      currentIndex - 1,
-                      0,
-                      maxIndex,
-                    );
-                    setCurrentIndex(boundaryIndex);
-                    const calcWidth = Math.floor(
-                      CONTENT_WIDTH + CARD_MARGIN_VALUE,
-                    );
-                    if (carouselElement) {
-                      carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
-                    }
+                if (deltaX > 0) {
+                  const boundaryIndex = inrange(currentIndex - 1, 0, maxIndex);
+                  setCurrentIndex(boundaryIndex);
+                  const calcWidth = Math.floor(
+                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
+                  );
+                  if (carouselElement) {
+                    carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
                   }
                 }
               },
