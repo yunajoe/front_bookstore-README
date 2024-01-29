@@ -47,8 +47,7 @@ function Carousel({ data, responsive }: CarouselProps) {
     let width = carouselElement?.clientWidth!;
     const visibleItemsCount = Math.ceil(
       width / (CONTENT_WIDTH + CARD_MARGIN_VALUE),
-    );
-
+    );  
     return data.length - visibleItemsCount;
   };
 
