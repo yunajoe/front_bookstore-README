@@ -1,15 +1,15 @@
-import DropDown from '@/components/dropDown/dropDown';
+// import DropDown from '@/components/dropDown/dropDown';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 import TestImage2 from '@/public/images/SampleBookCover3.jpeg';
 
 function TestPage() {
-  const person1 = {
-    id: 1,
-    name: 'yuna',
-    isPurchased: true,
-    firstPurchasedDate: '2019.12.12',
-  };
+  // const person1 = {
+  //   id: 1,
+  //   name: 'yuna',
+  //   isPurchased: true,
+  //   firstPurchasedDate: '2019.12.12',
+  // };
   // const person2 = {
   //   id: 2,
   //   name: 'yuna2',
