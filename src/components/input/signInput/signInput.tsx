@@ -49,7 +49,7 @@ function TextInput({
           pattern: pattern,
           validate: validate,
         })}
-        className={`py-12 w-full autofill:bg-white border-b border-gray-3 focus:border-green
+        className={`py-12 w-full autofill:bg-white border-b border-gray-1 focus:border-green
           ${isError && 'border-red focus:border-red'} outline-none ${classNames}`}
         {...props}
       />
@@ -76,8 +76,8 @@ function PasswordInput({
           onClick={() => setIsView(!isView)}
           src={isView ? 'icons/EyeOpen.svg' : 'icons/EyeClose.svg'}
           alt="eye"
-          width={24}
-          height={24}
+          width={16}
+          height={11}
         />
       </button>
       <input
@@ -89,7 +89,7 @@ function PasswordInput({
           pattern: pattern,
           validate: validate,
         })}
-        className={`py-12 w-full autofill:bg-white border-b border-gray-3 focus:border-green
+        className={`py-12 w-full autofill:bg-white border-b border-gray-1 focus:border-green
           ${isError ? 'border-red' : ''} outline-none ${classNames}`}
         {...props}
       />
