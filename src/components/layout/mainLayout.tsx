@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import ScrollToTopButton from '@/components/button/scrollToTopButton';
 import useInfinite from '@/hooks/useInfinite';
 import { useAtom } from 'jotai';
-import { headerVisibleAtom } from '@/store/state';
+import { pointVisibleAtom } from '@/store/state';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -11,9 +11,9 @@ interface MainLayoutProps {
 
 function MainLayout({ children }: MainLayoutProps) {
   const [ref, isIntersecting] = useInfinite();
-  const [, setHeaderVisible] = useAtom(headerVisibleAtom);
+  const [, setPointVisible] = useAtom(pointVisibleAtom);
 
-  setHeaderVisible(isIntersecting);
+  setPointVisible(isIntersecting);
 
   return (
     <>
