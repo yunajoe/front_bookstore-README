@@ -15,6 +15,7 @@ export interface GenreList {
 export interface CategoryProps {
   title: string;
   link: string;
+  categoryType?: string;
 }
 
 export interface CategoryList {
@@ -63,12 +64,14 @@ export const ReadMeGenreList: GenreList = {
 
 const createCategory = (title: string, link: string): CategoryProps => ({
   title,
-  link: '/domestic' + link,
+  link: link,
+  categoryType: '/domestic',
 });
 
 const createForeignCategory = (title: string, link: string): CategoryProps => ({
   title,
-  link: '/foreign' + link,
+  link: link,
+  categoryType: '/foreign',
 });
 
 export const ReadMeForeignCategoryList: CategoryList = {

@@ -72,7 +72,12 @@ function CategoryTab() {
       <div
         className={`flex flex-wrap mx-30 tablet:h-320 pc:h-320 ${getLinkLayoutClass()}`}>
         {categoryList.map(({ title, link }) => (
-          <Category key={link} title={title} link={link} />
+          <Category
+            key={link}
+            title={title}
+            link={link}
+            categoryType={selectedCategory}
+          />
         ))}
       </div>
     </div>
@@ -81,10 +86,16 @@ function CategoryTab() {
 
 export default CategoryTab;
 
-function Category({ title, link }: CategoryProps) {
+function Category({ title, link, categoryType }: CategoryProps) {
   console.log(link);
+
+  const dynamicLink = `/${categoryType}${link}`;
+
   return (
-    <Link key={link} href={link}>
+    <Link
+      key={dynamicLink}
+      href={`/${categoryType}/[category]`}
+      as={dynamicLink}>
       {title}
     </Link>
   );
