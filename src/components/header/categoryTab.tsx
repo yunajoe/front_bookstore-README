@@ -30,23 +30,27 @@ function CategoryTab() {
 
   const getButtonStyle = (categoryType: string) => ({
     borderBottom:
-      selectedCategory === categoryType ? '2px solid green' : '2px solid black',
+      selectedCategory === categoryType
+        ? '2px solid green'
+        : '2px solid transparent',
     color: selectedCategory === categoryType ? 'green' : 'black',
-    marginBottom: '-25px',
-    zIndex: 2, // 카테고리 탭과 버튼의 border 가 겹친 부분에서 border를 위로 띄우기 위함
+    marginBottom: '-22px',
+    '@screen tablet': {
+      marginBottom: '-33px',
+    },
   });
 
   const getLinkLayoutClass = () => {
-    return 'bg-white pc:grid pc:grid-cols-4 pc:gap-4 tablet:grid tablet:grid-cols-4 tablet:gap-4 mobile:grid mobile:grid-cols-2 mobile:gap-4';
+    return 'bg-white pc:grid pc:grid-cols-4 pc:gap-4 tablet:grid tablet:grid-cols-4 tablet:gap-x-16 mobile:grid mobile:grid-cols-2 mobile:gap-4 ';
   };
 
   return (
     <div
-      className="flex flex-wrap bg-white tablet:h-400 pc:h-400 pc:w-[600px] tablet:w-[600px]
-        mx-16 tablet:mx-90 pc:mx-110 border border-t-0 rounded-md relative z-100
-        opacity-100">
-      <div className="flex flex-wrap space-x-96 border-b">
-        <div className="flex mx-30 tablet:h-60 pc:h-60 items-center relative">
+      className="flex border-gray-1 flex-wrap bg-white min-h-fit tablet:h-437 pc:h-437
+        mobile:w-280 pc:w-[600px] tablet:w-[600px] mx-15 tablet:mx-30 pc:mx-60 border
+        border-t-0 rounded-md relative z-100 opacity-100">
+      <div className="flex w-full justify-between border-b border-gray-1">
+        <div className="flex mobile:mx-20 mx-30 mobile:gap-35 gap-60 h-60 items-center relative">
           <CategoryButton
             label="국내도서"
             onClick={() => {
@@ -63,6 +67,8 @@ function CategoryTab() {
             }}
             style={getButtonStyle('foreign')}
           />
+        </div>
+        <div className="mt-15 mobile:mt-22 mr-30">
           <SelectedAllButton
             selectedCategory={selectedCategory}
             selectedAll={selectedAll}
@@ -70,7 +76,8 @@ function CategoryTab() {
         </div>
       </div>
       <div
-        className={`flex flex-wrap mx-30 tablet:h-320 pc:h-320 ${getLinkLayoutClass()}`}>
+        className={`flex flex-wrap mobile:mx-20 mx-30 my-20 tablet:h-350 pc:h-350 text-13
+          ${getLinkLayoutClass()}`}>
         {categoryList.map(({ title, link }) => (
           <Category
             key={link}
@@ -87,8 +94,6 @@ function CategoryTab() {
 export default CategoryTab;
 
 function Category({ title, link, categoryType }: CategoryProps) {
-  console.log(link);
-
   const dynamicLink = `/${categoryType}${link}`;
 
   return (

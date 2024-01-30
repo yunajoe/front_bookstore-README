@@ -15,7 +15,7 @@ function SelectedAllButton({
   selectedAll,
 }: SelectedAllButtonProps) {
   return (
-    <div>
+    <div className="flex tablet:mt-10 pc:mt-10">
       <Link href={`/${selectedCategory}`} className="mobile:hidden bg-white">
         <p className="text-green text-[13px]">
           {selectedAll}
@@ -37,7 +37,7 @@ function SelectedAllButton({
           alt="전체보기 화살표"
           width={8}
           height={13}
-          className="inline-block"
+          className="inline-block ml-3 mb-2"
         />
       </Link>
     </div>

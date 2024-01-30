@@ -25,20 +25,38 @@ function MyPageButton() {
 
   return (
     <div className="flex items-center">
-      <Image
-        src={IconProfile}
-        alt="케밥버튼"
-        onClick={handleKebabClick}
-        ref={ref}
-      />
-      {showOptions && (
-        <KebabDropDownButton
-          title1={<Link href="/mypage">마이페이지</Link>}
-          title2="로그아웃"
-          onClickTitle1={handleMyPageClick}
-          onClickTitle2={handleLogoutClick}
+      <div className="mobile:hidden">
+        <Link href="/mypage">
+          <Image
+            src={IconProfile}
+            alt="케밥버튼"
+            onClick={handleKebabClick}
+            ref={ref}
+            width={21}
+            height={24}
+          />
+        </Link>
+      </div>
+      <div className="tablet:hidden pc:hidden">
+        <Image
+          src={IconProfile}
+          alt="케밥버튼"
+          onClick={handleKebabClick}
+          ref={ref}
+          width={12}
+          height={14}
         />
-      )}
+
+        {showOptions && (
+          <KebabDropDownButton
+            title1={<Link href="/mypage">마이페이지</Link>}
+            title2="로그아웃"
+            color="black"
+            onClickTitle1={handleMyPageClick}
+            onClickTitle2={handleLogoutClick}
+          />
+        )}
+      </div>
     </div>
   );
 }

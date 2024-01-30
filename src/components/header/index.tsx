@@ -13,7 +13,7 @@ export interface HeaderProps {
 
 function Separator() {
   return (
-    <div className="mobile:hidden inline-block border-r w-1 h-14 border-gray-1" />
+    <div className="mobile:hidden inline-block border-r w-1 h-12 border-gray-1" />
   );
 }
 
@@ -21,8 +21,8 @@ function Separator() {
 function NonLoggedInHeader() {
   return (
     <div
-      className="z-10 flex tablet:mx-90 justify-between min-w-fit max-w-full items-center h-50
-        mx-16 tablet:h-100 pc:h-100 pc:mx-110">
+      className="z-10 flex mx-15 tablet:mx-30 justify-between min-w-fit max-w-full items-center
+        h-50 tablet:h-100 pc:h-100 pc:mx-60">
       <div className="text-18 pc:text-24 text-green font-bold tablet:text-24">
         Read Me
       </div>
@@ -38,14 +38,13 @@ function NonLoggedInHeader() {
 function LoggedInHeader({ numItemsOfCart }: { numItemsOfCart: number }) {
   return (
     <div
-      className="relative flex z-10 tablet:mx-90 justify-between min-w-fit max-w-full
-        items-center h-50 mx-16 tablet:h-100 pc:h-100 pc:mx-110">
+      className="relative flex z-10 tablet:mx-30 mx-15 justify-between min-w-fit max-w-full
+        items-center h-50 tablet:h-100 pc:h-100 pc:mx-60">
       <div className="text-18 pc:text-24 text-green font-bold tablet:text-24">
         Read Me
       </div>
       <SearchInput />
-
-      <div className="inline-flex gap-10 tablet:gap-20 pc:gap-20 items-center">
+      <div className="flex gap-10 tablet:gap-20 pc:gap-20 items-center">
         <SignOutButton />
         <Separator />
         <BookmarkButton />

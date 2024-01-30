@@ -34,7 +34,7 @@ export const ReadMeGenreList: GenreList = {
     createReadMeGenre('고전'),
     createReadMeGenre('공무원 수험서'),
     createReadMeGenre('과학'),
-    createReadMeGenre('대학교재/전문서적'),
+    createReadMeGenre('대학교재'),
     createReadMeGenre('만화'),
     createReadMeGenre('사회과학'),
     createReadMeGenre('수험서/자격증'),
@@ -76,7 +76,7 @@ const createForeignCategory = (title: string, link: string): CategoryProps => ({
 
 export const ReadMeForeignCategoryList: CategoryList = {
   categoryList: [
-    createForeignCategory('가정/원예/인테리어', '/homeGardening'),
+    createForeignCategory('가정/원예', '/homeGardening'),
     createForeignCategory('가족/관계', '/familyRelationship'),
     createForeignCategory('건강/스포츠', '/healthSports'),
     createForeignCategory('건축/디자인', '/architectureDesign'),
@@ -98,7 +98,7 @@ export const ReadMeForeignCategoryList: CategoryList = {
     createForeignCategory('의학', '/medicine'),
     createForeignCategory('인문/사회', '/social'),
     createForeignCategory('자기계발', '/selfDevelopment'),
-    createForeignCategory('과학/수학/생태', '/science'),
+    createForeignCategory('과학/수학', '/science'),
     createForeignCategory('전기/자서전', '/biography'),
     createForeignCategory('종교/명상/점술', '/religion'),
     createForeignCategory('청소년', '/teenager'),
@@ -120,7 +120,7 @@ export const ReadMeDomesticCategoryList: CategoryList = {
     createCategory('고전', '/classic'),
     createCategory('공무원 수험서', '/civilServantExam'),
     createCategory('과학', '/science'),
-    createCategory('대학교재/전문서적', '/universityTextbooks'),
+    createCategory('대학교재', '/universityTextbooks'),
     createCategory('만화', '/comics'),
     createCategory('사회과학', '/socialScience'),
     createCategory('수험서/자격증', '/certificate'),
