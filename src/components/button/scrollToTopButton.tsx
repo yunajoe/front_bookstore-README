@@ -1,10 +1,10 @@
 import ScrollToTopButtonImg from '@/public/icons/ScrollToTopButton.svg';
-import { headerVisibleAtom } from '@/store/state';
+import { pointVisibleAtom } from '@/store/state';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 
 function ScrollToTopButton() {
-  const [headerVisible] = useAtom(headerVisibleAtom);
+  const [headerVisible] = useAtom(pointVisibleAtom);
 
   const handleClickScrollToTop = () => {
     if (!headerVisible) {
