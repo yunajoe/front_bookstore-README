@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import CategoryButton from '@/components/button/categoryButton';
+import CategoryTabButton from '../button/header/categoryTabButton';
 import CategoryTab from '@/components/header/categoryTab';
 import Link from 'next/link';
-import WritePostButton from '../button/writePostButton';
+import WritePostButton from '../button/header/writePostButton';
 // 카테고리를 포함한 NavigationTab
 function NavigationTab() {
   const [isCategoryTabVisible, setCategoryTabVisibility] = useState(false);
@@ -16,7 +16,7 @@ function NavigationTab() {
       <div className="flex items-center h-40 tablet:h-70 pc:h-70 border-gray-3 border-y">
         <div className="flex justify-between items-center text-14 tablet:text-16 pc:text-16">
           <div className="mx-16 tablet:mx-90 pc:mx-110">
-            <CategoryButton onClick={toggleCategoryTab} />
+            <CategoryTabButton onClick={toggleCategoryTab} />
           </div>
           <div className="flex gap-18 pc:gap-40 tablet:gap-30">
             <Link href="/bestsellers"> 베스트</Link>

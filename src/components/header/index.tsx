@@ -1,10 +1,9 @@
-import CartButton from '@/components/button/cartButton';
+import CartButton from '@/components/button/header/cartButton';
 import SearchInput from '@/components/input/searchInput';
-import MyPageButton from '@/components/button/myPageButton';
+import MyPageButton from '@/components/button/header/myPageButton';
 import SignInButton from '@/components/button/signInButton';
 import SignOutButton from '@/components/button/signOutButton';
-import SignUpButton from '@/components/button/signUpButton';
-import BookmarkButton from '../button/bookmarkButton';
+import BookmarkButton from '../button/header/bookmarkButton';
 import HeaderLayout from '../layout/headerLayout';
 
 export interface HeaderProps {
@@ -30,8 +29,6 @@ function NonLoggedInHeader() {
       <SearchInput />
       <div className="inline-flex items-center tablet:gap-40 pc:gap-40">
         <SignInButton />
-        <Separator />
-        <SignUpButton />
       </div>
     </div>
   );
