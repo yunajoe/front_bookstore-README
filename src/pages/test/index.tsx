@@ -19,8 +19,6 @@ function TestPage() {
         bookCover={SampleBookCover}
         bookTitle="책이름"
         review="리뷰입니다"/>
-
-    <div className="flex flex-col gap-20 p-20">
       <PreviewBookInfo
         title="어머 이책 사야해!"
         authorList={['이승연', '작가얌', '작가2', '작가3', '작가3', '작가3']}
