@@ -3,8 +3,13 @@ import useShowDropDown from '@/hooks/useShowDropDown';
 import DropDownItem from '@/components/dropDown/dropDownItem';
 import OrderDate from '@/components/container/orderDate/orderDate';
 import Image from 'next/image';
+import { Person } from '@/types/orderDateType';
 
-function DropDown() {
+type DropDownTypes = {
+  person: Person;
+};
+
+function DropDown({ person }: DropDownTypes) {
   const [selectedItem, setSelectedItem] = useState('전체보기');
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
@@ -16,6 +21,7 @@ function DropDown() {
     '최근 3개월',
     '최근 6개월',
     '최근 1년',
+    '직접 입력',
   ];
 
   return (
@@ -24,9 +30,9 @@ function DropDown() {
         <div className="flex relative w-180">
           <button
             onClick={handleClick}
-            className="flex justify-between flex-row items-center px-5 border-solid border-2
-              border-gray-1 w-150 h-42 text-left">
-            {selectedItem}
+            className={`flex items-center border-solid border-2 border-gray-1 w-113 h-42 text-left
+              ${showOptions ? 'rounded-t-[5px]' : 'rounded-[5px]'}`}>
+            <span className="w-85 pl-16 text-14">{selectedItem}</span>
             <div>
               <Image
                 src={showOptions ? 'icons/UpArrow.svg' : 'icons/DownArrow.svg'}
@@ -38,7 +44,7 @@ function DropDown() {
           </button>
         </div>
         {showOptions && (
-          <ul className="w-150 border-solid border-2 border-gray-1 absolute">
+          <ul className="w-113 border-solid border-2 border-gray-1 absolute rounded-b-[5px] text-14">
             {menus.map((menu) => {
               return (
                 <DropDownItem
@@ -53,7 +59,11 @@ function DropDown() {
         )}
       </div>
       <div className="flex-center">
-        <OrderDate pastDate={selectedItem} setSelectedItem={setSelectedItem} />
+        <OrderDate
+          pastDate={selectedItem}
+          setSelectedItem={setSelectedItem}
+          person={person}
+        />
       </div>
     </div>
   );
