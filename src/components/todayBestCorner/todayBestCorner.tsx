@@ -8,6 +8,33 @@ import SkeletonTodayBestBook from '@/components/skeleton/skeletonTodayBestBook';
 import useWindowInnerWidth from '@/hooks/useWindowInnerWidth';
 import TodayBestSlider from './todayBestSlider';
 
+// width, height, top, bottom, left, right 관련 속성을 모아둔 SIZE 객체
+const SIZE = {
+  desktop: {
+    container: 'w-full h-[633px]',
+    'colored-background': 'w-full h-273',
+    title: 'text-24 top-60',
+    'card-section': 'top-93',
+  },
+  tablet: {
+    container: 'tablet:h-[833px]',
+    'card-section': 'tablet:top-133',
+  },
+  mobile: {
+    container: 'mobile:h-[268px]',
+    'colored-background': 'mobile:h-187',
+    title: 'mobile:text-20 mobile:top-40',
+    'card-section': 'mobile:top-87',
+  },
+};
+
+const STYLE = {
+  container: `${SIZE.desktop.container} ${SIZE.tablet.container} ${SIZE.mobile.container}`,
+  'colored-background': `${SIZE.desktop['colored-background']} ${SIZE.mobile['colored-background']}`,
+  title: `${SIZE.desktop.title} ${SIZE.mobile.title}`,
+  'card-section': `${SIZE.desktop['card-section']} ${SIZE.tablet['card-section']} ${SIZE.mobile['card-section']}`,
+};
+
 function TodayBestCorner() {
   // const { data: bookList, isLoading } = useQuery({
   //     queryKey: [""],
@@ -21,16 +48,20 @@ function TodayBestCorner() {
   if (isLoading) {
     return (
       <div
-        className="relative w-full flex justify-start items-center flex-col h-[633px]
-          tablet:h-[833px] mobile:h-268 overflow-hidden">
-        <div className="bg-gray-1 w-full h-270 mobile:h-187 flex-center">
-          <h1 className="relative bottom-55 font-bold text-24 mobile:bottom-45 mobile:text-20">
+        role="container"
+        className={`relative flex flex-col justify-start items-center overflow-hidden
+          ${STYLE.container}`}>
+        <div
+          role="colored-background"
+          className={`bg-gray-1 flex-center ${STYLE['colored-background']}`}>
+          <h1 role="title" className={`absolute font-bold ${STYLE.title}`}>
             실시간 인기 도서
           </h1>
         </div>
         <div
-          className="grid grid-rows-2 grid-flow-col gap-20 tablet:grid-rows-3 absolute top-93
-            tablet:top-133 mobile:top-87">
+          role="card-section"
+          className={`grid grid-rows-2 grid-flow-col absolute gap-20 tablet:grid-rows-3
+            ${STYLE['card-section']}`}>
           {[0, 1, 2, 3, 4, 5].map((key) => {
             return (
               <div
@@ -48,14 +79,16 @@ function TodayBestCorner() {
   // 데탑, 타블렛 환경에선 그냥 TodayBestBook map으로 렌더링, 모바일환경에선 TodayBestSlider 렌더링.
   return (
     <div
-      className="relative w-full flex justify-start items-center flex-col h-[633px]
-        tablet:h-[833px] mobile:h-268">
-      <div className="bg-gray-1 w-full h-270 mobile:h-187 flex-center">
-        <h1 className="relative bottom-55 font-bold text-24 mobile:bottom-45 mobile:text-20">
+      className={`relative flex flex-col justify-start items-center overflow-hidden
+        ${STYLE.container}`}>
+      <div
+        role="colored-background"
+        className={`bg-gray-1 flex-center ${STYLE['colored-background']}`}>
+        <h1 role="title" className={`absolute font-bold ${STYLE.title}`}>
           실시간 인기 도서
         </h1>
       </div>
-      <div className="absolute flex-center top-93 tablet:top-133 mobile:top-87">
+      <div role="card-section" className={`absolute ${STYLE['card-section']}`}>
         <div className="grid grid-rows-2 grid-flow-col gap-20 tablet:grid-rows-3 mobile:hidden">
           {bookList ? (
             <>
