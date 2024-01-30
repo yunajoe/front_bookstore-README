@@ -1,11 +1,11 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import EmojiButtonContainer from '@/components/card/communityCard/emoji/emojiButtonContainer';
 import KebabButton from '@/components/button/kebab/kebabButton';
 interface CommunityCardProps {
-  profileImg: string;
+  profileImg: string | StaticImageData; //TODO 수정필요
   userNickname: string;
   createAt: string;
-  bookCover: string;
+  bookCover: string | StaticImageData; //TODO 수정필요
   bookTitle: string;
   review: string;
 }
@@ -28,7 +28,7 @@ function CommunityCard({
         </div>
         <div className="flex flex-col justify-start py-5 pl-12">
           <p className="text-14 font-bold text-gray-4">{userNickname}</p>
-          <p className="text-12 font-normal tex-gray-3">{createAt}</p>
+          <p className="text-12 font-normal text-gray-3">{createAt}</p>
         </div>
         <KebabButton title1="수정하기" title2="삭제하기" />
       </div>
