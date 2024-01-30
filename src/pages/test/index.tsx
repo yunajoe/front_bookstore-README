@@ -1,5 +1,6 @@
 // import DropDown from '@/components/dropDown/dropDown';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import TodayBestCorner from '@/components/todayBestCorner/todayBestCorner';
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 import TestImage2 from '@/public/images/SampleBookCover3.jpeg';
 
@@ -40,6 +41,8 @@ function TestPage() {
         ranking={10}
         image={TestImage1}
       />
+
+      <TodayBestCorner />
     </div>
   );
 }
