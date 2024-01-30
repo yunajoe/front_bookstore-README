@@ -18,7 +18,7 @@ function TestPage() {
         createAt="2024.01.25"
         bookCover={SampleBookCover}
         bookTitle="책이름"
-        review="리뷰입니다"
+        review="리뷰입니다"/>
 
     <div className="flex flex-col gap-20 p-20">
       <PreviewBookInfo
