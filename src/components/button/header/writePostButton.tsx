@@ -1,4 +1,7 @@
-function WritePostButton({ showButton }) {
+interface WriteButtonProps {
+  showButton: boolean;
+}
+function WritePostButton({ showButton }: WriteButtonProps) {
   if (!showButton) {
     return null; // 렌더링하지 않음
   }
