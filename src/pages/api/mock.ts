@@ -12,7 +12,10 @@ export interface GenreList {
   genreList: GenreProps[];
 }
 
-const createReadMeGenre = (title: string, selected: boolean = false): GenreProps => ({ title, selected });
+const createReadMeGenre = (
+  title: string,
+  selected: boolean = false,
+): GenreProps => ({ title, selected });
 
 export const ReadMeGenreList: GenreList = {
   genreList: [
@@ -46,5 +49,84 @@ export const ReadMeGenreList: GenreList = {
     createReadMeGenre('초등학교참고서'),
     createReadMeGenre('중학교참고서'),
     createReadMeGenre('고등학교참고서'),
+  ],
+};
+
+//  mock.ts
+
+export const myWishListData = {
+  id: 1,
+  name: 'yuna',
+  whishListArray: [
+    {
+      id: 1,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 1',
+      author: '작가 이름 1',
+      rating: 4.5,
+      genre: '소설',
+      price: 20000,
+    },
+    {
+      id: 2,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 2',
+      author: '작가 이름 2',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 3,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 2',
+      author: '작가 이름 2',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 4,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 2',
+      author: '작가 이름 2',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 5,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 2',
+      author: '작가 이름 2',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 6,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 2',
+      author: '작가 이름 2',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 7,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 2',
+      author: '작가 이름 2',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
   ],
 };
