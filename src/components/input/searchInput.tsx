@@ -3,7 +3,7 @@ import IconSearch from '@/public/icons/SearchIcon.svg';
 
 function SearchInput() {
   return (
-    <div className="w-3/6 relative inline-flex">
+    <div className="z-10 w-3/6 relative inline-flex">
       <input
         className="w-full tablet:h-56 pc:h-56 border border-gray-1 rounded-3xl pl-20 pr-20 py-2
           max-w-full"
