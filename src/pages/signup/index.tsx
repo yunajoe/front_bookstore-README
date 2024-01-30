@@ -91,7 +91,7 @@ function SignUp() {
                 required={true}
                 pattern={checkEmail}
               />
-              <div className="mt-8 mb-40 h-22 text-left">
+              <div className="mt-8 mb-40 text-left">
                 <SignError errors={errors} id="email" />
               </div>
             </fieldset>
