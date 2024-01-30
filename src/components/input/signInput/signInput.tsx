@@ -49,8 +49,9 @@ function TextInput({
           pattern: pattern,
           validate: validate,
         })}
-        className={`py-12 w-full autofill:bg-white border-b border-gray-3 focus:border-green
-          ${isError && 'border-red focus:border-red'} outline-none ${classNames}`}
+        className={`h-48 pt-[13px] pb-[12px] leading-normal w-full text-[16px] autofill:bg-white border-b border-gray-1 focus:border-green 
+        ${isError && 'border-b border-2 border-red focus:border-red'}
+          outline-none ${classNames}`}
         {...props}
       />
     </div>
@@ -71,7 +72,7 @@ function PasswordInput({
   const [isView, setIsView] = useState(false);
   return (
     <div className="relative w-full">
-      <button type="button" className="absolute top-18 right-14">
+      <button type="button" className="absolute bottom-12 right-8">
         <Image
           onClick={() => setIsView(!isView)}
           src={isView ? 'icons/EyeOpen.svg' : 'icons/EyeClose.svg'}
@@ -89,8 +90,9 @@ function PasswordInput({
           pattern: pattern,
           validate: validate,
         })}
-        className={`py-12 w-full autofill:bg-white border-b border-gray-3 focus:border-green
-          ${isError ? 'border-red' : ''} outline-none ${classNames}`}
+        className={`h-48 pt-[13px] pb-[12px] leading-normal w-full text-[16px] autofill:bg-white border-b border-gray-1 focus:border-green
+          ${isError && 'border-b border-2 focus:border-red border-red'} 
+          outline-none ${classNames}`}
         {...props}
       />
     </div>
