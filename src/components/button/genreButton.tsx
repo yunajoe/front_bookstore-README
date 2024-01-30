@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GenreProps } from '@/pages/api/mock';
 export interface GenreButtonProps extends GenreProps {
-  editMode: boolean;
+  editMode?: boolean;
 }
 
 function GenreButton({
