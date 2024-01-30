@@ -1,5 +1,4 @@
 import CommunityCard from '@/components/card/communityCard/communityCard';
-import DropDown from '@/components/dropDown/dropDown';
 import SampleProfile from '@/public/images/SampleBookCover1.jpeg';
 import SampleBookCover from '@/public/images/SampleBookCover4.jpeg';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
@@ -11,7 +10,6 @@ function TestPage() {
   return (
 
     <div className="grid auto-rows-auto gap-20 p-40">  
-      <DropDown />
       <CommunityCard
         profileImg={SampleProfile}
         userNickname="리드미"
