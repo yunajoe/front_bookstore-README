@@ -5,14 +5,17 @@ import CategoryTab from '@/components/header/categoryTab';
 import Link from 'next/link';
 import WritePostButton from '../button/header/writePostButton';
 
-function NavigationTab() {
+interface NavigationTabProps {
+  isLoggedIn: boolean;
+}
+function NavigationTab({ isLoggedIn }: NavigationTabProps) {
   const [isCategoryTabVisible, setCategoryTabVisibility] = useState(false);
   const router = useRouter();
   // 현재 페이지 경로 확인
   const currentPath = router.pathname;
 
   // 특정 페이지에서만 WritePostButton을 보이도록 조건을 설정
-  const showWritePostButton = currentPath === '/community';
+  const showWritePostButton = currentPath === '/community' && isLoggedIn;
 
   const toggleCategoryTab = () => {
     setCategoryTabVisibility((prevVisibility) => !prevVisibility);

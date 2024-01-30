@@ -58,11 +58,11 @@ function LoggedInHeader({ numItemsOfCart }: { numItemsOfCart: number }) {
 // 헤더 컴포넌트
 function Header({ isLoggedIn, numItemsOfCart }: HeaderProps) {
   return isLoggedIn && numItemsOfCart ? (
-    <HeaderLayout>
+    <HeaderLayout isLoggedIn={isLoggedIn}>
       <LoggedInHeader numItemsOfCart={numItemsOfCart} />
     </HeaderLayout>
   ) : (
-    <HeaderLayout>
+    <HeaderLayout isLoggedIn={isLoggedIn}>
       <NonLoggedInHeader />
     </HeaderLayout>
   );
