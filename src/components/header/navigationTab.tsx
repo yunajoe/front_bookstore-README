@@ -3,7 +3,7 @@ import CategoryTabButton from '../button/header/categoryTabButton';
 import CategoryTab from '@/components/header/categoryTab';
 import Link from 'next/link';
 import WritePostButton from '../button/header/writePostButton';
-// 카테고리를 포함한 NavigationTab
+
 function NavigationTab() {
   const [isCategoryTabVisible, setCategoryTabVisibility] = useState(false);
 
@@ -12,7 +12,7 @@ function NavigationTab() {
   };
 
   return (
-    <div className="flex-col w-full">
+    <>
       <div className="flex items-center h-40 tablet:h-70 pc:h-70 border-gray-3 border-y">
         <div className="flex justify-between items-center text-14 tablet:text-16 pc:text-16">
           <div className="mx-16 tablet:mx-90 pc:mx-110">
@@ -31,7 +31,7 @@ function NavigationTab() {
         </div>
       </div>
       {isCategoryTabVisible && <CategoryTab />}
-    </div>
+    </>
   );
 }
 

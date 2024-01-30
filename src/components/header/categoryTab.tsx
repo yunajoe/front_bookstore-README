@@ -40,12 +40,11 @@ function CategoryTab() {
     return 'bg-white pc:grid pc:grid-cols-4 pc:gap-4 tablet:grid tablet:grid-cols-4 tablet:gap-4 mobile:grid mobile:grid-cols-2 mobile:gap-4';
   };
 
-  console.log(selectedCategory);
-
   return (
     <div
-      className="bg-white z-50 pc:w-[600px] tablet:w-[600px] mx-16 tablet:mx-90 pc:mx-110 border
-        border-t-0 rounded-md relative">
+      className="flex flex-wrap bg-white tablet:h-400 pc:h-400 pc:w-[600px] tablet:w-[600px]
+        mx-16 tablet:mx-90 pc:mx-110 border border-t-0 rounded-md relative z-100
+        opacity-100">
       <div className="flex flex-wrap space-x-96 border-b">
         <div className="flex mx-30 tablet:h-60 pc:h-60 items-center relative">
           <CategoryButton
