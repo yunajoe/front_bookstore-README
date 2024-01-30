@@ -11,7 +11,7 @@ function HeaderLayout({ children }: { children: ReactElement }) {
   setHeaderVisible(isIntersecting);
 
   return (
-    <div className="flex-row h-90 tablet:h-170 pc:h-170">
+    <div className="min-w-fit max-w-full sticky top-0 flex-row h-90 tablet:h-170 pc:h-170 bg-white">
       {children} <NavigationTab />
     </div>
   );
