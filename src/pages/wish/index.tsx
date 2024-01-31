@@ -29,6 +29,8 @@ function WishListPage() {
   //     setItemArr([]);
   //   }
   // }, [itemArr]);
+
+  cons;
   return (
     <div className="w-fulㄴl flex flex-col items-center">
       <div className="max-w-[1200px] border-solid border-2 border-green">
