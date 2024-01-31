@@ -1,7 +1,7 @@
 import CommunityCard from '@/components/card/communityCard/communityCard';
 import SampleProfile from '@/public/images/SampleBookCover1.jpeg';
 import SampleBookCover from '@/public/images/SampleBookCover4.jpeg';
-import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import Header from '@/components/header';import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 import TestImage2 from '@/public/images/SampleBookCover3.jpeg';
 
@@ -39,6 +39,8 @@ function TestPage() {
         ranking={100}
         image={TestImage1}
       />
+      <Header isLoggedIn={false} />
+      <Header isLoggedIn={true} numItemsOfCart={3} />
     </div>
   );
 }
