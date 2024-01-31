@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import IconSearch from '@/public/icons/SearchIcon.svg';
+import SearchIcon from '@/public/icons/SearchIcon.svg';
 
 function SearchInput() {
   return (
@@ -11,7 +11,7 @@ function SearchInput() {
       <div
         className="absolute w-12 h-12 tablet:h-15 tablet:w-15 pc:h-15 pc:w-15 top-1/2
           mobile:right-4 right-12 transform -translate-y-1/2">
-        <Image src={IconSearch} fill alt="검색 아이콘" />
+        <Image src={SearchIcon} fill alt="검색 아이콘" />
       </div>
     </div>
   );

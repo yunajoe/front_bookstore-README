@@ -12,7 +12,7 @@ function MainLayout() {
 
   return (
     <div className="flex-col items-center flex-center w-full">
-      <Header isLoggedIn={true} numItemsOfCart={1} />
+      <Header isLoggedIn={false} />
       <div className="flex-col w-full relative flex-center">
         <div className="w-300 h-20" ref={ref} />
         <div

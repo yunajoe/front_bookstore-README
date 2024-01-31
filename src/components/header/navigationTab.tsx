@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import CategoryTabButton from '../button/header/categoryTabButton';
+import CategoryTabButton from '@/components/button/header/categoryTabButton';
 import CategoryTab from '@/components/header/categoryTab';
 import Link from 'next/link';
-import WritePostButton from '../button/header/writePostButton';
+import WritePostButton from '@/components/button/header/writePostButton';
 
 interface NavigationTabProps {
   isLoggedIn: boolean;
@@ -37,7 +37,7 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
             <Link href="/community"> 커뮤니티</Link>
           </div>
         </div>
-        <div className="flex items-center ml-auto tablet:mx-40 pc:mx-60">
+        <div className="flex items-center ml-auto tablet:mr-40 pc:mr-60">
           <WritePostButton showButton={showWritePostButton} />
         </div>
       </div>

@@ -3,8 +3,10 @@ import SearchInput from '@/components/input/searchInput';
 import MyPageButton from '@/components/button/header/myPageButton';
 import SignInButton from '@/components/button/signInButton';
 import SignOutButton from '@/components/button/signOutButton';
-import BookmarkButton from '../button/header/bookmarkButton';
-import HeaderLayout from '../layout/headerLayout';
+import BookmarkButton from '@/components/button/header/bookmarkButton';
+import HeaderLayout from '@/components/layout/headerLayout';
+import SignUpButton from '@/components/button/signUpButton';
+import ReadMeButton from '../button/header/readmeButton';
 
 export interface HeaderProps {
   isLoggedIn: boolean;
@@ -23,12 +25,11 @@ function NonLoggedInHeader() {
     <div
       className="z-10 flex mx-15 tablet:mx-30 justify-between min-w-fit max-w-full items-center
         h-50 tablet:h-100 pc:h-100 pc:mx-60">
-      <div className="text-18 pc:text-24 text-green font-bold tablet:text-24">
-        Read Me
-      </div>
+      <ReadMeButton />
       <SearchInput />
       <div className="inline-flex items-center tablet:gap-40 pc:gap-40">
         <SignInButton />
+        <SignUpButton />
       </div>
     </div>
   );
@@ -40,9 +41,7 @@ function LoggedInHeader({ numItemsOfCart }: { numItemsOfCart: number }) {
     <div
       className="relative flex z-10 tablet:mx-30 mx-15 justify-between min-w-fit max-w-full
         items-center h-50 tablet:h-100 pc:h-100 pc:mx-60">
-      <div className="text-18 pc:text-24 text-green font-bold tablet:text-24">
-        Read Me
-      </div>
+      <ReadMeButton />
       <SearchInput />
       <div className="flex gap-10 tablet:gap-20 pc:gap-20 items-center">
         <SignOutButton />

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import IconCart from '@/public/icons/CartIcon.svg';
+import CartIcon from '@/public/icons/CartIcon.svg';
 import Link from 'next/link';
 
 interface CardChipProps {
@@ -11,7 +11,7 @@ function CartButton({ numItemsOfCart }: CardChipProps) {
     <Link href="/cart">
       <button className="flex relative items-center w-14 h-14 tablet:w-24 tablet:h-24 pc:w-24 pc:h-24">
         <div className="relative w-full h-full items-center">
-          <Image src={IconCart} alt="장바구니 이미지" fill />
+          <Image src={CartIcon} alt="장바구니 이미지" fill />
           {numItemsOfCart && (
             <div
               className="absolute bottom-8 pc:bottom-12 tablet:bottom-12 left-10 tablet:left-17

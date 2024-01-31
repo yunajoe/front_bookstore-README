@@ -6,8 +6,8 @@ import {
   ReadMeDomesticCategoryList,
 } from '@/pages/api/mock';
 
-import SelectedAllButton from '../button/header/selectedAllButton';
-import CategoryButton from '../button/header/categoryButton';
+import SelectedAllButton from '@/components/button/header/selectedAllButton';
+import CategoryButton from '@/components/button/header/categoryButton';
 
 function CategoryTab() {
   const [selectedCategory, setSelectedCategory] = useState('domestic'); // 'domestic' 또는 'foreign'

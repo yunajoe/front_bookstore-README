@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import IconProfile from '@/public/icons/ProfileIcon.svg';
-import KebabDropDownButton from '../kebab/kebabDropDownButton';
+import ProfileIcon from '@/public/icons/ProfileIcon.svg';
+import KebabDropDownButton from '@/components/button/kebab/kebabDropDownButton';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import { MutableRefObject, useRef } from 'react';
 
@@ -28,7 +28,7 @@ function MyPageButton() {
       <div className="mobile:hidden">
         <Link href="/mypage">
           <Image
-            src={IconProfile}
+            src={ProfileIcon}
             alt="케밥버튼"
             onClick={handleKebabClick}
             ref={ref}
@@ -39,7 +39,7 @@ function MyPageButton() {
       </div>
       <div className="tablet:hidden pc:hidden">
         <Image
-          src={IconProfile}
+          src={ProfileIcon}
           alt="케밥버튼"
           onClick={handleKebabClick}
           ref={ref}
