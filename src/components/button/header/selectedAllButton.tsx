@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import GreenArrowRight from '@/public/icons/GreenRightArrow.svg';
+import GreenArrowRightIcon from '@/public/icons/GreenRightArrow.svg';
 interface SelectedAllButtonProps {
   selectedCategory: string;
   selectedAll: string;
@@ -17,10 +17,10 @@ function SelectedAllButton({
   return (
     <div className="flex tablet:mt-10 pc:mt-10">
       <Link href={`/${selectedCategory}`} className="mobile:hidden bg-white">
-        <p className="text-green text-[13px]">
+        <p className="text-green text-13">
           {selectedAll}
           <Image
-            src={GreenArrowRight}
+            src={GreenArrowRightIcon}
             alt="전체보기 화살표"
             width={8}
             height={13}

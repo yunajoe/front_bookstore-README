@@ -18,7 +18,7 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
   const showWritePostButton = currentPath === '/community' && isLoggedIn;
 
   const toggleCategoryTab = () => {
-    setCategoryTabVisibility((prevVisibility) => !prevVisibility);
+    setCategoryTabVisibility(!isCategoryTabVisible);
   };
   return (
     <>
