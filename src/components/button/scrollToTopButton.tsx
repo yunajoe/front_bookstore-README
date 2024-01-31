@@ -15,7 +15,7 @@ function ScrollToTopButton() {
   return pointVisible ? null : (
     <div onClick={handleClickScrollToTop} className="cursor-pointer">
       <Image
-        className="fixed right-50 bottom-80"
+        className="fixed right-20 bottom-80"
         src={ScrollToTopButtonImg}
         alt="페이지 상단으로 이동"
       />
