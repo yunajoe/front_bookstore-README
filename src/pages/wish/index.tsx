@@ -30,9 +30,8 @@ function WishListPage() {
   //   }
   // }, [itemArr]);
 
-  cons;
   return (
-    <div className="w-fulㄴl flex flex-col items-center">
+    <div className="w-full flex flex-col items-center">
       <div className="max-w-[1200px] border-solid border-2 border-green">
         <div>웹헤더</div>
         <div>카테고리헤더</div>
