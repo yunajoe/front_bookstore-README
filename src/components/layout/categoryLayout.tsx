@@ -1,6 +1,5 @@
 /** 카테고리 페이지 > 국내 > 전체*/
 
-import Advertisement from '@/components/container/advertisement/advertisement';
 import MainLayout from '@/components/layout/mainLayout';
 import Spacing from '@/components/container/spacing/spacing';
 import Sidebar from '../sidebar/sidebar';
@@ -23,7 +22,14 @@ function CategoryLayout({ isDomestic = true, location }: CategoryLayoutProps) {
           <Sidebar isDomestic={isDomestic} location={location} />
         </aside>
         <Spacing height={[0, 0, 20]} />
-        <Advertisement />
+        <article>
+          <div
+            role="temp"
+            className="bg-gray-1 w-[895px] h-[483px] tablet:w-[511px] tablet:h-[275px] mobile:w-[330px]
+              mobile:h-[278px]">
+            광고 넣을 곳!!!!!
+          </div>
+        </article>
         <Spacing height={[60, 40, 40]} />
         <article className="flex flex-col gap-50 tablet:gap-40 mobile:gap-20">
           <h1 className="text-black text-20">신간도서</h1>

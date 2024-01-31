@@ -10,7 +10,6 @@ interface SidebarTabProps {
 }
 
 function SidebarTab({ isDomestic, location }: SidebarTabProps) {
-  console.log(location);
   const categoryList = isDomestic
     ? ReadMeDomesticCategoryList.categoryList
     : ReadMeForeignCategoryList.categoryList;
