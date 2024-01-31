@@ -1,34 +1,19 @@
-// desktop에서는 2x 4
-//  tablet에서는 1 x 4
-// mobile에서는  1 x 4
-
 import BookRating from '@/components/book/bookRating/bookRating';
 import { myWishListData } from '@/pages/api/mock';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function WishListPage() {
-  const resdata = myWishListData.whishListArray;
-  const [isAllItemsClick, setAllItemsClick] = useState(false);
+  const [resdata, setResData] = useState(myWishListData.whishListArray);
+
   const [itemArr, setItemArr] = useState([]);
 
-  const [isClick, setIsClick] = useState(false);
-
-  // 전체선택을 하면은 모든 아이템들이 check
-  // 다중선택 가능하게함
-  // 전체선택 후에 개별 아이템들을 선택하면은 그 선택한 아이템만 초록색 check가 되구 나머지는 하얀색 check루 변함
-
-  // 이게 true이면서
-  // console.log('전체선택의유무', isAllItemsClick, itemArr);
-  // 전체선택이 false이면은 check를 다 안해야 하는게 맞는다
-  // 하지만, false이면은 item이 선택이
-  // 개별 선택후 => 전체석태 => 전체 체크 표시
-  // 그 후 전체선택 (false) => 다 해제되어야함
-  // useEffect(() => {
-  //   if (!isAllItemsClick && itemArr.length) {
-  //     setItemArr([]);
-  //   }
-  // }, [itemArr]);
+  const handleDeleteSelectedItems = () => {
+    const filteredData = resdata.filter((item) => {
+      return itemArr.map((picked) => picked.id).indexOf(item.id) === -1;
+    });
+    setResData(filteredData);
+  };
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -42,12 +27,17 @@ function WishListPage() {
           <div className="flex justify-between my-23 mobile:my-18 tablet:my-23">
             <div className="flex gap-x-8">
               <div
+                className="cursor-pointer"
                 onClick={() => {
-                  setAllItemsClick(!isAllItemsClick);
+                  if (resdata.length === itemArr.length) {
+                    setItemArr([]);
+                  } else {
+                    setItemArr([...resdata]);
+                  }
                 }}>
                 <Image
                   src={
-                    isAllItemsClick
+                    resdata.length === itemArr.length
                       ? '/icons/CheckedCheckBox.svg'
                       : '/icons/CheckBox.svg'
                   }
@@ -58,7 +48,9 @@ function WishListPage() {
               </div>
               <span className="text-gray-4 text-14">전체선택</span>
             </div>
-            <span className="text-black text-14 font-normal">
+            <span
+              className="text-black text-14 font-normal cursor-pointer"
+              onClick={() => handleDeleteSelectedItems()}>
               선택항목 삭제
             </span>
           </div>
@@ -68,12 +60,21 @@ function WishListPage() {
                 (clickedItem) => clickedItem.id === item.id,
               );
 
+              const pickedNum = selectedItems.map((item) => item.id)[0];
+
               return (
+                // 아래부분 border를 변경해야함
                 <div
                   key={item.id}
-                  className="relative flex items-center pt-40 pb-43 pr-82 border-2 border-gray-1 bg-white
-                    rounded-[10px]">
-                  <div className="absolute top-20 right-20 mobile:top-10 right-10">
+                  className={`relative flex items-center pt-40 pb-43 pr-82 border-2 ${
+                    item.id === pickedNum ? 'border-green' : 'border-gray-1'
+                  } bg-white rounded-[10px]`}>
+                  <div
+                    className="absolute top-20 right-20 mobile:top-10 right-10 cursor-pointer"
+                    onClick={() => {
+                      const aa = resdata.filter((data) => data.id !== item.id);
+                      setResData(aa);
+                    }}>
                     <Image
                       src="/icons/Close.svg"
                       alt="엑스"
@@ -84,32 +85,30 @@ function WishListPage() {
                   <div
                     className="mx-20"
                     onClick={() => {
-                      setIsClick(!isClick);
                       setItemArr((prev) => [...prev, item]);
-
                       const targetIdx = itemArr.findIndex(
                         (clickedItem) => clickedItem.id === item.id,
                       );
+
                       if (targetIdx !== -1) {
                         itemArr.splice(targetIdx, 1);
                         setItemArr([...itemArr]);
                       }
-                      if (isAllItemsClick) {
-                        setAllItemsClick(false);
-                      }
                     }}>
-                    <Image
-                      src={
-                        isAllItemsClick || item.id === selectedItems[0]?.id
-                          ? '/icons/CheckedCheckBox.svg'
-                          : '/icons/CheckBox.svg'
-                      }
-                      alt="체크아이콘"
-                      width={20}
-                      height={20}
-                    />
+                    <div className="cursor-pointer">
+                      <Image
+                        src={
+                          item.id === selectedItems[0]?.id
+                            ? '/icons/CheckedCheckBox.svg'
+                            : '/icons/CheckBox.svg'
+                        }
+                        alt="체크아이콘"
+                        width={20}
+                        height={20}
+                      />
+                    </div>
                   </div>
-                  <div className="flex gap-x-20 rounded-[10px] border-solid border-2 border-green">
+                  <div className="flex gap-x-20 rounded-[10px]">
                     <img
                       src={item.image}
                       alt=""
@@ -120,6 +119,7 @@ function WishListPage() {
                     <div className="flex flex-col gap-x-8 border-solid border-2 border-blue">
                       <span className="w-200 mobile:w-147 text-ellipsis overflow-hidden">
                         {item.title}
+                        sdfsdfsdfsfdsfsdfsdfsfsfdsdfsfssdfsdfsdfsdfsdfsdfsdf
                       </span>
                       <span className="text-gray-3">{item.author}</span>
                       <div className="flex-start">
