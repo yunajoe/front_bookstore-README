@@ -1,13 +1,5 @@
 import Carousel from '@/components/carousel/carousel';
-import { responsive } from '@/utils/checkRespinsiveEnv';
-
-// 데스크탑 6개  카드 이미지 163
-// tablet  4개  카드 이미지 157
-// mobile  2개   카드 이미지 142
-
-// 데스크탑 1200px  padding이 60   즉, container 1080px;  //  6.62576687117 개
-// 태블릿  768px  padding이 40, 즉 container  688px   // 4.328 개
-// 모바일 360px padding 15, 즉 container 330px // 2.32... 개
+import { responsive } from '@/utils/checkResponsiveEnv';
 
 function TestPage() {
   const data = [

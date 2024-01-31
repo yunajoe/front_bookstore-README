@@ -1,8 +1,9 @@
 import CarouselCard from '@/components/carousel/carouselCard';
-import { EnvType, NewBook, ResponSive } from '@/types/carouselType';
+import useCarouselEnv from '@/hooks/useCarouselEnv';
+import { NewBook, ResponSive } from '@/types/carouselType';
 import registDragEvent from '@/utils/registerDragEvent';
 import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 const CARD_MARGIN_VALUE = 20;
 
 type CarouselProps = {
@@ -17,11 +18,7 @@ const inrange = (v: number, min: number, max: number) => {
 };
 
 function Carousel({ data, responsive }: CarouselProps) {
-  const [carouselContainer, setCarouselContainer] = useState({
-    width: 0,
-    height: 0,
-  });
-  const [env, setEnv] = useState<EnvType>('desktop');
+  const { env } = useCarouselEnv();
   const [transDelta, setTransDelta] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const CONTENT_WIDTH = responsive[env]?.imageSize.width!;
@@ -36,64 +33,40 @@ function Carousel({ data, responsive }: CarouselProps) {
     }
   };
 
+  let carouselElementWidth = carouselElement?.clientWidth!;
+
+  const visibleItemsCount = useMemo(() => {
+    return Math.round(carouselElementWidth / calcContentWidthValue);
+  }, [carouselElementWidth, calcContentWidthValue]);
+
+  const maxPage = useMemo(() => {
+    return data.length - visibleItemsCount;
+  }, [data, visibleItemsCount]);
+
   const btnpressprev = () => {
     if (currentIndex < 1) return;
     const prevIndex = currentIndex - 1;
     setCurrentIndex(prevIndex);
     transformCarousel(prevIndex);
   };
-
-  const calcMaxPageValue = () => {
-    let width = carouselElement?.clientWidth!;
-    const visibleItemsCount = Math.ceil(
-      width / (CONTENT_WIDTH + CARD_MARGIN_VALUE),
-    );  
-    return data.length - visibleItemsCount;
-  };
-
-  const maxPage = useMemo(() => {
-    try {
-      return calcMaxPageValue();
-    } catch (e) {
-      return 0;
-    }
-  }, [env, currentIndex]);
-
   const btnpressnext = () => {
-    const maxPageValue = calcMaxPageValue();
-    if (currentIndex === maxPageValue) return;
+    if (currentIndex === maxPage) return;
     const nextIndex = currentIndex + 1;
     setCurrentIndex(nextIndex);
     transformCarousel(nextIndex);
   };
 
-  const calculateEnv = useCallback(() => {
-    window.addEventListener('resize', () => {
-      let w = window.innerWidth;
-      if (w < 768) {
-        setEnv('mobile');
-      } else if (w < 1200) {
-        setEnv('tablet');
-      } else {
-        setEnv('desktop');
-      }
-    });
-  }, [carouselContainer]);
-
-  const resetCurrentIndex = useCallback(() => {
+  const resetCurrentIndex = () => {
     setCurrentIndex(0);
-  }, []);
+    transformCarousel(0);
+  };
 
-  useEffect(calculateEnv, [calculateEnv]);
+  const onDragEndTransform = (carouselIndex: number) => {
+    const boundaryIndex = inrange(carouselIndex, 0, maxPage);
+    setCurrentIndex(boundaryIndex);
+    transformCarousel(boundaryIndex);
+  };
   useEffect(resetCurrentIndex, [env]);
-
-  useEffect(() => {
-    const element = ref.current!;
-    if (ref.current) {
-      const { width, height } = element?.getBoundingClientRect() || {};
-      setCarouselContainer({ width, height });
-    }
-  }, []);
 
   return (
     <div className="bg-white relative overflow-hidden w-[1200px] tablet:w-[768px] mobile:w-360">
@@ -128,36 +101,19 @@ function Carousel({ data, responsive }: CarouselProps) {
               onDragChange: (deltaX) => {
                 const boundaryDelta = inrange(
                   deltaX,
-                  -(CONTENT_WIDTH + CARD_MARGIN_VALUE),
-                  CONTENT_WIDTH + CARD_MARGIN_VALUE,
+                  -calcContentWidthValue,
+                  calcContentWidthValue,
                 );
-                const calcWidth = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
                 if (carouselElement) {
-                  carouselElement.style.transform = `translateX(${transDelta + calcWidth * -currentIndex}px)`;
-                  setTransDelta(boundaryDelta);
+                  carouselElement.style.transform = `translateX(${boundaryDelta + calcContentWidthValue * -currentIndex}px)`;
                 }
               },
               onDragEnd: (deltaX) => {
-                const maxIndex = maxPage;
                 if (deltaX < 0) {
-                  const boundaryIndex = inrange(currentIndex + 1, 0, maxIndex);
-                  setCurrentIndex(boundaryIndex);
-                  const calcWidth = Math.floor(
-                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
-                  );
-                  if (carouselElement) {
-                    carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
-                  }
+                  onDragEndTransform(currentIndex + 1);
                 }
                 if (deltaX > 0) {
-                  const boundaryIndex = inrange(currentIndex - 1, 0, maxIndex);
-                  setCurrentIndex(boundaryIndex);
-                  const calcWidth = Math.floor(
-                    CONTENT_WIDTH + CARD_MARGIN_VALUE,
-                  );
-                  if (carouselElement) {
-                    carouselElement.style.transform = `translateX(${boundaryIndex * (calcWidth * -1)}px)`;
-                  }
+                  onDragEndTransform(currentIndex - 1);
                 }
               },
             })}>
