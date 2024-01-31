@@ -1,3 +1,7 @@
+/** 카테고리 페이지 > 국내 > 전체*/
+
+import CategoryLayout from '@/components/layout/categoryLayout';
+
 export default function DomesticPage() {
-  return <div>국내도서 전체보기</div>;
+  return <CategoryLayout isDomestic={true} />;
 }

@@ -1,3 +1,7 @@
+/** 카테고리 페이지 > 외국 > 전체*/
+
+import CategoryLayout from '@/components/layout/categoryLayout';
+
 export default function ForeignPage() {
-  return <div>외국도서 전체보기</div>;
+  return <CategoryLayout isDomestic={false} />;
 }
