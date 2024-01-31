@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import ProfileIcon from '@/public/icons/ProfileIcon.svg';
 import KebabDropDownButton from '@/components/button/kebab/kebabDropDownButton';
 import useShowDropDown from '@/hooks/useShowDropDown';
