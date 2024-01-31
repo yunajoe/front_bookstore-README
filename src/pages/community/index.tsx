@@ -1,3 +1,10 @@
+import Header from '@/components/header';
+
 export default function Community() {
-  return <div>커뮤니티</div>;
+  return (
+    <div>
+      <Header isLoggedIn={false} />
+      <Header isLoggedIn={true} numItemsOfCart={4} />
+    </div>
+  );
 }
