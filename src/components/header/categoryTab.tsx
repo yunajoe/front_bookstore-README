@@ -10,7 +10,10 @@ import SelectedAllButton from '@/components/button/header/selectedAllButton';
 import CategoryButton from '@/components/button/header/categoryButton';
 
 function CategoryTab() {
-  const [selectedCategory, setSelectedCategory] = useState('domestic'); // 'domestic' 또는 'foreign'
+  const [selectedCategory, setSelectedCategory] = useState<
+    'domestic' | 'foreign'
+  >('domestic');
+  // 'domestic' 또는 'foreign';
   const [selectedAll, setSelectedAll] = useState('국내도서 전체보기');
   const [categoryList, setCategoryList] = useState(
     ReadMeDomesticCategoryList.categoryList,
@@ -21,7 +24,7 @@ function CategoryTab() {
       setSelectedCategory('domestic');
       setCategoryList(ReadMeDomesticCategoryList.categoryList);
       setSelectedAll('국내도서 전체보기');
-    } else if (categoryType === 'foreign') {
+    } else {
       setSelectedCategory('foreign');
       setCategoryList(ReadMeForeignCategoryList.categoryList);
       setSelectedAll('외국도서 전체보기');
