@@ -128,5 +128,15 @@ export const myWishListData = {
       genre: '비평',
       price: 18000,
     },
+    {
+      id: 8,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 2',
+      author: '작가 이름 2',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
   ],
 };
