@@ -2,8 +2,6 @@
 
 import Advertisement from '@/components/container/advertisement/advertisement';
 import MainLayout from '@/components/layout/mainLayout';
-import { ORDER_LIST } from 'src/constants/orders';
-import OrderDropDown from '@/components/dropDown/tempDropDown';
 import Spacing from '@/components/container/spacing/spacing';
 import Sidebar from '../sidebar/sidebar';
 
@@ -50,7 +48,6 @@ function CategoryLayout({ isDomestic = true, location }: CategoryLayoutProps) {
         <article className="flex flex-col gap-50 tablet:gap-40 mobile:gap-20">
           <div className="flex justify-between items-center">
             <h1 className="text-black text-20">모든 도서</h1>
-            <OrderDropDown dataList={ORDER_LIST} />
           </div>
           <div
             role="temp"
