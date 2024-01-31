@@ -21,9 +21,9 @@ function CartButton({ numItemsOfCart }: CardChipProps) {
           <Image src={CartIcon} alt="장바구니 이미지" fill />
           {numItemsOfCart && (
             <div
-              className={`absolute bottom-6 pc:bottom-12 tablet:bottom-12 left-8 tablet:left-17 pc:left-17
-                bg-green text-white rounded-full p-1 mobile:w-14 mobile:h-14 w-20 h-20 flex
-                items-center justify-center ${getCircleStyle()}`}>
+              className={`absolute bottom-6 pc:bottom-12 tablet:bottom-12 left-6 tablet:left-15 pc:left-15
+                flex-center bg-green text-white rounded-full p-1 mobile:w-14 mobile:h-14 w-20
+                h-20 justify-center ${getCircleStyle()}`}>
               {items}
             </div>
           )}

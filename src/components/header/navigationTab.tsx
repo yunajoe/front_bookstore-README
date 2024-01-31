@@ -33,7 +33,7 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
             <Link href="/bestsellers"> 베스트</Link>
             <Link href="/newest"> 신간</Link>
             <Link href="/custom">맞춤도서</Link>
-            <div className="inline-block border-r w-1 h-14 border-gray-1" />
+            <div className="inline-block border-r w-1 h-14 mt-4 border-gray-1" />
             <Link href="/community"> 커뮤니티</Link>
           </div>
         </div>
