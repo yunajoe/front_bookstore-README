@@ -33,7 +33,7 @@ function SelectedAllButton({
         className="tablet:hidden pc:hidden bg-white text-green text-[13px]">
         전체
         <Image
-          src={GreenArrowRight}
+          src={GreenArrowRightIcon}
           alt="전체보기 화살표"
           width={8}
           height={13}
