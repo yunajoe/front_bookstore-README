@@ -19,7 +19,8 @@ export default function CarouselCard(props: CarouselCardProps) {
   return (
     <div>
       <div
-        className={`bg-black mr-20 text-white ${sizeVariants[env]} overflow-hidden relative`}>
+        className={`bg-black mr-20 text-white ${sizeVariants[env]} overflow-hidden relative
+          select-none`}>
         <img src={imageUrl} alt="이미지" />
         {title}
         {authorname}

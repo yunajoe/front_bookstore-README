@@ -1,8 +1,10 @@
 import CarouselCard from '@/components/carousel/carouselCard';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
 import { NewBook, ResponSive } from '@/types/carouselType';
+import { inrange } from '@/utils/inrange';
 import registDragEvent from '@/utils/registerDragEvent';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 const CARD_MARGIN_VALUE = 20;
 
@@ -11,29 +13,21 @@ type CarouselProps = {
   responsive: ResponSive;
 };
 
-const inrange = (v: number, min: number, max: number) => {
-  if (v < min) return min;
-  if (v > max) return max;
-  return v;
-};
-
 function Carousel({ data, responsive }: CarouselProps) {
   const { env } = useCarouselEnv();
-  const [transDelta, setTransDelta] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const CONTENT_WIDTH = responsive[env]?.imageSize.width!;
   const ref = useRef<HTMLDivElement>(null);
-  const carouselElement = ref.current;
 
   const calcContentWidthValue = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
 
   const transformCarousel = (currentIndex: number) => {
-    if (carouselElement) {
-      carouselElement.style.transform = `translateX(${currentIndex * (calcContentWidthValue * -1)}px)`;
+    if (ref.current) {
+      ref.current.style.transform = `translateX(${currentIndex * (calcContentWidthValue * -1)}px)`;
     }
   };
 
-  let carouselElementWidth = carouselElement?.clientWidth!;
+  let carouselElementWidth = ref.current?.clientWidth!;
 
   const visibleItemsCount = useMemo(() => {
     return Math.round(carouselElementWidth / calcContentWidthValue);
@@ -74,7 +68,9 @@ function Carousel({ data, responsive }: CarouselProps) {
         className="flex items-center justify-between mx-60 tablet:mx-40 mobile:mx-15 mb-40
           mobile:mb-20">
         <span className="text-black text-20">신간도서</span>
-        <span className="text-green text-16">더보기</span>
+        <Link href="#" className="text-green text-16">
+          더보기
+        </Link>
       </div>
       <div className="flex flex-row items-center mx-24 tablet:mx-14 mobile:mx-15">
         <button
@@ -104,8 +100,8 @@ function Carousel({ data, responsive }: CarouselProps) {
                   -calcContentWidthValue,
                   calcContentWidthValue,
                 );
-                if (carouselElement) {
-                  carouselElement.style.transform = `translateX(${boundaryDelta + calcContentWidthValue * -currentIndex}px)`;
+                if (ref.current) {
+                  ref.current.style.transform = `translateX(${boundaryDelta + calcContentWidthValue * -currentIndex}px)`;
                 }
               },
               onDragEnd: (deltaX) => {
