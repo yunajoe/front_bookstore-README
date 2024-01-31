@@ -13,7 +13,7 @@ function CommunityCard({
 }: CommunityCardProps ) {
   return (
     <div
-      className="relative flex flex-col w-347 h-439 border-[1px] border-solid border-[#dbdbdb]
+      className="relative flex flex-col w-347 h-439 border-[1px] border-solid border-gray-1
         rounded-[10px] py-20 gap-20 tablet:max-w-334 mobile:max-w-330">
       <div className="flex items-center px-20">
         <div className="relative w-48 h-48 overflow-hidden rounded-full">
