@@ -14,8 +14,8 @@ returns: component
 
 import { useEffect, useMemo, useState } from 'react';
 
-// TODO 코드 수정 예정
-import registDragEvent from '@/components/todayBestCorner/tempRegistEvent';
+import registDragEvent from '@/utils/registerDragEvent';
+import { inrange } from '@/utils/inrange';
 
 export default function useWithSlider(
   InnerComponent: any,
@@ -33,12 +33,6 @@ export default function useWithSlider(
   const [currentIndex, setCurrentIndex] = useState(1);
   const [transX, setTransX] = useState(0);
   const [animate, setAnimate] = useState(false);
-
-  const inrange = (v: number, min: number, max: number) => {
-    if (v < min) return min;
-    if (v > max) return max;
-    return v;
-  };
 
   useEffect(() => {
     if (sec && auto) {
