@@ -1,14 +1,7 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import EmojiButtonContainer from '@/components/card/communityCard/emoji/emojiButtonContainer';
 import KebabButton from '@/components/button/kebab/kebabButton';
-interface CommunityCardProps {
-  profileImg: string | StaticImageData; //TODO 수정필요
-  userNickname: string;
-  createAt: string;
-  bookCover: string | StaticImageData; //TODO 수정필요
-  bookTitle: string;
-  review: string;
-}
+import { CommunityCardProps } from '@/types/communityCardType';
 
 function CommunityCard({
   profileImg,
@@ -17,7 +10,7 @@ function CommunityCard({
   bookCover,
   bookTitle,
   review,
-}: CommunityCardProps) {
+}: CommunityCardProps ) {
   return (
     <div
       className="relative flex flex-col w-347 h-439 border-[1px] border-solid border-[#dbdbdb]
@@ -33,7 +26,9 @@ function CommunityCard({
         <KebabButton title1="수정하기" title2="삭제하기" />
       </div>
       <div className="flex-center w-full h-180 bg-gray-5">
-        <Image src={bookCover} alt="책표지" className="h-180 w-auto" />
+        <div className='relative h-180 w-100'>
+          <Image src={bookCover} alt="책표지" fill/>
+        </div>
       </div>
       <div className="flex flex-col px-20">
         <p className="text-16 font-bold text-gray-4">{bookTitle}</p>
