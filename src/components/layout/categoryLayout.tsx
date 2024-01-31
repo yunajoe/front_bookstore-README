@@ -2,9 +2,6 @@
 
 import Advertisement from '@/components/container/advertisement/advertisement';
 import MainLayout from '@/components/layout/mainLayout';
-import Carousel from '@/components/carousel/carousel';
-import { responsive } from '@/utils/checkResponsiveEnv';
-import { newBookList } from '@/pages/api/todayBestMock';
 import { ORDER_LIST } from 'src/constants/orders';
 import OrderDropDown from '@/components/dropDown/tempDropDown';
 import Spacing from '@/components/container/spacing/spacing';
