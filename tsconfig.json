@@ -30,7 +30,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/button/register",
+    "src/components/button/register", "next.config.js",
   ],
   "exclude": ["node_modules"],
 }

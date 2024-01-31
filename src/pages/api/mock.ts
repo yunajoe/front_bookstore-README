@@ -278,7 +278,7 @@ export const communityCards = [
   },
   {
     id: 15,
-    profileImg: 'https://picsum.photos/id/150/200/300',
+    profileImg: 'https://picsum.photos/id/152/200/300',
     userNickname: '모래알',
     createAt: '2024.01.17',
     bookCover: 'https://picsum.photos/id/151/200/300',
@@ -331,4 +331,3 @@ export const communityCards = [
     review: '별빛 아래에서 펼쳐지는 감성적인 이야기.',
   },
 ];
-
