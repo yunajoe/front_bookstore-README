@@ -4,6 +4,7 @@ import ProfileIcon from '@/public/icons/ProfileIcon.svg';
 import KebabDropDownButton from '@/components/button/kebab/kebabDropDownButton';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import { MutableRefObject, useRef } from 'react';
+import router from 'next/router';
 
 function MyPageButton() {
   const ref = useRef() as MutableRefObject<HTMLImageElement>;
@@ -14,8 +15,7 @@ function MyPageButton() {
   };
 
   const handleMyPageClick = () => {
-    // MyPage 버튼이 클릭되었을 때 페이지로 이동
-    console.log('MyPage 버튼 클릭됨');
+    router.push('/mypage');
   };
 
   const handleLogoutClick = () => {
@@ -26,16 +26,14 @@ function MyPageButton() {
   return (
     <div className="flex items-center">
       <div className="mobile:hidden">
-        <Link href="/mypage">
-          <Image
-            src={ProfileIcon}
-            alt="케밥버튼"
-            onClick={handleKebabClick}
-            ref={ref}
-            width={21}
-            height={24}
-          />
-        </Link>
+        <Image
+          src={ProfileIcon}
+          alt="케밥버튼"
+          onClick={handleKebabClick}
+          ref={ref}
+          width={21}
+          height={24}
+        />
       </div>
       <div className="tablet:hidden pc:hidden">
         <Image
@@ -49,7 +47,7 @@ function MyPageButton() {
 
         {showOptions && (
           <KebabDropDownButton
-            title1={<Link href="/mypage">마이페이지</Link>}
+            title1={'마이페이지'}
             title2="로그아웃"
             color="black"
             onClickTitle1={handleMyPageClick}
