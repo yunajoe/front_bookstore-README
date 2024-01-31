@@ -1,5 +1,8 @@
 import CommunityCard from '@/components/card/communityCard/communityCard';
 import { myCommunityCard } from '@/pages/api/mock';
+import { ReactElement } from 'react';
+import MainLayout from '@/components/layout/mainLayout';
+import PageTab from '@/components/header/pageTab';
 
 function WriteMe() {
   return (
@@ -22,3 +25,17 @@ function WriteMe() {
 }
 
 export default WriteMe;
+
+WriteMe.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <MainLayout>
+      <PageTab
+        origin="피드"
+        originHref="."
+        add="내 글 보기"
+        addHref="/community/writeme"
+      />
+      {page}
+    </MainLayout>
+  );
+};
