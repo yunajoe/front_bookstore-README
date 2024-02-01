@@ -65,7 +65,6 @@ export const ReadMeGenreList: GenreList = {
 
 // wish데이터
 
-
 export const myWishListData = {
   id: 1,
   name: 'yuna',
