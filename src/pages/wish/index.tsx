@@ -55,7 +55,7 @@ function WishListPage() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="max-w-[1200px]">
+      <div className="max-w-[1200px] w-full">
         <MainLayout>
           <div className="flex flex-col px-60 mobile:px-15 tablet:px-40">
             <div className="text-black text-20 font-bold">
@@ -179,7 +179,7 @@ function WishListPage() {
           </div>
         </MainLayout>
       </div>
-      <div ref={ref}>여기요!!!</div>
+      <div ref={ref} />
     </div>
   );
 }
