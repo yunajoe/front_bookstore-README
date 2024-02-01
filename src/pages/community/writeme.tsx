@@ -7,8 +7,7 @@ import PageTab from '@/components/header/pageTab';
 function WriteMe() {
   return (
     <div
-      className="grid grid-cols-3 auto-rows-auto tablet:grid-cols-2 mobile:grid-cols-1 gap-20
-        mt-87">
+      className="grid grid-cols-3 auto-rows-auto tablet:grid-cols-2 mobile:grid-cols-1 gap-20 mb-198">
       {myCommunityCard.map((my) => (
         <CommunityCard
           key={my.id}
@@ -18,6 +17,7 @@ function WriteMe() {
           bookCover={my.bookCover}
           bookTitle={my.bookTitle}
           review={my.review}
+          kebab={true}
         />
       ))}
     </div>

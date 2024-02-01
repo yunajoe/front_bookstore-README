@@ -7,4 +7,5 @@ export interface CommunityCardProps {
   bookCover: string | StaticImageData; //TODO 수정필요
   bookTitle: string;
   review: string;
+  kebab?: boolean;
 }

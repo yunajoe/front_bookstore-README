@@ -10,7 +10,8 @@ function CommunityCard({
   bookCover,
   bookTitle,
   review,
-}: CommunityCardProps ) {
+  kebab = false,
+}: CommunityCardProps) {
   return (
     <div
       className="relative flex flex-col w-347 h-439 border-[1px] border-solid border-gray-1
@@ -23,7 +24,7 @@ function CommunityCard({
           <p className="text-14 font-bold text-gray-4">{userNickname}</p>
           <p className="text-12 font-normal text-gray-3">{createAt}</p>
         </div>
-        <KebabButton title1="수정하기" title2="삭제하기" />
+        {kebab && <KebabButton title1="수정하기" title2="삭제하기" />}
       </div>
       <div className="flex-center w-full h-180 bg-gray-5">
         <div className='relative h-180 w-100'>

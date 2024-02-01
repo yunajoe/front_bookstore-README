@@ -6,7 +6,7 @@ import PageTab from '@/components/header/pageTab';
 
 function Community() {
   return (
-    <div className="grid grid-cols-3 auto-rows-auto tablet:grid-cols-2 mobile:grid-cols-1 gap-20">
+    <div className="grid grid-cols-3 auto-rows-auto tablet:grid-cols-2 mobile:grid-cols-1 gap-20 mb-198">
       {communityCards.map((card) => (
         <CommunityCard
           key={card.id}
@@ -29,7 +29,7 @@ Community.getLayout = function getLayout(page: ReactElement) {
     <MainLayout>
       <PageTab
         origin="피드"
-        originHref="."
+        originHref="/community/index"
         add="내 글 보기"
         addHref="/community/writeme"
       />
