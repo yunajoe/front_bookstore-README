@@ -1,7 +1,8 @@
 import BookRating from '@/components/book/bookRating/bookRating';
 import MainLayout from '@/components/layout/mainLayout';
 import useInfinite from '@/hooks/useInfinite';
-import { myWishListData } from '@/pages/api/mock';
+import { myWishListData } from '@/pages/api/wishMock';
+
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
