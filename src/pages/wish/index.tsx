@@ -19,7 +19,6 @@ function fetchNextData(start: number, end: number) {
   const dataByScreen = myWishListData.wishListArray.slice(start, end);
   return dataByScreen;
 }
-
 const START = 0;
 function WishListPage() {
   const [end, setEnd] = useState(8);
