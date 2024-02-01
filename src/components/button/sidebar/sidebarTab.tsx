@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import {
   ReadMeForeignCategoryList,
   ReadMeDomesticCategoryList,
 } from '@/pages/api/mock';
-import Link from 'next/link';
 
 interface SidebarTabProps {
   isDomestic: boolean;

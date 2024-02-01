@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { useRef } from 'react';
+
+import SidebarTab from '@/components/button/sidebar/sidebarTab';
 import useShowDropDown from '@/hooks/useShowDropDown';
-import SidebarTab from './sidebarTab';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
 
 interface MobileSidebarTabButtonProps {
