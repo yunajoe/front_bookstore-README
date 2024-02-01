@@ -1,3 +1,9 @@
+/** 사이드바 하위 내비게이션 탭을 보여줄지 말지 컨트롤하는 버튼
+ * @params isDomestic: required, 불린
+ * @params location: optional, string
+ * @example
+ */
+
 import Image from 'next/image';
 import { useRef } from 'react';
 
@@ -5,15 +11,15 @@ import SidebarTab from '@/components/button/sidebar/sidebarTab';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
 
-interface MobileSidebarTabButtonProps {
+interface SidebarTabControllerProps {
   isDomestic: boolean;
   location?: string;
 }
 
-function MobileSidebarTabButton({
+function SidebarTabController({
   isDomestic,
   location,
-}: MobileSidebarTabButtonProps) {
+}: SidebarTabControllerProps) {
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const handleClick = () => setShowOptions(!showOptions);
@@ -42,4 +48,4 @@ function MobileSidebarTabButton({
   );
 }
 
-export default MobileSidebarTabButton;
+export default SidebarTabController;

@@ -22,7 +22,7 @@ function StyledLink({
   );
 }
 
-function SidebarCategoryButton({ isDomestic = true }) {
+function SidebarRegionButton({ isDomestic = true }) {
   return (
     <div className="flex justify-start items-center mobile:flex-center">
       <StyledLink
@@ -42,4 +42,4 @@ function SidebarCategoryButton({ isDomestic = true }) {
   );
 }
 
-export default SidebarCategoryButton;
+export default SidebarRegionButton;
