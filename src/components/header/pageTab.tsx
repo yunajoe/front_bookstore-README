@@ -7,7 +7,7 @@ interface PageTabProps {
   addHref: string;
 }
 
-const linkStyle = 'font-bold text-20 text-gray-2'
+const linkStyle = 'hover:text-black font-bold text-20 text-gray-2'
 
 //본문 container내에서 이동할 때 사용
 function PageTab({ origin, originHref, add, addHref }: PageTabProps) {
