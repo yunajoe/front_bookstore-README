@@ -1,39 +1,20 @@
-import CommunityCard from '@/components/card/communityCard/communityCard';
+import CommunityLayout from '@/components/layout/communityLayout';
 import { communityCards } from '@/pages/api/mock';
-import { ReactElement } from 'react';
-import MainLayout from '@/components/layout/mainLayout';
-import PageTab from '@/components/header/pageTab';
+
+// export async function getServerSideProps() {
+//   const response = getCommunity();
+//   const communityData = response.data;
+
+//   return (
+//     props: {
+//       communityData;
+//     }
+//   )
+// };
+//  위에처럼 데이터 받아서 props로 내려줄 예정. 지금은 mock data 사용중임
 
 function Community() {
-  return (
-    <div className="grid grid-cols-3 auto-rows-auto tablet:grid-cols-2 mobile:grid-cols-1 gap-20 mb-198">
-      {communityCards.map((card) => (
-        <CommunityCard
-          key={card.id}
-          profileImg={card.profileImg}
-          userNickname={card.userNickname}
-          createAt={card.createAt}
-          bookCover={card.bookCover}
-          bookTitle={card.bookTitle}
-          review={card.review}
-        />
-      ))}
-    </div>
-  );
+  return <CommunityLayout communityData={communityCards} isSelected='피드' />;
 }
 
 export default Community;
-
-Community.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <MainLayout>
-      <PageTab
-        origin="피드"
-        originHref="/community/index"
-        add="내 글 보기"
-        addHref="/community/writeme"
-      />
-      {page}
-    </MainLayout>
-  );
-};

@@ -6,16 +6,16 @@ interface ModalLayoutProps {
   onClick: () => void;
 }
 
-function ModalLayout({children, onClick} : ModalLayoutProps) {
+function ModalLayout({ children, onClick }: ModalLayoutProps) {
   return (
     <>
       {createPortal(
-        <div role="overlay" className="top-0 left-0 w-full h-full flex-center bg-black opacity-60" onClick={onClick}>
-          <div role="modalContainer" className="bg-white rounded-[10px]" >
+        <div role="overlay" className="fixed top-0 left-0 w-screen h-screen flex-center bg-black opacity-60 z-90" onClick={onClick}>
+          <div role="modalContainer" className="bg-white rounded-[10px]">
             {children}
           </div>
         </div>,
-        document.getElementById('modal-root') as HTMLElement
+        document.getElementById('portal') as HTMLDivElement
       )}
     </> 
   )

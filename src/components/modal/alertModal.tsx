@@ -1,24 +1,19 @@
-import { useState } from "react";
-import ModalLayout from "./modalLayout";
+import ModalLayout from "@/components/modal/modalLayout";
 
 interface AlertModalProps {
   title: string;
   description: string;
+  onClick: () => void;
 }
 
-function AlertModal({ title, description }: AlertModalProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsModalOpen(!isModalOpen);
-  }
-
+function AlertModal({ title, description, onClick }: AlertModalProps) {
+  console.log('열리네')
   return (
-    <ModalLayout onClick={handleButtonClick}>
+    <ModalLayout onClick={onClick}>
       <div className="flex-center flex-col">
         <p>{title}</p>
         <span>{description}</span>
-        <button onClick={handleButtonClick}>취소, 삭제</button>
+        <button onClick={onClick}>취소, 삭제</button>
       </div>
     </ModalLayout>
   )
