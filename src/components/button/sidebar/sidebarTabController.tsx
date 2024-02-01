@@ -10,7 +10,10 @@ import { useRef } from 'react';
 import SidebarTab from '@/components/button/sidebar/sidebarTab';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
-
+import {
+  ReadMeDomesticCategoryList,
+  ReadMeForeignCategoryList,
+} from '@/pages/api/mock';
 interface SidebarTabControllerProps {
   isDomestic: boolean;
   location?: string;
@@ -24,6 +27,11 @@ function SidebarTabController({
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const handleClick = () => setShowOptions(!showOptions);
   const { env } = useCarouselEnv();
+  const categoryList = isDomestic
+    ? ReadMeDomesticCategoryList.categoryList
+    : ReadMeForeignCategoryList.categoryList;
+  let found = categoryList.find((e) => e.link === `/${location}`);
+  let locatedTitle = location ? found?.title : '전체보기';
 
   return (
     <>
@@ -31,10 +39,10 @@ function SidebarTabController({
         ref={ref}
         onClick={handleClick}
         className="pc:hidden tablet:hidden mobile:flex-center mobile:gap-4 text-[13px]">
-        {location ?? '전체보기'}
+        {locatedTitle}
         <div className="w-19 h-19 border-[1px] rounded-[100%] border-gray-1 overflow-hidden">
           <Image
-            src={`${showOptions ? '/icons/UpArrow.svg' : 'icons/DownArrow.svg'}`}
+            src={`${showOptions ? '/icons/UpArrow.svg' : '/icons/DownArrow.svg'}`}
             alt="카테고리 펼치기 버튼"
             width={19}
             height={19}
