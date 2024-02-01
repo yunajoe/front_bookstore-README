@@ -1,5 +1,5 @@
 import BookRating from '@/components/book/bookRating/bookRating';
-import Header from '@/components/header';
+import MainLayout from '@/components/layout/mainLayout';
 import useInfinite from '@/hooks/useInfinite';
 import { myWishListData } from '@/pages/api/mock';
 import Image from 'next/image';
@@ -17,29 +17,22 @@ type WishListData = {
 
 function fetchNextData(start: number, end: number) {
   const dataByScreen = myWishListData.wishListArray.slice(start, end);
-  console.log('fetchNextData함수입니다!', dataByScreen);
   return dataByScreen;
 }
 
+const START = 0;
 function WishListPage() {
-  const start = 0;
   const [end, setEnd] = useState(8);
-  // ()=> fetchNextData(start, end)
   const [wishListData, setWishListData] = useState(
-    fetchNextData(start, end) || [],
+    () => fetchNextData(START, end) || [],
   );
   const [ref, isIntersecting] = useInfinite();
-  // console.log('ref', ref, '화면이보이는가?', isIntersecting);
-  console.log('whish', wishListData);
-  // 8개씩 화면에 뿌린다구 가정하자
 
   useEffect(() => {
-    if (ref?.current && isIntersecting && wishListData.length >= end) {
+    if (isIntersecting && wishListData.length >= end) {
       setEnd((num) => num + 8);
-      // setWishListData(wishListData);
       setWishListData((prev) => [...prev, ...fetchNextData(end, end + 8)]);
     }
-    console.log(wishListData.length, end);
   }, [isIntersecting]);
 
   const [selectedItemArr, setSelectedItemArr] = useState<WishListData[]>([]);
@@ -62,127 +55,129 @@ function WishListPage() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="max-w-[1200px] border-solid border-2 border-green">
-        <Header isLoggedIn={false} numItemsOfCart={0} />
-
-        <div className="flex flex-col border-solid border-2 border-red mobile:px-15 tablet: px-40">
-          <div className="text-black text-20 font-bold">
-            찜목록({wishListData.length})
-          </div>
-          <div className="flex justify-between my-23 mobile:my-18 tablet:my-23">
-            <div className="flex gap-x-8">
-              <div
-                className="cursor-pointer"
-                onClick={() => {
-                  if (wishListData.length === selectedItemArr.length) {
-                    resetSelectedItemArr();
-                  } else {
-                    setSelectedItemArr([...wishListData]);
-                  }
-                }}>
-                <Image
-                  src={
-                    wishListData.length === selectedItemArr.length
-                      ? '/icons/CheckedCheckBox.svg'
-                      : '/icons/CheckBox.svg'
-                  }
-                  alt="체크아이콘"
-                  width={20}
-                  height={20}
-                />
-              </div>
-              <span className="text-gray-4 text-14">전체선택</span>
+      <div className="max-w-[1200px]">
+        <MainLayout>
+          <div className="flex flex-col px-60 mobile:px-15 tablet:px-40">
+            <div className="text-black text-20 font-bold">
+              찜목록({wishListData.length})
             </div>
-            <span
-              className="text-black text-14 font-normal cursor-pointer"
-              onClick={() => handleDeleteSelectedItems()}>
-              선택항목 삭제
-            </span>
-          </div>
-          <div className="grid grid-cols-2 tablet:grid-cols-1 mobile:grid-cols-1 gap-20 mobile:gap-y-10">
-            {wishListData.map((item) => {
-              const selectedItems = filteredDataByTargetId(
-                selectedItemArr,
-                item.id,
-              );
-              const pickedNum = selectedItems.map((item) => item.id)[0];
-              return (
+            <div className="flex justify-between my-23 mobile:my-18 tablet:my-23">
+              <div className="flex gap-x-8">
                 <div
-                  key={item.id}
-                  className={`relative flex items-center pt-40 pb-43 pr-82 border-2 ${
-                    item.id === pickedNum ? 'border-green' : 'border-gray-1'
-                  } bg-white rounded-[10px]`}>
+                  className="cursor-pointer"
+                  onClick={() => {
+                    if (wishListData.length === selectedItemArr.length) {
+                      resetSelectedItemArr();
+                    } else {
+                      setSelectedItemArr([...wishListData]);
+                    }
+                  }}>
+                  <Image
+                    src={
+                      wishListData.length === selectedItemArr.length
+                        ? '/icons/CheckedCheckBox.svg'
+                        : '/icons/CheckBox.svg'
+                    }
+                    alt="체크아이콘"
+                    width={20}
+                    height={20}
+                  />
+                </div>
+                <span className="text-gray-4 text-14">전체선택</span>
+              </div>
+              <span
+                className="text-black text-14 font-normal cursor-pointer"
+                onClick={() => handleDeleteSelectedItems()}>
+                선택항목 삭제
+              </span>
+            </div>
+            <div
+              className="grid grid-cols-2 tablet:grid-cols-1 mobile:grid-cols-1 gap-x-20 tablet: gap-y-20
+                mobile:gap-y-10">
+              {wishListData.map((item) => {
+                const selectedItems = filteredDataByTargetId(
+                  selectedItemArr,
+                  item.id,
+                );
+                const pickedNum = selectedItems.map((item) => item.id)[0];
+                return (
                   <div
-                    className="absolute top-20 right-20 mobile:top-10 right-10 cursor-pointer"
-                    onClick={() => {
-                      const filteredWishListData = filteredDataByNotTargetId(
-                        wishListData,
-                        item.id,
-                      );
-                      setWishListData(filteredWishListData);
-                    }}>
-                    <Image
-                      src="/icons/Close.svg"
-                      alt="엑스"
-                      width={24}
-                      height={24}
-                    />
-                  </div>
-                  <div
-                    className="mx-20"
-                    onClick={() => {
-                      setSelectedItemArr((prev) => [...prev, item]);
-                      const targetIdx = selectedItemArr.findIndex(
-                        (clickedItem) => clickedItem.id === item.id,
-                      );
-
-                      if (targetIdx !== -1) {
-                        selectedItemArr.splice(targetIdx, 1);
-                        setSelectedItemArr([...selectedItemArr]);
-                      }
-                    }}>
-                    <div className="cursor-pointer">
+                    key={item.id}
+                    className={`relative flex items-center pt-40 pb-43 pr-82 border-2 ${
+                      item.id === pickedNum ? 'border-green' : 'border-gray-1'
+                    } bg-white rounded-[10px]`}>
+                    <div
+                      className="absolute top-20 right-20 mobile:top-10 right-10 cursor-pointer"
+                      onClick={() => {
+                        const filteredWishListData = filteredDataByNotTargetId(
+                          wishListData,
+                          item.id,
+                        );
+                        setWishListData(filteredWishListData);
+                      }}>
                       <Image
-                        src={
-                          item.id === selectedItems[0]?.id
-                            ? '/icons/CheckedCheckBox.svg'
-                            : '/icons/CheckBox.svg'
-                        }
-                        alt="체크아이콘"
-                        width={20}
-                        height={20}
+                        src="/icons/Close.svg"
+                        alt="엑스"
+                        width={24}
+                        height={24}
                       />
                     </div>
-                  </div>
-                  <div className="flex gap-x-20 rounded-[10px]">
-                    <img
-                      src={item.image}
-                      alt="책이미지"
-                      width="112"
-                      height="170"
-                      className="object-cover aspect-[112/170]"
-                    />
-                    <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
-                      <div className="text-15 text-black font-bold break-all line-clamp-2">
-                        {item.title}
+                    <div
+                      className="mx-20 mobile:mx-10"
+                      onClick={() => {
+                        setSelectedItemArr((prev) => [...prev, item]);
+                        const targetIdx = selectedItemArr.findIndex(
+                          (clickedItem) => clickedItem.id === item.id,
+                        );
+
+                        if (targetIdx !== -1) {
+                          selectedItemArr.splice(targetIdx, 1);
+                          setSelectedItemArr([...selectedItemArr]);
+                        }
+                      }}>
+                      <div className="cursor-pointer">
+                        <Image
+                          src={
+                            item.id === selectedItems[0]?.id
+                              ? '/icons/CheckedCheckBox.svg'
+                              : '/icons/CheckBox.svg'
+                          }
+                          alt="체크아이콘"
+                          width={20}
+                          height={20}
+                        />
                       </div>
-                      <span className="text-gray-3 whitespace-nowrap text-ellipsis overflow-hidden">
-                        {item.author}
-                      </span>
-                      <div className="flex">
-                        <BookRating rating={item.rating} />
+                    </div>
+                    <div className="flex gap-x-20 rounded-[10px]">
+                      <img
+                        src={item.image}
+                        alt="책이미지"
+                        width="112"
+                        height="170"
+                        className="object-cover aspect-[112/170]"
+                      />
+                      <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
+                        <div className="text-15 text-black font-bold break-all line-clamp-2">
+                          {item.title}
+                        </div>
+                        <span className="text-gray-3 whitespace-nowrap text-ellipsis overflow-hidden">
+                          {item.author}
+                        </span>
+                        <div className="flex">
+                          <BookRating rating={item.rating} />
+                        </div>
+                        <span className="text-14">[{item.genre}]</span>
+                        <span className="text-14 text-color font-bold">
+                          {item.price.toLocaleString()}원
+                        </span>
                       </div>
-                      <span className="text-14">[{item.genre}]</span>
-                      <span className="text-14 text-color font-bold">
-                        {item.price.toLocaleString()}원
-                      </span>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </MainLayout>
       </div>
       <div ref={ref}>여기요!!!</div>
     </div>
