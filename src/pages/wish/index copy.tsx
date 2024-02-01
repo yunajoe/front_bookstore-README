@@ -1,9 +1,8 @@
 import BookRating from '@/components/book/bookRating/bookRating';
 import Header from '@/components/header';
-import useInfinite from '@/hooks/useInfinite';
 import { myWishListData } from '@/pages/api/mock';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type WishListData = {
   id: number;
@@ -15,56 +14,25 @@ type WishListData = {
   price: number;
 };
 
-function fetchNextData(start: number, end: number) {
-  const dataByScreen = myWishListData.wishListArray.slice(start, end);
-  console.log('fetchNextData함수입니다!', dataByScreen);
-  return dataByScreen;
-}
-
 function WishListPage() {
-  const start = 0;
-  const [end, setEnd] = useState(8);
-  // ()=> fetchNextData(start, end)
-  const [wishListData, setWishListData] = useState(
-    fetchNextData(start, end) || [],
+  const [wishListData, setWishListData] = useState<WishListData[]>(
+    myWishListData.wishListArray,
   );
-  const [ref, isIntersecting] = useInfinite();
-  // console.log('ref', ref, '화면이보이는가?', isIntersecting);
-  console.log('whish', wishListData);
-  // 8개씩 화면에 뿌린다구 가정하자
-
-  useEffect(() => {
-    if (ref?.current && isIntersecting && wishListData.length >= end) {
-      setEnd((num) => num + 8);
-      // setWishListData(wishListData);
-      setWishListData((prev) => [...prev, ...fetchNextData(end, end + 8)]);
-    }
-    console.log(wishListData.length, end);
-  }, [isIntersecting]);
 
   const [selectedItemArr, setSelectedItemArr] = useState<WishListData[]>([]);
-
-  const resetSelectedItemArr = () => setSelectedItemArr([]);
-
-  const filteredDataByTargetId = (arr: WishListData[], targetId: number) =>
-    arr.filter((arrItem) => arrItem.id === targetId);
-
-  const filteredDataByNotTargetId = (arr: WishListData[], targetId: number) =>
-    arr.filter((arrItem) => arrItem.id !== targetId);
 
   const handleDeleteSelectedItems = () => {
     const filteredData = wishListData.filter((item) => {
       return selectedItemArr.map((picked) => picked.id).indexOf(item.id) === -1;
     });
     setWishListData(filteredData);
-    resetSelectedItemArr();
+    setSelectedItemArr([]);
   };
 
   return (
     <div className="w-full flex flex-col items-center">
       <div className="max-w-[1200px] border-solid border-2 border-green">
         <Header isLoggedIn={false} numItemsOfCart={0} />
-
         <div className="flex flex-col border-solid border-2 border-red mobile:px-15 tablet: px-40">
           <div className="text-black text-20 font-bold">
             찜목록({wishListData.length})
@@ -75,7 +43,7 @@ function WishListPage() {
                 className="cursor-pointer"
                 onClick={() => {
                   if (wishListData.length === selectedItemArr.length) {
-                    resetSelectedItemArr();
+                    setSelectedItemArr([]);
                   } else {
                     setSelectedItemArr([...wishListData]);
                   }
@@ -101,9 +69,8 @@ function WishListPage() {
           </div>
           <div className="grid grid-cols-2 tablet:grid-cols-1 mobile:grid-cols-1 gap-20 mobile:gap-y-10">
             {wishListData.map((item) => {
-              const selectedItems = filteredDataByTargetId(
-                selectedItemArr,
-                item.id,
+              const selectedItems = selectedItemArr.filter(
+                (clickedItem) => clickedItem.id === item.id,
               );
               const pickedNum = selectedItems.map((item) => item.id)[0];
               return (
@@ -115,9 +82,8 @@ function WishListPage() {
                   <div
                     className="absolute top-20 right-20 mobile:top-10 right-10 cursor-pointer"
                     onClick={() => {
-                      const filteredWishListData = filteredDataByNotTargetId(
-                        wishListData,
-                        item.id,
+                      const filteredWishListData = wishListData.filter(
+                        (data) => data.id !== item.id,
                       );
                       setWishListData(filteredWishListData);
                     }}>
@@ -157,13 +123,13 @@ function WishListPage() {
                   <div className="flex gap-x-20 rounded-[10px]">
                     <img
                       src={item.image}
-                      alt="책이미지"
+                      alt=""
                       width="112"
                       height="170"
                       className="object-cover aspect-[112/170]"
                     />
                     <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
-                      <div className="text-15 text-black font-bold break-all line-clamp-2">
+                      <div className="text-black text-bold break-all line-clamp-2">
                         {item.title}
                       </div>
                       <span className="text-gray-3 whitespace-nowrap text-ellipsis overflow-hidden">
@@ -173,7 +139,7 @@ function WishListPage() {
                         <BookRating rating={item.rating} />
                       </div>
                       <span className="text-14">[{item.genre}]</span>
-                      <span className="text-14 text-color font-bold">
+                      <span className="text-14 text-color text-bold">
                         {item.price.toLocaleString()}원
                       </span>
                     </div>
@@ -184,7 +150,6 @@ function WishListPage() {
           </div>
         </div>
       </div>
-      <div ref={ref}>여기요!!!</div>
     </div>
   );
 }

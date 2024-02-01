@@ -57,13 +57,15 @@ export const ReadMeGenreList: GenreList = {
 export const myWishListData = {
   id: 1,
   name: 'yuna',
-  whishListArray: [
+  wishListArray: [
     {
       id: 1,
       image:
         'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
-      title: '책 제목 1',
-      author: '작가 이름 1',
+      title:
+        '나는긴이름우아아아아ㅏㅇ아아아아아아아아아앙아아아아아아아아아아앙아아아아아아아앙아아아아앙아아',
+      author:
+        '작가 이름 1아아아아아앙아아아아아아아앙아아아아아앙아아아아아앙아아아아아아',
       rating: 4.5,
       genre: '소설',
       price: 20000,
@@ -130,6 +132,186 @@ export const myWishListData = {
     },
     {
       id: 8,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 9,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 9',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 10,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 11,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 12,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 13,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 14,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 15,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 16,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 17,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 18,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 19,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 20,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 21,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 22,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 23,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 24,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 25,
+      image:
+        'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
+      title: '책 제목 8',
+      author: '작가 이름 8',
+      rating: 3.8,
+      genre: '비평',
+      price: 18000,
+    },
+    {
+      id: 26,
       image:
         'https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_640.jpg',
       title: '책 제목 8',

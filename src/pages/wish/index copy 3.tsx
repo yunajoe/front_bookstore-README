@@ -15,32 +15,22 @@ type WishListData = {
   price: number;
 };
 
-function fetchNextData(start: number, end: number) {
-  const dataByScreen = myWishListData.wishListArray.slice(start, end);
-  console.log('fetchNextData함수입니다!', dataByScreen);
-  return dataByScreen;
-}
-
+const fetchNextData = () => {
+  myWishListData.wishListArray;
+};
 function WishListPage() {
-  const start = 0;
+  const [wishListData, setWishListData] =
+    useState<WishListData[]>(fetchNextData);
+  const [start, setStart] = useState(0);
   const [end, setEnd] = useState(8);
-  // ()=> fetchNextData(start, end)
-  const [wishListData, setWishListData] = useState(
-    fetchNextData(start, end) || [],
-  );
-  const [ref, isIntersecting] = useInfinite();
-  // console.log('ref', ref, '화면이보이는가?', isIntersecting);
-  console.log('whish', wishListData);
-  // 8개씩 화면에 뿌린다구 가정하자
 
-  useEffect(() => {
-    if (ref?.current && isIntersecting && wishListData.length >= end) {
-      setEnd((num) => num + 8);
-      // setWishListData(wishListData);
-      setWishListData((prev) => [...prev, ...fetchNextData(end, end + 8)]);
-    }
-    console.log(wishListData.length, end);
-  }, [isIntersecting]);
+  const [ref, isIntersecting] = useInfinite();
+
+  const fetchNextData = () => {
+    myWishListData.wishListArray;
+  };
+  console.log('ref', ref, '화면이보이는가?', isIntersecting);
+  // 8개씩 화면에 뿌린다구 가정하자
 
   const [selectedItemArr, setSelectedItemArr] = useState<WishListData[]>([]);
 
@@ -64,7 +54,6 @@ function WishListPage() {
     <div className="w-full flex flex-col items-center">
       <div className="max-w-[1200px] border-solid border-2 border-green">
         <Header isLoggedIn={false} numItemsOfCart={0} />
-
         <div className="flex flex-col border-solid border-2 border-red mobile:px-15 tablet: px-40">
           <div className="text-black text-20 font-bold">
             찜목록({wishListData.length})
@@ -157,13 +146,13 @@ function WishListPage() {
                   <div className="flex gap-x-20 rounded-[10px]">
                     <img
                       src={item.image}
-                      alt="책이미지"
+                      alt=""
                       width="112"
                       height="170"
                       className="object-cover aspect-[112/170]"
                     />
                     <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
-                      <div className="text-15 text-black font-bold break-all line-clamp-2">
+                      <div className="text-black text-bold break-all line-clamp-2">
                         {item.title}
                       </div>
                       <span className="text-gray-3 whitespace-nowrap text-ellipsis overflow-hidden">
@@ -173,7 +162,7 @@ function WishListPage() {
                         <BookRating rating={item.rating} />
                       </div>
                       <span className="text-14">[{item.genre}]</span>
-                      <span className="text-14 text-color font-bold">
+                      <span className="text-14 text-color text-bold">
                         {item.price.toLocaleString()}원
                       </span>
                     </div>
