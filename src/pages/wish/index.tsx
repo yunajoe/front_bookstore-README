@@ -1,4 +1,5 @@
 import BookRating from '@/components/book/bookRating/bookRating';
+import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import MainLayout from '@/components/layout/mainLayout';
 import useInfinite from '@/hooks/useInfinite';
 import { myWishListData } from '@/pages/api/wishMock';
@@ -149,13 +150,7 @@ function WishListPage() {
                       </div>
                     </div>
                     <div className="flex gap-x-20 rounded-[10px]">
-                      <img
-                        src={item.image}
-                        alt="책이미지"
-                        width="112"
-                        height="170"
-                        className="object-cover aspect-[112/170]"
-                      />
+                      <PreviewBookInfo size="sm" />
                       <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
                         <div className="text-15 text-black font-bold break-all line-clamp-2">
                           {item.title}
