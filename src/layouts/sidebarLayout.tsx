@@ -24,14 +24,14 @@ function SidebarLayout({
       <MainLayout>
         <section
           role="content"
-          className="flex items-start flex-col pt-20 pl-245 pr-60 tablet:pr-40 tablet:pl-217
-            mobile:pt-0 mobile:px-15">
+          className="w-full h-full flex items-start flex-col pt-20 pl-245 pr-60 tablet:pr-40
+            tablet:pl-217 mobile:pt-0 mobile:px-15">
           <aside
-            className="absolute top-40 left-60 tablet:left-40 w-[163px] h-[994px] tablet:w-[155px]
-              mobile:static mobile:h-35 mobile:w-full">
+            className="absolute top-40 left-40 w-[163px] h-[994px] tablet:w-[155px] mobile:static
+              mobile:h-35 mobile:w-full">
             <Sidebar isDomestic={isDomestic} location={location} />
           </aside>
-          {children}
+          <div className="p-20">{children}</div>
         </section>
       </MainLayout>
     </div>
