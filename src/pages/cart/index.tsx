@@ -151,31 +151,32 @@ function CartPage() {
                         />
                       </div>
                     </div>
-
-                    <div className="flex gap-x-20 rounded-[10px]">
-                      <PreviewBookInfo size="sm" />
-                      <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
-                        <div className="text-15 text-black font-bold break-all line-clamp-2">
-                          {item.title}
-                        </div>
-                        <span className="text-gray-3 whitespace-nowrap text-ellipsis overflow-hidden">
-                          {item.author}
-                        </span>
-                        <span className="text-14 text-color font-bold">
-                          {item.price.toLocaleString()}원
-                        </span>
-                        <div
-                          className="flex justify-center gap-x-6 border-2 border-solid border-gray-1 w-72
-                            rounded-[5px] pt-10 pb-10">
-                          <div>-</div>
-                          <div>3</div>
-                          <div>+</div>
+                    <div className="flex items-end">
+                      <div className="flex gap-x-20 rounded-[10px]">
+                        <PreviewBookInfo size="sm" />
+                        <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
+                          <div className="text-15 text-black font-bold break-all line-clamp-2">
+                            {item.title}
+                          </div>
+                          <span className="text-gray-3 whitespace-nowrap text-ellipsis overflow-hidden">
+                            {item.author}
+                          </span>
+                          <span className="text-14 text-color font-bold">
+                            {item.price.toLocaleString()}원
+                          </span>
+                          <div
+                            className="flex justify-center gap-x-6 border-2 border-solid border-gray-1 w-72
+                              rounded-[5px] pt-10 pb-10">
+                            <div>-</div>
+                            <div>3</div>
+                            <div>+</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="flex flex-col border-2 border-solid border-red items-end gap-y-8 place-items-end">
-                      <span>배송비 3,000원</span>
-                      <span>{item.price.toLocaleString()}원</span>
+                      <div className="flex flex-col border-2 border-solid border-red items-end gap-y-8 place-items-end">
+                        <span>배송비 3,000원</span>
+                        <span>{item.price.toLocaleString()}원</span>
+                      </div>
                     </div>
                   </div>
                 );
