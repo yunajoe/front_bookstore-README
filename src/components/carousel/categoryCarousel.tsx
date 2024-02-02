@@ -80,7 +80,7 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
   useEffect(resetCurrentIndex, [env]);
 
   return (
-    <div className="bg-white relative overflow-hidden w-[895px] tablet:w-[511px] mobile:w-300">
+    <div className="bg-white relative overflow-hidden w-[895px] tablet:w-[511px] mobile:w-330">
       <div className="flex items-center justify-between mb-40 mobile:mb-20">
         <span className="text-black text-20">신간도서</span>
         <div className="flex gap-x-30">
