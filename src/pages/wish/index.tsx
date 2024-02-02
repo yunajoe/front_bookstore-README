@@ -58,7 +58,7 @@ function WishListPage() {
     <div className="w-full flex flex-col items-center">
       <div className="max-w-[1200px] w-full">
         <MainLayout>
-          <div className="flex flex-col px-60 mobile:px-15 tablet:px-40">
+          <div className="flex flex-col px-60 tablet:px-40 mobile:px-15">
             <div className="text-black text-20 font-bold">
               찜목록({wishListData.length})
             </div>
