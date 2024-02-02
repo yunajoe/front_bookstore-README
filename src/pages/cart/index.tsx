@@ -106,9 +106,9 @@ function CartPage() {
                 return (
                   <div
                     key={item.id}
-                    className={`relative w-[710px] tablet:w-452 mobile:w-330 flex items-center pt-40 pb-43 pr-82
-                      border-2 ${item.id === pickedNum ? 'border-green' : 'border-gray-1'} bg-white
-                      rounded-[10px]`}>
+                    className={`relative flex-1 flex items-center pt-40 pb-43 pr-82 border-2 ${
+                      item.id === pickedNum ? 'border-green' : 'border-gray-1'
+                    } bg-white rounded-[10px]`}>
                     <div
                       className="absolute top-20 right-20 mobile:top-10 cursor-pointer"
                       onClick={() => {
@@ -182,6 +182,8 @@ function CartPage() {
                 );
               })}
             </div>
+            {/* 총상품 금액 */}
+
             <div
               className="flex flex-col w-340 tablet:w-216 mobile:w-330 h-308 tablet:h-288 mobile:h-288
                 mobile:mt-20 border-2 border-solid border-gray-1 p-30 tablet:p-20 mobile:p-20
