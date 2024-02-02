@@ -18,6 +18,12 @@ export interface CategoryProps {
   categoryType?: string;
 }
 
+export interface CategoryProps {
+  title: string;
+  link: string;
+  categoryType?: string;
+}
+
 export interface CategoryList {
   categoryList: CategoryProps[];
 }
@@ -29,6 +35,8 @@ const createReadMeGenre = (
 
 export const ReadMeGenreList: GenreList = {
   genreList: [
+    createReadMeGenre('건강/취미'),
+    createReadMeGenre('만화'),
     createReadMeGenre('건강/취미'),
     createReadMeGenre('만화'),
     createReadMeGenre('고전'),
