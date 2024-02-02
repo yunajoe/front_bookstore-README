@@ -1,29 +1,42 @@
 import CarouselCard from '@/components/carousel/carouselCard';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
-import { NewBook, ResponSive } from '@/types/carouselType';
+import { EnvType, NewBook, ResponSive } from '@/types/carouselType';
 import { inrange } from '@/utils/inrange';
 import registDragEvent from '@/utils/registerDragEvent';
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { useEffect, useMemo, useRef, useState } from 'react';
-const CARD_MARGIN_VALUE = 20;
+const DESKTOP_MARGIN_VALUE = 30; // 캐러셀 컨테이너 895
+const TABLET_MARGIN_VALUE = 20; // 캐러셀컨테이너 511
+const MOBILE_MARGIN_VALUE = 10; // 캐럴셀 컨테이너 330
+
+const calcMarginValue = (env: EnvType) => {
+  switch (env) {
+    case 'desktop':
+      return DESKTOP_MARGIN_VALUE;
+    case 'tablet':
+      return TABLET_MARGIN_VALUE;
+    case 'mobile':
+      return MOBILE_MARGIN_VALUE;
+    default:
+      return 0;
+  }
+};
 
 type CarouselProps = {
   data: NewBook[];
   responsive: ResponSive;
 };
 
-function Carousel({ data, responsive }: CarouselProps) {
+function CategoryCarousel({ data, responsive }: CarouselProps) {
   const { env } = useCarouselEnv();
   const [currentIndex, setCurrentIndex] = useState(0);
   const CONTENT_WIDTH = responsive[env]?.imageSize.width!;
   const ref = useRef<HTMLDivElement>(null);
 
-  const calcContentWidthValue = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
-
-  // console.log('이미지사이즈', CONTENT_WIDTH);
-
-  // console.log('이미지 + Margin 사이즈', calcContentWidthValue);
+  const calcContentWidthValue = Math.floor(
+    CONTENT_WIDTH + calcMarginValue(env),
+  );
 
   const transformCarousel = (currentIndex: number) => {
     if (ref.current) {
@@ -32,8 +45,7 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
 
   let carouselElementWidth = ref.current?.clientWidth!;
-  // console.log('carouselContainer', carouselElementWidth);
-
+  console.log('첫번쨰carouselContainer', carouselElementWidth);
   const visibleItemsCount = useMemo(() => {
     return Math.round(carouselElementWidth / calcContentWidthValue);
   }, [carouselElementWidth, calcContentWidthValue]);
@@ -67,38 +79,53 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
   useEffect(resetCurrentIndex, [env]);
 
-  console.log('메인페이지이미지사이즈', CONTENT_WIDTH);
+  console.log('이미지사이즈', CONTENT_WIDTH);
 
-  console.log('메인페이지이미지 + Margin 사이즈', calcContentWidthValue);
+  console.log('이미지 + Margin 사이즈', calcContentWidthValue);
 
-  console.log('메인페이지최종,carouselContainer', carouselElementWidth);
+  console.log('최종,carouselContainer', carouselElementWidth);
   return (
-    <div className="bg-white relative overflow-hidden w-[1200px] tablet:w-[768px] mobile:w-360">
+    <div className="bg-white relative overflow-hidden w-[895px] tablet:w-[511px] mobile:w-300">
       <div
         className="flex items-center justify-between mx-60 tablet:mx-40 mobile:mx-15 mb-40
           mobile:mb-20">
         <span className="text-black text-20">신간도서</span>
-        <Link href="/newest" className="text-green text-16">
-          더보기
-        </Link>
+        <div className="flex gap-x-30">
+          <button
+            onClick={btnpressprev}
+            className="w-10 h-full flex justify-center items-center bg-transparent mobile:hidden">
+            <div className="w-10 h-16 relative">
+              <Image
+                className="cursor-pointer"
+                src={
+                  currentIndex === 0
+                    ? '/icons/CarouselLeftInActivateArrow.svg'
+                    : '/icons/CarouselLeftActivateArrow.svg'
+                }
+                alt="왼쪽화살표"
+                fill
+              />
+            </div>
+          </button>
+          <button
+            onClick={btnpressnext}
+            className="w-10 h-full flex justify-center items-center bg-transparent right-0
+              mobile:hidden">
+            <div className="w-10 h-16 relative">
+              <Image
+                src={
+                  currentIndex === maxPage && maxPage !== 0
+                    ? '/icons/CarouselRightInActivateArrow.svg'
+                    : '/icons/CarouselRightActivateArrow.svg'
+                }
+                alt="오른쪽화살표"
+                fill
+              />
+            </div>
+          </button>
+        </div>
       </div>
       <div className="flex flex-row items-center mx-24 tablet:mx-14 mobile:mx-15">
-        <button
-          onClick={btnpressprev}
-          className="w-10 h-full flex justify-center items-center bg-transparent mobile:hidden">
-          <div className="w-10 h-16 relative">
-            <Image
-              className="cursor-pointer"
-              src={
-                currentIndex === 0
-                  ? '/icons/CarouselLeftInActivateArrow.svg'
-                  : '/icons/CarouselLeftActivateArrow.svg'
-              }
-              alt="왼쪽화살표"
-              fill
-            />
-          </div>
-        </button>
         <div className="mx-27 tablet:mx-16 mobile:mx-0 overflow-x-hidden scroll-smooth">
           <div
             className="flex scroll-smooth transition-transform"
@@ -132,25 +159,9 @@ function Carousel({ data, responsive }: CarouselProps) {
             ))}
           </div>
         </div>
-        <button
-          onClick={btnpressnext}
-          className="w-10 h-full flex justify-center items-center bg-transparent right-0
-            mobile:hidden">
-          <div className="w-10 h-16 relative">
-            <Image
-              src={
-                currentIndex === maxPage && maxPage !== 0
-                  ? '/icons/CarouselRightInActivateArrow.svg'
-                  : '/icons/CarouselRightActivateArrow.svg'
-              }
-              alt="오른쪽화살표"
-              fill
-            />
-          </div>
-        </button>
       </div>
     </div>
   );
 }
 
-export default Carousel;
+export default CategoryCarousel;

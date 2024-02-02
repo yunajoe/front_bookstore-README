@@ -1,5 +1,6 @@
 import Carousel from '@/components/carousel/carousel';
-import { responsive } from '@/utils/checkResponsiveEnv';
+import CategoryCarousel from '@/components/carousel/categoryCarousel';
+import { responsive, categoryResponsive } from '@/utils/checkResponsiveEnv';
 
 function TestPage() {
   const data = [
@@ -74,6 +75,7 @@ function TestPage() {
   return (
     <>
       <Carousel data={data} responsive={responsive} />
+      <CategoryCarousel data={data} responsive={categoryResponsive} />
     </>
   );
 }
