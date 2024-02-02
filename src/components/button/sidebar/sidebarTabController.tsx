@@ -1,4 +1,6 @@
-/** 사이드바 하위 내비게이션 탭을 보여줄지 말지 컨트롤하는 버튼
+/** 사이드바 하위 내비게이션 탭을 보여줄지 말지 컨트롤하는 버튼과 사이드바 하위 내비게이션탭
+ * 단, 데스크탑에선 컨트롤버튼이 안 보이고 하위 내비게이션 탭만 보임
+ * 단, 모바일환경에서는 컨트롤버튼만 보이고 내비게이션 탭은 안 보임, 컨트롤 버튼을 눌러서 팝업으로 내비게이션 탭을 띄우는 형식
  * @params isDomestic: required, 불린
  * @params location: optional, string
  * @example
@@ -25,13 +27,15 @@ function SidebarTabController({
 }: SidebarTabControllerProps) {
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
-  const handleClick = () => setShowOptions(!showOptions);
   const { env } = useCarouselEnv();
   const categoryList = isDomestic
     ? ReadMeDomesticCategoryList.categoryList
     : ReadMeForeignCategoryList.categoryList;
+
   let found = categoryList.find((e) => e.link === `/${location}`);
   let locatedTitle = location ? found?.title : '전체보기';
+
+  const handleClick = () => setShowOptions(!showOptions);
 
   return (
     <>
