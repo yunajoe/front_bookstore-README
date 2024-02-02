@@ -15,13 +15,15 @@ export default function CarouselCard(props: CarouselCardProps) {
 
   const sizeVariant = `w-${width} h-${height}`;
   // 첫번째 div없애면은 완전꺠짐
+  // console.log(height);
   return (
     <div>
       <div
-        className={`bg-black mr-20 text-white ${sizeVariant} overflow-hidden relative select-none`}>
-        <img src={imageUrl} alt="이미지" />
+        className={`mr-20 bg-black text-white overflow-hidden relative select-none h-200 w-180
+          overflow-hidden`}>
+        <img src={imageUrl} />
         {title}
-        {authorname}
+        {/* <PreviewBookInfo size="md" title={title} authorList={[authorname]} /> */}
       </div>
     </div>
   );
