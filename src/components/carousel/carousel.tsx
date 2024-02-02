@@ -21,10 +21,6 @@ function Carousel({ data, responsive }: CarouselProps) {
 
   const calcContentWidthValue = Math.floor(CONTENT_WIDTH + CARD_MARGIN_VALUE);
 
-  // console.log('이미지사이즈', CONTENT_WIDTH);
-
-  // console.log('이미지 + Margin 사이즈', calcContentWidthValue);
-
   const transformCarousel = (currentIndex: number) => {
     if (ref.current) {
       ref.current.style.transform = `translateX(${currentIndex * (calcContentWidthValue * -1)}px)`;
@@ -32,7 +28,6 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
 
   let carouselElementWidth = ref.current?.clientWidth!;
-  // console.log('carouselContainer', carouselElementWidth);
 
   const visibleItemsCount = useMemo(() => {
     return Math.round(carouselElementWidth / calcContentWidthValue);
@@ -67,11 +62,6 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
   useEffect(resetCurrentIndex, [env]);
 
-  console.log('메인페이지이미지사이즈', CONTENT_WIDTH);
-
-  console.log('메인페이지이미지 + Margin 사이즈', calcContentWidthValue);
-
-  console.log('메인페이지최종,carouselContainer', carouselElementWidth);
   return (
     <div className="bg-white relative overflow-hidden w-[1200px] tablet:w-[768px] mobile:w-360">
       <div
@@ -128,6 +118,7 @@ function Carousel({ data, responsive }: CarouselProps) {
                 key={index}
                 {...item}
                 imageSize={responsive[env].imageSize}
+                marginRight={CARD_MARGIN_VALUE}
               />
             ))}
           </div>

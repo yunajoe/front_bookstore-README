@@ -45,7 +45,7 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
   };
 
   let carouselElementWidth = ref.current?.clientWidth!;
-  console.log('첫번쨰carouselContainer', carouselElementWidth);
+
   const visibleItemsCount = useMemo(() => {
     return Math.round(carouselElementWidth / calcContentWidthValue);
   }, [carouselElementWidth, calcContentWidthValue]);
@@ -79,16 +79,9 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
   };
   useEffect(resetCurrentIndex, [env]);
 
-  console.log('이미지사이즈', CONTENT_WIDTH);
-
-  console.log('이미지 + Margin 사이즈', calcContentWidthValue);
-
-  console.log('최종,carouselContainer', carouselElementWidth);
   return (
     <div className="bg-white relative overflow-hidden w-[895px] tablet:w-[511px] mobile:w-300">
-      <div
-        className="flex items-center justify-between mx-60 tablet:mx-40 mobile:mx-15 mb-40
-          mobile:mb-20">
+      <div className="flex items-center justify-between mb-40 mobile:mb-20">
         <span className="text-black text-20">신간도서</span>
         <div className="flex gap-x-30">
           <button
@@ -125,8 +118,8 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
           </button>
         </div>
       </div>
-      <div className="flex flex-row items-center mx-24 tablet:mx-14 mobile:mx-15">
-        <div className="mx-27 tablet:mx-16 mobile:mx-0 overflow-x-hidden scroll-smooth">
+      <div className="flex flex-row items-center">
+        <div className="overflow-x-hidden scroll-smooth">
           <div
             className="flex scroll-smooth transition-transform"
             ref={ref}
@@ -155,6 +148,7 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
                 key={index}
                 {...item}
                 imageSize={responsive[env].imageSize}
+                marginRight={calcMarginValue(env)}
               />
             ))}
           </div>
