@@ -1,5 +1,5 @@
-import PreviewBookInfo from './previewBookInfo/previewBookInfo';
-import BookRating from './bookRating/bookRating';
+import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import BookRating from '@/components/book/bookRating/bookRating';
 import { StaticImageData } from 'next/image';
 interface BookOverViewCardProps {
   ranking: number;

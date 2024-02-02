@@ -6,7 +6,7 @@ import SignOutButton from '@/components/button/signOutButton';
 import BookmarkButton from '@/components/button/header/bookmarkButton';
 import HeaderLayout from '@/layouts/headerLayout';
 import SignUpButton from '@/components/button/signUpButton';
-import ReadMeButton from '../button/header/readmeButton';
+import ReadMeButton from '@/components/button/header/readmeButton';
 
 export interface HeaderProps {
   isLoggedIn: boolean;
