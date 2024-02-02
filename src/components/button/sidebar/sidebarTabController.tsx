@@ -15,7 +15,7 @@ import useCarouselEnv from '@/hooks/useCarouselEnv';
 import {
   ReadMeDomesticCategoryList,
   ReadMeForeignCategoryList,
-} from '@/pages/api/mock';
+} from '@/pages/api/mock/mock';
 interface SidebarTabControllerProps {
   isDomestic: boolean;
   location?: string;

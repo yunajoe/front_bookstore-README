@@ -5,7 +5,7 @@
 
 import { ReactNode } from 'react';
 
-import MainLayout from '@/components/layout/mainLayout';
+import MainLayout from '@/layouts/mainLayout';
 import Sidebar from '@/components/sidebar/sidebar';
 
 interface SidebarLayoutProps {
