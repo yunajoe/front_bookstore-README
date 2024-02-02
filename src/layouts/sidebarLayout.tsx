@@ -1,5 +1,5 @@
 /** 카테고리 페이지
- * @param isDomsetic: required, 불린형, 현재 페이지가 domestic인지 아닌지 판별하는 인자값
+ * @param isDomestic: required, 불린형, 현재 페이지가 domestic인지 아닌지 판별하는 인자값
  * @param location: optional, 불린형, 현재 페이지가 domestic/하위 페이지 중 어디에 있는지 체크. 없다면 전체보기 페이지에 있다는 것으로 간주, "healthhobby" 이런 식으로 하위페이지 id 값이 들어옴.
  */
 
@@ -23,7 +23,7 @@ function SidebarLayout({
     <div className="flex flex-col max-w-[1200px]">
       <MainLayout>
         <section
-          role="content"
+          role="contents"
           className="w-full h-full flex items-start flex-col pt-20 pl-245 pr-60 tablet:pr-40
             tablet:pl-217 mobile:pt-0 mobile:px-15">
           <aside
@@ -31,7 +31,7 @@ function SidebarLayout({
               mobile:h-35 mobile:w-full">
             <Sidebar isDomestic={isDomestic} location={location} />
           </aside>
-          <div className="p-20">{children}</div>
+          <div>{children}</div>
         </section>
       </MainLayout>
     </div>
