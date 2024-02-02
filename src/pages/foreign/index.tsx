@@ -1,6 +1,6 @@
 /** 카테고리 페이지 > 외국 > 전체*/
 
-import SidebarLayout from '@/components/layout/sidebarLayout';
+import SidebarLayout from '@/layouts/sidebarLayout';
 import Spacing from '@/components/container/spacing/spacing';
 
 export default function ForeignPage() {

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import SidebarLayout from '@/components/layout/sidebarLayout';
+import SidebarLayout from '@/layouts/sidebarLayout';
 import Spacing from '@/components/container/spacing/spacing';
 
 function CategoryPage() {
