@@ -2,21 +2,29 @@
 
 import Link from 'next/link';
 
+function classNames<T>(...classes: Array<T>) {
+  return classes.filter(Boolean).join(' ');
+}
+
 function StyledLink({
   title = '',
   link = '/',
   isLeft = true,
   isSelected = true,
 }) {
+  const SidebarLinkClassNames = classNames(
+    `text-18 block relative mobile:text-[13px] font-bold mobile:font-light
+    mobile:py-8 mobile:px-12`,
+    isSelected
+      ? 'text-gray-7 mobile:text-green mobile:border-[1px] mobile:border-green'
+      : 'text-gray-2 mobile:text-black mobile:border-[1px] mobile:border-gray-1',
+    isLeft
+      ? 'pr-12 mobile:rounded-l-lg -right-1'
+      : 'pl-12 mobile:rounded-r-lg -left-1',
+  );
+
   return (
-    <Link
-      className={`text-18 block relative mobile:text-[13px] font-bold mobile:font-light mobile:py-8
-        mobile:px-12 ${
-          isSelected
-            ? 'text-gray-7 mobile:text-green mobile:border-[1px] mobile:border-green'
-            : 'text-gray-2 mobile:text-black mobile:border-[1px] mobile:border-gray-1'
-        } ${isLeft ? 'pr-12 mobile:rounded-l-lg -right-1' : 'pl-12 mobile:rounded-r-lg -left-1'}`}
-      href={link}>
+    <Link className={SidebarLinkClassNames} href={link}>
       {title}
     </Link>
   );
