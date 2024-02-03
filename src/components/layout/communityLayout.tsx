@@ -1,5 +1,5 @@
 import CommunityCard from '@/components/card/communityCard/communityCard';
-import MainLayout from '@/layouts/mainLayout';
+import MainLayout from '@/components/layout/mainLayout';
 import PageTab from '@/components/header/pageTab';
 import { CommunityCardProps } from '@/types/communityCardType';
 
