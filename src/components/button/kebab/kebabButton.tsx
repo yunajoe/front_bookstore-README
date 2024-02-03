@@ -11,11 +11,9 @@ function KebabButton({ title1, title2 }: KebabDropDownButtonProps) {
   const ref = useRef() as MutableRefObject<HTMLImageElement>;
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(isModalOpen);
 
-  const handleButtonClick = () => {
+  const handleAlertModalOpenClick = () => {
     setIsModalOpen(!isModalOpen);
-    console.log('클릭!');
   };
 
   const handleKebabClick = () => {
@@ -31,12 +29,12 @@ function KebabButton({ title1, title2 }: KebabDropDownButtonProps) {
         onClick={handleKebabClick}
         ref={ref}
       />
-      {showOptions && <KebabDropDownButton title1={title1} title2={title2} onClickTitle1={handleButtonClick}/>}
+      {showOptions && <KebabDropDownButton title1={title1} title2={title2} onClickTitle2={handleAlertModalOpenClick}/>}
       {isModalOpen && (
         <AlertModal
-          title="정말삭제하시겠습니까"
-          description="삭제하면 되돌릴 수 없습니다."
-          onClick={handleButtonClick}
+          title="정말 삭제하시겠습니까?"
+          description="삭제한 글은 복구할 수 없습니다."
+          onClick={handleAlertModalOpenClick}
         />
       )}
     </>

@@ -18,7 +18,7 @@ function PageTab({
   isSelected,
 }: PageTabProps) {
   return (
-    <div className="flex items-center justify-between w-169 h-27 mb-40 mt-20">
+    <div className="flex items-center justify-between w-169 h-27 mb-40 mt-20 tablet:mb-36 tablet:mt-16 mobile:mb-27 mobile:mt-6">
       <Link
         href={originHref}
         className={`hover:text-black font-bold text-20 text-${

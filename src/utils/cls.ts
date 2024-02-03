@@ -1,5 +1,5 @@
-// function cls<T>(...classes: Array<T>) {
-//   return classes.filter(Boolean).join(' ');
-// }
+function cls<T>(...classes: Array<T>) {
+  return classes.filter(Boolean).join(' ');
+}
 
-// export default cls;
+export default cls;

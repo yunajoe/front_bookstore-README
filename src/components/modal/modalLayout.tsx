@@ -10,9 +10,9 @@ function ModalLayout({ children, onClick }: ModalLayoutProps) {
   return (
     <>
       {createPortal(
-        <div role="overlay" className="fixed top-0 left-0 w-screen h-screen flex-center z-9999" >
-          <div className="absolute w-full h-full bg-black opacity-60" onClick={onClick}></div>
-          <div role="modalContainer" className="bg-white rounded-[10px]">
+        <div role="overlay" className="fixed top-0 left-0 w-screen h-screen flex-center z-[100]" >
+          <div className="absolute w-full h-full bg-black opacity-60" onClick={onClick} />
+          <div role="modalContainer" className="bg-white rounded-[10px] z-[150]">
             {children}
           </div>
         </div>,
