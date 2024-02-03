@@ -1,3 +1,4 @@
+import { BookReviewType } from "@/types/bookReviewType";
 import { BookDetailCardType } from "@/types/cardType";
 
 export const BookDetailMock1: BookDetailCardType = {
@@ -12,7 +13,15 @@ export const BookDetailMock1: BookDetailCardType = {
   authors: ["김남길", "최석준"],
   views: 32,
   bookmarkNum: 17,
-  reviewNum: 2,
+  reviewNum: 5,
   rating: 4.2,
   isBookmarked: true,
+}
+
+export const ReviewListMock1: BookReviewType = {
+  bookId: 112,
+  averageRating: 4.2,
+  ratingDist: [0, 0, 1, 2, 2],
+  reviewNum: 5,
+  reviewList: [],
 }
