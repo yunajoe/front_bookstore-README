@@ -6,6 +6,11 @@ import BookDetailNav from '@/components/button/bookDetailNav';
 import { BookDetailMock1 } from '../api/mock/bookDetailMock';
 import { useState } from 'react';
 import { BookDetailNavLocationType } from '@/types/bookDetailtype';
+import RefundTerm from '@/components/container/refundTerm/refundTerm';
+import BookInformation from '@/components/book/bookInformation/bookInformation';
+import ReviewOverviewCard from '@/components/card/bookReviewCard/reviewOverviewCard';
+import Review from '@/components/review/review';
+import Spacing from '@/components/container/spacing/spacing';
 
 export default function BookDetailPage() {
   const router = useRouter();
@@ -21,15 +26,17 @@ export default function BookDetailPage() {
           상품구매 컴포넌트 넣을 곳, 화면에서 안보이면 sticky되게끔 구현
         </article>
       </section>
+      <Spacing height={[80, 80, 40]} />
       <BookDetailNav
         reviewNum={BookDetailMock1.reviewNum}
         location={location}
         setLocation={setLocation}
       />
-      <section className="flex flex-col w-full p-40 mobile:p-19">
-        <h3>BookDetailNav에 따라 상품정보를 보여주든가</h3>
-        <h3>BookDetailNav에 따라 리뷰를 보여주든가</h3>
-        <h3>BookDetailNav에 따라 배송교환환불을 보여주든가</h3>
+      <Spacing height={[80, 80, 40]} />
+      <section className="flex flex-col w-full p-40 pt-120 mobile:p-19 mobile:pt-40">
+        {location === 'information' && <BookInformation />}
+        {location === 'review' && <Review bookId={bookId as string} />}
+        {location === 'currency' && <RefundTerm />}
       </section>
     </MainLayout>
   );
