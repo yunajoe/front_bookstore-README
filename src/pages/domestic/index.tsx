@@ -1,6 +1,6 @@
 /** 카테고리 페이지 > 국내 > 전체*/
 
-import SidebarLayout from '@/layouts/sidebarLayout';
+import SidebarLayout from '@/components/layout/sidebarLayout';
 import Spacing from '@/components/container/spacing/spacing';
 
 export default function DomesticPage() {
