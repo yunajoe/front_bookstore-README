@@ -1,4 +1,5 @@
 import { EnvType } from '@/types/carouselType';
+import Image from 'next/image';
 import React from 'react';
 
 export type CarouselCardProps = {
@@ -16,12 +17,18 @@ export default function CarouselCard(props: CarouselCardProps) {
     mobile: 'w-142 h-202',
   };
 
+  const sizeVariantsmodal = {
+    desktop: 'w-137 h-208',
+    tablet: 'w-137 h-198',
+    mobile: 'w-128 h-174',
+  };
+
   return (
     <div>
       <div
-        className={`bg-black mr-20 text-white ${sizeVariants[env]} overflow-hidden relative
+        className={`bg-black mr-20 text-white ${sizeVariantsmodal[env]} overflow-hidden relative
           select-none`}>
-        <img src={imageUrl} alt="이미지" />
+        <Image src={imageUrl} alt="이미지" fill />
         {title}
         {authorname}
       </div>
