@@ -25,8 +25,18 @@ export function createBook(
     bookImg: image,
   };
 }
-
-export const CustomSectionMockData = [
+export const CustomSectionMockData_1 = [
+  {
+    category: '건강/취미',
+    bookList: [
+      createBook(1, '건강하게 살자', ['홍재원', '안혜정'], TestImage4),
+      createBook(2, '건강하게 살자', ['안윤진', '이승연'], TestImage2),
+      createBook(3, '건강하게 살자', ['권덕영', '조연아'], TestImage3),
+      createBook(4, '건강하게 살자', ['김태은', '문경민'], TestImage1),
+    ],
+  },
+];
+export const CustomSectionMockData_3 = [
   {
     category: '건강/취미',
     bookList: [

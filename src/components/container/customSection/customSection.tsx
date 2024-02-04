@@ -4,11 +4,11 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import MoreLink from '@/components/button/moreLinkButton';
 import {
   CustomBook,
-  CustomSectionMockData,
+  CustomSectionMockData_3,
 } from '@/pages/api/mock/customSectionMock';
 import { StaticImageData } from 'next/image';
-import NonLoggedInCustomSection from './nonLoggedInCustomSection';
-import NonSelectedCustomSection from './nonSelectedCustomSection';
+import NonLoggedInCustomSection from '@/components/container/customSection/nonLoggedInCustomSection';
+import NonSelectedCustomSection from '@/components/container/customSection/nonSelectedCustomSection';
 import Link from 'next/link';
 interface CustomSectionProps {
   isLoggedIn: boolean;
@@ -17,7 +17,7 @@ interface CustomSectionProps {
 
 function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
   const [selectedGenre, setSelectedGenre] = useState<string | null>(
-    CustomSectionMockData[0].category,
+    CustomSectionMockData_3[0].category,
   );
   const [selectedBookList, setSelectedBookList] = useState<
     {
@@ -30,7 +30,7 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
 
   useEffect(() => {
     // 처음 렌더링 시 selectedGenre에 해당하는 bookList 설정
-    const initialSelectedData = CustomSectionMockData.find(
+    const initialSelectedData = CustomSectionMockData_3.find(
       (data) => data.category === selectedGenre,
     );
     setSelectedBookList(
@@ -69,7 +69,7 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
           선호 장르 분석을 통해 도서를 추천해요
         </div>
         <div className="flex-center flex-wrap w-full gap-10 mb-60 mobile:mb-40">
-          {CustomSectionMockData.map((data) => (
+          {CustomSectionMockData_3.map((data) => (
             <CustomGenreButton
               key={data.category}
               title={data.category}

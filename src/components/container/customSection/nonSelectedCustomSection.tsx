@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import RecommendationContent from './recommendationContent';
+import RecommendationContent from '@/components/container/customSection/recommendationContent';
 
 function NonSelectedCustomSection() {
   return (
