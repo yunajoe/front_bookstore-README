@@ -1,14 +1,36 @@
-import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import CustomGenreButton from '@/components/button/genre/customGenreButton';
+import { Key, useEffect, useState } from 'react';
 import Link from 'next/link';
+import CustomGenreButton from '@/components/button/genre/customGenreButton';
+import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import RecommendationContent from './recommendationContent';
-
+import { CustomSectionMockData } from '@/pages/api/mock/customSectionMock';
 interface CustomSectionProps {
   isLoggedIn: boolean;
   isGenreSelected: boolean;
 }
 
 function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(
+    CustomSectionMockData[0].category,
+  );
+  const [selectedBookList, setSelectedBookList] = useState<
+    { bookId: number; title: string; authorList: string[]; bookImg: string }[]
+  >([]);
+
+  useEffect(() => {
+    // 처음 렌더링 시 selectedGenre에 해당하는 bookList 설정
+    const initialSelectedData = CustomSectionMockData.find(
+      (data) => data.category === selectedGenre,
+    );
+    setSelectedBookList(
+      initialSelectedData ? initialSelectedData.bookList : [],
+    );
+  }, [selectedGenre]);
+
+  const handleGenreClick = (genre: string) => {
+    setSelectedGenre((prevGenre) => (prevGenre === genre ? null : genre));
+  };
+
   if (!isLoggedIn) {
     return (
       <div className="flex-col flex-center h-482 bg-gray-1 w-full">
@@ -39,12 +61,6 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
 
   return (
     <div className="flex-center w-full h-500 gap-x-76 relative bg-gray-1">
-      <div className="absolute top-0 right-0 mt-60 mr-60">
-        <div className="flex text-green text-16 mb-20">
-          <Link href="/custom">더보기</Link>
-        </div>
-      </div>
-
       <div className="flex-col flex-center w-347">
         <div className="font-bold text-24 mb-8">
           <span className="text-green">맞춤도서</span>를 가져왔어요
@@ -53,33 +69,38 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
           선호 장르 분석을 통해 도서를 추천해요
         </div>
         <div className="flex-center flex-wrap w-260 gap-10">
-          <CustomGenreButton title={'소설'} selected={false} />
-          <CustomGenreButton title={'자기계발'} selected={false} />
-          <CustomGenreButton title={'취미/실용/스포츠'} selected={false} />
+          {CustomSectionMockData.map((data) => (
+            <CustomGenreButton
+              key={data.category}
+              title={data.category}
+              selected={selectedGenre === data.category}
+              onSelect={handleGenreClick}
+            />
+          ))}
         </div>
       </div>
 
-      <div className="flex gap-x-20">
-        <PreviewBookInfo
-          size={'sm'}
-          title="소설1"
-          authorList={['작가1', '작가2']}
-        />
-        <PreviewBookInfo
-          size={'sm'}
-          title="소설1"
-          authorList={['작가1', '작가2']}
-        />
-        <PreviewBookInfo
-          size={'sm'}
-          title="소설1"
-          authorList={['작가1', '작가2']}
-        />
-        <PreviewBookInfo
-          size={'sm'}
-          title="소설1"
-          authorList={['작가1', '작가2']}
-        />
+      <div className="flex gap-x-20 h-320">
+        {selectedBookList.length > 0 && (
+          <>
+            {selectedBookList.map(
+              (book: {
+                bookId: Key | null | undefined;
+                title: string | undefined;
+                authorList: string[] | undefined;
+                bookImg: string | undefined;
+              }) => (
+                <PreviewBookInfo
+                  key={book.bookId}
+                  size={'md'}
+                  title={book.title}
+                  authorList={book.authorList}
+                  image={book.bookImg || ''}
+                />
+              ),
+            )}
+          </>
+        )}
       </div>
     </div>
   );
