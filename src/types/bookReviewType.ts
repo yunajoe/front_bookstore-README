@@ -4,7 +4,7 @@ interface ReviewType{
   reviewId: number;
   isOwner: boolean;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
   reviewTitle: string;
   reviewBookImgUrl?: string | null;
   reviewProfileImg?: string | null;
@@ -23,7 +23,7 @@ interface BookReviewType {
   averageRating: number;
   ratingDist: [number, number, number, number, number];
   reviewNum: number;
-  reviewList: ReviewType[] | [];
+  reviewList: ReviewType[];
 }
 
 export type { MyReviewType, BookReviewType };

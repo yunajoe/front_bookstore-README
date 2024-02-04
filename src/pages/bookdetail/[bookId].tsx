@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { BookDetailNavLocationType } from '@/types/bookDetailtype';
 import RefundTerm from '@/components/container/refundTerm/refundTerm';
 import BookInformation from '@/components/book/bookInformation/bookInformation';
-import ReviewOverviewCard from '@/components/card/bookReviewCard/reviewOverviewCard';
 import Review from '@/components/review/review';
 import Spacing from '@/components/container/spacing/spacing';
 
@@ -20,7 +19,7 @@ export default function BookDetailPage() {
 
   return (
     <MainLayout>
-      <section className="flex flex-col w-full p-40 mobile:p-19">
+      <section className="flex flex-col w-full p-40 mobile:p-19 mobile:flex-center">
         <BookDetailCard bookId={bookId as string} />
         <article>
           상품구매 컴포넌트 넣을 곳, 화면에서 안보이면 sticky되게끔 구현
@@ -32,8 +31,7 @@ export default function BookDetailPage() {
         location={location}
         setLocation={setLocation}
       />
-      <Spacing height={[80, 80, 40]} />
-      <section className="flex flex-col w-full p-40 pt-120 mobile:p-19 mobile:pt-40">
+      <section className="flex flex-col w-full p-40 pt-120 mobile:p-19 mobile:pt-40 mobile:flex-center">
         {location === 'information' && <BookInformation />}
         {location === 'review' && <Review bookId={bookId as string} />}
         {location === 'currency' && <RefundTerm />}
