@@ -29,7 +29,7 @@ const bookOverviewsMock: BookOverviewType[] = [
     book: {
       bookId: 2,
       bookTitle: '리액트 초급부터 심화까지',
-      bookImgUrl: TestImage2, // 객체 직접 할당
+      bookImgUrl: TestImage3, // 객체 직접 할당
       price: 30000,
       authors: ['이순신'],
       rank: 22,
