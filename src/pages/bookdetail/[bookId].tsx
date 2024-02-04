@@ -21,9 +21,6 @@ export default function BookDetailPage() {
     <MainLayout>
       <section className="flex flex-col w-full p-40 mobile:p-19 mobile:flex-center">
         <BookDetailCard bookId={bookId as string} />
-        <article>
-          상품구매 컴포넌트 넣을 곳, 화면에서 안보이면 sticky되게끔 구현
-        </article>
       </section>
       <Spacing height={[80, 80, 40]} />
       <BookDetailNav
