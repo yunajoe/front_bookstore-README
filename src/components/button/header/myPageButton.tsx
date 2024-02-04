@@ -17,6 +17,11 @@ function MyPageButton() {
     router.push('/mypage');
   };
 
+  const handleLogoutClick = () => {
+    // 로그아웃 버튼이 클릭되었을 때 할 동작
+    console.log('로그아웃 버튼 클릭됨');
+  };
+
   return (
     <div className="flex items-center">
       <div className="mobile:hidden">
@@ -33,7 +38,7 @@ function MyPageButton() {
         <Image
           src={ProfileIcon}
           alt="마이페이지 버튼"
-          onClick={handleMyPageClick}
+          onClick={handleKebabClick}
           ref={ref}
           width={12}
           height={14}
