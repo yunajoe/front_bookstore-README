@@ -10,8 +10,9 @@ function Home() {
   return (
     <>
       <div
-        className="mobile:flex-col w-[1080px] mt-40 mb-87 flex-center tablet:w-[688px] tablet:mb-80
-          mobile:w-330 mobile:mb-20 pc:gap-x-30 tablet:gap-x-20 mobile:gap-y-10">
+        className="mobile:flex-col w-[1080px] mt-20 mobile:mt-0 mb-87 flex-center tablet:w-[688px]
+          tablet:mb-80 mobile:w-330 mobile:mb-20 pc:gap-x-30 tablet:gap-x-20
+          mobile:gap-y-10">
         <div
           className="bg-gray-1 pc:w-[803px] pc:h-480 tablet:w-[511px] mobile:w-330 tablet:h-304
             mobile:h-174"
