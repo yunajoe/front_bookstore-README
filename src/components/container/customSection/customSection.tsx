@@ -1,9 +1,15 @@
-import { Key, useEffect, useState } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import CustomGenreButton from '@/components/button/genre/customGenreButton';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import RecommendationContent from './recommendationContent';
-import { CustomSectionMockData } from '@/pages/api/mock/customSectionMock';
+import MoreLink from '@/components/button/moreLinkButton';
+import {
+  CustomBook,
+  CustomSectionMockData,
+} from '@/pages/api/mock/customSectionMock';
+import { StaticImageData } from 'next/image';
+import NonLoggedInCustomSection from './nonLoggedInCustomSection';
+import NonSelectedCustomSection from './nonSelectedCustomSection';
+import Link from 'next/link';
 interface CustomSectionProps {
   isLoggedIn: boolean;
   isGenreSelected: boolean;
@@ -14,7 +20,12 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
     CustomSectionMockData[0].category,
   );
   const [selectedBookList, setSelectedBookList] = useState<
-    { bookId: number; title: string; authorList: string[]; bookImg: string }[]
+    {
+      bookId: number;
+      title: string;
+      authorList: string[];
+      bookImg: string | StaticImageData;
+    }[]
   >([]);
 
   useEffect(() => {
@@ -32,43 +43,32 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
   };
 
   if (!isLoggedIn) {
-    return (
-      <div className="flex-col flex-center h-482 bg-gray-1 w-full">
-        <RecommendationContent />
-        <Link
-          className="flex-center w-256 h-50 text-green text-14 bg-white border border-green
-            rounded-[5px]"
-          href="/signin">
-          로그인하고 맞춤 도서 추천받기
-        </Link>
-      </div>
-    );
+    return <NonLoggedInCustomSection />;
   }
 
   if (isLoggedIn && !isGenreSelected) {
-    return (
-      <div className="flex-col flex-center h-482 bg-gray-1 w-full">
-        <RecommendationContent />
-        <Link
-          className="flex-center w-256 h-50 text-green text-14 bg-white border border-green
-            rounded-[5px]"
-          href="/mypage">
-          선호 장르 선택하러 가기
-        </Link>
-      </div>
-    );
+    return <NonSelectedCustomSection />;
   }
 
   return (
-    <div className="flex-center w-full h-500 gap-x-76 relative bg-gray-1">
-      <div className="flex-col flex-center w-347">
+    <div
+      className="relative tablet:flex-col mobile:flex-col flex-center w-full h-500
+        tablet:h-[665px] mobile:h-[886px] pc:gap-x-20 bg-gray-1">
+      <Link
+        href="/custom"
+        className="flex absolute top-20 tablet:top-60 right-60 pc:hidden text-green">
+        더보기
+      </Link>
+      <div
+        className="flex-col pc:w-347 flex-center w-314 tablet:h-244 pc:h-342 mobile:mt-50
+          tablet:mx-auto mobile:mx-auto mt-80">
         <div className="font-bold text-24 mb-8">
           <span className="text-green">맞춤도서</span>를 가져왔어요
         </div>
-        <div className="mb-30 text-gray-4">
+        <div className="mobile:mb-20 mb-30 text-gray-4">
           선호 장르 분석을 통해 도서를 추천해요
         </div>
-        <div className="flex-center flex-wrap w-260 gap-10">
+        <div className="flex-center flex-wrap w-full gap-10 mb-60 mobile:mb-40">
           {CustomSectionMockData.map((data) => (
             <CustomGenreButton
               key={data.category}
@@ -80,25 +80,24 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
         </div>
       </div>
 
-      <div className="flex gap-x-20 h-320">
+      <div
+        className="flex-center flex-wrap tablet:h-312 gap-x-20 pc:w-712 mobile:w-330
+          mobile:gap-y-60 mobile:mx-auto pc:justify-end relative">
         {selectedBookList.length > 0 && (
           <>
-            {selectedBookList.map(
-              (book: {
-                bookId: Key | null | undefined;
-                title: string | undefined;
-                authorList: string[] | undefined;
-                bookImg: string | undefined;
-              }) => (
-                <PreviewBookInfo
-                  key={book.bookId}
-                  size={'md'}
-                  title={book.title}
-                  authorList={book.authorList}
-                  image={book.bookImg || ''}
-                />
-              ),
-            )}
+            {selectedBookList.map((book: CustomBook, index: number) => (
+              <div className="relative" key={book.bookId}>
+                <div className="relative">
+                  <PreviewBookInfo
+                    size={'md'}
+                    title={book.title}
+                    authorList={book.authorList}
+                    image={book.bookImg || ''}
+                  />
+                  <MoreLink isVisible={index === 3} />
+                </div>
+              </div>
+            ))}
           </>
         )}
       </div>
