@@ -9,7 +9,7 @@ function AlertModal({ title, description, onClick }: AlertModalProps) {
 
   return (
     <ModalLayout onClick={onClick}>
-      <div className="flex-center flex-col w-412 h-240 px-40 pt-50 pb-40 gap-40">
+      <div className="flex-center flex-col w-412 h-240 mobile:w-330 mobile:h-190 px-40 pt-50 pb-40 gap-40 mobile:p-30">
         <div>
           <p className="text-20 font-bold mb-8">{title}</p>
           <span className="text-16 text-gray-3 font-light">{description}</span>
