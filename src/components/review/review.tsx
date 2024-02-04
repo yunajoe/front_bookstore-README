@@ -2,24 +2,38 @@
  *
  *
  */
-import {
-  ReviewListMock1,
-  BookDetailMock1,
-} from '@/pages/api/mock/bookDetailMock';
+import { ReviewListMock1 } from '@/pages/api/mock/bookDetailMock';
 import ReviewOverviewCard from '../card/bookReviewCard/reviewOverviewCard';
+import BookReviewCard from '../card/bookReviewCard/bookReviewCard';
 
 function Review({ bookId = '' }) {
-  // TODO reqct query를 통해 book 상세 정보와 review 리스트를 받아올 것
+  // TODO react query를 통해 book 상세 정보와 review 리스트를 받아올 것
 
   return (
-    <div>
+    <section className="flex flex-col gap-20 mobile:flex-center">
+      <h3
+        className="w-full max-w-[710px] mobile:w-330 text-20 font-bold text-gray-4 flex
+          justify-start items-start">
+        리뷰
+        <span className="text-20 font-bold text-green pl-10">
+          {ReviewListMock1.reviewNum}
+        </span>
+      </h3>
       <ReviewOverviewCard
         rating={ReviewListMock1.averageRating}
         reviewNum={ReviewListMock1.reviewNum}
         ratingDist={ReviewListMock1.ratingDist}
       />
-      <></>
-    </div>
+      <div className="flex justify-end items-end pt-20 mobile:pt-0">
+        드롭다운 들어갈 자리, 리뷰리스트 컴포넌트와 함께 묶어서 만들어야 함
+      </div>
+      <article className="flex flex-col gap-20 w-full mobile:flex-center">
+        {ReviewListMock1.reviewList.map((el) => {
+          return <BookReviewCard key={el.reviewId} />;
+        })}
+      </article>
+      페이지네이션 아직 구현 안 했습니다, !!
+    </section>
   );
 }
 
