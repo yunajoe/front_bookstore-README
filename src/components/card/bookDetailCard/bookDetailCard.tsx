@@ -26,7 +26,7 @@ function BookDetailCard({ bookId = '' }) {
   };
 
   return (
-    <section className="flex justify-start gap-20 items-start mobile:flex-col">
+    <section className="flex justify-start gap-20 items-start mobile:flex-col mobile:flex-center">
       <article
         role="img"
         className="bg-[#F5F5F5] relative w-[525px] h-[797px] tablet:min-w-[334px]
