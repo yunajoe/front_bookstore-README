@@ -3,7 +3,6 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import MainLayout from '@/components/layout/mainLayout';
 import useInfinite from '@/hooks/useInfinite';
 import { myWishListData } from '@/pages/api/wishMock';
-
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
