@@ -1,5 +1,5 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import GenreButton from '@/components/button/genreButton';
+import CustomGenreButton from '@/components/button/genre/customGenreButton';
 import Link from 'next/link';
 import RecommendationContent from './recommendationContent';
 
@@ -38,24 +38,24 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
   }
 
   return (
-    <div className="flex-center w-full h-500 gap-x-76 bg-gray-1 relative">
+    <div className="flex-center w-full h-500 gap-x-76 relative bg-gray-1">
       <div className="absolute top-0 right-0 mt-60 mr-60">
         <div className="flex text-green text-16 mb-20">
           <Link href="/custom">더보기</Link>
         </div>
       </div>
 
-      <div className="flex-col">
+      <div className="flex-col flex-center w-347">
         <div className="font-bold text-24 mb-8">
           <span className="text-green">맞춤도서</span>를 가져왔어요
         </div>
         <div className="mb-30 text-gray-4">
           선호 장르 분석을 통해 도서를 추천해요
         </div>
-        <div className="flex flex-wrap w-280">
-          <GenreButton title={'#소설'} selected={false} />
-          <GenreButton title={'#자기계발'} selected={false} />
-          <GenreButton title={'#취미/실용/스포츠'} selected={false} />
+        <div className="flex-center flex-wrap w-260 gap-10">
+          <CustomGenreButton title={'소설'} selected={false} />
+          <CustomGenreButton title={'자기계발'} selected={false} />
+          <CustomGenreButton title={'취미/실용/스포츠'} selected={false} />
         </div>
       </div>
 
