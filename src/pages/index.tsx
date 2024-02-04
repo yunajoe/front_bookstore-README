@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import MainLayout from '@/components/layout/mainLayout';
+import CustomSection from '@/components/container/customSection/customSection';
 
 function Home() {
   return (
@@ -10,9 +11,9 @@ function Home() {
           mobile:w-330 mobile:mb-20">
         div두개있는 젤 위에꺼
       </div>
-      <div className="bg-gray-3 h-482 w-[1200px] flex-center tablet:w-[688px] mobile:w-full">
-        맞춤도서
-      </div>
+      {/* <CustomSection isLoggedIn={false} isGenreSelected={false} /> */}
+      {/* <CustomSection isLoggedIn={true} isGenreSelected={false} /> */}
+      <CustomSection isLoggedIn={true} isGenreSelected={true} />
       <div className="bg-green h-[581px] w-[1200px] flex-center tablet:w-[688px] mobile:w-full">
         신간도서
       </div>
