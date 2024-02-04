@@ -24,10 +24,7 @@ function Review({ bookId = '' }) {
         reviewNum={ReviewListMock1.reviewNum}
         ratingDist={ReviewListMock1.ratingDist}
       />
-      <div className="flex justify-end items-end pt-20 mobile:pt-0">
-        드롭다운 들어갈 자리
-      </div>
-      <article className="flex flex-col gap-20 w-full mobile:flex-center">
+      <article className="flex flex-col gap-20 w-full pt-40 mobile:flex-center">
         {ReviewListMock1.reviewList.map((el) => {
           return <BookReviewCard key={el.reviewId} />;
         })}

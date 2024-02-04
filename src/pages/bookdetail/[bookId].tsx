@@ -28,11 +28,25 @@ export default function BookDetailPage() {
         location={location}
         setLocation={setLocation}
       />
-      <section className="flex flex-col w-full p-40 pt-120 mobile:p-19 mobile:pt-40 mobile:flex-center">
-        {location === 'information' && <BookInformation />}
-        {location === 'review' && <Review bookId={bookId as string} />}
-        {location === 'currency' && <RefundTerm />}
-      </section>
+      <div className="flex flex-col w-full">
+        <section className="flex w-full p-40 pt-120 mobile:p-19 mobile:pt-40 mobile:flex-center">
+          <div className="flex flex-col w-full mobile:flex-center">
+            {location === 'information' && <BookInformation />}
+            {location === 'review' && <Review bookId={bookId as string} />}
+            {location === 'currency' && <RefundTerm />}
+          </div>
+          <div className="pc:pt-50 pc:flex hidden">
+            <div
+              className="bg-red mt-auto pc:w-340 pc:h-164 pc:sticky pc:bottom-80 pc:right-60 z-50
+                bottom-0 left-0 right-0 w-full h-70">
+              스티키 컴포넌트
+            </div>
+          </div>
+        </section>
+        <div className="pc:hidden flex w-full bg-[#353535] sticky bottom-0 h-70 z-10">
+          타블렛 모바일 환경 스티키 배송구매 버튼
+        </div>
+      </div>
     </MainLayout>
   );
 }
