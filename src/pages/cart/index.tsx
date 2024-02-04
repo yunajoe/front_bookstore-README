@@ -1,10 +1,11 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import CartPayment from '@/components/cart/cartPayment';
+import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
-
 import { myWishListData } from '@/pages/api/wishMock';
-
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { THOUSAND_UNIT } from 'src/constants/price';
 
 type WishListData = {
   id: number;
@@ -14,17 +15,56 @@ type WishListData = {
   rating: number;
   genre: string;
   price: number;
+  clicked?: number;
 };
 
+const fetchData = () => {
+  return myWishListData.wishListArray.map((ele, index) => {
+    return { ...ele, clicked: 0 };
+  });
+};
 function CartPage() {
-  const [wishListData, setWishListData] = useState(
-    myWishListData.wishListArray,
+  const [wishListData, setWishListData] = useState<WishListData[]>(() =>
+    fetchData(),
   );
 
   const [selectedItemArr, setSelectedItemArr] = useState<WishListData[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [totalDiscount, setTotalDisCount] = useState(0);
 
   const resetSelectedItemArr = () => setSelectedItemArr([]);
+
+  const calcBookPlusCount = (
+    wishList: WishListData[],
+    item: WishListData,
+    setter: React.Dispatch<React.SetStateAction<WishListData[]>>,
+  ) => {
+    const itemIdx = wishList.findIndex((data) => data.id === item.id);
+    if (itemIdx > -1) {
+      let clickedCount = (wishList[itemIdx]['clicked'] || 1) + 1;
+      setter((prev) =>
+        prev.map((ele, index) =>
+          index === itemIdx ? { ...ele, clicked: clickedCount } : ele,
+        ),
+      );
+    }
+  };
+
+  const calcBookMinusCount = (
+    wishList: WishListData[],
+    item: WishListData,
+    setter: React.Dispatch<React.SetStateAction<WishListData[]>>,
+  ) => {
+    const itemIdx = wishList.findIndex((data) => data.id === item.id);
+    if (itemIdx > -1) {
+      let clickedCount = (wishList[itemIdx]['clicked'] || 1) - 1;
+      setter((prev) =>
+        prev.map((ele, index) =>
+          index === itemIdx ? { ...ele, clicked: clickedCount } : ele,
+        ),
+      );
+    }
+  };
 
   const filteredDataByTargetId = (arr: WishListData[], targetId: number) =>
     arr.filter((arrItem) => arrItem.id === targetId);
@@ -39,37 +79,32 @@ function CartPage() {
     setWishListData(filteredData);
     resetSelectedItemArr();
   };
-  const isThePriceChange = () => {};
-  const copyWishListData = wishListData.slice();
-  const res = wishListData.filter((item) => {
-    return copyWishListData.map((copyItem) => {
-      if (copyItem.id === item.id) {
-        return item.price !== copyItem.price;
-      }
-      return;
-    });
-  });
 
   useEffect(() => {
-    const totalPrice = wishListData.reduce((acc, item) => {
-      acc += item.price;
+    const totalPrice = selectedItemArr.reduce((acc, item) => {
+      acc += item.price * (item.clicked || 1);
       return acc;
     }, 0);
     setTotalAmount(totalPrice);
-  }, []);
+  }, [selectedItemArr]);
+
+  const bookTotalCount = selectedItemArr.reduce((acc, item) => {
+    acc += item.clicked || 1;
+    return acc;
+  }, 0);
 
   return (
     <div className="w-full flex flex-col items-center">
       <div className="max-w-[1200px] w-full">
         <MainLayout>
-          <div className="w-full border-2 border-solid border-red">
+          <div className="w-full">
             <div
               className="flex mobile:flex-col px-60 tablet:px-40 mobile:px-15 gap-x-30 tablet:gap-x-20
                 mobile:gap-x-10">
               <div
                 className="flex-1 grid grid-cols-1 tablet:grid-cols-1 mobile:grid-cols-1 gap-x-20 tablet:
                   gap-y-20 mobile:gap-y-10">
-                <div className="text-black text-20 font-bold mt-40">
+                <div className="text-black text-20 font-bold">
                   장바구니({wishListData.length})
                 </div>
                 <div className="flex justify-between">
@@ -108,7 +143,6 @@ function CartPage() {
                     item.id,
                   );
                   const pickedItemId = selectedItems.map((item) => item.id)[0];
-
                   return (
                     <div
                       key={item.id}
@@ -121,6 +155,9 @@ function CartPage() {
                           const filteredWishListData =
                             filteredDataByNotTargetId(wishListData, item.id);
                           setWishListData(filteredWishListData);
+                          const filteredWishListData2 =
+                            filteredDataByNotTargetId(selectedItemArr, item.id);
+                          setSelectedItemArr(filteredWishListData2);
                         }}>
                         <Image
                           src="/icons/Close.svg"
@@ -173,67 +210,54 @@ function CartPage() {
                               </div>
                             </div>
                             <div className="text-14 text-color font-bold mb-12">
-                              {item.price.toLocaleString()}원
+                              {item.price
+                                .toString()
+                                .replace(THOUSAND_UNIT, ',')}
+                              원
                             </div>
-                            <div
-                              className="flex justify-center gap-x-6 w-72 rounded-[5px] py-4 border-2 border-solid
-                                border-gray-1">
-                              <div
-                                className="cursor-pointer"
-                                onClick={() => {
-                                  const itemIdx = wishListData.findIndex(
-                                    (data) => data.id === item.id,
-                                  );
-                                  let clickedCount =
-                                    (wishListData[itemIdx]['clicked'] || 1) - 1;
-
-                                  setWishListData((prev) =>
-                                    prev.map((el, index) =>
-                                      index === itemIdx
-                                        ? { ...el, clicked: clickedCount }
-                                        : el,
-                                    ),
-                                  );
-                                }}>
-                                -
-                              </div>
-                              <div>
-                                {(item.clicked >= 1 && item.clicked) || 1}
-                              </div>
-                              <div
-                                className="cursor-pointer"
-                                onClick={() => {
-                                  // 클릭한 아이템의 index
-                                  const itemIdx = wishListData.findIndex(
-                                    (data) => data.id === item.id,
-                                  );
-                                  let clickedCount =
-                                    (wishListData[itemIdx]['clicked'] || 1) + 1;
-                                  setWishListData((prev) =>
-                                    prev.map((el, index) =>
-                                      index === itemIdx
-                                        ? { ...el, clicked: clickedCount }
-                                        : el,
-                                    ),
-                                  );
-                                }}>
-                                +
-                              </div>
-                            </div>
+                            <OrderBookCount
+                              minusFunc={() => {
+                                calcBookMinusCount(
+                                  wishListData,
+                                  item,
+                                  setWishListData,
+                                );
+                                calcBookMinusCount(
+                                  selectedItemArr,
+                                  item,
+                                  setSelectedItemArr,
+                                );
+                              }}
+                              plusFunc={() => {
+                                calcBookPlusCount(
+                                  wishListData,
+                                  item,
+                                  setWishListData,
+                                );
+                                calcBookPlusCount(
+                                  selectedItemArr,
+                                  item,
+                                  setSelectedItemArr,
+                                );
+                              }}
+                              count={item.clicked ?? 1}
+                            />
                           </div>
                         </div>
                         <div
                           className="absolute right-0 bottom-0 flex flex-col items-end mobile:border-t-2
                             border-gray-1 mobile:flex-row mobile:justify-between mobile:w-full mobile:px-20
                             mobile:py-16">
-                          {/* <span className="text-gray-3">
-                            <span>배송비 </span>
-                            <span>3,000원</span>
-                          </span> */}
+                          <div className="text-gray-3">
+                            <span>배송비 무료</span>
+                          </div>
                           <span className="text-black text-20 font-bold">
-                            {item.clicked > 0
+                            {(item.clicked && item.clicked > 0
                               ? item.price * item.clicked
-                              : item.price}
+                              : item.price
+                            )
+                              .toString()
+                              .replace(THOUSAND_UNIT, ',')}
                             원
                           </span>
                         </div>
@@ -242,42 +266,11 @@ function CartPage() {
                   );
                 })}
               </div>
-              <div
-                className="mobile:w-full h-fit flex flex-col w-340 tablet:w-216 mt-127 mobile:mt-20
-                  border-2 border-solid border-gray-1 p-30 tablet:p-20 mobile:p-20 rounded-[10px]">
-                <div className="flex justify-between border-2 border-solid border-red mb-20">
-                  <span className="text-black font-normal text-15">
-                    총 상품 금액
-                  </span>
-                  <span className="text-black font-bold text-15">
-                    {totalAmount}
-                  </span>
-                </div>
-                <div className="flex justify-between border-2 border-solid border-red mb-20">
-                  <span className="text-black font-normal text-15">
-                    총 배송비
-                  </span>
-                  <span className="text-black font-bold text-15">
-                    + 3,000원
-                  </span>
-                </div>
-                <div className="flex justify-between border-2 border-solid border-red mb-30">
-                  <span className="text-black font-normal text-15">
-                    총 할인 금액
-                  </span>
-                  <span>23,500원</span>
-                </div>
-                <div className="flex justify-between border-2 border-solid border-red mb-40">
-                  <span className="text-green font-bold text-15">
-                    결제 금액
-                  </span>
-                  <span className="text-green font-bold text-25">23,500원</span>
-                </div>
-
-                <button className="text-center bg-green text-white rounded-[5px] py-15">
-                  결제하기(1)
-                </button>
-              </div>
+              <CartPayment
+                totalAmount={totalAmount}
+                totalDiscount={totalDiscount}
+                bookTotalCount={bookTotalCount}
+              />
             </div>
           </div>
         </MainLayout>
