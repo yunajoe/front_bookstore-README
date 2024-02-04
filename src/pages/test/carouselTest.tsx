@@ -1,12 +1,17 @@
-
-import Carousel from '@/components/modal/addCommunityCard/carousel';
+import Carousel from '@/components/carousel/carousel';
+import CategoryCarousel from '@/components/carousel/categoryCarousel';
+import { carouselMockData } from '@/pages/api/mock/carouselMock';
+import { responsive, categoryResponsive } from '@/utils/checkResponsiveEnv';
 
 function TestPage() {
-
   return (
-    <div className='flex-center mt-100'>
-      <Carousel />
-    </div>
+    <>
+      <Carousel data={carouselMockData} responsive={responsive} />
+      <CategoryCarousel
+        data={carouselMockData}
+        responsive={categoryResponsive}
+      />
+    </>
   );
 }
 
