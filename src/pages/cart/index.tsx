@@ -97,20 +97,22 @@ function CartPage() {
     <div className="w-full flex flex-col items-center">
       <div className="max-w-[1200px] w-full">
         <MainLayout>
-          <div className="w-full">
+          {/* sticky로 변경 */}
+          {/* {wishListData.length } */}
+          <div className="w-full relative">
             <div
               className="flex mobile:flex-col px-60 tablet:px-40 mobile:px-15 gap-x-30 tablet:gap-x-20
                 mobile:gap-x-10">
               <div
-                className="flex-1 grid grid-cols-1 tablet:grid-cols-1 mobile:grid-cols-1 gap-x-20 tablet:
-                  gap-y-20 mobile:gap-y-10">
+                className="mt-20 flex-1 grid grid-cols-1 tablet:grid-cols-1 mobile:grid-cols-1 gap-x-20
+                  tablet: gap-y-20 mobile:gap-y-10">
                 <div className="text-black text-20 font-bold">
                   장바구니({wishListData.length})
                 </div>
+                {wishListData.length > 0}
                 <div className="flex justify-between">
                   <div className="flex gap-x-8">
                     <div
-                      className="cursor-pointer"
                       onClick={() => {
                         if (wishListData.length === selectedItemArr.length) {
                           resetSelectedItemArr();
