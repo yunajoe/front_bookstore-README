@@ -1,15 +1,21 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard';
 import AddReview from '@/components/modal/addReview';
+import FindAddress from '@/components/modal/findAddress';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 import { useState } from 'react';
 const bookOverviews = bookOverviewsMock;
 
 function TestPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isFindAddressModalOpen, setIsFindAddressModalOpen] = useState(false);
 
-  const handleModalOpen = () => {
-    setIsModalOpen(!isModalOpen);
+  const handleReviewModalOpen = () => {
+    setIsReviewModalOpen(!isReviewModalOpen);
+  }
+
+  const handleFindAddressModalOpen = () => {
+    setIsFindAddressModalOpen(!isFindAddressModalOpen);
   }
 
   return (
@@ -34,8 +40,10 @@ function TestPage() {
         book={bookOverviews[4]?.book}
         like={bookOverviews[4]?.like}
       />
-      <button onClick={handleModalOpen}>모달열려라</button>
-      {isModalOpen && <AddReview onClick={handleModalOpen}/>}
+      <button onClick={handleReviewModalOpen} className='border border-black w-full h-50 bg-green flex-center'>리뷰 모달 열려라</button>
+      <button onClick={handleFindAddressModalOpen} className='border border-black w-full h-50 bg-green flex-center'>주소 검색하기 모달 열려라</button>
+      {isReviewModalOpen && <AddReview onClick={handleReviewModalOpen} />}
+      {isFindAddressModalOpen && <FindAddress onClick={handleFindAddressModalOpen}/>}
     </div>
   );
 }

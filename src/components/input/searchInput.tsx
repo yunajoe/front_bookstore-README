@@ -2,9 +2,9 @@ import Image from 'next/image';
 import SearchIcon from '@/public/icons/SearchIcon.svg';
 
 interface SearchInput {
-  width: string; 
-  height: string;
-  rounded: string;
+  width?: string; 
+  height?: string;
+  rounded?: string;
   placeholder?: string;
 }
 
