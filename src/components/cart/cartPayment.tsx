@@ -25,7 +25,6 @@ function CartPayment({
   };
 
   return (
-    // header 20 height를 가지고 있으므로.. 107만!
     <div
       className="sticky top-297 mt-107 mobile:mt-20 mobile:mb-165 mobile:w-full h-fit flex
         flex-col w-340 tablet:w-216 border-2 border-solid border-gray-1 p-30 tablet:p-20

@@ -4,7 +4,7 @@ import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
 import { myWishListData } from '@/pages/api/wishMock';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
 
 type WishListData = {
@@ -18,11 +18,59 @@ type WishListData = {
   clicked?: number;
 };
 
+type WishListNavProps = {
+  wishListData: WishListData[];
+  selectedItemArr: WishListData[];
+  resetSelectedItemArr: Function;
+  setSelectedItemArr: React.Dispatch<SetStateAction<WishListData[]>>;
+  handleDeleteSelectedItems: Function;
+};
 const fetchData = () => {
   return myWishListData.wishListArray.map((ele, index) => {
     return { ...ele, clicked: 0 };
   });
 };
+
+function CartPageNav({
+  wishListData,
+  selectedItemArr,
+  resetSelectedItemArr,
+  setSelectedItemArr,
+  handleDeleteSelectedItems,
+}: WishListNavProps) {
+  return (
+    <div className="flex justify-between">
+      <div className="flex gap-x-8">
+        <div
+          onClick={() => {
+            if (wishListData.length === selectedItemArr.length) {
+              resetSelectedItemArr();
+            } else {
+              setSelectedItemArr([...wishListData]);
+            }
+          }}>
+          <Image
+            src={
+              wishListData.length === selectedItemArr.length
+                ? '/icons/CheckedCheckBox.svg'
+                : '/icons/CheckBox.svg'
+            }
+            alt="체크아이콘"
+            width={20}
+            height={20}
+          />
+        </div>
+        <span className="text-gray-4 text-14">전체선택</span>
+      </div>
+      <span
+        className="text-black font-normal cursor-pointer"
+        onClick={() => handleDeleteSelectedItems()}>
+        선택항목 삭제
+      </span>
+    </div>
+  );
+}
+
 function CartPage() {
   const [wishListData, setWishListData] = useState<WishListData[]>(() =>
     fetchData(),
@@ -97,8 +145,6 @@ function CartPage() {
     <div className="w-full flex flex-col items-center">
       <div className="max-w-[1200px] w-full">
         <MainLayout>
-          {/* sticky로 변경 */}
-          {/* {wishListData.length } */}
           <div className="w-full relative">
             <div
               className="flex mobile:flex-col px-60 tablet:px-40 mobile:px-15 gap-x-30 tablet:gap-x-20
@@ -109,36 +155,19 @@ function CartPage() {
                 <div className="text-black text-20 font-bold">
                   장바구니({wishListData.length})
                 </div>
-                {wishListData.length > 0}
-                <div className="flex justify-between">
-                  <div className="flex gap-x-8">
-                    <div
-                      onClick={() => {
-                        if (wishListData.length === selectedItemArr.length) {
-                          resetSelectedItemArr();
-                        } else {
-                          setSelectedItemArr([...wishListData]);
-                        }
-                      }}>
-                      <Image
-                        src={
-                          wishListData.length === selectedItemArr.length
-                            ? '/icons/CheckedCheckBox.svg'
-                            : '/icons/CheckBox.svg'
-                        }
-                        alt="체크아이콘"
-                        width={20}
-                        height={20}
-                      />
-                    </div>
-                    <span className="text-gray-4 text-14">전체선택</span>
+                {wishListData.length > 0 ? (
+                  <CartPageNav
+                    wishListData={wishListData}
+                    selectedItemArr={selectedItemArr}
+                    resetSelectedItemArr={resetSelectedItemArr}
+                    setSelectedItemArr={setSelectedItemArr}
+                    handleDeleteSelectedItems={handleDeleteSelectedItems}
+                  />
+                ) : (
+                  <div className="text-gray-4 text-16 text-center mobile:mt-120 mobile:mb-120">
+                    장바구니에 아직 상품이 없어요!
                   </div>
-                  <span
-                    className="text-black font-normal cursor-pointer"
-                    onClick={() => handleDeleteSelectedItems()}>
-                    선택항목 삭제
-                  </span>
-                </div>
+                )}
                 {wishListData.map((item) => {
                   const selectedItems = filteredDataByTargetId(
                     selectedItemArr,
@@ -250,9 +279,6 @@ function CartPage() {
                           className="absolute right-0 bottom-0 flex flex-col items-end mobile:border-t-2
                             border-gray-1 mobile:flex-row mobile:justify-between mobile:w-full mobile:px-20
                             mobile:py-16">
-                          <div className="text-gray-3">
-                            <span>배송비 무료</span>
-                          </div>
                           <span className="text-black text-20 font-bold">
                             {(item.clicked && item.clicked > 0
                               ? item.price * item.clicked
