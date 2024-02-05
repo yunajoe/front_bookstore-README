@@ -11,22 +11,15 @@ export type ResponSive = {
 };
 
 export interface Desktop {
-  breakpoint: Breakpoint;
   imageSize: ImageSize;
 }
 
 export interface Tablet {
-  breakpoint: Breakpoint;
   imageSize: ImageSize;
 }
 
 export interface Mobile {
-  breakpoint: Breakpoint;
   imageSize: ImageSize;
-}
-export interface Breakpoint {
-  min: number;
-  max: number;
 }
 
 export interface ImageSize {
