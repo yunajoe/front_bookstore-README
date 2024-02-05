@@ -15,7 +15,7 @@ interface PreviewBookInfoProps {
   size: 'sm' | 'md' | 'lg';
   price?: number;
   category?: string;
-}
+}  
 
 function PreviewBookInfo({
   image,
