@@ -2,7 +2,6 @@ import Image from 'next/image';
 import SearchIcon from '@/public/icons/SearchIcon.svg';
 import RegisterButton from '@/components/button/register/registerButton';
 import { useForm } from 'react-hook-form';
-import Carousel from '@/components/modal/addCommunityCard/carousel';
 
 function AddCommunityCardForm() {
   const { register, watch, handleSubmit } = useForm({
@@ -40,7 +39,7 @@ function AddCommunityCardForm() {
           />
         </div>
       </div>
-      {watch('book') ? <Carousel /> : <div className='flex-center w-[608px] h-283'>검색 결과가 없어요</div>}
+      {/* {watch('book') ? <Carousel /> : <div className='flex-center w-[608px] h-283'>검색 결과가 없어요</div>} */}
       <div className="flex flex-col w-full gap-12">
         <label htmlFor="content" className="text-16 text-b-b">
           내용
