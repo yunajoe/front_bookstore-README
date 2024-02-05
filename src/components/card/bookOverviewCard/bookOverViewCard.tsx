@@ -10,14 +10,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 function BookOverviewCard({ book, like }: BookOverviewType) {
-  const [isLiked, setIsLiked] = useState(like.userLiked || false);
-  const [likeCount, setIsLikeCount] = useState(like.count || 0);
+  const [isBookmarked, setIsBookmarked] = useState(like.userLiked || false);
+  const [bookmarkCount, setIsBookmarkCount] = useState(like.count || 0);
   const router = useRouter();
 
   const handleLikeClick = () => {
-    setIsLiked(!isLiked);
-    if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
-    else setIsLikeCount((prevCount) => prevCount - 1);
+    setIsBookmarked(!isBookmarked);
+    if (!isBookmarked) setIsBookmarkCount((prevCount) => prevCount + 1);
+    else setIsBookmarkCount((prevCount) => prevCount - 1);
   };
 
   const handleAddToCart = () => {
@@ -117,8 +117,8 @@ function BookOverviewCard({ book, like }: BookOverviewType) {
           className="flex flex-col items-end gap-30 tablet:absolute tablet:right-0 mobile:absolute
             mobile:bottom-16 mobile:right-0">
           <div role="like-button" className="flex-center flex-col gap-2">
-            <LikeButton onClick={handleLikeClick} isLiked={isLiked} />
-            <span className="text-black text-12">{likeCount}</span>
+            <LikeButton onClick={handleLikeClick} isLiked={isBookmarked} />
+            <span className="text-black text-12">{bookmarkCount}</span>
           </div>
           <div
             role="cart-button"
