@@ -1,5 +1,5 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import { EnvType, ImageSize } from '@/types/carouselType';
+import { ImageSize } from '@/types/carouselType';
 import React from 'react';
 
 export type CarouselCardProps = {
