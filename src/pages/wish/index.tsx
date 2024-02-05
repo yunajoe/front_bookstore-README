@@ -64,7 +64,7 @@ function WishListPage() {
             <div className="flex justify-between my-23 mobile:my-18 tablet:my-23">
               <div className="flex gap-x-8">
                 <div
-                  className="cursor-pointer"
+                  className="cursor-pointer w-20 h-20"
                   onClick={() => {
                     if (wishListData.length === selectedItemArr.length) {
                       resetSelectedItemArr();
@@ -123,7 +123,7 @@ function WishListPage() {
                       />
                     </div>
                     <div
-                      className="mx-20 mobile:mx-10"
+                      className="mx-20 mobile:mx-10 w-20"
                       onClick={() => {
                         setSelectedItemArr((prev) => [...prev, item]);
                         const targetIdx = selectedItemArr.findIndex(
@@ -135,7 +135,7 @@ function WishListPage() {
                           setSelectedItemArr([...selectedItemArr]);
                         }
                       }}>
-                      <div className="cursor-pointer">
+                      <div className="cursor-pointer w-20 h-20">
                         <Image
                           src={
                             item.id === selectedItems[0]?.id
