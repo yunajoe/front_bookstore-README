@@ -5,7 +5,7 @@ function BookInformation() {
   return (
     <section className="flex flex-col gap-20">
       <h2 className="font-bold text-[22px] text-gray-6">상품 정보</h2>
-      <div className="bg-[#F5F5F5] w-full max-w-[710px] max-h-792px min-h-[589px] min-w-330">
+      <div className="bg-gray-5 w-full max-w-[710px] max-h-792px min-h-[589px] min-w-330">
         상품 정보를 넣을 곳.
       </div>
     </section>

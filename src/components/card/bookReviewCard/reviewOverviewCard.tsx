@@ -15,7 +15,7 @@ function ReviewOverviewCard({
 }: ReviewOverviewCardProps) {
   return (
     <div
-      className="bg-[#F5F5F5] h-210 max-w-[710px] w-full rounded-[10px] flex-center mobile:w-330
+      className="bg-gray-5 h-210 max-w-[710px] w-full rounded-[10px] flex-center mobile:w-330
         mobile:h-151 flex justify-between items-center px-87 mobile:px-15">
       <div className="flex-center flex-col gap-8">
         <h3 className="font-bold text-[24px] text-gray-4">{rating}</h3>

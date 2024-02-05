@@ -25,7 +25,7 @@ function BookDetailNav({
 
   return (
     <div
-      className="bg-[#F5F5F5] flex justify-start gap-80 items-center sticky top-170 mobile:top-90
+      className="bg-gray-5 flex justify-start gap-80 items-center sticky top-170 mobile:top-90
         h-70 mobile:h-50 w-full px-70 mobile:px-0 mobile:flex-center border-b-[1px]
         border-gray-1 z-10">
       <div

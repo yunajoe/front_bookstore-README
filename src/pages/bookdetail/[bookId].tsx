@@ -43,7 +43,7 @@ export default function BookDetailPage() {
             </div>
           </div>
         </section>
-        <div className="pc:hidden flex w-full bg-[#353535] sticky bottom-0 h-70 z-10">
+        <div className="pc:hidden flex w-full bg-gray-3 sticky bottom-0 h-70 z-10">
           타블렛 모바일 환경 스티키 배송구매 버튼
         </div>
       </div>
