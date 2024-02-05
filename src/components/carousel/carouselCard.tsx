@@ -26,9 +26,3 @@ function CarouselCard(props: CarouselCardProps) {
 }
 
 export default CarouselCard;
-
-// const sizeVariantsmodal = {
-//   desktop: 'w-137 h-208',
-//   tablet: 'w-137 h-198',
-//   mobile: 'w-128 h-174',
-// };
