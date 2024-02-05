@@ -4,7 +4,7 @@ import CategoryTabButton from '@/components/button/header/categoryTabButton';
 import CategoryTab from '@/components/header/categoryTab';
 import Link from 'next/link';
 import WritePostButton from '@/components/button/header/writePostButton';
-import AddCommunityCard from '../modal/addCommunityCard/addCommunityCard';
+import AddCommunityCard from '../modal/addCommunityCard';
 
 interface NavigationTabProps {
   isLoggedIn: boolean;

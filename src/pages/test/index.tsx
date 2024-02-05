@@ -1,9 +1,17 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard';
+import AddReview from '@/components/modal/addReview';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
+import { useState } from 'react';
 const bookOverviews = bookOverviewsMock;
 
 function TestPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsModalOpen(!isModalOpen);
+  }
+
   return (
     <div className="flex flex-col gap-20 p-20">
       <BookOverviewCard
@@ -26,7 +34,8 @@ function TestPage() {
         book={bookOverviews[4]?.book}
         like={bookOverviews[4]?.like}
       />
-      <button>모달열려라</button>
+      <button onClick={handleModalOpen}>모달열려라</button>
+      {isModalOpen && <AddReview onClick={handleModalOpen}/>}
     </div>
   );
 }

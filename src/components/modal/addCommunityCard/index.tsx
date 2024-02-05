@@ -1,6 +1,4 @@
 import ModalLayout from '@/components/modal/modalLayout';
-import Image from 'next/image';
-import CloseIcon from '@/public/icons/Close.svg';
 import AddCommunityCardForm from '@/components/modal/addCommunityCard/addCommunityCardForm';
 import ModalContainer from '../modalContainer';
 
