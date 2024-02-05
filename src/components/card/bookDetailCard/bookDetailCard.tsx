@@ -14,24 +14,25 @@ import { useState } from 'react';
 
 function BookDetailCard({ bookId = '' }) {
   // TODO bookId로 react query를 통해 book detail data를 받는 코드를 짜야 함. 지금은 목업데이터만 연결함
-  const [isLiked, setIsLiked] = useState(BookDetailMock1.isBookmarked || false);
-  const [likeCount, setIsLikeCount] = useState(
+  const [isBookmarked, setIsBookmarked] = useState(
+    BookDetailMock1.isBookmarked || false,
+  );
+  const [bookmarkCount, setIsBookmarkCount] = useState(
     BookDetailMock1.bookmarkNum || 0,
   );
 
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
-    if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
-    else setIsLikeCount((prevCount) => prevCount - 1);
+  const handleBookmarkClick = () => {
+    setIsBookmarked(!isBookmarked);
+    if (!isBookmarked) setIsBookmarkCount((prevCount) => prevCount + 1);
+    else setIsBookmarkCount((prevCount) => prevCount - 1);
   };
 
   return (
     <section className="flex justify-start gap-20 items-start mobile:flex-col mobile:flex-center">
       <article
         role="img"
-        className="bg-[#F5F5F5] relative w-[525px] h-[797px] tablet:min-w-[334px]
-          tablet:max-w-[334px] tablet:h-[526px] mobile:min-w-[330px] mobile:max-w-[330px]
-          mobile:h-[500px]">
+        className="bg-gray-5 relative w-[525px] h-[797px] tablet:min-w-[334px] tablet:max-w-[334px]
+          tablet:h-[526px] mobile:min-w-[330px] mobile:max-w-[330px] mobile:h-[500px]">
         <Image
           src={BookDetailMock1.imageUrl ?? ''}
           alt="책 표지 이미지"
@@ -52,8 +53,13 @@ function BookDetailCard({ bookId = '' }) {
           </h3>
           <div className="flex justify-center gap-24">
             <div className="flex-center flex-col">
-              <LikeButton onClick={handleLikeClick} isLiked={isLiked} />
-              {likeCount}
+              <LikeButton
+                onClick={handleBookmarkClick}
+                isLiked={isBookmarked}
+                width={30}
+                height={30}
+              />
+              {bookmarkCount}
             </div>
             <button className="relative w-30 h-30">
               <Image src="/icons/ShareIcon.svg" fill alt="공유 버튼" />
