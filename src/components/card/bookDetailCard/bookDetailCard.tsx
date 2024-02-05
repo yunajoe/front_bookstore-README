@@ -31,9 +31,8 @@ function BookDetailCard({ bookId = '' }) {
     <section className="flex justify-start gap-20 items-start mobile:flex-col">
       <article
         role="img"
-        className="bg-[#F5F5F5] relative w-[525px] h-[797px] tablet:min-w-[334px]
-          tablet:max-w-[334px] tablet:h-[526px] mobile:min-w-[330px] mobile:max-w-[330px]
-          mobile:h-[500px]">
+        className="bg-gray-5 relative w-[525px] h-[797px] tablet:min-w-[334px] tablet:max-w-[334px]
+          tablet:h-[526px] mobile:min-w-[330px] mobile:max-w-[330px] mobile:h-[500px]">
         <Image
           src={BookDetailMock1.imageUrl ?? ''}
           alt="책 표지 이미지"

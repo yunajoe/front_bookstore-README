@@ -17,9 +17,9 @@ function BookPrice({
   isBold = false,
   hasUnit = true,
 }) {
-  const priceClassNames = `${fontColor} text-[${fontSize}px] ${isBold ? 'font-bold' : ''}`;
+  const priceClassNames = `${fontColor} ${isBold ? 'font-bold' : ''}`;
   return (
-    <div className={priceClassNames}>
+    <div className={priceClassNames} style={{ fontSize: fontSize }}>
       {price.toString().replace(THOUSAND_UNIT, ',')} {hasUnit ? '원' : ''}
     </div>
   );
