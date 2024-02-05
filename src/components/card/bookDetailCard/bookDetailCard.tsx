@@ -28,7 +28,7 @@ function BookDetailCard({ bookId = '' }) {
   };
 
   return (
-    <section className="flex justify-start gap-20 items-start mobile:flex-col">
+    <section className="flex justify-start gap-20 items-start mobile:flex-col mobile:flex-center">
       <article
         role="img"
         className="bg-gray-5 relative w-[525px] h-[797px] tablet:min-w-[334px] tablet:max-w-[334px]
@@ -91,8 +91,13 @@ function BookDetailCard({ bookId = '' }) {
           fontColor="text-gray-4"
           hasUnit={true}
         />
+        <Spacing height={[57, 57, 57]} />
+        <div className="bg-green w-full h-154 tablet:h-150 mobile:w-330 mobile:h-130 mx-auto">
+          장바구니버튼, 구매하기버튼, 수량선택 버튼이 들어갈 컴포넌트
+          <button className="bg-gray-3">장바구니</button>
+          <button className="bg-red">구매하기</button>
+        </div>
       </article>
-      <div></div>
     </section>
   );
 }
