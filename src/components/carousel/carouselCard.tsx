@@ -12,12 +12,12 @@ export type CarouselCardProps = {
 
 function CarouselCard(props: CarouselCardProps) {
   const { imageUrl, title, authorname, imageSize, marginRight } = props;
-  const { width, height } = imageSize;
+  const { width } = imageSize;
   return (
     <div>
       <div
-        className={'bg-black text-white relative select-none overflow-hidden'}
-        style={{ width, height, marginRight }}>
+        className={`bg-black text-white relative select-none`}
+        style={{ width, marginRight }}>
         <PreviewBookInfo size="md" title={title} authorList={[authorname]} />
       </div>
     </div>
