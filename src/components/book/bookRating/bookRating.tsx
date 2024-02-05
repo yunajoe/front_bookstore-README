@@ -1,6 +1,6 @@
 import cls from '@/utils/cls';
 import Image from 'next/image';
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, ReactNode } from 'react';
 
 interface BookRatingProps {
   rating: number;
@@ -9,7 +9,12 @@ interface BookRatingProps {
   className?: string;
 }
 
-function BookRating({ rating, size = 'sm', onClick, className }: BookRatingProps) {
+function BookRating({
+  rating,
+  size = 'sm',
+  onClick,
+  className,
+}: BookRatingProps) {
   const iconSize = {
     sm: 15,
     md: 20,
@@ -18,11 +23,11 @@ function BookRating({ rating, size = 'sm', onClick, className }: BookRatingProps
 
   const [isRating, setIsRating] = useState(rating);
 
-  const handleChangeRating = (e : MouseEvent<HTMLImageElement> ) => {
-    console.log(e.currentTarget.id)
-    const newRating = parseInt(e.currentTarget.id)
+  const handleChangeRating = (e: MouseEvent<HTMLImageElement>) => {
+    console.log(e.currentTarget.id);
+    const newRating = parseInt(e.currentTarget.id);
     setIsRating(newRating);
-  }
+  };
 
   const viewRating = () => {
     const ratingImages = [];
@@ -42,7 +47,7 @@ function BookRating({ rating, size = 'sm', onClick, className }: BookRatingProps
     for (let i = 0; i < 5 - Math.round(isRating); i++) {
       ratingImages.push(
         <Image
-          id={`${isRating+i+1}`}
+          id={`${isRating + i + 1}`}
           src="/icons/UnfilledStar.svg"
           key={`unfill${i}`}
           alt="별점"
@@ -54,7 +59,11 @@ function BookRating({ rating, size = 'sm', onClick, className }: BookRatingProps
     }
     return ratingImages;
   };
-  return <div className={cls(`${ className ? className :'flex-center gap-3'}`)}>{viewRating()}</div>;
+  return (
+    <div className={cls(`${className ? className : 'flex-center gap-3'}`)}>
+      {viewRating()}
+    </div>
+  );
 }
 
 export default BookRating;

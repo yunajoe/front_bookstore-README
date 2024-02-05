@@ -29,7 +29,13 @@ function KebabButton({ title1, title2 }: KebabDropDownButtonProps) {
         onClick={handleKebabClick}
         ref={ref}
       />
-      {showOptions && <KebabDropDownButton title1={title1} title2={title2} onClickTitle2={handleAlertModalOpenClick}/>}
+      {showOptions && (
+        <KebabDropDownButton
+          title1={title1}
+          title2={title2}
+          onClickTitle2={handleAlertModalOpenClick}
+        />
+      )}
       {isModalOpen && (
         <AlertModal
           title="정말 삭제하시겠습니까?"

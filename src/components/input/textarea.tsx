@@ -1,4 +1,8 @@
-function Textarea() {
+interface TextareaProps {
+  height: number;
+}
+
+function Textarea({ height } : TextareaProps) {
   return (
     <div className="flex flex-col w-full gap-12">
       <label htmlFor="content" className="text-16 text-b-b">
@@ -7,7 +11,7 @@ function Textarea() {
       <textarea
         id="content"
         // {...register('content', { required: true })}
-        className="w-full h-101 resize-none border border-gray-1 rounded-[10px] px-20 py-15"
+        className={`w-full h-${height} resize-none border border-gray-1 rounded-[10px] px-20 py-15`}
         placeholder="내용을 작성해주세요"></textarea>
     </div>
   );
