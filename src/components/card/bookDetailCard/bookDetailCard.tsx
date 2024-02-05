@@ -14,7 +14,9 @@ import { useState } from 'react';
 
 function BookDetailCard({ bookId = '' }) {
   // TODO bookId로 react query를 통해 book detail data를 받는 코드를 짜야 함. 지금은 목업데이터만 연결함
-  const [isBookmarked, setIsBookmarked] = useState(BookDetailMock1.isBookmarked || false);
+  const [isBookmarked, setIsBookmarked] = useState(
+    BookDetailMock1.isBookmarked || false,
+  );
   const [bookmarkCount, setIsBookmarkCount] = useState(
     BookDetailMock1.bookmarkNum || 0,
   );
@@ -52,7 +54,12 @@ function BookDetailCard({ bookId = '' }) {
           </h3>
           <div className="flex justify-center gap-24">
             <div className="flex-center flex-col">
-              <LikeButton onClick={handleBookmarkClick} isLiked={isBookmarked} />
+              <LikeButton
+                onClick={handleBookmarkClick}
+                isLiked={isBookmarked}
+                width={30}
+                height={30}
+              />
               {bookmarkCount}
             </div>
             <button className="relative w-30 h-30">
