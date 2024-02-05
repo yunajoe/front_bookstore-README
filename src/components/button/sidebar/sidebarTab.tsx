@@ -6,7 +6,6 @@ import {
 import { SidebarProps } from '@/types/sidebarType';
 
 function SidebarTab({ pageName, isDomestic, location }: SidebarProps) {
-  console.log(pageName);
   const categoryList = isDomestic
     ? ReadMeDomesticCategoryList.categoryList
     : ReadMeForeignCategoryList.categoryList;
