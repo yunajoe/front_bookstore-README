@@ -153,7 +153,8 @@ function CartPage() {
                 className="mt-20 flex-1 grid grid-cols-1 tablet:grid-cols-1 mobile:grid-cols-1 gap-x-20
                   tablet: gap-y-20 mobile:gap-y-10">
                 <div className="text-black text-20 font-bold">
-                  장바구니({wishListData.length})
+                  장바구니
+                  {wishListData.length > 0 && `(${wishListData.length})`}
                 </div>
                 {wishListData.length > 0 ? (
                   <CartPageNav
