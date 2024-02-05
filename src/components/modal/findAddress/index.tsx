@@ -1,7 +1,7 @@
 import { OnClickProps } from '@/types/onClickType';
-import ModalContainer from '../modalContainer';
-import ModalLayout from '../modalLayout';
-import FindAddressForm from './findAddressForm';
+import ModalContainer from '@/components/modal/modalContainer';
+import ModalLayout from '@/components/modal/modalLayout';
+import FindAddressForm from '@/components/modal/findAddress/findAddressForm';
 
 function FindAddress({ onClick }: OnClickProps) {
   return (

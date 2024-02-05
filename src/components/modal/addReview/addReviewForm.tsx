@@ -1,7 +1,7 @@
 import BookRating from "@/components/book/bookRating/bookRating";
 import RegisterButton from "@/components/button/register/registerButton";
 import Textarea from "@/components/input/textarea";
-import TitleContentTable from "./titleContentTable";
+import TitleContentTable from "@/components/modal/addReview/titleContentTable";
 import Image from "next/image";
 import LineIcon from '@/public/icons/Line.svg';
 

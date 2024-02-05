@@ -1,6 +1,6 @@
 import SearchInput from "@/components/input/searchInput"
-import DoFindAddress from "./doFindAddress"
-import NotFindAddress from "./notFindAddress"
+import DoFindAddress from "@/components/modal/findAddress/doFindAddress"
+import NotFindAddress from "@/components/modal/findAddress/notFindAddress"
 import FindAddressPagination from "./findAddressPagination"
 
 function FindAddressForm() {
