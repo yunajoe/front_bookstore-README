@@ -40,9 +40,9 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
             <CategoryTabButton onClick={toggleCategoryTab} />
           </div>
           <div className="flex gap-18 pc:gap-40 tablet:gap-30">
-            <Link href="/bestsellers"> 베스트</Link>
-            <Link href="/newest"> 신간</Link>
-            <CustomBookButton isLoggedIn={isLoggedIn} /> 
+            <Link href="/domestic/bestseller"> 베스트</Link>
+            <Link href="/domestic/newest"> 신간</Link>
+            <CustomBookButton isLoggedIn={isLoggedIn} />
             <div className="inline-block border-r w-1 h-14 mt-4 border-gray-1" />
             <Link href="/community"> 커뮤니티</Link>
           </div>
