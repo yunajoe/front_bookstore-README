@@ -13,11 +13,11 @@ function BestSellerSection() {
           더보기
         </Link>
       </div>
-      <div className="tablet:hidden flex mobile:flex-center flex-wrap gap-x-30 gap-y-62">
+      <div className="tablet:hidden flex flex-center flex-wrap gap-x-10 pc:gap-x-30 gap-y-62">
         {bookOverviewsMock.map((book, index) => (
           <PreviewBookInfo
             key={book.book.bookId}
-            size={'md'}
+            size={'lg'}
             title={book.book.bookTitle}
             image={book.book.bookImgUrl}
             authorList={book.book.authors}
