@@ -1,11 +1,7 @@
 /* 카테고리 페이지의 사이드바 '국내 외국' 선택 버튼 */
 
+import { SidebarProps } from '@/types/sidebarType';
 import Link from 'next/link';
-
-interface SidebarRegionButtonProps {
-  pageName?: string;
-  isDomestic: boolean;
-}
 
 function classNames<T>(...classes: Array<T>) {
   return classes.filter(Boolean).join(' ');
@@ -35,10 +31,7 @@ function StyledLink({
   );
 }
 
-function SidebarRegionButton({
-  pageName,
-  isDomestic = true,
-}: SidebarRegionButtonProps) {
+function SidebarRegionButton({ pageName, isDomestic = true }: SidebarProps) {
   return (
     <div className="flex justify-start items-center mobile:flex-center">
       <StyledLink

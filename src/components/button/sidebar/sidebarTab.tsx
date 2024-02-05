@@ -3,14 +3,10 @@ import {
   ReadMeForeignCategoryList,
   ReadMeDomesticCategoryList,
 } from '@/pages/api/mock';
+import { SidebarProps } from '@/types/sidebarType';
 
-interface SidebarTabProps {
-  pageName?: string;
-  isDomestic: boolean;
-  location?: string;
-}
-
-function SidebarTab({ pageName, isDomestic, location }: SidebarTabProps) {
+function SidebarTab({ pageName, isDomestic, location }: SidebarProps) {
+  console.log(pageName);
   const categoryList = isDomestic
     ? ReadMeDomesticCategoryList.categoryList
     : ReadMeForeignCategoryList.categoryList;

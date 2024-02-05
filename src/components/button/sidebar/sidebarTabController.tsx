@@ -16,17 +16,13 @@ import {
   ReadMeDomesticCategoryList,
   ReadMeForeignCategoryList,
 } from '@/pages/api/mock';
-interface SidebarTabControllerProps {
-  pageName?: string;
-  isDomestic: boolean;
-  location?: string;
-}
+import { SidebarProps } from '@/types/sidebarType';
 
 function SidebarTabController({
   pageName,
   isDomestic,
   location,
-}: SidebarTabControllerProps) {
+}: SidebarProps) {
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const { env } = useCarouselEnv();

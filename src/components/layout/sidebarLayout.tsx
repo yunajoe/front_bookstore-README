@@ -7,11 +7,9 @@ import { ReactNode } from 'react';
 
 import MainLayout from './mainLayout';
 import Sidebar from '@/components/sidebar/sidebar';
+import { SidebarProps } from '@/types/sidebarType';
 
-interface SidebarLayoutProps {
-  pageName?: string;
-  isDomestic: boolean;
-  location?: string;
+interface SidebarLayoutProps extends SidebarProps {
   children?: ReactNode;
 }
 
