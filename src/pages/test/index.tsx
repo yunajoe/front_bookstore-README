@@ -26,6 +26,7 @@ function TestPage() {
         book={bookOverviews[4]?.book}
         like={bookOverviews[4]?.like}
       />
+      <button>모달열려라</button>
     </div>
   );
 }

@@ -39,7 +39,7 @@ function AddCommunityCardForm() {
           />
         </div>
       </div>
-      {/* {watch('book') ? <Carousel /> : <div className='flex-center w-[608px] h-283'>검색 결과가 없어요</div>} */}
+      <div>책내용</div>
       <div className="flex flex-col w-full gap-12">
         <label htmlFor="content" className="text-16 text-b-b">
           내용
