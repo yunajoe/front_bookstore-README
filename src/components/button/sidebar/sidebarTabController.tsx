@@ -17,11 +17,13 @@ import {
   ReadMeForeignCategoryList,
 } from '@/pages/api/mock';
 interface SidebarTabControllerProps {
+  pageName?: string;
   isDomestic: boolean;
   location?: string;
 }
 
 function SidebarTabController({
+  pageName,
   isDomestic,
   location,
 }: SidebarTabControllerProps) {
@@ -54,7 +56,11 @@ function SidebarTabController({
         </div>
       </button>
       {(showOptions || env !== 'mobile') && (
-        <SidebarTab isDomestic={isDomestic} location={location} />
+        <SidebarTab
+          pageName={pageName}
+          isDomestic={isDomestic}
+          location={location}
+        />
       )}
     </>
   );

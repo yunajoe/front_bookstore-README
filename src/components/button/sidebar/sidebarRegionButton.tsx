@@ -2,6 +2,11 @@
 
 import Link from 'next/link';
 
+interface SidebarRegionButtonProps {
+  pageName?: string;
+  isDomestic: boolean;
+}
+
 function classNames<T>(...classes: Array<T>) {
   return classes.filter(Boolean).join(' ');
 }
@@ -30,19 +35,22 @@ function StyledLink({
   );
 }
 
-function SidebarRegionButton({ isDomestic = true }) {
+function SidebarRegionButton({
+  pageName,
+  isDomestic = true,
+}: SidebarRegionButtonProps) {
   return (
     <div className="flex justify-start items-center mobile:flex-center">
       <StyledLink
         title="국내"
-        link="/domestic/"
+        link={`/domestic/${pageName ?? ''}`}
         isLeft={true}
         isSelected={isDomestic}
       />
       <div className="bg-gray-1 h-11 mobile:bg-green mobile:h-37 relative w-[1px] z-10"></div>
       <StyledLink
         title="외국"
-        link="/foreign/"
+        link={`/foreign/${pageName ?? ''}`}
         isLeft={false}
         isSelected={!isDomestic}
       />
