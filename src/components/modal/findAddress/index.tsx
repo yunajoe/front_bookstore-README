@@ -6,7 +6,7 @@ import FindAddressForm from '@/components/modal/findAddress/findAddressForm';
 function FindAddress({ onClick }: OnClickProps) {
   return (
     <ModalLayout onClick={onClick}>
-      <ModalContainer onClick={onClick} title='주소 검색하기'>
+      <ModalContainer onClick={onClick} title="주소 검색하기">
         <FindAddressForm />
       </ModalContainer>
     </ModalLayout>

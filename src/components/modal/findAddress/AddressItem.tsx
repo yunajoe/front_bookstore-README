@@ -12,10 +12,10 @@ interface Adr {
 
 function AddressItem({ adr }: { adr: Adr }) {
   return (
-    <div>
+    <>
       <TitleContentTable title1={adr.number} content1={adr.address} title2={adr.type} content2={adr.detail} truncate={false} />
       <Image src={LineIcon} alt="구분선" />
-    </div>
+    </>
   )
 }
 
