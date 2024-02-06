@@ -17,7 +17,6 @@ const tabRoutes: TabRoutes = {
 
 function MyPageTab() {
   const [selectedTab, setSelectedTab] = useState('');
-  const [selectedSettingTab, setSelectedSettingTab] = useState('editProfile'); // SettingTab의 선택된 탭 상태
   const router = useRouter();
 
   useEffect(() => {
@@ -38,10 +37,6 @@ function MyPageTab() {
     if (tabRoutes[tabName]) {
       // 해당하는 키가 있는지 확인
       setSelectedTab(tabName);
-      if (tabName === 'setting') {
-        // SettingTab을 클릭한 경우
-        setSelectedSettingTab('editProfile'); // 초기 탭을 설정
-      }
       router.push(tabRoutes[tabName]);
     } else {
       console.error(`Tab route for '${tabName}' is not defined`);
