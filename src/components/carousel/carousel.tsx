@@ -119,6 +119,7 @@ function Carousel({ data, responsive }: CarouselProps) {
                 {...item}
                 imageSize={responsive[env].imageSize}
                 marginRight={CARD_MARGIN_VALUE}
+                size="md"
               />
             ))}
           </div>
