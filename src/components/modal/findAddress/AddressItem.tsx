@@ -1,19 +1,13 @@
 import TitleContentTable from "@/components/modal/addReview/titleContentTable"
 import Image from "next/image";
 import LineIcon from '@/public/icons/Line.svg';
+import { Address } from "@/types/address";
 
 
-interface Adr {
-  number: string;
-  address: string;
-  type: string;
-  detail: string;
-}
-
-function AddressItem({ adr }: { adr: Adr }) {
+function AddressItem({ zipNo, roadAddr, jibunAddr }: Address) {
   return (
     <>
-      <TitleContentTable title1={adr.number} content1={adr.address} title2={adr.type} content2={adr.detail} truncate={false} />
+      <TitleContentTable title1={zipNo} content1={roadAddr} content2={jibunAddr} truncate={false} />
       <Image src={LineIcon} alt="구분선" />
     </>
   )

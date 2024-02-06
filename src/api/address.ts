@@ -8,24 +8,16 @@ export async function getAddress(searchWord: string) {
     keyword: searchWord,
     resultType: 'json',
   };
-
+  let result;
   try {
     const response = await axios.get(`/address/addrlink/addrLinkApiJsonp.do`, {
       params: params,
     });
-
-    const result = response?.data;  
-
-    //({results:~}) 식으로 데이터가 나와서 정규식으로 괄호안 데이터를 뽑아내려고함
-    const regex = /\(([^)]+)\)/;
-    const matches = result.match(regex);
-
-    if (matches) {
-      const content = matches[1];
-
-      return content;  //{results:~} 형식의 데이터가 반환됨
-    }
+    const trimmedDataStr = response.data.substring(1, response.data.length - 1);
+    result = JSON.parse(trimmedDataStr).results.juso;
+    return result;
   } catch (error) {
     console.error(error);
   }
 }
+

@@ -4,16 +4,15 @@ import NotFindAddress from '@/components/modal/findAddress/notFindAddress';
 import FindAddressPagination from './findAddressPagination';
 import { getAddress } from 'src/api/address';
 import { useState } from 'react';
+import { Address } from '@/types/address';
 
 function FindAddressForm() {
   const [address, setAddress] = useState();
 
-  const handleSearch = async() => {
-    const result = await getAddress('정관1로');
+  const handleSearch = async(search : string) => {
+    const result = await getAddress(search);
     setAddress(result)
   }
-  
-  console.log(address)
 
   return (
     <div className="flex flex-col w-full gap-20">
@@ -22,9 +21,9 @@ function FindAddressForm() {
         height="48"
         rounded="5"
         placeholder="도로명, 지명, 건물명 검색"
-        onClick={handleSearch}
+        onSearch={handleSearch}
       />
-      <FindAddressPagination />
+      {address ? <FindAddressPagination addressData={address} /> : <NotFindAddress />}
     </div>
   );
 }
