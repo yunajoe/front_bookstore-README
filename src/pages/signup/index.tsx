@@ -14,8 +14,6 @@ import {
 } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
-import { PostMemberType, postMember } from 'src/temp/postMember';
-import { useMutation } from '@tanstack/react-query';
 
 function SignUp() {
   const method = useForm<SignValueType>({
@@ -31,15 +29,32 @@ function SignUp() {
     register,
     handleSubmit,
     setError,
-    getValues,
     formState: { errors },
   } = method;
 
-  const passwordValue = getValues('password');
-  const rePasswordValue = getValues('repassword');
+  const onSubmit = (data: SignValueType) => {
+    console.log(data);
+    const { email, password, repassword, nickname } = data;
+    if (!checkEmail.value.test(email)) {
+      setError('email', {
+        type: 'manual',
+        message: checkEmail.message,
+      });
+    }
+    if (!checkPassword.value.test(password)) {
+      setError('password', {
+        type: 'manual',
+        message: checkPassword.message,
+      });
+    }
 
-  const onSubmit = () => {
-    if (passwordValue !== rePasswordValue) {
+    if (!checkNickName.value.test(nickname)) {
+      setError('nickname', {
+        type: 'manual',
+        message: checkNickName.message,
+      });
+    }
+    if (password !== repassword) {
       setError('repassword', {
         type: 'manual',
         message: '비밀번호가 다릅니다',
@@ -79,7 +94,7 @@ function SignUp() {
                 placeholder="이메일"
                 register={register}
                 required={true}
-                pattern={checkEmail}
+                isError={errors.email}
               />
               <div className="mt-8 mb-40 text-left">
                 <SignError errors={errors} id="email" />
@@ -97,7 +112,6 @@ function SignUp() {
                 placeholder="비밀번호"
                 register={register}
                 required={true}
-                pattern={checkPassword}
                 isError={errors.password}
               />
               <div className="mt-8 mb-40">
@@ -131,7 +145,6 @@ function SignUp() {
                 placeholder="닉네임"
                 register={register}
                 required={true}
-                pattern={checkNickName}
                 isError={errors.nickname}
               />
               <div className="mt-8 mb-40">
