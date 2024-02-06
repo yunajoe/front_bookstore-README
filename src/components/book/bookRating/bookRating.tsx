@@ -24,7 +24,6 @@ function BookRating({
   const [isRating, setIsRating] = useState(rating);
 
   const handleChangeRating = (e: MouseEvent<HTMLImageElement>) => {
-    console.log(e.currentTarget.id);
     const newRating = parseInt(e.currentTarget.id);
     setIsRating(newRating);
   };

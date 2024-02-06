@@ -23,8 +23,6 @@ function FindAddressForm() {
     enabled: !!search,
   });
 
-  console.log(data);
-
   const handleSearch = async (value: string) => {
     setSearch(value);
     setAddressCurrentPage(1);

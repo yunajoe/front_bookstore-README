@@ -1,49 +1,27 @@
 import Image from 'next/image';
 import SearchIcon from '@/public/icons/SearchIcon.svg';
-import { useEffect, useState } from 'react';
+import useSearchDebounce from '@/hooks/useSearchDebounce';
+import EraserSearchValueIcon from '@/public/icons/EraserSearchValue.svg';
 
 interface SearchInput {
-  placeholder?: string;
+  placeholder: string;
   onSearch?: (searchTerm: string) => void;
 }
 
 function ModalSearchInput({ placeholder, onSearch }: SearchInput) {
-  const [value, setValue] = useState('');
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
-  // Debounce
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, 1000); // 1초 대기
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value]);
-
-  const handleSearch = () => {
-    if (onSearch) {
-      onSearch(debouncedValue);
-    }
-  };
+  const { value, setValue, handleInputChange, handleSearch } = useSearchDebounce(onSearch);
 
   return (
-    <div className={'relative inline-flex z-10 w-full'}>
+    <div className='flex items-center z-10 w-full h-48 px-18 py-12 border border-gray-1 rounded-[5px] gap-18 focus-within:border-green'>
       <input
-        className={`w-full h-48 border border-gray-1 px-18 py-12 max-w-full pr-20 text-16 font-light
-          rounded-[5px]`}
-        placeholder={`${placeholder ? placeholder : ''}`}
+        className='w-full text-16 font-light flex-shrink focus:outline-none'
+        placeholder={placeholder}
         value={value}
         onChange={(e) => handleInputChange(e)}
       />
+      {value && <Image src={EraserSearchValueIcon} alt='검색창 지우기' width={18} height={18} onClick={() => setValue('')} />}
       <div
-        className="absolute w-12 h-12 tablet:h-15 tablet:w-15 pc:h-15 pc:w-15 top-1/2
-          mobile:right-6 right-12 transform -translate-y-1/2"
+        className="relative w-12 h-12 tablet:h-15 tablet:w-15 pc:h-15 pc:w-15"
         onClick={handleSearch}>
         <Image src={SearchIcon} fill alt="검색 아이콘" />
       </div>
