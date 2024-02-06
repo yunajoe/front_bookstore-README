@@ -6,7 +6,7 @@ export interface ModalLayoutProps {
   onClick: () => void;
 }
 
-function ModalLayout({ children, onClick}: ModalLayoutProps) {
+function ModalLayout({ children, onClick }: ModalLayoutProps) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 

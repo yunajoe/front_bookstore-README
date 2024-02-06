@@ -23,7 +23,7 @@ function KebabButton({ title1, title2 }: KebabDropDownButtonProps) {
   return (
     <>
       <Image
-        className="absolute top-23 right-20"
+        className="absolute right-20 top-23"
         src={KebabImg}
         alt="케밥버튼"
         onClick={handleKebabClick}

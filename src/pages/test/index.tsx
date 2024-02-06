@@ -65,6 +65,28 @@ function TestPage() {
       <button onClick={handleAddCommunityCardModalOpen} className='border border-black w-full h-50 bg-green flex-center'>커뮤니티 글쓰기 모달 열려라</button>
       {isAddCommunityCardModalOpen && <AddCommunityCard  onClick={handleAddCommunityCardModalOpen} />}
       
+      <PreviewBookInfo
+        size="lg"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+      />
+      <PreviewBookInfo
+        size="md"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+      />
+      <PreviewBookInfo
+        size="sm"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+        alignCenter
+      />
     </div>
   );
 }
