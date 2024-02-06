@@ -18,7 +18,6 @@ export default function Genre() {
   return (
     <div className="flex-col flex-center mt-40">
       <div className="text-20 font-bold mb-28">선호장르 선택</div>
-
       <div className={`${getButtonLayoutClass()}`}>
         {genres.map((genre, index) => (
           <GenreButton
