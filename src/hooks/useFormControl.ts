@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
-function useAddReview() {
-    const { control, handleSubmit, watch } = useForm({ mode: 'onChange' });
+function useFormControl() {
+  const { control, handleSubmit, watch } = useForm({ mode: 'onChange' });
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [newRating, setNewRating] = useState(0);
 
@@ -16,10 +16,10 @@ function useAddReview() {
   }, [newRating, watch('description')])
 
   //TODO:폼보낼 함수
-  const handleAddReview = () => {
+  const onSubmit = () => {
     console.log('폼보내짐')
   }
-  return { control, handleSubmit, isButtonActive, newRating, setNewRating, handleAddReview}
+  return { control, handleSubmit, isButtonActive, newRating, setNewRating, onSubmit}
 }
 
-export default useAddReview
+export default useFormControl

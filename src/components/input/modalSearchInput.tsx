@@ -5,7 +5,7 @@ import EraserSearchValueIcon from '@/public/icons/EraserSearchValue.svg';
 
 interface SearchInput {
   placeholder: string;
-  onSearch?: (searchTerm: string) => void;
+  onSearch: (searchTerm: string) => void;
 }
 
 function ModalSearchInput({ placeholder, onSearch }: SearchInput) {
@@ -21,7 +21,7 @@ function ModalSearchInput({ placeholder, onSearch }: SearchInput) {
       />
       {value && <Image src={EraserSearchValueIcon} alt='검색창 지우기' width={18} height={18} onClick={() => setValue('')} />}
       <div
-        className="relative w-12 h-12 tablet:h-15 tablet:w-15 pc:h-15 pc:w-15"
+        className="relative w-18 h-18"
         onClick={handleSearch}>
         <Image src={SearchIcon} fill alt="검색 아이콘" />
       </div>

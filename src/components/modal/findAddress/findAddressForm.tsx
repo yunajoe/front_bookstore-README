@@ -12,16 +12,14 @@ import { addressCurrentPageAtom } from '@/store/state';
 import { QUERY_KEY } from 'src/constants/queryKey';
 
 function FindAddressForm() {
-  const [search, setSearch] = useState('');
-  const [addressCurrentPage, setAddressCurrentPage] = useAtom(
-    addressCurrentPageAtom,
-  );
+  const [search, setSearch] = useState('')
+  const [addressCurrentPage, setAddressCurrentPage] = useAtom(addressCurrentPageAtom);
 
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEY.address, search, addressCurrentPage],
     queryFn: () => getAddress(search, addressCurrentPage),
     enabled: !!search,
-  });
+  })
 
   const handleSearch = async (value: string) => {
     setSearch(value);
@@ -30,7 +28,7 @@ function FindAddressForm() {
 
   useEffect(() => {
     refetch();
-  }, [search, addressCurrentPage, refetch]);
+  },[search, addressCurrentPage, refetch])
 
   return (
     <div className="flex flex-col w-full gap-20 overflow-scroll">

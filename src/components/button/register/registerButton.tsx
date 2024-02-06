@@ -14,7 +14,7 @@ function RegisterButton({
   type,
   onClick,
   children,
-  disabled,
+  disabled = true,
   color = 'green',
   height = 50,
   text = 17,

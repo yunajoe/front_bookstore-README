@@ -14,7 +14,7 @@ interface TextareaProps {
 
 function Textarea({ height, control, name }: TextareaProps) {
   const className = classNames(
-    'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15',
+    'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15 focus:border-green outline-none',
     height,
   );
   const { field } = useController({name, control})
