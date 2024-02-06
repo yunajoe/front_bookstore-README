@@ -5,9 +5,14 @@ import { Address } from "@/types/address";
 
 
 function AddressItem({ zipNo, roadAddr, jibunAddr }: Address) {
+  //TODO:선택버튼 누른 후 결제페이지 반영하는 거 추가해야함. 임시 console
+  const chooseAddress = () => {
+    console.log(zipNo, roadAddr, jibunAddr)
+  }
+
   return (
     <>
-      <TitleContentTable title1={zipNo} content1={roadAddr} content2={jibunAddr} truncate={false} button={true} green={true} black={true} gap={8} />
+      <TitleContentTable title1={zipNo} content1={roadAddr} content2={jibunAddr} onClick={chooseAddress} truncate={false} button={true} green={true} black={true} gap={8} />
       <Image src={LineIcon} alt="구분선" />
     </>
   )

@@ -12,16 +12,18 @@ import { addressCurrentPageAtom } from '@/store/state';
 import { QUERY_KEY } from 'src/constants/queryKey';
 
 function FindAddressForm() {
-  const [search, setSearch] = useState('')
-  const [addressCurrentPage, setAddressCurrentPage] = useAtom(addressCurrentPageAtom);
+  const [search, setSearch] = useState('');
+  const [addressCurrentPage, setAddressCurrentPage] = useAtom(
+    addressCurrentPageAtom,
+  );
 
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEY.address, search, addressCurrentPage],
     queryFn: () => getAddress(search, addressCurrentPage),
     enabled: !!search,
-  })
+  });
 
-  console.log(data)
+  console.log(data);
 
   const handleSearch = async (value: string) => {
     setSearch(value);
@@ -30,7 +32,7 @@ function FindAddressForm() {
 
   useEffect(() => {
     refetch();
-  },[search, addressCurrentPage, refetch])
+  }, [search, addressCurrentPage, refetch]);
 
   return (
     <div className="flex flex-col w-full gap-20 overflow-scroll">
@@ -38,7 +40,9 @@ function FindAddressForm() {
         placeholder="도로명, 지명, 건물명 검색"
         onSearch={handleSearch}
       />
-      {search.length === 0 ? <DoFindAddress /> : data?.juso ? (
+      {search.length === 0 ? (
+        <DoFindAddress />
+      ) : data?.juso ? (
         <FindAddressWrapper addressData={data?.juso} />
       ) : (
         <NotFindAddress />

@@ -7,12 +7,13 @@ interface TitleContentTableProps {
   content2: string;
   truncate?: boolean;
   button?: boolean;
+  onClick?: () => void;
   green?: boolean;
   black?: boolean;
   gap?: number;
 }
 
-function TitleContentTable({ title1, content1, title2, content2, truncate = true, button = false, green, black, gap = 20} : TitleContentTableProps) {
+function TitleContentTable({ title1, content1, title2, content2, truncate = true, button = false, onClick, green, black, gap = 20} : TitleContentTableProps) {
   return (
     <div className={`relative flex flex-col gap-${gap} text-16 mt-10`}>
       <div className="flex items-center justify-start">
@@ -24,7 +25,7 @@ function TitleContentTable({ title1, content1, title2, content2, truncate = true
         <p className="w-full text-gray-3 font-light">{content2}</p>
       </div>
       {button && <div className="absolute w-50 top-0 right-0">
-        <RegisterButton height={36} text={14}>선택</RegisterButton>
+        <RegisterButton height={36} text={14} onClick={onClick}>선택</RegisterButton>
       </div>}
     </div>
   );
