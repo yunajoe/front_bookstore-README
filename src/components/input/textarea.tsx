@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { ReactNode } from 'react';
 import {
   Control,
   FieldPath,
@@ -10,9 +11,10 @@ interface TextareaProps {
   height?: string;
   control: Control<FieldValues>;
   name: FieldPath<FieldValues>;
+  as?: ReactNode;
 }
 
-function Textarea({ height, control, name }: TextareaProps) {
+function Textarea({ height, control, name, as = null }: TextareaProps) {
   const className = classNames(
     'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15 focus:border-green outline-none',
     height,
@@ -24,6 +26,7 @@ function Textarea({ height, control, name }: TextareaProps) {
       <label htmlFor={field.name} className="text-16 text-b-b">
         내용
       </label>
+      {as ?? as}
       <textarea
         id={field.name}
         className={className}

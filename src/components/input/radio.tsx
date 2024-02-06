@@ -14,15 +14,15 @@ interface RadioProps {
 }
 
 function Radio({ label, control, name, title1, title2 }: RadioProps) {
-  const { field } = useController({ control, name });
+  const { field } = useController({name, control})
 
   return (
     <div className="flex flex-col w-full gap-12">
       <label htmlFor={field.name} className="text-16 text-b-b">
         {label}
       </label>
-      <input type='radio' name={field.name}>{title1}</input>
-      <input type='radio' name={field.name}>{title2}</input>
+      <input type='radio' name={field.name} value={title1}  />
+      <input type='radio' name={field.name} value={title2}/>
     </div>
   )
 }

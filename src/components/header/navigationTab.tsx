@@ -4,7 +4,7 @@ import CategoryTabButton from '@/components/button/header/categoryTabButton';
 import CategoryTab from '@/components/header/categoryTab';
 import Link from 'next/link';
 import WritePostButton from '@/components/button/header/writePostButton';
-import AddCommunityCard from '@/components/modal/addCommunityCard/addCommunityCard';
+import AddCommunityCard from '@/components/modal/addCommunityCard';
 import CustomBookButton from '@/components/button/header/customBookButton';
 
 interface NavigationTabProps {
