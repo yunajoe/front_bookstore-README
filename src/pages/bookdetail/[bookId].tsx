@@ -11,6 +11,7 @@ import BookInformation from '@/components/book/bookInformation/bookInformation';
 import Review from '@/components/review/review';
 import Spacing from '@/components/container/spacing/spacing';
 import SideOrderNavigator from '@/components/orderNavigator/sideOrderNavigator';
+import FooterOrderNavitgator from '@/components/orderNavigator/footerOrderNavitgator';
 
 export default function BookDetailPage() {
   const router = useRouter();
@@ -56,9 +57,13 @@ export default function BookDetailPage() {
               />
             </div>
           </section>
-          <div className="pc:hidden flex w-full bg-gray-3 sticky bottom-0 h-70 z-10">
-            타블렛 모바일 환경 스티키 배송구매 버튼
-          </div>
+          <FooterOrderNavitgator
+            isBookmarked={BookDetailMock1.isBookmarked}
+            price={BookDetailMock1.price}
+            bookId={bookId as string}
+            orderCount={orderCount}
+            setOrderCount={setOrderCount}
+          />
         </div>
       </MainLayout>
     </div>

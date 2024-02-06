@@ -32,7 +32,9 @@ function SideOrderNavigator({
         <OrderBookCount
           count={orderCount}
           plusFunc={() => setOrderCount(orderCount + 1)}
-          minusFunc={() => setOrderCount(orderCount - 1)}
+          minusFunc={() =>
+            setOrderCount(orderCount - 1 > 0 ? orderCount - 1 : 1)
+          }
         />
       </div>
       <div className="flex justify-between">
