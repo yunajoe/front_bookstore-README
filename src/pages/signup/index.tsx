@@ -14,6 +14,8 @@ import {
 } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
+import { PostMemberType, postMember } from 'src/temp/postMember';
+import { useMutation } from '@tanstack/react-query';
 
 function SignUp() {
   const method = useForm<SignValueType>({
@@ -32,29 +34,17 @@ function SignUp() {
     getValues,
     formState: { errors },
   } = method;
+
   const passwordValue = getValues('password');
   const rePasswordValue = getValues('repassword');
-  const onSubmit = () => {
-    setError('email', {
-      type: 'manual',
-      message: '이메일 형식에 맞지 않습니다',
-    });
-    setError('password', {
-      type: 'manual',
-      message: '영문, 숫자를 포함해 8자 이상으로 지어주세요.',
-    });
 
+  const onSubmit = () => {
     if (passwordValue !== rePasswordValue) {
       setError('repassword', {
         type: 'manual',
         message: '비밀번호가 다릅니다',
       });
     }
-
-    setError('nickname', {
-      type: 'manual',
-      message: '닉네임은 3자 이상, 8자 이하로 지어주세요.',
-    });
   };
 
   return (
