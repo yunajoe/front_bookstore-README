@@ -1,8 +1,11 @@
+import classNames from "classnames";
+
 interface TextareaProps {
-  height: number;
+  height?: string;
 }
 
-function Textarea({ height = 101 } : TextareaProps) {
+function Textarea({ height }: TextareaProps) {
+  const className = classNames("w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15", height)
   return (
     <div className="flex flex-col w-full gap-12">
       <label htmlFor="content" className="text-16 text-b-b">
@@ -11,7 +14,7 @@ function Textarea({ height = 101 } : TextareaProps) {
       <textarea
         id="content"
         // {...register('content', { required: true })}
-        className={`w-full h-${height} border border-gray-1 rounded-[10px] px-20 py-15`}
+        className={className}
         placeholder="내용을 작성해주세요"></textarea>
     </div>
   );
