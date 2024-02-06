@@ -76,7 +76,9 @@ function BookDetailInfo({
 
       <div role="rating" className="flex gap-6">
         <BookRating rating={rating} size="md" />
-        <span className="relative top-12 text-gray-3 text-14">{reviewNum}</span>
+        <span className="relative top-12 text-gray-3 text-14">
+          ({reviewNum})
+        </span>
         <span className="text-green font-bold text-[24px]">{rating}</span>
       </div>
       <Spacing height={[12, 12, 12]} />
