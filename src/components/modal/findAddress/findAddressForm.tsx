@@ -43,7 +43,7 @@ function FindAddressForm() {
       ) : (
         <NotFindAddress />
       )}
-      <Pagination totalCount={data?.common.totalCount} />
+      <Pagination totalCount={data?.common.totalCount} standard={15}/>
     </div>
   );
 }

@@ -3,10 +3,8 @@ import Image from 'next/image';
 import PrevPageIcon from '@/public/icons/PrevIcon.svg';
 import NextPageIcon from '@/public/icons/NextIcon.svg';
 import usePagination from '@/hooks/usePagination';
-import { useAtom } from 'jotai';
-import { addressCurrentPageAtom } from '@/store/state';
 
-function Pagination({ totalCount }: { totalCount: number }) {
+function Pagination({ totalCount, standard }: { totalCount: number; standard: number; }) {
   const {
     pageArrays,
     currentPage,
@@ -14,7 +12,7 @@ function Pagination({ totalCount }: { totalCount: number }) {
     goToNextPageArray,
     goToPrevPageArray,
     changeCurrentPage,
-  } = usePagination(totalCount);
+  } = usePagination(totalCount, standard);
 
   return (
     <div className="flex-center">
@@ -25,6 +23,7 @@ function Pagination({ totalCount }: { totalCount: number }) {
           width={22}
           height={22}
           onClick={goToPrevPageArray}
+          style={{cursor:'pointer'}}
         />
       )}
       <div className="flex-center gap-20 w-200">
@@ -32,6 +31,7 @@ function Pagination({ totalCount }: { totalCount: number }) {
           <span
             key={page + 1}
             className={`${currentPage === page ? 'text-green' : 'text-gray-4'}`}
+            style={{cursor:'pointer'}}
             onClick={() => changeCurrentPage(page)}>
             {page}{' '}
           </span>
@@ -44,6 +44,7 @@ function Pagination({ totalCount }: { totalCount: number }) {
           width={22}
           height={22}
           onClick={goToNextPageArray}
+          style={{cursor:'pointer'}}
         />
       )}
     </div>
