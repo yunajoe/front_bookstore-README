@@ -5,15 +5,14 @@ import FindAddressWrapper from '@/components/modal/findAddress/findAddressWrappe
 import { getAddress } from '@/api/address';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Address } from '@/types/address';
 import Pagination from '@/components/button/pagination';
 import { useAtom } from 'jotai';
-import { addressCurrentPageAtom } from '@/store/state';
+import {CurrentPageStateAtom } from '@/store/state';
 import { QUERY_KEY } from 'src/constants/queryKey';
 
 function FindAddressForm() {
   const [search, setSearch] = useState('')
-  const [addressCurrentPage, setAddressCurrentPage] = useAtom(addressCurrentPageAtom);
+  const [addressCurrentPage, setAddressCurrentPage] = useAtom(CurrentPageStateAtom);
 
   const { data, refetch } = useQuery({
     queryKey: [QUERY_KEY.address, search, addressCurrentPage],

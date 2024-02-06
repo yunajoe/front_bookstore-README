@@ -5,6 +5,7 @@ import AddCommunityCard from '@/components/modal/addCommunityCard';
 import AddReview from '@/components/modal/addReview';
 import AlertModal from '@/components/modal/alertModal';
 import FindAddress from '@/components/modal/findAddress';
+import GetRefund from '@/components/modal/getRefund';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 import { useState } from 'react';
 const bookOverviews = bookOverviewsMock;
@@ -14,6 +15,7 @@ function TestPage() {
   const [isFindAddressModalOpen, setIsFindAddressModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isAddCommunityCardModalOpen, setIsAddCommunityCardModalOpen] = useState(false);
+  const [isGetRefundFormModalOpen, setIsGetRefundFormModalOpen] = useState(false);
 
   const handleReviewModalOpen = () => {
     setIsReviewModalOpen(!isReviewModalOpen);
@@ -29,6 +31,10 @@ function TestPage() {
 
   const handleAddCommunityCardModalOpen = () => {
     setIsAddCommunityCardModalOpen(!isAddCommunityCardModalOpen)
+  }
+
+  const handleGetRefundFormModalOpen = () => {
+    setIsGetRefundFormModalOpen(!isGetRefundFormModalOpen)
   }
 
   return (
@@ -63,7 +69,11 @@ function TestPage() {
       {isAlertModalOpen && <AlertModal title="정말 삭제하시겠습니까?" description="삭제한 글은 복구할 수 없습니다." onClick={handleAlertModalOpen} />}
       
       <button onClick={handleAddCommunityCardModalOpen} className='border border-black w-full h-50 bg-green flex-center'>커뮤니티 글쓰기 모달 열려라</button>
-      {isAddCommunityCardModalOpen && <AddCommunityCard  onClick={handleAddCommunityCardModalOpen} />}
+      {isAddCommunityCardModalOpen && <AddCommunityCard onClick={handleAddCommunityCardModalOpen} />}
+
+      <button onClick={handleGetRefundFormModalOpen} className='border border-black w-full h-50 bg-green flex-center'>커뮤니티 글쓰기 모달 열려라</button>
+      {isGetRefundFormModalOpen && <GetRefund onClick={handleGetRefundFormModalOpen} />}
+      
       
       <PreviewBookInfo
         size="lg"
