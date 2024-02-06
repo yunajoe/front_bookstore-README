@@ -1,7 +1,7 @@
 import { Address } from '@/types/address';
 import AddressItem from './AddressItem';
 
-function FindAddressPagination({ addressData }: { addressData: Address[] }) {
+function FindAddressWrapper({ addressData }: { addressData: Address[] }) {
   return (
     <div className='flex flex-col overflow-scroll '>
       {addressData?.map((data) => (
@@ -11,4 +11,4 @@ function FindAddressPagination({ addressData }: { addressData: Address[] }) {
   );
 }
 
-export default FindAddressPagination;
+export default FindAddressWrapper;

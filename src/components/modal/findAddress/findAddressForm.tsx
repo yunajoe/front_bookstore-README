@@ -1,17 +1,36 @@
 import ModalSearchInput from '@/components/input/modalSearchInput';
 import DoFindAddress from '@/components/modal/findAddress/doFindAddress';
 import NotFindAddress from '@/components/modal/findAddress/notFindAddress';
-import FindAddressPagination from './findAddressPagination';
-import { getAddress } from 'src/api/address';
-import { useState } from 'react';
+import FindAddressWrapper from '@/components/modal/findAddress/findAddressWrapper';
+import { getAddress } from '@/api/address';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Address } from '@/types/address';
+import Pagination from '@/components/button/pagination';
+import { useAtom } from 'jotai';
+import { addressCurrentPageAtom } from '@/store/state';
+import { QUERY_KEY } from 'src/constants/queryKey';
 
 function FindAddressForm() {
-  const [address, setAddress] = useState();
+  const [search, setSearch] = useState('')
+  const [addressCurrentPage, setAddressCurrentPage] = useAtom(addressCurrentPageAtom);
 
-  const handleSearch = async (search: string) => {
-    const result = await getAddress(search);
-    setAddress(result);
+  const { data, refetch } = useQuery({
+    queryKey: [QUERY_KEY.address, search, addressCurrentPage],
+    queryFn: () => getAddress(search, addressCurrentPage),
+    enabled: !!search,
+  })
+
+  console.log(data)
+
+  const handleSearch = async (value: string) => {
+    setSearch(value);
+    setAddressCurrentPage(1);
   };
+
+  useEffect(() => {
+    refetch();
+  },[search, addressCurrentPage, refetch])
 
   return (
     <div className="flex flex-col w-full gap-20 overflow-scroll">
@@ -19,11 +38,12 @@ function FindAddressForm() {
         placeholder="도로명, 지명, 건물명 검색"
         onSearch={handleSearch}
       />
-      {address ? (
-        <FindAddressPagination addressData={address} />
+      {search.length === 0 ? <DoFindAddress /> : data?.juso ? (
+        <FindAddressWrapper addressData={data?.juso} />
       ) : (
         <NotFindAddress />
       )}
+      <Pagination totalCount={data?.common.totalCount} />
     </div>
   );
 }
