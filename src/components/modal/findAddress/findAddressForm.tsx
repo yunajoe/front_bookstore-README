@@ -15,7 +15,7 @@ function FindAddressForm() {
   }
 
   return (
-    <div className="flex flex-col w-full gap-20">
+    <div className="flex flex-col w-full gap-20 overflow-scroll">
       <SearchInput
         width="full"
         height="48"

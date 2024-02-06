@@ -3,7 +3,7 @@ import AddressItem from './AddressItem';
 
 function FindAddressPagination({ addressData }: { addressData: Address[] }) {
   return (
-    <div className='overflow-scroll'>
+    <div className='flex flex-col overflow-scroll '>
       {addressData?.map((data) => (
          <AddressItem zipNo={data.zipNo} roadAddr={data.roadAddr} jibunAddr={data.jibunAddr} />
       ))}
