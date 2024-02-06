@@ -11,6 +11,7 @@ import Spacing from '@/components/container/spacing/spacing';
 import { BookDetailMock1 } from '@/pages/api/mock/bookDetailMock';
 import Image from 'next/image';
 import { useState } from 'react';
+import BookDetailImg from './bookDetailImg';
 
 function BookDetailCard({ bookId = '' }) {
   // TODO bookId로 react query를 통해 book detail data를 받는 코드를 짜야 함. 지금은 목업데이터만 연결함
@@ -29,19 +30,7 @@ function BookDetailCard({ bookId = '' }) {
 
   return (
     <section className="flex justify-start gap-20 items-start mobile:flex-col mobile:flex-center">
-      <article
-        role="img"
-        className="bg-gray-5 relative w-[525px] h-[797px] tablet:min-w-[334px] tablet:max-w-[334px]
-          tablet:h-[526px] mobile:min-w-[330px] mobile:max-w-[330px] mobile:h-[500px]">
-        <Image
-          src={BookDetailMock1.imageUrl ?? ''}
-          alt="책 표지 이미지"
-          fill
-          objectFit="contain"
-          objectPosition="top"
-        />
-      </article>
-
+      <BookDetailImg imageUrl={BookDetailMock1.imageUrl} />
       <article
         role="info"
         className="flex flex-col justify-start items-start grow mobile:w-full">
