@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 
-function bookDetailImg({ imageUrl }: { imageUrl?: string | null }) {
+function BookDetailImg({ imageUrl }: { imageUrl?: string | null }) {
   return (
     <article
       role="img"
@@ -18,4 +18,4 @@ function bookDetailImg({ imageUrl }: { imageUrl?: string | null }) {
   );
 }
 
-export default bookDetailImg;
+export default BookDetailImg;
