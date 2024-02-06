@@ -15,7 +15,7 @@ interface PreviewBookInfoProps {
   size: 'sm' | 'md' | 'lg';
   price?: number;
   category?: string;
-}  
+}
 
 function PreviewBookInfo({
   image,
@@ -85,7 +85,7 @@ function PreviewBookInfo({
   return (
     <div className={`flex ${STYLE.width} flex-col`}>
       <div
-        className={`${STYLE.img} flex relative justify-center ${itemsStart ? '' : 'items-end'}`}>
+        className={`${STYLE.img} relative flex justify-center ${itemsStart ? '' : 'items-end'}`}>
         <div className="relative">
           <div
             className={`flex items-end min-w-${rawImageSize.width} ${
@@ -108,9 +108,9 @@ function PreviewBookInfo({
                   alt="순위라벨 이미지"
                 />
                 <span
-                  className={`text-white text-[13px] font-bold absolute top-5 left-10 ${
-                    ranking > 9 && 'tracking-[-0.6px] left-6'
-                  } ${ranking > 99 && 'tracking-[-0.5px] left-2'}`}>
+                  className={`absolute left-10 top-5 text-[13px] font-bold text-white ${
+                    ranking > 9 && 'left-6 tracking-[-0.6px]'
+                  } ${ranking > 99 && 'left-2 tracking-[-0.5px]'}`}>
                   {ranking}
                 </span>
               </div>
@@ -120,20 +120,20 @@ function PreviewBookInfo({
       </div>
       {title && (
         <p
-          className={`text-black text-15 font-medium text-overflow2 mb-4 mt-12 ${
+          className={`font-medium text-overflow2 mb-4 mt-12 text-15 text-black ${
             alignCenter ? 'text-center font-bold' : ''
           }`}>
           {title}
         </p>
       )}
       {authorList && (
-        <div className="text-gray-3 text-14 truncate">
+        <div className="truncate text-14 text-gray-3">
           {authorList.join(', ')}
         </div>
       )}
-      {category && <div className="text-gray-3 text-14">[{category}]</div>}
+      {category && <div className="text-14 text-gray-3">[{category}]</div>}
       {price && (
-        <div className="text-black text-14 font-bold mt-4">
+        <div className="mt-4 text-14 font-bold text-black">
           {price.toString().replace(THOUSAND_UNIT, ',')}
         </div>
       )}
