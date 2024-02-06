@@ -19,7 +19,7 @@ function GetRefundForm() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TitleContentTable />
+        <TitleContentTable title1='책 제목' content1='스물 아홉 생일, 1년 후 죽기로 결심하다' title2='저자' content2='이제니'/>
         <Image src={LineIcon} alt="구분선"/>
         <div className='flex'>
           <Radio label='신청 유형 선택' control={control} name='application' title1='교환' title2='환불'/>
