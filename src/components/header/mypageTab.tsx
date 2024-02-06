@@ -20,16 +20,19 @@ function MyPageTab() {
   const [selectedSettingTab, setSelectedSettingTab] = useState('editProfile'); // SettingTab의 선택된 탭 상태
   const router = useRouter();
 
-  // 페이지 로드 시 라우터의 경로를 기반으로 선택된 탭을 설정
   useEffect(() => {
-    const pathname = router.pathname;
+    const pathParts = router.asPath.split('/');
+    const lastPathPart = pathParts[pathParts.length - 2];
+    setSelectedTab(lastPathPart); //설정탭 하위에 해당하는 경로를 선택했을 때
+
+    const pathname = router.pathname; //주문 조회, 나의리뷰, 나의 커뮤니티글, 설정 에 해당하는 경로
     const tabName = Object.keys(tabRoutes).find(
       (key) => tabRoutes[key] === pathname,
     );
     if (tabName) {
       setSelectedTab(tabName);
     }
-  }, [router.pathname]);
+  }, [router.asPath, router.pathname]);
 
   const handleButtonClick = (tabName: string) => {
     if (tabRoutes[tabName]) {
@@ -72,12 +75,8 @@ function MyPageTab() {
           isSmall={false}
         />
       </div>
-      {selectedTab === 'setting' && (
-        <SettingTab
-          selectedTab={selectedSettingTab}
-          setSelectedTab={setSelectedSettingTab}
-        />
-      )}
+
+      {selectedTab === 'setting' && <SettingTab />}
     </div>
   );
 }
