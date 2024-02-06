@@ -5,13 +5,15 @@ type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
   color?: string;
+  height?: number;
+  text?: number;
 };
 
-function RegisterButton({ type, onClick, children, color = 'green' }: ButtonProps) {
+function RegisterButton({ type, onClick, children, color = 'green', height = 50, text = 17}: ButtonProps) {
   return (
     <button
       type={type}
-      className={`h-50 w-full text-center bg-${color} rounded-[5px] text-17 text-white`}
+      className={`h-${height} w-full text-center bg-${color} rounded-[5px] text-${text} text-white py-8`}
       onClick={onClick}>
       {children}
     </button>

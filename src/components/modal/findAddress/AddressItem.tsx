@@ -7,7 +7,7 @@ import { Address } from "@/types/address";
 function AddressItem({ zipNo, roadAddr, jibunAddr }: Address) {
   return (
     <>
-      <TitleContentTable title1={zipNo} content1={roadAddr} content2={jibunAddr} truncate={false} />
+      <TitleContentTable title1={zipNo} content1={roadAddr} content2={jibunAddr} truncate={false} green={true} black={true} gap={8} />
       <Image src={LineIcon} alt="구분선" />
     </>
   )
