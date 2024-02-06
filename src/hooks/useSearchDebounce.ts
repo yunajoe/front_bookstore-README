@@ -4,7 +4,7 @@ function useSearchDebounce(onSearch?: (searchTerm: string) => void) {
   const [value, setValue] = useState('');
   const [debouncedValue, setDebouncedValue] = useState(value);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 

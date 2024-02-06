@@ -1,20 +1,35 @@
-import classNames from "classnames";
+import classNames from 'classnames';
+import {
+  Control,
+  FieldPath,
+  FieldValues,
+  useController,
+} from 'react-hook-form';
 
 interface TextareaProps {
   height?: string;
+  control: Control<FieldValues>;
+  name: FieldPath<FieldValues>;
 }
 
-function Textarea({ height }: TextareaProps) {
-  const className = classNames("w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15", height)
+function Textarea({ height, control, name }: TextareaProps) {
+  const className = classNames(
+    'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15',
+    height,
+  );
+  const { field } = useController({name, control})
+
   return (
     <div className="flex flex-col w-full gap-12">
-      <label htmlFor="content" className="text-16 text-b-b">
+      <label htmlFor={field.name} className="text-16 text-b-b">
         내용
       </label>
       <textarea
-        id="content"
-        // {...register('content', { required: true })}
+        id={field.name}
         className={className}
+        name={field.name}
+        value={field.value}
+        onChange={field.onChange}
         placeholder="내용을 작성해주세요"></textarea>
     </div>
   );

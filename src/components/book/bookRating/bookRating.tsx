@@ -1,9 +1,10 @@
 import cls from '@/utils/cls';
 import Image from 'next/image';
-import { useState, MouseEvent, ReactNode } from 'react';
+import { Dispatch, MouseEvent, SetStateAction, useState } from 'react';
 
 interface BookRatingProps {
   rating: number;
+  setNewRating?: Dispatch<SetStateAction<number>>;
   size?: 'sm' | 'md' | 'lg';
   onClick?: boolean;
   className?: string;
@@ -11,6 +12,7 @@ interface BookRatingProps {
 
 function BookRating({
   rating,
+  setNewRating,
   size = 'sm',
   onClick,
   className,
@@ -26,6 +28,7 @@ function BookRating({
   const handleChangeRating = (e: MouseEvent<HTMLImageElement>) => {
     const newRating = parseInt(e.currentTarget.id);
     setIsRating(newRating);
+    if (setNewRating) setNewRating(newRating);
   };
 
   const viewRating = () => {
@@ -58,6 +61,7 @@ function BookRating({
     }
     return ratingImages;
   };
+
   return (
     <div className={cls(`${className ? className : 'flex-center gap-3'}`)}>
       {viewRating()}
