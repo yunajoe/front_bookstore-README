@@ -1,14 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TabButton from '../button/header/TabButton';
 import SettingTab from '@/components/header/settingTab';
-import CommunityCard from '@/components/card/communityCard/communityCard';
-import BookReviewCard from '@/components/card/bookReviewCard/bookReviewCard';
-import OrderOverView from '@/components/container/orderDate/orderOverView';
-function MyPageTab() {
-  const [selectedTab, setSelectedTab] = useState(''); // 현재 선택된 탭 추가
+import { useRouter } from 'next/router';
 
-  const handleButtonClick = (tabName: React.SetStateAction<string>) => {
-    setSelectedTab(tabName);
+// tabRoutes 객체의 타입 정의
+interface TabRoutes {
+  [key: string]: string;
+}
+
+const tabRoutes: TabRoutes = {
+  myReview: '/mypage/review',
+  setting: '/mypage/setting/editProfile',
+  orderList: '/mypage/order',
+  myCommunity: '/mypage/community',
+};
+
+function MyPageTab() {
+  const [selectedTab, setSelectedTab] = useState('');
+  const [selectedSettingTab, setSelectedSettingTab] = useState('editProfile'); // SettingTab의 선택된 탭 상태
+  const router = useRouter();
+
+  // 페이지 로드 시 라우터의 경로를 기반으로 선택된 탭을 설정
+  useEffect(() => {
+    const pathname = router.pathname;
+    const tabName = Object.keys(tabRoutes).find(
+      (key) => tabRoutes[key] === pathname,
+    );
+    if (tabName) {
+      setSelectedTab(tabName);
+    }
+  }, [router.pathname]);
+
+  const handleButtonClick = (tabName: string) => {
+    if (tabRoutes[tabName]) {
+      // 해당하는 키가 있는지 확인
+      setSelectedTab(tabName);
+      if (tabName === 'setting') {
+        // SettingTab을 클릭한 경우
+        setSelectedSettingTab('editProfile'); // 초기 탭을 설정
+      }
+      router.push(tabRoutes[tabName]);
+    } else {
+      console.error(`Tab route for '${tabName}' is not defined`);
+    }
   };
 
   return (
@@ -38,45 +72,10 @@ function MyPageTab() {
           isSmall={false}
         />
       </div>
-      {selectedTab === 'myCommunity' && (
-        <CommunityCard
-          profileImg={''}
-          userNickname={''}
-          createAt={''}
-          bookCover={''}
-          bookTitle={''}
-          review={''}
-        />
-      )}
-      {selectedTab === 'order' && (
-        <OrderOverView
-          orderView={{
-            processing: 1,
-            shipping: 1,
-            completed: 1,
-            exchangeCompleted: 0,
-            purchased: 0,
-          }}
-        />
-      )}
-      {selectedTab === 'setting' && <SettingTab />}
-      {selectedTab === 'myReview' && (
-        <BookReviewCard
-          book={{
-            productId: 0,
-            title: '',
-            imageUrl: undefined,
-            authors: null,
-          }}
-          review={{
-            reviewId: 0,
-            createdAt: '',
-            updatedAt: '',
-            reviewTitle: '',
-            reviewImgUrl: undefined,
-            reviewContent: '',
-            reviewRating: 0,
-          }}
+      {selectedTab === 'setting' && (
+        <SettingTab
+          selectedTab={selectedSettingTab}
+          setSelectedTab={setSelectedSettingTab}
         />
       )}
     </div>

@@ -10,7 +10,7 @@ interface HeaderLayoutProps {
 
 function HeaderLayout({ isLoggedIn, children }: HeaderLayoutProps) {
   const router = useRouter();
-  const isMypage = router.pathname === '/mypage';
+  const isMypage = router.pathname.startsWith('/mypage');
 
   return (
     <div className="sticky top-0 z-50 h-90 w-full min-w-fit flex-row bg-white tablet:h-170 pc:h-170">
