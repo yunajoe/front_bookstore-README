@@ -1,5 +1,5 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import BookOverviewCard from '@/components/book/bookOverviewCard/bookOverViewCard';
+import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 const bookOverviews = bookOverviewsMock;
 
@@ -25,6 +25,28 @@ function TestPage() {
       <BookOverviewCard
         book={bookOverviews[4]?.book}
         like={bookOverviews[4]?.like}
+      />
+      <PreviewBookInfo
+        size="lg"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+      />
+      <PreviewBookInfo
+        size="md"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+      />
+      <PreviewBookInfo
+        size="sm"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+        alignCenter
       />
     </div>
   );
