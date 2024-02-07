@@ -6,42 +6,29 @@ import { carouselMockData } from '../api/mock/carouselMock';
 import { responsive } from '@/utils/checkResponsiveEnv';
 import CategoryCarousel from '@/components/carousel/categoryCarousel';
 import CategoryBookList from '@/components/list/categoryBookList/categoryBookList';
+import EventSection from '@/components/container/eventSection/eventSection';
 
 export default function DomesticPage() {
   return (
-      <div className='flex flex-col mobile:flex-center'>
-    <SidebarLayout isDomestic={true}>
-        
-      <Spacing height={[0, 0, 20]} />
-      
-      <article>
-        <div
-          role="temp"
-          className="h-[483px] w-[895px] bg-gray-1 mobile:h-[278px] mobile:w-[330px] tablet:h-[275px]
-            tablet:w-[511px]">
-          광고 넣을 곳!!!!!
-        </div>
-      </article>
-      
-      <Spacing height={[60, 40, 40]} />
+    <div className='flex flex-col mobile:flex-center'>
+      <SidebarLayout isDomestic={true}>
+        <Spacing height={[0, 0, 20]} />
+        <EventSection adsSizeClassName='w-[525px] h-[483px] tablet:w-297 tablet:h-275 mobile:w-330 mobile:h-178' eventSizeClassName='w-[340px] h-[483px] tablet:w-194 tablet:h-275 mobile:w-330 mobile:h-90'/>
+        <Spacing height={[60, 40, 40]} />
+        <CategoryCarousel data={carouselMockData} responsive={responsive} />
+        <Spacing height={[120, 80, 80]} />
 
-      <CategoryCarousel data={carouselMockData} responsive={responsive} />
-      
-      <Spacing height={[120, 80, 80]} />
-
-      <article className="flex flex-col gap-50 mobile:gap-20 tablet:gap-40">
-        <h1 className="text-20 text-black">베스트셀러 넣을 곳</h1>
-        <div
-          role="temp"
-          className="h-[500px] w-[895px] bg-gray-1 mobile:w-[330px]
-          tablet:w-[511px]"></div>
-      </article>
+        <article className="flex flex-col gap-50 mobile:gap-20 tablet:gap-40">
+          <h1 className="text-20 text-black">베스트셀러 넣을 곳</h1>
+          <div
+            role="temp"
+            className="h-[500px] w-[895px] bg-gray-1 mobile:w-[330px]
+            tablet:w-[511px]"></div>
+        </article>
         
         <Spacing height={[120, 80, 80]} />
-        
         <CategoryBookList />
-        
-    </SidebarLayout>
-          </div>
+      </SidebarLayout>
+    </div>
   );
 }
