@@ -23,8 +23,7 @@ export default function BookDetailPage() {
   const [orderCount, setOrderCount] = useState(1);
 
   return (
-    <div className="max-w-[1200px]">
-      <MainLayout>
+    <MainLayout>
         <section className="flex flex-col w-full p-40 mobile:p-19 mobile:flex-center">
           <BookDetailCard
             bookId={bookId as string}
@@ -66,6 +65,5 @@ export default function BookDetailPage() {
           />
         </div>
       </MainLayout>
-    </div>
   );
 }
