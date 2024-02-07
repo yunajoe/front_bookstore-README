@@ -20,6 +20,8 @@ function SidebarLayout({
   children,
 }: SidebarLayoutProps) {
   return (
+    <div className='flex flex-col mobile:flex-center'>
+
       <MainLayout>
         <section
           role="contents"
@@ -37,6 +39,7 @@ function SidebarLayout({
           <div>{children}</div>
         </section>
       </MainLayout>
+      </div>
   );
 }
 

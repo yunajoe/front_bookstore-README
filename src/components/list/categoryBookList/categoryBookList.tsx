@@ -3,11 +3,13 @@ import Link from "next/link";
 
 import PreviewBookInfo from "@/components/book/previewBookInfo/previewBookInfo";
 import DropDown from "@/components/dropDown/dropDown";
+import useCarouselEnv from "@/hooks/useCarouselEnv";
+
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 import { DomesticBookList } from "@/pages/api/mock/domesticBookListMock";
-import useCarouselEnv from "@/hooks/useCarouselEnv";
+
 interface CategoryBookList {
-  mainCategory: "국내" | "외국";
+  mainCategory: "domestic" | "foreign";
   subCategory?: string;
 }
 

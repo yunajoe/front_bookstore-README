@@ -12,7 +12,6 @@ import { carouselMockData } from '../api/mock/carouselMock';
 
 export default function DomesticPage() {
   return (
-    <div className='flex flex-col mobile:flex-center'>
       <SidebarLayout isDomestic={true}>
         <Spacing height={[0, 0, 20]} />
 
@@ -31,8 +30,7 @@ export default function DomesticPage() {
         </article>        
         <Spacing height={[120, 80, 80]} />
 
-        <CategoryBookList mainCategory="국내"/>
+        <CategoryBookList mainCategory="domestic"/>
       </SidebarLayout>
-    </div>
   );
 }
