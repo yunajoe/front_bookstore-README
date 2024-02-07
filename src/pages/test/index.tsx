@@ -26,6 +26,28 @@ function TestPage() {
         book={bookOverviews[4]?.book}
         like={bookOverviews[4]?.like}
       />
+      <PreviewBookInfo
+        size="lg"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+      />
+      <PreviewBookInfo
+        size="md"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+      />
+      <PreviewBookInfo
+        size="sm"
+        image={bookOverviews[1]?.book.bookImgUrl}
+        ranking={bookOverviews[1]?.book.rank}
+        title="야오호로어옹"
+        authorList={['하이', '이작가']}
+        alignCenter
+      />
     </div>
   );
 }
