@@ -1,4 +1,4 @@
-import { BookDetailCardType } from "./cardType";
+import { BookDetailCardType } from './cardType';
 
 /** 상세페이지/리뷰컴포넌트의 props 타입 */
 interface ReviewType{
