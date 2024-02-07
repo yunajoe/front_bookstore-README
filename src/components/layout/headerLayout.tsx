@@ -14,7 +14,7 @@ function HeaderLayout({ isLoggedIn, children }: HeaderLayoutProps) {
 
   return (
     <div
-      className={`sticky top-0 z-50 min-h-fit w-full min-w-fit flex-row bg-white ${isMypage ? 'h-240 mobile:h-160' : 'h-110 tablet:h-170 pc:h-170'}`}>
+      className={`sticky top-0 z-50 min-h-fit w-full min-w-fit flex-row bg-white ${isMypage ? 'min-h-fit' : 'h-110 tablet:h-170 pc:h-170'}`}>
       {children}
       {isMypage ? <MyPageTab /> : <NavigationTab isLoggedIn={isLoggedIn} />}
     </div>
