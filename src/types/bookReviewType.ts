@@ -8,7 +8,7 @@ interface ReviewType{
   updatedAt?: string;
   reviewBookImgUrl?: string | null;
   reviewProfileImg?: string | null;
-  profileName?: string;
+  userNickname?: string;
   reviewContent: string;
   reviewRating: number;
 }

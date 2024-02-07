@@ -5,14 +5,14 @@ import { ReviewType } from '@/types/bookReviewType';
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 
 interface BookReviewProfileType {
-  profileName: string;
+  userNickname: string;
   reviewProfileImg?: string | null;
   reviewRating: number;
   createdAt: string;
 }
 
 function BookReviewProfile({
-  profileName,
+  userNickname,
   reviewProfileImg,
   reviewRating,
   createdAt,
@@ -28,7 +28,7 @@ function BookReviewProfile({
           />
         </div>
         <div className="flex flex-col justify-start items-start gap-4">
-          <h3 className="text-14 text-gray-4 font-bold">{profileName}</h3>
+          <h3 className="text-14 text-gray-4 font-bold">{userNickname}</h3>
           <BookRating rating={reviewRating} />
         </div>
       </div>
@@ -40,7 +40,7 @@ function BookReviewProfile({
 function BookReviewCard({
   createdAt,
   reviewProfileImg,
-  profileName,
+  userNickname,
   reviewContent,
   reviewRating,
 }: ReviewType) {
@@ -53,7 +53,7 @@ function BookReviewCard({
       <div className="flex flex-col gap-12 w-full">
         <BookReviewProfile
           createdAt={createdAt}
-          profileName={profileName ?? '익명이'}
+          userNickname={userNickname ?? '익명이'}
           reviewProfileImg={reviewProfileImg}
           reviewRating={reviewRating}
         />
