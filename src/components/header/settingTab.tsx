@@ -15,7 +15,7 @@ function SettingTab() {
 
   const handleButtonClick = (buttonName: string) => {
     setSelectedTab(buttonName);
-    router.replace(`/mypage/setting/${buttonName}`);
+    router.push(`/mypage/setting/${buttonName}`);
   };
 
   return (
