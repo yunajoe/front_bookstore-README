@@ -1,5 +1,4 @@
-import { CusTomBookType } from '@/types/customPageType';
-// 이미 선호장르에서 filtering된 책들중에서, 우선순위로 bookmarkCount, viewcount, 그다음 책 이름순으로 ㄹ보여주기기
+import { CusTomBookType } from '@/types/customPageType'; 
 
 export const filteredBooks = (preferredGenreList: CusTomBookType[]) => {
   const filteredPreferredGenreList = preferredGenreList.sort(function (a, b) {
