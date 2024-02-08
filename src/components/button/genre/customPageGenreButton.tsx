@@ -14,11 +14,12 @@ function CustomPageGenreButton({
     if (editMode) onClick(!selected);
   };
 
+
   return (
     <button
       className={`whitespace-nowrap rounded-[53px] w-fit h-33 text-13 border flex-center ${
         selected ? 'border-green text-green' : 'border-gray-1'
-      } pc:text-14 ${editMode ? 'hover:border-green hover:text-green' : ''}`}
+      } pc:text-14 ${editMode ? 'desktop:hover:border-green desktop:hover:text-green tablet:hover:border-green tablet:hover:text-green' : ''}`}
       onClick={handleClick}>
       <div className="mx-30">{title}</div>
     </button>

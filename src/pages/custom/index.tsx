@@ -8,9 +8,9 @@ import CustomPageGenreButton from '@/components/button/genre/customPageGenreButt
 import { customMockResult } from '@/pages/api/mock/customPageMock';
 import Link from 'next/link';
 import { filteredBooks } from '@/utils/compareBooks';
+import ToolTip from '@/components/dropDown/toolTip';
 
-// 이 페이지에서 필요한거 =>  책 이미지, 제목, 작가, 장르, 가격,  viewCount(조회수), bookmarkcount(찜갯수)
-// 문제 마지막 한개 선택된 장르에 해당되는 책이 아무것도 없을떄는?
+
 function CustomPage() {
   const [bookArray, setBookArray] = useState<CusTomBookType[]>([]);
   const [filterBooksArray, setFilterBookArray] = useState<CusTomBookType[]>([]);
@@ -18,14 +18,14 @@ function CustomPage() {
   const genres = ReadMeGenreList.genreList;
 
   const handledFilteredGenreBooks = (selectedGenreList: SelectedBookType[]) => {
-    const filteredBooksList = selectedGenreList.reduce((acc, book) => {
+    const filteredBooksList = selectedGenreList.reduce<CusTomBookType[]>((acc, book) => {
       const selectedTitle = book.title;
       const selectedGenreBooks = bookArray.filter((book) => {
         const [_, genre] = book.categories;
         return selectedTitle === genre;
       });
       return [...acc, ...selectedGenreBooks];
-    }, [] as CusTomBookType[]);
+    }, []);
 
     return filteredBooksList;
   };
@@ -34,12 +34,10 @@ function CustomPage() {
     if (customMockResult.status === 200) {
       const books = customMockResult.data.books;
       setBookArray(books);
-      // 마이페이지에서 가져온 선호 장르리스트들
       const genres = ReadMeGenreList.genreList;
       // const notingGenres = [];
       // const selectedItem = notingGenres.filter((genre) => genre.selected);
       const selectedItem = genres.filter((genre) => genre.selected);
-
       setGenreArr(selectedItem);
       const filteredItem = handledFilteredGenreBooks(selectedItem);
       const filteredBooksList = filteredBooks(filteredItem);
@@ -53,6 +51,8 @@ function CustomPage() {
     setFilterBookArray(filteredBooksList);
   }, [genreArr.length]);
 
+
+
   return (
     <div className="flex-1">
       <div className="w-full flex flex-col items-center">
@@ -61,10 +61,10 @@ function CustomPage() {
             <CustomPageContentsLayout>
               <div
                 className="flex flex-wrap w-full gap-8 mt-30 mb-40 mobile:flex-nowrap
-                  mobile:overflow-scroll">
+                  mobile:overflow-auto no-scrollbar">
                 {genreArr.length > 0 ? (
                   genres.map((genre, index) => {
-                    const { title, selected } = genre;
+                    const { title } = genre;
                     const selectedTitleArr = genreArr.map((item) => item.title);
                     return (
                       <div key={index}>
@@ -94,15 +94,17 @@ function CustomPage() {
                     );
                   })
                 ) : (
-                  <div className="mt-120 mobile:mt-80 flex flex-col gap-y-10">
-                    <div className="flex flex-col items-center">
-                      <div>맞춤 도서를 추천받아 보세요!</div>
-                      <div>선호 장르 분석을 통해 도서를 추천해드려요</div>
+                  <>
+                    <div className="mt-120 mobile:mt-80 flex flex-col gap-y-10 w-full items-center">
+                      <div className="flex flex-col items-center mb-20">
+                        <div className="text-20">맞춤 도서를 추천받아 보세요!</div>
+                        <div>선호 장르 분석을 통해 도서를 추천해드려요</div>
+                      </div>
+                      <div className="px-45 py-13 text-green rounded-[5px] border-2 border-green">
+                        <Link href="/signin">선호 장르 선택하러 가기</Link>
+                      </div>
                     </div>
-                    <div className="px-45 py-13 text-green rounded-[5px] border-green">
-                      <Link href="/signin">로그인하고 맞춤 도서 추천받기</Link>
-                    </div>
-                  </div>
+                  </>
                 )}
               </div>
               <div
@@ -110,7 +112,7 @@ function CustomPage() {
                   mobile:gap-x-10 gap-y-40 mobile:gap-y-30 mobile:pr-15">
                 {filterBooksArray?.map((book) => {
                   return (
-                    <div key={book.bookId}>
+                    <div key={book.bookId} className="bg-red">
                       <PreviewBookInfo
                         size="lg"
                         title={book.bookTitle}
@@ -130,27 +132,29 @@ function CustomPage() {
   );
 }
 
+
 type CustomPageContentsLayoutProps = {
   children: ReactNode;
 };
-
 const CustomPageContentsLayout = ({
   children,
 }: CustomPageContentsLayoutProps) => {
   return (
-    <div className="px-60 mobile:px-0 mobile:pl-15 mobile:w-360">
+    <div className="w-full px-60 mobile:px-0 mobile:pl-15 mobile:w-360">
       <div className="w-full flex justify-start items-center gap-x-10 mt-20">
         <div className="text-black text-20 font-bold">
           내 취향대로 인기도서 골라보기
         </div>
-        <div>
-          <Image
-            src="/icons/Info.svg"
-            alt="정보아이콘"
-            width={20}
-            height={20}
-          />
-        </div>
+        <ToolTip toolTipText='지난일정기간동안..~ 한 순위입니다'>
+          <div>
+            <Image
+              src="/icons/Info.svg"
+              alt="정보아이콘"
+              width={20}
+              height={20}
+            />
+          </div>
+        </ToolTip>
       </div>
       {children}
     </div>

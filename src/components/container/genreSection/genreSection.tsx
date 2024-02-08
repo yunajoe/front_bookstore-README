@@ -17,8 +17,7 @@ function GenreSection() {
 
   return (
     <div className="flex-center mt-40 flex-col">
-      <div className="mb-28 text-20 font-bold">선호장르 선택</div>
-
+      <div className="mb-28 text-20 font-bold">선호장르 선택</div> 
       <div className={`${getButtonLayoutClass()}`}>
         {genres.map((genre, index) => (
           <GenreButton
