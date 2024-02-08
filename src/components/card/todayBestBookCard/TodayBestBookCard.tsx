@@ -5,12 +5,15 @@ import Image from 'next/image';
 
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookRating from '@/components/book/bookRating/bookRating';
+import BookPrice from '@/components/book/bookPrice/bookPrice';
+import BookCategory from '@/components/book/bookCategory/bookCategory';
+
 import { BookDetailCardType } from '@/types/cardType';
 
 const SIZE = {
   desktop: {
     container: 'w-347 h-240',
-    img: 'w-112 h-170',
+    img: 'min-w-112 max-w-112 h-170',
   },
   tablet: {
     container: 'tablet:w-334 tablet:h-220',
@@ -33,7 +36,7 @@ function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, catego
       className={`rounded-xl border-2 border-gray-1 bg-white px-40 pt-40 mobile:px-20 mobile:pt-20
         tablet:px-30 tablet:pt-30 ${STYLE.container}`}>
       <Link
-        href={`/book/${bookId}`}
+        href={`/bookdetail/${bookId}`}
         className="flex items-start justify-start gap-20 mobile:gap-10">
         <div
           role="img-section"
@@ -56,14 +59,10 @@ function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, catego
             className="text-gray-7 line-clamp-2 w-full text-15 font-bold leading-tight">
             {title}
           </div>
-          <BookAuthor authorList={authors} />
+          <BookAuthor authorList={authors} fontSize={14} />
           <BookRating rating={rating} />
-          <p role="bookGenre" className="text-13 pb-4 text-gray-3">
-            {categoryList}
-          </p>
-          <p role="bookPrice" className="text-gray-7 text-14 font-bold">
-            {price} 원
-          </p>
+          <BookCategory categories={categoryList} fontSize={13}/>
+          <BookPrice price={price}  fontSize={14} isBold hasUnit/>
         </div>
       </Link>
     </div>
