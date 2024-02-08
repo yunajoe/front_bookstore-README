@@ -6,7 +6,7 @@ import TodayBestBook from '@/components/card/todayBestBookCard/TodayBestBookCard
 import TodayBestSlider from '@/components/container/todayBestSection/todayBestSlider';
 import useWindowInnerWidth from '@/hooks/useWindowInnerWidth';
 
-import SkeletonTodayBestBook from '@/components/skeleton/skeletonTodayBestBook';
+import SkeletonTodayBestBook from '@/components/skeleton/todayBestBookSkeleton/skeletonTodayBestBook';
 import { TodayBestBookListMock } from '@/pages/api/mock/todayBestSectionMock';
 
 // width, height, top, bottom, left, right 관련 속성을 모아둔 SIZE 객체

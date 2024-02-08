@@ -9,6 +9,7 @@ import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookCategory from '@/components/book/bookCategory/bookCategory';
 
 import { BookDetailCardType } from '@/types/cardType';
+import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 
 const SIZE = {
   desktop: {
@@ -42,13 +43,7 @@ function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, catego
           role="img-section"
           className={`flex-center relative bg-white ${STYLE.img}`}>
           {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt="책 표지 이미지"
-              layout="fill"
-              objectFit="contain"
-              objectPosition="top"
-            />
+          <PreviewBookInfo size='sm' image={imageUrl} itemsStart/>
           ) : (
             <div className={`bg-gray-1 ${STYLE.img}`}></div>
           )}
