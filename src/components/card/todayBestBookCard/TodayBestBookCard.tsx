@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookRating from '@/components/book/bookRating/bookRating';
-import { TodayBestBookCardType } from '@/types/cardType';
+import { BookDetailCardType } from '@/types/cardType';
 
 const SIZE = {
   desktop: {
@@ -26,21 +26,21 @@ const STYLE = {
   img: `${SIZE.desktop.img} ${SIZE.mobile.img}`,
 };
 
-function TodayBestBook({ ...bookData }: TodayBestBookCardType) {
+function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, categoryList }: BookDetailCardType) {
   return (
     <div
       role="container"
       className={`rounded-xl border-2 border-gray-1 bg-white px-40 pt-40 mobile:px-20 mobile:pt-20
         tablet:px-30 tablet:pt-30 ${STYLE.container}`}>
       <Link
-        href={`/book/${bookData.productId}`}
+        href={`/book/${bookId}`}
         className="flex items-start justify-start gap-20 mobile:gap-10">
         <div
           role="img-section"
           className={`flex-center relative bg-white ${STYLE.img}`}>
-          {bookData.bookImg ? (
+          {imageUrl ? (
             <Image
-              src={bookData.bookImg}
+              src={imageUrl}
               alt="책 표지 이미지"
               layout="fill"
               objectFit="contain"
@@ -54,15 +54,15 @@ function TodayBestBook({ ...bookData }: TodayBestBookCardType) {
           <div
             role="bookTitle"
             className="text-gray-7 line-clamp-2 w-full text-15 font-bold leading-tight">
-            {bookData.title}
+            {title}
           </div>
-          <BookAuthor authorList={bookData.author} />
-          <BookRating rating={bookData.rating} />
+          <BookAuthor authorList={authors} />
+          <BookRating rating={rating} />
           <p role="bookGenre" className="text-13 pb-4 text-gray-3">
-            {bookData.genre}
+            {categoryList}
           </p>
           <p role="bookPrice" className="text-gray-7 text-14 font-bold">
-            {bookData.price} 원
+            {price} 원
           </p>
         </div>
       </Link>
