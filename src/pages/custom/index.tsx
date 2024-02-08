@@ -34,9 +34,7 @@ function CustomPage() {
     if (customMockResult.status === 200) {
       const books = customMockResult.data.books;
       setBookArray(books);
-      const genres = ReadMeGenreList.genreList;
-      // const notingGenres = [];
-      // const selectedItem = notingGenres.filter((genre) => genre.selected);
+      const genres = ReadMeGenreList.genreList;  
       const selectedItem = genres.filter((genre) => genre.selected);
       setGenreArr(selectedItem);
       const filteredItem = handledFilteredGenreBooks(selectedItem);
@@ -97,7 +95,10 @@ function CustomPage() {
                   <>
                     <div className="mt-120 mobile:mt-80 flex flex-col gap-y-10 w-full items-center">
                       <div className="flex flex-col items-center mb-20">
-                        <div className="text-20">맞춤 도서를 추천받아 보세요!</div>
+                          <div className="text-20">
+                            <span className="text-green font-bold">맞춤 도서</span>
+                            <span className="text-black font-bold">를 추천받아 보세요!</span>
+                          </div>
                         <div>선호 장르 분석을 통해 도서를 추천해드려요</div>
                       </div>
                       <div className="px-45 py-13 text-green rounded-[5px] border-2 border-green">
