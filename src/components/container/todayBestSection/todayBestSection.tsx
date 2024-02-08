@@ -2,11 +2,12 @@
 
 // TODO - props 없이 내부에서 data fetching을 받도록 구현할 예정으로, 지금은 목업데이터를 쓰게끔 함
 
-import { bookListMock } from '@/pages/api/todayBestMock';
-import TodayBestBook from '@/components/card/todayBestBookCard/TodayBestBookCard';
 import SkeletonTodayBestBook from '@/components/skeleton/skeletonTodayBestBook';
+import TodayBestBook from '@/components/card/todayBestBookCard/TodayBestBookCard';
+import TodayBestSlider from '@/components/container/todayBestSection/todayBestSlider';
 import useWindowInnerWidth from '@/hooks/useWindowInnerWidth';
-import TodayBestSlider from './todayBestSlider';
+
+import { bookListMock } from '@/pages/api/todayBestMock';
 
 // width, height, top, bottom, left, right 관련 속성을 모아둔 SIZE 객체
 const SIZE = {
@@ -35,7 +36,7 @@ const STYLE = {
   'card-section': `${SIZE.desktop['card-section']} ${SIZE.tablet['card-section']} ${SIZE.mobile['card-section']}`,
 };
 
-function TodayBestCorner() {
+function TodayBestSection() {
   // const { data: bookList, isLoading } = useQuery({
   //     queryKey: [""],
   //     queryFn: () => { },
@@ -121,4 +122,4 @@ function TodayBestCorner() {
   );
 }
 
-export default TodayBestCorner;
+export default TodayBestSection;

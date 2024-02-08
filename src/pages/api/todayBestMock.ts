@@ -1,6 +1,6 @@
 import { TodayBestBookCardType } from '@/types/cardType';
 
-/** TodayBestCorner 컴포넌트 확인용 목업 데이터 */
+/** TodayBestSection 컴포넌트 확인용 목업 데이터 */
 const book1: TodayBestBookCardType = {
   productId: 1,
   bookImg: '/images/SampleBookCover1.jpeg',
