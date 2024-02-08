@@ -113,7 +113,7 @@ function CustomPage() {
                   mobile:gap-x-10 gap-y-40 mobile:gap-y-30 mobile:pr-15">
                 {filterBooksArray?.map((book) => {
                   return (
-                    <div key={book.bookId} className="bg-red">
+                    <div key={book.bookId} >
                       <PreviewBookInfo
                         size="lg"
                         title={book.bookTitle}
