@@ -6,6 +6,7 @@ import AddReview from '@/components/modal/addReview';
 import AlertModal from '@/components/modal/alertModal';
 import FindAddress from '@/components/modal/findAddress';
 import GetRefund from '@/components/modal/getRefund';
+import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 import { useState } from 'react';
 const bookOverviews = bookOverviewsMock;
@@ -43,17 +44,32 @@ function TestPage() {
         book={bookOverviews[0]?.book}
         like={bookOverviews[0]?.like}
       />
-      <BookOverviewCard
-        book={bookOverviews[1]?.book}
-        like={bookOverviews[1]?.like}
+      {/* <SkeletonPreviewBookImage size="sm" />
+      <SkeletonPreviewBookImage size="md" />
+      <SkeletonPreviewBookImage size="lg" /> */}
+      <PreviewBookInfo
+        title="하이용"
+        authorList={['얌얌', '능이버섯']}
+        image={bookOverviews[0]?.book.bookImgUrl}
+        size="sm"
+        ranking={100}
+        // itemsStart
       />
-      <BookOverviewCard
-        book={bookOverviews[2]?.book}
-        like={bookOverviews[2]?.like}
+      <PreviewBookInfo
+        title="하이용"
+        authorList={['얌얌', '능이버섯']}
+        image={bookOverviews[0]?.book.bookImgUrl}
+        size="md"
+        ranking={20}
+        // itemsStart
       />
-      <BookOverviewCard
-        book={bookOverviews[3]?.book}
-        like={bookOverviews[3]?.like}
+      <PreviewBookInfo
+        title="하이용"
+        authorList={['얌얌', '능이버섯']}
+        image={bookOverviews[0]?.book.bookImgUrl}
+        size="lg"
+        ranking={10}
+        // itemsStart
       />
       <BookOverviewCard
         book={bookOverviews[4]?.book}
