@@ -12,6 +12,9 @@ function AddCommunityCardForm() {
   const [search, setSearch] = useState('');
   const [CurrentPage, setCurrentPage] = useAtom(CurrentPageStateAtom);
 
+  //TODO : search, CurrentPage값 data fetch때 사용할 예정
+  console.log(search, CurrentPage)
+
   const handleSearch = (value: string) => {
     setSearch(value);
     setCurrentPage(1);
