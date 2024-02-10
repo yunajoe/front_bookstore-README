@@ -19,6 +19,7 @@ interface InputProps {
 
 function Input({
   type,
+  title,
   height,
   control,
   name,
@@ -43,6 +44,7 @@ function Input({
       </label>
       {as ?? as}
       <input
+        type={type}
         id={field.name}
         className={className}
         name={field.name}

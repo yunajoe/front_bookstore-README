@@ -20,7 +20,9 @@ function GetRefundForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-40 overflow-scroll'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-40 overflow-scroll">
         <TitleContentTable
           title1="책 제목"
           content1="스물 아홉 생일, 1년 후 죽기로 결심하다"
@@ -44,10 +46,16 @@ function GetRefundForm() {
             label2="상품 회수"
           />
         </div>
-        <Input type='email' title='이메일' control={control} name='email'/>
         <Input
-          type='text'
-          title='내용'
+          type="email"
+          title="이메일"
+          description="처리 내역이 해당 이메일로 발송"
+          control={control}
+          name="email"
+        />
+        <Input
+          type="text"
+          title="내용"
           control={control}
           name="description"
           as={
@@ -60,7 +68,9 @@ function GetRefundForm() {
         />
         <RefundPrice refundPrice="19,800" />
       </form>
-      <RegisterButton disabled={isButtonActive}>교환/환불 신청하기</RegisterButton>
+      <RegisterButton disabled={isButtonActive}>
+        교환/환불 신청하기
+      </RegisterButton>
     </>
   );
 }
