@@ -6,6 +6,9 @@ import RegisterButton from '@/components/button/register/registerButton';
 import Textarea from '@/components/input/textarea';
 import useFormControl from '@/hooks/useFormControl';
 import DropDown from '@/components/dropDown/dropDown';
+import { useState } from 'react';
+import { REFUND } from '@/constants/dropDownMenu';
+import RefundPrice from './refundPrice';
 
 function GetRefundForm() {
   const {
@@ -14,7 +17,10 @@ function GetRefundForm() {
     isButtonActive,
     onSubmit,
   } = useFormControl();
-
+    const [selectedItem, setSelectedItem] = useState('전체보기');
+    const onSelectedItem = (menu: string) => {
+      setSelectedItem(menu);
+    };
 
   return (
     <>
@@ -25,11 +31,8 @@ function GetRefundForm() {
           <Radio label='신청 유형 선택' control={control} name='application' title1='교환' title2='환불'/>
           <Radio label='회수 방법' control={control} name='return' title1='직접 발송' title2='상품 회수'/>
         </div>
-        <Textarea control={control} name='description' /> 
-        <div>
-          환불금액
-          얼마
-        </div>
+        <Textarea control={control} name='description' as={<DropDown menus={REFUND} selectedItem={selectedItem} onSelectedItem={onSelectedItem} />} /> 
+        <RefundPrice refundPrice='19,800' />
       </form> 
       <RegisterButton>교환/환불 신청하기</RegisterButton>
     </>
