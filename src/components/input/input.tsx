@@ -34,7 +34,7 @@ function Input({
   return (
     <div className="flex w-full flex-col gap-12">
       <label htmlFor={field.name} className="text-b-b text-16">
-        내용
+        {title}
         {description && (
           <span className="ml-8 text-12 font-light text-gray-2">
             {description}
