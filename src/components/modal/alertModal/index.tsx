@@ -10,16 +10,16 @@ interface AlertModalProps {
 function AlertModal({ title, description, onClick }: AlertModalProps) {
   //TODO : community data fetching 연결되면 id값은 없어질 예정
   let id = 1
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (id : number) => deleteCommunity(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    }
-  })
+  // const queryClient = useQueryClient();
+  // const mutation = useMutation({
+  //   mutationFn: (id : number) => deleteCommunity(id),
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries();
+  //   }
+  // })
 
   const handleDelete = (id : number) => {
-    mutation.mutate(id);
+    // mutation.mutate(id);
   }
 
   return (
