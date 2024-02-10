@@ -7,35 +7,50 @@ import {
   useController,
 } from 'react-hook-form';
 
-interface TextareaProps {
+interface InputProps {
+  type: string;
+  title: string;
   height?: string;
   control: Control<FieldValues>;
   name: FieldPath<FieldValues>;
   as?: ReactNode;
+  description?: string;
 }
 
-function Textarea({ height, control, name, as = null }: TextareaProps) {
+function Input({
+  type,
+  height,
+  control,
+  name,
+  as = null,
+  description,
+}: InputProps) {
   const className = classNames(
     'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15 focus:border-green outline-none',
     height,
   );
-  const { field } = useController({name, control})
+  const { field } = useController({ name, control });
 
   return (
-    <div className="flex flex-col w-full gap-12">
-      <label htmlFor={field.name} className="text-16 text-b-b">
+    <div className="flex w-full flex-col gap-12">
+      <label htmlFor={field.name} className="text-b-b text-16">
         내용
+        {description && (
+          <span className="ml-8 text-12 font-light text-gray-2">
+            {description}
+          </span>
+        )}
       </label>
       {as ?? as}
-      <textarea
+      <input
         id={field.name}
         className={className}
         name={field.name}
         value={field.value}
         onChange={field.onChange}
-        placeholder="내용을 작성해주세요"></textarea>
+        placeholder="내용을 작성해주세요"></input>
     </div>
   );
 }
 
-export default Textarea;
+export default Input;
