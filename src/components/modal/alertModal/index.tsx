@@ -16,10 +16,10 @@ function AlertModal({ title, description, onClick }: AlertModalProps) {
           <span className="text-16 font-light text-gray-3">{description}</span>
         </div>
         <div className="flex w-full gap-20">
-          <RegisterButton type="button" color="gray-2" onClick={onClick}>
+          <RegisterButton type="button" color="bg-gray-2" onClick={onClick}>
             취소
           </RegisterButton>
-          <RegisterButton type="button" color="red">
+          <RegisterButton type="button" color="bg-red">
             삭제
           </RegisterButton>
         </div>
