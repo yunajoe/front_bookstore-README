@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
 
-interface ProfileEditPageLayoutProps {
+interface SettingPageLayoutProps {
   header: ReactNode;
   main: ReactNode;
 }
 
-function SettingPageLayout({ header, main }: ProfileEditPageLayoutProps) {
+
+function SettingPageLayout({ header, main }: SettingPageLayoutProps) {
   return (
     <>
       <div role="container" className="flex flex-col gap-40">
