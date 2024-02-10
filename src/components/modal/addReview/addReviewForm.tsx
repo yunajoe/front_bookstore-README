@@ -5,16 +5,16 @@ import Image from 'next/image';
 import LineIcon from '@/public/icons/Line.svg';
 import useFormControl from '@/hooks/useFormControl';
 import Input from '@/components/input/input';
+import { useState } from 'react';
 
 function AddReviewForm() {
   const {
     control,
     handleSubmit,
     isButtonActive,
-    newRating,
-    setNewRating,
     onSubmit,
   } = useFormControl();
+    const [newRating, setNewRating] = useState(0);
 
   return (
     <>

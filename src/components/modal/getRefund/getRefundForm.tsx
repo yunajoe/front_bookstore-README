@@ -9,14 +9,14 @@ import { useState } from 'react';
 import { REFUND } from '@/constants/dropDownMenu';
 import RefundPrice from '@/components/modal/getRefund/refundPrice';
 import Input from '@/components/input/input';
-import Spacing from '@/components/container/spacing/spacing';
 
 function GetRefundForm() {
-  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl();
-  const [selectedItem, setSelectedItem] = useState('전체보기');
+  const [selectedItem, setSelectedItem] = useState(REFUND[0]);
   const onSelectedItem = (menu: string) => {
     setSelectedItem(menu);
   };
+  const option = selectedItem.length === 0 ? false : selectedItem;
+  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl(option);
 
   return (
     <>
@@ -60,7 +60,7 @@ function GetRefundForm() {
         />
         <RefundPrice refundPrice="19,800" />
       </form>
-      <RegisterButton>교환/환불 신청하기</RegisterButton>
+      <RegisterButton disabled={isButtonActive}>교환/환불 신청하기</RegisterButton>
     </>
   );
 }
