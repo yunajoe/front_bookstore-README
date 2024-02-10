@@ -2,24 +2,13 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import { createPortal } from 'react-dom';
 import useResizeEffect from '@/hooks/useResizeEffect';
-
+import { LocationType } from '@/types/toolTipType';  
 
 type ToolTipTypes = {
   toolTipText: string;
   children: ReactNode
-};
+};  
 
-
-export type LocationType = {
-  x: number
-  y: number
-  width: number
-  height: number
-  top: number
-  right: number
-  bottom: number
-  left: number
-}
 
 function ToolTip({ children, toolTipText }: ToolTipTypes) {
   const ref = useRef(null);
@@ -29,8 +18,7 @@ function ToolTip({ children, toolTipText }: ToolTipTypes) {
     setShowOptions(!showOptions);
   }
   const childrenRef = useRef<HTMLDivElement>(null)
-  const portalRef = useRef<HTMLDivElement>(null)
-
+  const portalRef = useRef<HTMLDivElement>(null)   
 
   const portalHeight = childrenRef?.current?.offsetHeight!
 
