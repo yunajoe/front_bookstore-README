@@ -6,6 +6,9 @@ import Link from 'next/link';
 import WritePostButton from '@/components/button/header/writePostButton';
 import AddCommunityCard from '@/components/modal/addCommunityCard';
 import CustomBookButton from '@/components/button/header/customBookButton';
+import useSetLocatedCategory from '@/hooks/useSetLocatedCategory';
+import { useAtom } from 'jotai';
+import { LocatedCategoryAtom } from '@/store/state';
 
 interface NavigationTabProps {
   isLoggedIn: boolean;
@@ -16,6 +19,8 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
   const router = useRouter();
   // 현재 페이지 경로 확인
   const currentPath = router.pathname;
+    const [locatedCategory] = useAtom(LocatedCategoryAtom);
+  const { updateLocatedCategory } = useSetLocatedCategory();
 
   // 특정 페이지에서만 WritePostButton을 보이도록 조건을 설정
   const showWritePostButton =
@@ -30,6 +35,10 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
     setIsModalOpen(!isModalOpen);
   };
 
+  const resetLocatedCategory = () => {
+    updateLocatedCategory(locatedCategory.mainId);
+  }
+
   return (
     <>
       <div
@@ -40,8 +49,8 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
             <CategoryTabButton onClick={toggleCategoryTab} />
           </div>
           <div className="flex gap-18 pc:gap-40 tablet:gap-30">
-            <Link href="/domestic/bestseller"> 베스트</Link>
-            <Link href="/domestic/newest"> 신간</Link>
+            <Link onClick={resetLocatedCategory} href="/domestic/bestseller"> 베스트</Link>
+            <Link onClick={resetLocatedCategory} href="/domestic/newest"> 신간</Link>
             <CustomBookButton isLoggedIn={isLoggedIn} />
             <div className="inline-block border-r w-1 h-14 mt-4 border-gray-1" />
 
