@@ -1,11 +1,27 @@
 import ModalLayout from '@/components/modal/modalLayout';
 import RegisterButton from '@/components/button/register/registerButton';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { deleteCommunity } from '@/api/community';
 interface AlertModalProps {
   title: string;
   description: string;
   onClick: () => void;
 }
 function AlertModal({ title, description, onClick }: AlertModalProps) {
+  //TODO : community data fetching 연결되면 id값은 없어질 예정
+  let id = 1
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (id : number) => deleteCommunity(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    }
+  })
+
+  const handleDelete = (id : number) => {
+    mutation.mutate(id);
+  }
+
   return (
     <ModalLayout onClick={onClick}>
       <div
@@ -19,7 +35,7 @@ function AlertModal({ title, description, onClick }: AlertModalProps) {
           <RegisterButton type="button" color="bg-gray-2" onClick={onClick}>
             취소
           </RegisterButton>
-          <RegisterButton type="button" color="bg-red">
+          <RegisterButton type="button" color="bg-red" onClick={() => handleDelete(id)}>
             삭제
           </RegisterButton>
         </div>
