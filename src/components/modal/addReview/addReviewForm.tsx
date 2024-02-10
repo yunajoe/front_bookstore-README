@@ -8,13 +8,13 @@ import Input from '@/components/input/input';
 import { useState } from 'react';
 
 function AddReviewForm() {
+  const [newRating, setNewRating] = useState(0);
   const {
     control,
     handleSubmit,
     isButtonActive,
     onSubmit,
-  } = useFormControl();
-    const [newRating, setNewRating] = useState(0);
+  } = useFormControl(newRating);
 
   return (
     <>
