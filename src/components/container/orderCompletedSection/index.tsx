@@ -20,11 +20,14 @@ function OrderCompletedSection() {
         title="결제가 완료되었습니다!"
         content={`주문일자 ${orderDate}`}
       />
-      <TitleContentCard
-        title="배송지 정보"
-        titleData={DELIVERY_INFO}
-        contentData={DcontentData}
-      />
+      <div className='flex gap-34'>
+        <TitleContentCard
+          title="배송지 정보"
+          titleData={DELIVERY_INFO}
+          contentData={DcontentData}
+        />
+        {/* {totalPayment 컴포넌트 올 예정} */}
+      </div>
       <TitleContentCard
         title="결제 정보"
         titleData={PAYMENT_INFO}
