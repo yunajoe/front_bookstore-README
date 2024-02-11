@@ -70,8 +70,8 @@ function TermsCheckbox({ title, entire, checkContent, useFormContextProps = true
 
       <div>
         {checkContent.map((content, index) => (
-          <div key={content} className="flex h-48 items-center justify-between">
-            <div className="relative flex items-center">
+          <div key={content} className="flex h-48 items-center justify-between gap-5">
+            <div className="relative flex items-center gap-8">
               <label
                 htmlFor={`id.${content}`}
                 className="text-15 text-[#767676]">
