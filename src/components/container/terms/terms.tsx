@@ -29,7 +29,7 @@ function TermsCheckbox() {
   };
 
   const handleOpenModal = () => {
-    //모달을 열거예용
+    //TODO : 모달을 열거예용
   };
 
   useEffect(() => {
