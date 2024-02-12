@@ -11,6 +11,8 @@ import { responsive } from '@/utils/checkResponsiveEnv';
 import { carouselMockData } from '../api/mock/carouselMock';
 
 export default function DomesticPage() {
+  console.log("a");
+
   return (
       <SidebarLayout>
         <Spacing height={[0, 0, 20]} />
