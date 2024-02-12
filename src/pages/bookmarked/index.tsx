@@ -15,7 +15,12 @@ type WishListData = {
   genre: string;
   price: number;
 };
-
+  // const { data, isLoading } = useQuery<ColumnsType>({
+  //   queryKey: ['getColumns', boardId],
+  //   queryFn: () => getColumns(boardId),
+  //   enabled: !!boardId,
+  //   retry: 1,
+  // })
 function fetchNextData(start: number, end: number) {
   const dataByScreen = myWishListData.wishListArray.slice(start, end);
   return dataByScreen;
