@@ -16,7 +16,7 @@ export const postLogin = async (data: Login) => {
 };
 
 //회원조회
-export const getMember = async (id: number) => {
+const getMember = async (id: number) => {
   const result = await instance.get(`/member/${id}`);
   return result.data.data;
 };
@@ -24,14 +24,15 @@ export const getMember = async (id: number) => {
 export const useGetMember = (id: number) => {
   const { data, ...props } = useQuery({
     queryKey: ['member', `${id}`],
-    queryFn: () => getMember(id)
+    queryFn: () => getMember(id),
+    enabled: true,
   })
   return {data, ...props};
 };
 
 
 //비밀번호 수정
-export const putPassword = async (data: ChangePassword) => {
+const putPassword = async (data: ChangePassword) => {
   const result = await instance.put('/member/password', data);
   return result.data;
 };
@@ -48,7 +49,7 @@ export const usePutPassword = () => {
 }
 
 //프로필이미지 수정
-export const putProfileImage = async (data: ChangeImage) => {
+const putProfileImage = async (data: ChangeImage) => {
   const result = await instance.put('/member/profile', data);
   return result.data;
 };
