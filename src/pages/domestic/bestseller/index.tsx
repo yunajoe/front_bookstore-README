@@ -6,22 +6,17 @@ import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 
 function BestSellerPage() {
   return (
-    <div>
-      <BestSellerPageLayout
-        header={<Header isLoggedIn={true} />}
-        sideBar={
-          <Sidebar
-            pageName="bestseller"
-          />
-        }
-        main={
-          <BookOverViewCardList
-            bookData={bookOverviewsMock}
-            title="베스트셀러"
-          />
-        }
-      />
-    </div>
+    <BestSellerPageLayout
+      header={<Header isLoggedIn={true} />}
+      sideBar={
+        <Sidebar
+          pageName="bestseller"
+        />
+      }
+      main={
+        <BookOverViewCardList bookData={bookOverviewsMock} title="베스트셀러" />
+      }
+    />
   );
 }
 
