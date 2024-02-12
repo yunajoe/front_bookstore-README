@@ -2,6 +2,7 @@ import { PasswordInput } from '@/components/input/signInput/signInput';
 import { EditPasswordType } from '@/types/editProfileTypes';
 import { FormProvider, useForm } from 'react-hook-form';
 import RegisterButton from '@/components/button/register/registerButton';
+import { notify } from '@/components/toast/toast';
 
 function EditPassword() {
   const method = useForm<EditPasswordType>({
@@ -32,31 +33,35 @@ function EditPassword() {
 
   const onSubmit = () => {
     // 서버로 비밀번호를 보낼거에용
+    console.log(getValues('checkPassword'));
+    // 성공시 토스트 메시지 띄우기
+    notify({ type: 'success', text: '비밀번호가 변경되었어요 🔐' });
   };
 
   return (
     <FormProvider {...method}>
       <div
-        className="max-w-440 max-h-745 bg-white border rounded-[10px] border-gray-1
-          mobile:border-none p-40">
+        className="max-h-745 w-440 rounded-[10px] border border-gray-1 bg-white
+          p-40 mobile:border-none mobile:p-0">
         <div className="flex-center mb-40">
-          <h1 className="font-bold text-20">비밀번호 변경</h1>
+          <h1 className="text-20 font-bold">비밀번호 변경</h1>
         </div>
         <form
           className="flex flex-col gap-40 mobile:m-15"
           onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-40">
             <div>
-              <label className="text-black text-16 font-bold text-left w-full">
-                비밀번호
+              <label className="w-full text-left text-16 font-bold text-black">
+                새 비밀번호
               </label>
-              <p className="text-gray-3 text-15 text-left w-full mb-12">
+              <p className="mb-12 w-full text-left text-15 text-gray-3">
                 영문, 숫자를 포함한 8자 이상의 비밀번호
               </p>
               <PasswordInput
                 id="password"
                 placeholder="비밀번호"
                 register={register}
+                required={true}
                 requiredMessage={PASSWORD_RULES.required}
                 pattern={{
                   value: PASSWORD_RULES.pattern.value,
@@ -65,25 +70,26 @@ function EditPassword() {
                 isError={errors.password}
               />
               {errors.password?.message && (
-                <p className="text-14 text-red w-full text-left">
+                <p className="w-full text-left text-14 text-red">
                   {errors.password.message}
                 </p>
               )}
             </div>
             <div>
-              <label className="text-black text-16 font-bold text-left w-full mb-12">
-                비밀번호확인
+              <label className="mb-12 w-full text-left text-16 font-bold text-black">
+                새 비밀번호확인
               </label>
               <PasswordInput
                 id="checkPassword"
                 placeholder="비밀번호확인"
                 register={register}
+                required={true}
                 requiredMessage={PASSWORD_RULES.required}
                 isError={errors.checkPassword}
                 validate={PASSWORD_RULES.validate}
               />
               {errors.checkPassword?.message && (
-                <p className="text-14 text-red w-full text-left">
+                <p className="w-full text-left text-14 text-red">
                   {errors.checkPassword.message}
                 </p>
               )}

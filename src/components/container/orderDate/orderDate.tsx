@@ -14,7 +14,7 @@ import Image from 'next/image';
 import { getDateAgo } from '@/utils/getTimeAgo';
 import { Person } from '@/types/orderDateType';
 
-type OrderDateProps = {
+export type OrderDateProps = {
   pastDate: string;
   setSelectedItem: Dispatch<SetStateAction<string>>;
   person: Person;
@@ -22,11 +22,11 @@ type OrderDateProps = {
 
 const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
   return (
-    <div className="border-solid border-2 border-gray-1 w-135 h-42 flex-center px-9 rounded-[5px]">
+    <div className="flex-center h-42 w-135 rounded-[5px] border-2 border-solid border-gray-1 px-9">
       <input
         {...props}
         ref={ref}
-        className="focus:outline-none w-1 text-center flex-1"
+        className="w-1 flex-1 text-center focus:outline-none"
         readOnly
       />
       <Image src="/icons/Calendar.svg" width={20} height={20} alt="달력" />
@@ -44,7 +44,7 @@ function OrderDate({ person, pastDate, setSelectedItem }: OrderDateProps) {
   const sixMonthAgo = getDateAgo(180);
   const aYearAgo = getDateAgo(365);
 
-  const seltectdAgo = [
+  const selectedAgo = [
     ['전체보기', endDate],
     ['최근 1개월', aMonthAgo],
     ['최근 3개월', threeMonthAgo],
@@ -54,7 +54,7 @@ function OrderDate({ person, pastDate, setSelectedItem }: OrderDateProps) {
   ];
 
   const findMonthAgo = useMemo(
-    () => seltectdAgo.find((item) => item[0] === pastDate)![1],
+    () => selectedAgo.find((item) => item[0] === pastDate)![1],
     [pastDate],
   );
 

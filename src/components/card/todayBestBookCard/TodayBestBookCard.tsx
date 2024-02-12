@@ -5,12 +5,16 @@ import Image from 'next/image';
 
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookRating from '@/components/book/bookRating/bookRating';
-import { TodayBestBookCardType } from '@/types/cardType';
+import BookPrice from '@/components/book/bookPrice/bookPrice';
+import BookCategory from '@/components/book/bookCategory/bookCategory';
+
+import { BookDetailCardType } from '@/types/cardType';
+import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 
 const SIZE = {
   desktop: {
     container: 'w-347 h-240',
-    img: 'w-112 h-170',
+    img: 'min-w-112 max-w-112 h-170',
   },
   tablet: {
     container: 'tablet:w-334 tablet:h-220',
@@ -26,44 +30,34 @@ const STYLE = {
   img: `${SIZE.desktop.img} ${SIZE.mobile.img}`,
 };
 
-function TodayBestBook({ ...bookData }: TodayBestBookCardType) {
+function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, categoryList }: BookDetailCardType) {
   return (
     <div
       role="container"
-      className={`bg-white px-40 pt-40 rounded-xl border-2 border-gray-1 tablet:pt-30 tablet:px-30
-        mobile:px-20 mobile:pt-20 ${STYLE.container}`}>
+      className={`rounded-xl border-2 border-gray-1 bg-white px-40 pt-40 mobile:px-20 mobile:pt-20
+        tablet:px-30 tablet:pt-30 ${STYLE.container}`}>
       <Link
-        href={`/book/${bookData.productId}`}
-        className="flex justify-start items-start gap-20 mobile:gap-10">
+        href={`/bookdetail/${bookId}`}
+        className="flex items-start justify-start gap-20 mobile:gap-10">
         <div
           role="img-section"
-          className={`relative bg-white flex-center ${STYLE.img}`}>
-          {bookData.bookImg ? (
-            <Image
-              src={bookData.bookImg}
-              alt="책 표지 이미지"
-              layout="fill"
-              objectFit="contain"
-              objectPosition="top"
-            />
+          className={`flex-center relative bg-white ${STYLE.img}`}>
+          {imageUrl ? (
+          <PreviewBookInfo size='sm' image={imageUrl} itemsStart/>
           ) : (
             <div className={`bg-gray-1 ${STYLE.img}`}></div>
           )}
         </div>
-        <div className="flex flex-col gap-4 justify-start items-start">
+        <div className="flex flex-col items-start justify-start gap-4">
           <div
             role="bookTitle"
-            className="w-full leading-tight text-15 text-gray-7 font-bold line-clamp-2">
-            {bookData.title}
+            className="text-gray-7 line-clamp-2 w-full text-15 font-bold leading-tight">
+            {title}
           </div>
-          <BookAuthor authorList={bookData.author} />
-          <BookRating rating={bookData.rating} />
-          <p role="bookGenre" className="text-13 text-gray-3 pb-4">
-            {bookData.genre}
-          </p>
-          <p role="bookPrice" className="text-14 font-bold text-gray-7">
-            {bookData.price} 원
-          </p>
+          <BookAuthor authorList={authors} fontSize={14} />
+          <BookRating rating={rating} />
+          <BookCategory categories={categoryList} fontSize={13}/>
+          <BookPrice price={price}  fontSize={14} isBold hasUnit/>
         </div>
       </Link>
     </div>

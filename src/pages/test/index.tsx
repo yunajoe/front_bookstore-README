@@ -1,31 +1,79 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import BookOverviewCard from '@/components/book/bookOverviewCard/bookOverViewCard';
+import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard';
+import SkeletonBookOverviewCard from '@/components/skeleton/bookOverviewCard/skeleton';
+import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
+import { useState } from 'react';
 const bookOverviews = bookOverviewsMock;
 
 function TestPage() {
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isFindAddressModalOpen, setIsFindAddressModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [isAddCommunityCardModalOpen, setIsAddCommunityCardModalOpen] = useState(false);
+  const [isGetRefundFormModalOpen, setIsGetRefundFormModalOpen] = useState(false);
+
+  const handleReviewModalOpen = () => {
+    setIsReviewModalOpen(!isReviewModalOpen);
+  }
+
+  const handleFindAddressModalOpen = () => {
+    setIsFindAddressModalOpen(!isFindAddressModalOpen);
+  }
+
+  const handleAlertModalOpen = () => {
+    setIsAlertModalOpen(!isAlertModalOpen)
+  }
+
+  const handleAddCommunityCardModalOpen = () => {
+    setIsAddCommunityCardModalOpen(!isAddCommunityCardModalOpen)
+  }
+
+  const handleGetRefundFormModalOpen = () => {
+    setIsGetRefundFormModalOpen(!isGetRefundFormModalOpen)
+  }
+
   return (
     <div className="flex flex-col gap-20 p-20">
       <BookOverviewCard
         book={bookOverviews[0]?.book}
         like={bookOverviews[0]?.like}
       />
-      <BookOverviewCard
-        book={bookOverviews[1]?.book}
-        like={bookOverviews[1]?.like}
+      {/* <SkeletonPreviewBookImage size="sm" />
+      <SkeletonPreviewBookImage size="md" />
+      <SkeletonPreviewBookImage size="lg" /> */}
+      <PreviewBookInfo
+        title="하이용"
+        authorList={['얌얌', '능이버섯']}
+        image={bookOverviews[0]?.book.bookImgUrl}
+        size="sm"
+        ranking={100}
+        // itemsStart
       />
-      <BookOverviewCard
-        book={bookOverviews[2]?.book}
-        like={bookOverviews[2]?.like}
+      <PreviewBookInfo
+        title="하이용"
+        authorList={['얌얌', '능이버섯']}
+        image={bookOverviews[0]?.book.bookImgUrl}
+        size="md"
+        ranking={1}
+        itemsStart
+
       />
-      <BookOverviewCard
-        book={bookOverviews[3]?.book}
-        like={bookOverviews[3]?.like}
+      <PreviewBookInfo
+        title="하이용"
+        authorList={['얌얌', '능이버섯']}
+        image={bookOverviews[0]?.book.bookImgUrl}
+        size="lg"
+        ranking={10}
+        // itemsStart
       />
-      <BookOverviewCard
-        book={bookOverviews[4]?.book}
-        like={bookOverviews[4]?.like}
-      />
+
+      <SkeletonBookOverviewCard />
+      <div className="flex gap-10">
+        <SkeletonPreviewBookImage size="lg" />
+        <SkeletonPreviewBookImage size="md" />
+        <SkeletonPreviewBookImage size="sm" />
+      </div>
     </div>
   );
 }

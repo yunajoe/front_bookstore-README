@@ -4,20 +4,18 @@
 interface BookAuthorProps {
   authorList?: string[] | null;
   publisher?: string;
+  fontSize?: number;
 }
 
-function BookAuthor({ authorList, publisher }: BookAuthorProps) {
+function BookAuthor({ authorList, publisher, fontSize }: BookAuthorProps) {
   if (!authorList || authorList.length < 1) return;
+
+  let nameList = authorList.join(', ');
+  nameList += publisher ? ` | ${publisher}` : '';
   return (
-    <div className="flex-center gap-4">
-      {authorList.map((author) => {
-        return (
-          <span key={author} className="text-gray-3 text-14 hover:text-gray-7">
-            {author}
-          </span>
-        );
-      })}
-      {publisher && <span className="text-gray-3 text-14">| {publisher}</span>}
+    <div className="text-14 text-gray-3" style={{ fontSize: fontSize }}>
+      {nameList}
+
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { ImageSize } from '@/types/carouselType';
 import React from 'react';
 
 export type CarouselCardProps = {
+  size: 'sm' | 'md' | 'lg';
   imageUrl: string;
   title: string;
   authorname: string;
@@ -11,14 +12,15 @@ export type CarouselCardProps = {
 };
 
 function CarouselCard(props: CarouselCardProps) {
-  const { imageUrl, title, authorname, imageSize, marginRight } = props;
-  const { width, height } = imageSize;
+  const { imageUrl, title, authorname, imageSize, marginRight, size } = props;
+  const { width } = imageSize;
   return (
     <div>
       <div
-        className={'bg-black text-white relative select-none overflow-hidden'}
-        style={{ width, height, marginRight }}>
-        <PreviewBookInfo size="md" title={title} authorList={[authorname]} />
+        className={`text-white relative select-none`}
+        style={{ width, marginRight }}>
+        <PreviewBookInfo size={size} title={title} authorList={[authorname]} />
+
       </div>
     </div>
   );

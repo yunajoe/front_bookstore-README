@@ -15,6 +15,8 @@ returns: component
 
 import { InputHTMLAttributes, useState } from 'react';
 import Image from 'next/image';
+import EyeOpenImage from '@/public/icons/EyeOpen.svg';
+import EyeCloseImage from '@/public/icons/EyeClose.svg';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -49,8 +51,8 @@ function TextInput({
           pattern: pattern,
           validate: validate,
         })}
-        className={`h-48 pt-[13px] pb-[12px] leading-normal w-full text-[16px] autofill:bg-white border-b border-gray-1 focus:border-green 
-        ${isError && 'border-b border-2 border-red focus:border-red'}
+        className={`h-48 w-full border-b border-gray-1 pb-[12px] pt-[13px] text-[16px] leading-normal autofill:bg-white focus:border-green 
+        ${isError && 'border-red focus:border-red'}
           outline-none ${classNames}`}
         {...props}
       />
@@ -75,7 +77,7 @@ function PasswordInput({
       <button type="button" className="absolute bottom-12 right-8">
         <Image
           onClick={() => setIsView(!isView)}
-          src={isView ? 'icons/EyeOpen.svg' : 'icons/EyeClose.svg'}
+          src={isView ? EyeOpenImage : EyeCloseImage}
           alt="eye"
           width={24}
           height={24}
@@ -90,8 +92,8 @@ function PasswordInput({
           pattern: pattern,
           validate: validate,
         })}
-        className={`h-48 pt-[13px] pb-[12px] leading-normal w-full text-[16px] autofill:bg-white border-b border-gray-1 focus:border-green
-          ${isError && 'border-b border-2 focus:border-red border-red'} 
+        className={`h-48 w-full border-b border-gray-1 pb-[12px] pt-[13px] text-[16px] leading-normal autofill:bg-white focus:border-green
+          ${isError && 'border-red focus:border-red'} 
           outline-none ${classNames}`}
         {...props}
       />

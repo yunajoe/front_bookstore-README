@@ -1,49 +1,37 @@
 import { useRouter } from 'next/router';
 import SidebarLayout from '@/components/layout/sidebarLayout';
 import Spacing from '@/components/container/spacing/spacing';
+import EventSection from '@/components/container/eventSection/eventSection';
+import CategoryCarousel from '@/components/carousel/categoryCarousel';
+import { carouselMockData } from '@/pages/api/mock/carouselMock';
+import { responsive } from '@/utils/checkResponsiveEnv';
+import CategoryBookList from '@/components/list/categoryBookList/categoryBookList';
 
 function CategoryPage() {
   const router = useRouter();
   const { category } = router.query;
 
   return (
-    <SidebarLayout isDomestic={false} location={category as string}>
-      <Spacing height={[0, 0, 20]} />
-      <article>
-        <div
-          role="temp"
-          className="bg-gray-1 w-[895px] h-[483px] tablet:w-[511px] tablet:h-[275px] mobile:w-[330px]
-            mobile:h-[278px]">
-          광고 넣을 곳!!!!!
-        </div>
-      </article>
-      <Spacing height={[60, 40, 40]} />
-      <article className="flex flex-col gap-50 tablet:gap-40 mobile:gap-20">
-        <h1 className="text-black text-20">신간도서 넣을 곳</h1>
-        <div
-          role="temp"
-          className="bg-gray-1 w-[895px] h-[334px] tablet:w-[511px] tablet:h-[336px] mobile:w-[330px]
-            mobile:h-[297px]"></div>
-      </article>
-      <Spacing height={[120, 80, 80]} />
-      <article className="flex flex-col gap-50 tablet:gap-40 mobile:gap-20">
-        <h1 className="text-black text-20">베스트셀러 넣을 곳</h1>
-        <div
-          role="temp"
-          className="bg-gray-1 w-[895px] h-[708px] tablet:w-[511px] tablet:h-[1464px]
-            mobile:w-[330px] mobile:h-[1735px]"></div>
-      </article>
-      <Spacing height={[120, 80, 80]} />
-      <article className="flex flex-col gap-50 tablet:gap-40 mobile:gap-20">
-        <div className="flex justify-between items-center">
-          <h1 className="text-black text-20">모든 도서 넣을 곳</h1>
-        </div>
-        <div
-          role="temp"
-          className="bg-gray-1 w-[895px] h-[708px] tablet:w-[511px] tablet:h-[1464px]
-            mobile:w-[330px] mobile:h-[1735px]"></div>
-      </article>
-    </SidebarLayout>
+      <SidebarLayout isDomestic={false} location={category as string}>
+        <Spacing height={[0, 0, 20]} />
+
+        <EventSection adsSizeClassName='w-[525px] h-[483px] tablet:w-297 tablet:h-275 mobile:w-330 mobile:h-178' eventSizeClassName='w-[340px] h-[483px] tablet:w-194 tablet:h-275 mobile:w-330 mobile:h-90'/>
+        <Spacing height={[60, 40, 40]} />
+
+        <CategoryCarousel data={carouselMockData} responsive={responsive} />
+        <Spacing height={[120, 80, 80]} />
+
+        <article className="flex flex-col gap-50 mobile:gap-20 tablet:gap-40">
+          <h1 className="text-20 text-black">베스트셀러</h1>
+          <div
+            role="temp"
+            className="h-[500px] w-[895px] bg-gray-1 mobile:w-[330px]
+            tablet:w-[511px]"></div>
+        </article>        
+        <Spacing height={[120, 80, 80]} />
+
+      <CategoryBookList mainCategory="foreign" subCategory={category as string} />
+      </SidebarLayout>
   );
 }
 

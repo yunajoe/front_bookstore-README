@@ -10,12 +10,12 @@ import ReadMeButton from '../button/header/readmeButton';
 
 export interface HeaderProps {
   isLoggedIn: boolean;
-  numItemsOfCart?: number;
+  numItemsOfCart?: number | undefined;
 }
 
 function Separator() {
   return (
-    <div className="mobile:hidden inline-block border-r w-1 h-12 border-gray-1" />
+    <div className="inline-block h-12 w-1 border-r border-gray-1 mobile:hidden" />
   );
 }
 
@@ -23,8 +23,8 @@ function Separator() {
 function NonLoggedInHeader() {
   return (
     <div
-      className="z-10 flex mx-15 tablet:mx-30 justify-between min-w-fit max-w-full items-center
-        h-50 tablet:h-100 pc:h-100 pc:mx-60">
+      className="z-10 mx-15 flex h-50 min-w-fit max-w-full items-center justify-between
+        tablet:mx-30 tablet:h-100 pc:mx-60 pc:h-100">
       <ReadMeButton />
       <SearchInput />
       <div className="inline-flex items-center tablet:gap-40 pc:gap-40">
@@ -36,14 +36,18 @@ function NonLoggedInHeader() {
 }
 
 // 로그인한 상태의 헤더
-function LoggedInHeader({ numItemsOfCart }: { numItemsOfCart: number }) {
+function LoggedInHeader({
+  numItemsOfCart,
+}: {
+  numItemsOfCart: number | undefined;
+}) {
   return (
     <div
-      className="relative flex z-10 tablet:mx-30 mx-15 justify-between min-w-fit max-w-full
-        items-center h-50 tablet:h-100 pc:h-100 pc:mx-60">
+      className="relative z-10 mx-15 flex h-50 min-w-fit max-w-full items-center
+        justify-between tablet:mx-30 tablet:h-100 pc:mx-60 pc:h-100">
       <ReadMeButton />
       <SearchInput />
-      <div className="flex gap-10 tablet:gap-20 pc:gap-20 items-center">
+      <div className="flex items-center gap-10 tablet:gap-20 pc:gap-20">
         <SignOutButton />
         <Separator />
         <BookmarkButton />
@@ -56,7 +60,7 @@ function LoggedInHeader({ numItemsOfCart }: { numItemsOfCart: number }) {
 
 // 헤더 컴포넌트
 function Header({ isLoggedIn, numItemsOfCart }: HeaderProps) {
-  return isLoggedIn && numItemsOfCart ? (
+  return isLoggedIn ? (
     <HeaderLayout isLoggedIn={isLoggedIn}>
       <LoggedInHeader numItemsOfCart={numItemsOfCart} />
     </HeaderLayout>
