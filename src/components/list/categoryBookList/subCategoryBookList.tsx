@@ -1,17 +1,27 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { useAtom } from "jotai";
 
 import PreviewBookInfo from "@/components/book/previewBookInfo/previewBookInfo";
 import DropDown from "@/components/dropDown/dropDown";
 import { BOOK_OLDER_STANDARD } from "src/constants/orderList";
 import useCarouselEnv from "@/hooks/useCarouselEnv";
+import useGetCategoryId from "@/hooks/useGetCategoryId";
+import { LocatedCategoryAtom } from "@/store/state";
 
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 import { DomesticBookList } from "@/pages/api/mock/domesticBookListMock";
 
-function CategoryBookList() {
+function SubCategoryBookList() {
   const [selectedOrder, setSelectedOrder] = useState("조회순");
   const { env } = useCarouselEnv();
+  const [locatedCategory,] = useAtom(LocatedCategoryAtom);
+  const searchId = useGetCategoryId(locatedCategory.mainId, locatedCategory?.subId);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: [searchId, "category-page-books"],
+  }) 
 
   const onSelectedOrder = (menu: string) => {
     setSelectedOrder(menu);
@@ -47,4 +57,4 @@ function CategoryBookList() {
     </article>
   )}
 
-export default CategoryBookList
+export default SubCategoryBookList
