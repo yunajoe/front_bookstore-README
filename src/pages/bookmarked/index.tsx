@@ -1,11 +1,15 @@
+import { getBookMarkList } from '@/api/bookmark';
 import BookRating from '@/components/book/bookRating/bookRating';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import MainLayout from '@/components/layout/mainLayout';
 import useInfinite from '@/hooks/useInfinite';
 import { myWishListData } from '@/pages/api/wishMock';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';  
+const USER_ID = 3
+const OFFSET = 1
+const LIMIT = 10
 type WishListData = {
   id: number;
   image: string;
@@ -20,13 +24,23 @@ type WishListData = {
   //   queryFn: () => getColumns(boardId),
   //   enabled: !!boardId,
   //   retry: 1,
-  // })
+// })
+  
+
+
 function fetchNextData(start: number, end: number) {
   const dataByScreen = myWishListData.wishListArray.slice(start, end);
   return dataByScreen;
 }
 const START = 0;
 function BookMarkedPage() {
+  const bookMarkQuery = useQuery({
+  queryKey: ['bookMarkUserId', USER_ID], 
+  queryFn: () => getBookMarkList(USER_ID, OFFSET, LIMIT),   
+  })
+
+  console.log("꿔리",bookMarkQuery.data)
+  
   const [end, setEnd] = useState(8);
   const [wishListData, setWishListData] = useState(
     () => fetchNextData(START, end) || [],
