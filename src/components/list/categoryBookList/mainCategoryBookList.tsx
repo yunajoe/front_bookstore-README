@@ -16,10 +16,10 @@ function MainCategoryBookList() {
   const [selectedOrder, setSelectedOrder] = useState("조회순");
   const { env } = useCarouselEnv();
   const [locatedCategory,] = useAtom(LocatedCategoryAtom);
-
-  const { data, isLoading, isError } = useQuery({
-    queryKey: [locatedCategory.mainId, "category-page-books"],
-  }) 
+  console.log(locatedCategory);
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: [locatedCategory.mainId, "main-category-page-books"],
+  // }) 
 
   const onSelectedOrder = (menu: string) => {
     setSelectedOrder(menu);

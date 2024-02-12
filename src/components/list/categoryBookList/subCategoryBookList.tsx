@@ -17,11 +17,10 @@ function SubCategoryBookList() {
   const [selectedOrder, setSelectedOrder] = useState("조회순");
   const { env } = useCarouselEnv();
   const [locatedCategory,] = useAtom(LocatedCategoryAtom);
-  const searchId = useGetCategoryId(locatedCategory.mainId, locatedCategory?.subId);
-
-  const { data, isLoading, isError } = useQuery({
-    queryKey: [searchId, "category-page-books"],
-  }) 
+  const searchId = useGetCategoryId(locatedCategory.mainId, locatedCategory.subId as number);
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: [searchId, "sub-category-page-books"],
+  // }) 
 
   const onSelectedOrder = (menu: string) => {
     setSelectedOrder(menu);
