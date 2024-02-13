@@ -1,6 +1,5 @@
 import { Signup, Login, ChangePassword, ChangeImage } from '@/types/api/member';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
 //회원가입
@@ -29,7 +28,6 @@ export const useGetMember = (id: number) => {
   })
   return {data, ...props};
 };
-
 
 //비밀번호 수정
 const putPassword = async (data: ChangePassword) => {
