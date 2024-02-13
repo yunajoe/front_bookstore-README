@@ -12,7 +12,7 @@ const getPayment = async (id: number) => {
 
 export const useGetOrder = (id: number) => {
   const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.payment],
+    queryKey: [QUERY_KEY.payment, id],
     queryFn: () => getPayment(id),
     enabled: true,
   });
