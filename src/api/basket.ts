@@ -1,6 +1,5 @@
 import { PostBasketParams } from '@/types/api/basket';
 import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -10,9 +9,9 @@ const getBasket = async (memberId: number) => {
   return result.data;
 };
 
-export const useGetCart = (memberId:number) => {
+export const useGetCart = (memberId: number) => {
   return useFetch(QUERY_KEY.basket, getBasket, memberId);
-}
+};
 
 //장바구니 추가
 const postBasket = async (option: PostBasketParams) => {
@@ -34,5 +33,5 @@ const deleteBasket = async (basketId: number) => {
 };
 
 export const useDeleteBasket = (basketId: number) => {
-  return useDelete(deleteBasket, basketId)
-}
+  return useDelete(deleteBasket, basketId);
+};

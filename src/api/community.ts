@@ -1,12 +1,10 @@
 import { QUERY_KEY } from '@/constants/queryKey';
 import {
-  CommunityCard,
   GetCommunityOption,
   PostCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
 import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
 //커뮤니티 글 전체조회, 내가쓴글 조회,
@@ -22,7 +20,7 @@ const getCommunity = async (option: GetCommunityOption) => {
 };
 
 export const useGetCommunity = (option: GetCommunityOption) => {
-  return useFetch(QUERY_KEY.community, getCommunity, option)
+  return useFetch(QUERY_KEY.community, getCommunity, option);
 };
 
 //글 등록
@@ -33,8 +31,8 @@ const postCommunity = async (data: PostCommunityData) => {
   return result.data;
 };
 
-export const usePostCommunity = (data : PostCommunityData) => {
-  return usePost(postCommunity, data)
+export const usePostCommunity = (data: PostCommunityData) => {
+  return usePost(postCommunity, data);
 };
 
 //글 삭제
@@ -43,8 +41,8 @@ const deleteCommunity = async (communityId: number) => {
   return result.data;
 };
 
-export const useDeleteCommunity = (communityId:number) => {
-  return useDelete(deleteCommunity, communityId)
+export const useDeleteCommunity = (communityId: number) => {
+  return useDelete(deleteCommunity, communityId);
 };
 
 //글 수정
@@ -57,5 +55,5 @@ const putCommunity = async (option: PutCommunityOption) => {
 };
 
 export const usePutCommunity = (option: PutCommunityOption) => {
-  return usePut(putCommunity, option)
+  return usePut(putCommunity, option);
 };

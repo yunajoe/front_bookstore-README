@@ -1,6 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
 import { useFetch, usePost, usePut } from '@/utils/reactQuery';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
 //TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요

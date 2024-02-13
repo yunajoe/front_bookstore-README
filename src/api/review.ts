@@ -1,6 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
 import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
 //리뷰조회, 단일조회
