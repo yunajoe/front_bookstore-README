@@ -25,9 +25,7 @@ type WishListData = {
   //   enabled: !!boardId,
   //   retry: 1,
 // })
-  
-
-
+ 
 function fetchNextData(start: number, end: number) {
   const dataByScreen = myWishListData.wishListArray.slice(start, end);
   return dataByScreen;
@@ -55,17 +53,21 @@ function BookMarkedPage() {
 } = useInfiniteQuery({
   queryKey: ['bookMarkUserId', USER_ID], 
   queryFn: ({pageParam = OFFSET}) => getBookMarkList(USER_ID, pageParam, LIMIT),  
-  getNextPageParam: (lastPage, allPages, lastPageParam) => lastPage.nextCursor,
+  getNextPageParam: (lastPage, allPages, lastPageParam) => lastPage.nextCursor,  
   initialPageParam: 0, 
   select: (data) => {
     return data.pages[0].data
   }
 })
 //
-// {cursorId: -1, memberId: 3, total: 0, limit: 50, bookmarks: Array(0)}  data 
+// {cursorId: -1, memberId: 3, total: 0, limit: 50, bookmarks: Array(0)}  data
 
 
-  // console.log(data)
+  console.log("dd", data)
+  console.log("hasNextPage",  hasNextPage)
+  console.log(data.bookmarks)
+
+
 
   const [end, setEnd] = useState(8);
   const [wishListData, setWishListData] = useState(

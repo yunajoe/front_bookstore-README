@@ -7,4 +7,4 @@ export const instance = axios.create({
   }
 })  
 
-instance.defaults.headers.common["Authorization"] = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1NfVE9LRU4iLCJpYXQiOjE3MDc3ODU3OTgsImV4cCI6MTcwNzc4NzU5OCwiZW1haWwiOiJ5dW5ham9lQGdtYWlsLmNvbSJ9.Qwk-XoGdFAJilBP0TEaRkUfUzPl4IpSTnMyhvrJbxtx8eMWCLq-XpKLbqXUpgglHDS_HVBn9lswlfaYp3yRL1Q`
+instance.defaults.headers.common["Authorization"] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1NfVE9LRU4iLCJpYXQiOjE3MDc3OTEzMDcsImV4cCI6MTcwNzc5MzEwNywiZW1haWwiOiJ5dW5ham9lQGdtYWlsLmNvbSJ9.RPGNu4CxyOFEViCgVcTi-kYeIdjTpdKgkslMMo3FfAv7g3aNdiH-LerNmQe7p7qZpWMmYWaCToxmiDcNAZpLVg" 
