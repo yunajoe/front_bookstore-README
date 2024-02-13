@@ -5,7 +5,7 @@ import {
   PostCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
-import { useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -43,15 +43,8 @@ const deleteCommunity = async (communityId: number) => {
   return result.data;
 };
 
-export const useDeleteCommunity = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (communityId: number) => deleteCommunity(communityId),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const useDeleteCommunity = (communityId:number) => {
+  return useDelete(deleteCommunity, communityId)
 };
 
 //글 수정

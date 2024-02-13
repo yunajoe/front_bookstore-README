@@ -1,5 +1,5 @@
 import { BookmarkParams, postBookmarkPath } from '@/types/api/bookmark';
-import { useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
@@ -47,13 +47,6 @@ const deleteBookmark = async (bookmarkId : string) => {
   return result.data
 }
 
-export const useDeleteBookmark = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (bookmarkId: string) => deleteBookmark(bookmarkId),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    }
-  })
-  return mutation
+export const useDeleteBookmark = (bookmarkId : string) => {
+  return useDelete(deleteBookmark, bookmarkId)
 }

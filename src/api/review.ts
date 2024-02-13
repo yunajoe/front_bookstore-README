@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -57,12 +57,5 @@ const deleteReview = async (id: number) => {
 
 
 export const useDeleteReview = (id: number) => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: () => deleteReview(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+  return useDelete(deleteReview, id)
 };

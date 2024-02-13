@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -57,13 +57,6 @@ export const deleteOrder = async (id: number) => {
   return result.data;
 };
 
-export const useDeleteOrder = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (id:number) => deleteOrder(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const useDeleteOrder = (id:number) => {
+  return useDelete(deleteOrder, id)
 };

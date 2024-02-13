@@ -1,7 +1,7 @@
 import { instance } from 'src/libs/instance';
 import { QUERY_KEY } from '@/constants/queryKey';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
 
 //TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
 
@@ -56,13 +56,6 @@ export const deletePayment = async (id: number) => {
   return result.data;
 };
 
-export const useDeletePayment = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (id: number) => deletePayment(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const useDeletePayment = (id: number) => {
+  return useDelete(deletePayment, id)
 };

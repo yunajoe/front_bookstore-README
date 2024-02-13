@@ -1,5 +1,5 @@
 import { PostBasketParams } from '@/types/api/basket';
-import { useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
@@ -33,13 +33,6 @@ const deleteBasket = async (basketId: number) => {
   return result.data;
 };
 
-export const useDeleteBasket = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (basketId:number) => deleteBasket(basketId),
-    onSuccess: () => {
-      queryClient.invalidateQueries()
-    },
-  })
-  return mutation
+export const useDeleteBasket = (basketId: number) => {
+  return useDelete(deleteBasket, basketId)
 }
