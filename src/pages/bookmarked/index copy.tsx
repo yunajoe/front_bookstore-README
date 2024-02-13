@@ -44,7 +44,6 @@ function BookMarkedPage() {
   // allPages는 useInfiniteQuery를 이용해 호출된 모든 페이지 데이터를 의미합니다.
   const {
     data,
-    isLoading,
     status, 
   fetchNextPage,
   fetchPreviousPage,
@@ -54,7 +53,7 @@ function BookMarkedPage() {
   isFetchingPreviousPage,  
 } = useInfiniteQuery({
   queryKey: ['bookMarkUserId', USER_ID], 
-  queryFn: ({pageParam = OFFSET}) => getBookMarkList(USER_ID, pageParam, LIMIT),  
+  queryFn: () => getBookMarkList(USER_ID, OFFSET, LIMIT),  
   getNextPageParam: (lastPage, allPages, lastPageParam) => lastPage.nextCursor,
   initialPageParam: 0, 
   select: (data) => {
@@ -62,10 +61,10 @@ function BookMarkedPage() {
   }
 })
 //
-// {cursorId: -1, memberId: 3, total: 0, limit: 50, bookmarks: Array(0)}  data 
+  // {cursorId: -1, memberId: 3, total: 0, limit: 50, bookmarks: Array(0)}  data 
+  
 
-
-  // console.log(data)
+  console.log(data)
 
   const [end, setEnd] = useState(8);
   const [wishListData, setWishListData] = useState(
