@@ -11,7 +11,7 @@ import { instance } from 'src/libs/instance';
 const getCommunity = async (option: GetCommunityOption) => {
   const { memberId, params } = option;
   const result = await instance.get(
-    `community${memberId ? `/${memberId}` : ''})`,
+    `community${memberId ? `/${memberId}` : ''}`,
     {
       params,
     },
