@@ -1,5 +1,5 @@
 import { PostBasketParams } from '@/types/api/basket';
-import { useFetch } from '@/utils/reactQuery';
+import { useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
@@ -15,21 +15,15 @@ export const useGetCart = (memberId:number) => {
 }
 
 //장바구니 추가
-const postBasket = async ({bookId, memberId} : PostBasketParams) => {
+const postBasket = async (option: PostBasketParams) => {
+  const { bookId, memberId } = option;
   const result = await instance.post(`basket/${bookId}/${memberId}`);
   return result.data;
 };
 
-export const usePostCart = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: ({bookId, memberId} : PostBasketParams) => postBasket({bookId, memberId}),
-    onSuccess: () => {
-      queryClient.invalidateQueries()
-    },
-  })
-  return mutation
-}
+export const usePostCart = (option: PostBasketParams) => {
+  return usePost(postBasket, option);
+};
 
 //장바구니 물건 삭제
 const deleteBasket = async (basketId: number) => {
