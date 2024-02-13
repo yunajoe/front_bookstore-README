@@ -4,7 +4,7 @@ import { instance } from 'src/libs/instance';
 //커뮤니티 글 전체조회, 내가쓴글 조회,
 export const getCommunity = async (option: {
   id: number;
-  params: { size: number; cursorId: number; search: string };
+  params: { cursorId: number;};
 }) => {
   const { id, params } = option;
   const result = await instance.get('community', {
