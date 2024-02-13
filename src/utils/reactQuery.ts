@@ -15,11 +15,13 @@ export const useFetch = <T>(
   return context;
 };
 
-export const useDelete = <T>(mutationFn: () => Promise<any>, option: T) => {
+export const useDelete = <T>(mutationFn: (option: T) => Promise<any>, option: T) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: () => mutationFn(),
+    mutationFn: () => mutationFn(option),
+    onSuccess : () => queryClient.invalidateQueries(),
   });
+  return mutation
 };
 
 export const usePost = <T>(mutationFn: (option : T) => Promise<any>, option: T) => {
