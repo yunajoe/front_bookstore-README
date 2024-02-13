@@ -18,18 +18,10 @@ interface AddressItemProps {
 
 function AddressItem({ zipNo, roadAddr, jibunAddr }: AddressItemProps) {
   const [, setAddress] = useAtom(setAddressData);
-  const [zipNoState] = useAtom(zipNoAtom); // Jotai atom의 값을 읽어옵니다.
-  const [roadAddrState] = useAtom(roadAddrAtom);
-  const [jibunAddrState] = useAtom(jibunAddrAtom);
 
   const chooseAddress = () => {
     setAddress({ zipNo, roadAddr, jibunAddr });
   };
-
-  // Jotai atom의 값이 업데이트될 때마다 해당 값을 콘솔에 출력합니다.
-  console.log('zipNoState:', zipNoState);
-  console.log('roadAddrState:', roadAddrState);
-  console.log('jibunAddrState:', jibunAddrState);
 
   return (
     <>
