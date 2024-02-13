@@ -13,26 +13,10 @@ TODO
 */
 function ShippingAddressSection() {
   const [isDefault, setIsDefault] = useState(true);
-  const [isFindAddressModalOpen, setIsFindAddressModalOpen] = useState(false);
   const handleOptionChange = (event: { target: { value: string } }) => {
     setIsDefault(event.target.value === 'default');
   };
 
-  const handleRecipientChange = (event) => {
-    setIsDefault ? '' : event.target.value;
-  };
-
-  const handlePhoneNumberChange = (event) => {
-    setIsDefault ? '' : event.target.value;
-  };
-
-  const handleAddressChange = (event) => {
-    setIsDefault ? '' : event.target.value;
-  };
-
-  const handleFindAddressModalOpen = () => {
-    setIsFindAddressModalOpen(!isFindAddressModalOpen);
-  };
 
   return (
     <div className="flex w-5/6 flex-col gap-y-12 text-16 pc:mx-93 pc:w-1/2">
@@ -41,15 +25,10 @@ function ShippingAddressSection() {
         isDefault={isDefault}
         handleOptionChange={handleOptionChange}
       />
-      <RecipientInput
-        isDefault={isDefault}
-        value={isDefault ? MOCK_ADDRESS.recipient : ''}
-        handleChange={handleRecipientChange}
-      />
+      <RecipientInput isDefault={isDefault} value={MOCK_ADDRESS.recipient} />
       <PhoneNumberInput
         isDefault={isDefault}
-        value={isDefault ? MOCK_ADDRESS.phoneNumber : ''}
-        handleChange={handlePhoneNumberChange}
+        value={MOCK_ADDRESS.phoneNumber}
       />
       <AddressInput
         isDefault={isDefault}
@@ -58,7 +37,6 @@ function ShippingAddressSection() {
           MOCK_ADDRESS.addressLine2,
           MOCK_ADDRESS.addressLine3,
         ]}
-        onClick={handleFindAddressModalOpen}
       />
       <SetDefaultAddressButton />
       <DeliveryDropDown />

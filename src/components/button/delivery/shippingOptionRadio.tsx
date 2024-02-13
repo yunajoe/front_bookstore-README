@@ -1,8 +1,6 @@
-import { ReactEventHandler } from 'react';
-
 interface ShippingOptionRadioProps {
   isDefault: boolean;
-  handleOptionChange: ReactEventHandler;
+  handleOptionChange: (event: { target: { value: string } }) => void;
 }
 function ShippingOptionRadio({
   isDefault,
