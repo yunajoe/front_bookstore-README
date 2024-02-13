@@ -5,6 +5,6 @@ export const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
   }
-})  
+})
 
-instance.defaults.headers.common["Authorization"] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1NfVE9LRU4iLCJpYXQiOjE3MDc3OTEzMDcsImV4cCI6MTcwNzc5MzEwNywiZW1haWwiOiJ5dW5ham9lQGdtYWlsLmNvbSJ9.RPGNu4CxyOFEViCgVcTi-kYeIdjTpdKgkslMMo3FfAv7g3aNdiH-LerNmQe7p7qZpWMmYWaCToxmiDcNAZpLVg" 
+instance.defaults.headers.common["Authorization"] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1NfVE9LRU4iLCJpYXQiOjE3MDc4MTYwNDQsImV4cCI6MTcwNzgxNzg0NCwiZW1haWwiOiJ5dW5ham9lQGdtYWlsLmNvbSJ9.C1YtIi6I4q6BvpDSA5p1KQRPUL-qY-rbWsGnBFeXoNezrE4Rbj9M0IgAndyVAv714RMxZSIsfvATjwcuJSP6tA"

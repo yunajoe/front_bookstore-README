@@ -3,102 +3,109 @@ import BookRating from '@/components/book/bookRating/bookRating';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import MainLayout from '@/components/layout/mainLayout';
 import useInfinite from '@/hooks/useInfinite';
-import { myWishListData } from '@/pages/api/wishMock';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery} from '@tanstack/react-query';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';  
+import { useEffect, useState } from 'react';
+import { THOUSAND_UNIT } from 'src/constants/price';
 const USER_ID = 3
-const OFFSET = 1
-const LIMIT = 10
-type WishListData = {
-  id: number;
-  image: string;
-  title: string;
-  author: string;
-  rating: number;
-  genre: string;
-  price: number;
-};
-  // const { data, isLoading } = useQuery<ColumnsType>({
-  //   queryKey: ['getColumns', boardId],
-  //   queryFn: () => getColumns(boardId),
-  //   enabled: !!boardId,
-  //   retry: 1,
-// })
- 
-function fetchNextData(start: number, end: number) {
-  const dataByScreen = myWishListData.wishListArray.slice(start, end);
-  return dataByScreen;
+const LIMIT = 8
+type WishListData = {   
+  bookId: number
+  bookTitle: string
+  publishedDate: string
+  bookImgUrl: string
+  authors: string[]
+  description: string
+  categories: string[]
+  averageRating: number
+  price: number
+  bookmarkCount: number
+  reviewCount: number
+  viewCount: number
+  quantityCount: any
+  publisher: string
+  createDate: string
+  updateDate: string
+  bookmarkId: number
 }
-const START = 0;
-function BookMarkedPage() {
-  // const bookMarkQuery = useQuery({
-  // queryKey: ['bookMarkUserId', USER_ID], 
-  //   queryFn: () => getBookMarkList(USER_ID, OFFSET, LIMIT),     
-  // enabled:!!USER_ID
-  // })
-  
-  // lastPage는 useInfiniteQuery를 이용해 호출된 가장 마지막에 있는 페이지 데이터를 의미합니다.
-  // allPages는 useInfiniteQuery를 이용해 호출된 모든 페이지 데이터를 의미합니다.
-  const {
-    data,
-    isLoading,
-    status, 
-  fetchNextPage,
-  fetchPreviousPage,
-  hasNextPage,
-  hasPreviousPage,
-  isFetchingNextPage,
-  isFetchingPreviousPage,  
-} = useInfiniteQuery({
-  queryKey: ['bookMarkUserId', USER_ID], 
-  queryFn: ({pageParam = OFFSET}) => getBookMarkList(USER_ID, pageParam, LIMIT),  
-  getNextPageParam: (lastPage, allPages, lastPageParam) => lastPage.nextCursor,  
-  initialPageParam: 0, 
-  select: (data) => {
-    return data.pages[0].data
-  }
-})
-//
-// {cursorId: -1, memberId: 3, total: 0, limit: 50, bookmarks: Array(0)}  data
 
 
-  console.log("dd", data)
-  console.log("hasNextPage",  hasNextPage)
-  console.log(data.bookmarks)
+const threeDigitCommma = (value: string | number) => {
+  return value.toString().replace(THOUSAND_UNIT, ",");
+}
 
 
-
-  const [end, setEnd] = useState(8);
-  const [wishListData, setWishListData] = useState(
-    () => fetchNextData(START, end) || [],
-  );
-  const [ref, isIntersecting] = useInfinite();
-  // console.log("꿔리",bookMarkQuery.data.data.bookmarks)
-  useEffect(() => {
-    if (isIntersecting && wishListData.length >= end) {
-      setEnd((num) => num + 8);
-      setWishListData((prev) => [...prev, ...fetchNextData(end, end + 8)]);
-    }
-  }, [isIntersecting]);
-
+function BookMarkedPage() {   
+  const [wishListData, setWishListData] = useState<WishListData[]>([]);
   const [selectedItemArr, setSelectedItemArr] = useState<WishListData[]>([]);
+  const [ref, isIntersecting] = useInfinite()
+
+  const {
+    data,     
+    status,
+    fetchNextPage,   
+    fetchPreviousPage,
+    hasNextPage,  
+  } = useInfiniteQuery({
+    queryKey: ['bookMarkUserId', USER_ID],  
+    queryFn: async ({ pageParam }) => {
+      const result = await getBookMarkList(USER_ID, pageParam, LIMIT);
+      return {
+        ...result,
+        pageParam: pageParam,
+      }
+    },
+    getNextPageParam: (lastPage) => {
+      // {status: 200, message: 'Success', data: {…}}
+      console.log("cursorId", lastPage.data.cursorId)
+      return lastPage.data.cursorId === -1 ? undefined : lastPage.pageParam + 1
+    },
+    initialPageParam: 0,
+  })
+
+
+  useEffect(() => {
+    if (data && status === "success") {
+      const bookmarkList = data?.pages.reduce((sum, page) => {
+        if (Array.isArray(page?.data?.bookmarks)) {
+          return [...sum, ...page.data.bookmarks];
+        }
+        return sum;
+      }, []);
+      setWishListData(bookmarkList);
+    }
+  }, [data]);     
+
+
+  useEffect(() => {
+    //     getNextPageParam 의 return값이 hasNextPAge
+    if (isIntersecting && hasNextPage) {
+      // page값 + 1
+      fetchNextPage()
+    }
+  }, [isIntersecting])
+
+
+  
 
   const resetSelectedItemArr = () => setSelectedItemArr([]);
 
   const filteredDataByTargetId = (arr: WishListData[], targetId: number) =>
-    arr.filter((arrItem) => arrItem.id === targetId);
+    arr.filter((arrItem) => arrItem.bookId === targetId);
 
   const filteredDataByNotTargetId = (arr: WishListData[], targetId: number) =>
-    arr.filter((arrItem) => arrItem.id !== targetId);
+    arr.filter((arrItem) => arrItem.bookId !== targetId);
 
   const handleDeleteSelectedItems = () => {
     const filteredData = wishListData.filter((item) => {
-      return selectedItemArr.map((picked) => picked.id).indexOf(item.id) === -1;
+      return selectedItemArr.map((picked) => picked.bookId).indexOf(item.bookId) === -1;
     });
     setWishListData(filteredData);
     resetSelectedItemArr();
   };
+
+  if (status === "error") return "error"
+
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -141,24 +148,24 @@ function BookMarkedPage() {
             <div
               className="grid grid-cols-2 tablet:grid-cols-1 mobile:grid-cols-1 gap-x-20 tablet: gap-y-20
                 mobile:gap-y-10">
-              {wishListData.map((item) => {
+              {wishListData.map((item) => {         
                 const selectedItems = filteredDataByTargetId(
                   selectedItemArr,
-                  item.id,
+                  item.bookId,
                 );
-                const pickedNum = selectedItems.map((item) => item.id)[0];
+                const pickedNum = selectedItems.map((item) => item.bookId)[0];
+                // item.categories.shift();
                 return (
                   <div
-                    key={item.id}
-                    className={`relative flex items-center pt-40 pb-43 pr-82 border-2 ${
-                      item.id === pickedNum ? 'border-green' : 'border-gray-1'
-                    } bg-white rounded-[10px]`}>
+                    key={item.bookId + "bookmarkList"}
+                    className={`relative flex items-center pt-40 pb-43 pr-82 border-2 ${item.bookId === pickedNum ? 'border-green' : 'border-gray-1'
+                      } bg-white rounded-[10px]`}>
                     <div
                       className="absolute top-20 right-20 mobile:top-10 right-10 cursor-pointer"
                       onClick={() => {
                         const filteredWishListData = filteredDataByNotTargetId(
                           wishListData,
-                          item.id,
+                          item.bookId,
                         );
                         setWishListData(filteredWishListData);
                       }}>
@@ -174,7 +181,7 @@ function BookMarkedPage() {
                       onClick={() => {
                         setSelectedItemArr((prev) => [...prev, item]);
                         const targetIdx = selectedItemArr.findIndex(
-                          (clickedItem) => clickedItem.id === item.id,
+                          (clickedItem) => clickedItem.bookId === item.bookId,
                         );
 
                         if (targetIdx !== -1) {
@@ -185,7 +192,7 @@ function BookMarkedPage() {
                       <div className="cursor-pointer w-20 h-20">
                         <Image
                           src={
-                            item.id === selectedItems[0]?.id
+                            item.bookId === selectedItems[0]?.bookId
                               ? '/icons/CheckedCheckBox.svg'
                               : '/icons/CheckBox.svg'
                           }
@@ -199,17 +206,17 @@ function BookMarkedPage() {
                       <PreviewBookInfo size="sm" />
                       <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
                         <div className="text-15 text-black font-bold break-all line-clamp-2">
-                          {item.title}
+                          {item.bookTitle}
                         </div>
                         <span className="text-gray-3 whitespace-nowrap text-ellipsis overflow-hidden">
-                          {item.author}
+                          {item.authors.join(",")}
                         </span>
                         <div className="flex">
-                          <BookRating rating={item.rating} />
+                          <BookRating rating={item.averageRating} />
                         </div>
-                        <span className="text-14">[{item.genre}]</span>
+                        <span className="text-14">[{item.categories.join(", ")}]</span>
                         <span className="text-14 text-color font-bold">
-                          {item.price.toLocaleString()}원
+                          {threeDigitCommma(item.price)}원
                         </span>
                       </div>
                     </div>
@@ -217,10 +224,11 @@ function BookMarkedPage() {
                 );
               })}
             </div>
+
           </div>
         </MainLayout>
       </div>
-      <div ref={ref} />
+      <div ref={ref}>여기</div>
     </div>
   );
 }
