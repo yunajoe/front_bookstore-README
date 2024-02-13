@@ -13,9 +13,8 @@ export const getBookMarkList = async (memberId: number, offset:number, limit: nu
   return result.data  
 }   
 
-// 찜 아이템(개별, 다중 삭제)
-// http://15.165.141.22:8080/bookmark?bookmarkIds=1  
-
-export const deleteBookMarkItem = async (bookmarkId:number) => {
-   await instance.get(`/bookmark?bookmarkIds=${bookmarkId}`)    
+// 찜 아이템(개별, 다중 삭제)  
+export const deleteBookMarkItem = async (bookmarkId:string) => {
+  const result = await instance.delete(`/bookmark?bookmarkIds=${encodeURI(bookmarkId)}`)  
+  return result.data
 }

@@ -1,9 +1,9 @@
-import { getBookMarkList } from '@/api/bookmark';
+import { deleteBookMarkItem, getBookMarkList } from '@/api/bookmark';
 import BookRating from '@/components/book/bookRating/bookRating';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import MainLayout from '@/components/layout/mainLayout';
 import useInfinite from '@/hooks/useInfinite';
-import { useInfiniteQuery} from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation} from '@tanstack/react-query';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
@@ -27,13 +27,11 @@ type WishListData = {
   createDate: string
   updateDate: string
   bookmarkId: number
-}
-
+}   
 
 const threeDigitCommma = (value: string | number) => {
   return value.toString().replace(THOUSAND_UNIT, ",");
-}
-
+}   
 
 function BookMarkedPage() {   
   const [wishListData, setWishListData] = useState<WishListData[]>([]);
@@ -61,8 +59,13 @@ function BookMarkedPage() {
       return lastPage.data.cursorId === -1 ? undefined : lastPage.pageParam + 1
     },
     initialPageParam: 0,
-  })
+  })   
 
+  const deleteBookMarkItemMutation = useMutation({
+     mutationFn: (bookmarkId:string)=> deleteBookMarkItem(bookmarkId)
+  })    
+
+   const selectedBookMarkIds= selectedItemArr.map((item)=> item.bookmarkId)
 
   useEffect(() => {
     if (data && status === "success") {
@@ -83,22 +86,21 @@ function BookMarkedPage() {
       // page값 + 1
       fetchNextPage()
     }
-  }, [isIntersecting])
-
-
-  
+  }, [isIntersecting])     
 
   const resetSelectedItemArr = () => setSelectedItemArr([]);
 
   const filteredDataByTargetId = (arr: WishListData[], targetId: number) =>
-    arr.filter((arrItem) => arrItem.bookId === targetId);
+    arr.filter((arrItem) => arrItem.bookmarkId === targetId);
 
   const filteredDataByNotTargetId = (arr: WishListData[], targetId: number) =>
-    arr.filter((arrItem) => arrItem.bookId !== targetId);
+    arr.filter((arrItem) => arrItem.bookmarkId !== targetId);
 
   const handleDeleteSelectedItems = () => {
+    const selectedBookMarkIds= selectedItemArr.map((item)=> item.bookmarkId)
+    deleteBookMarkItemMutation.mutate(selectedBookMarkIds.join(","))
     const filteredData = wishListData.filter((item) => {
-      return selectedItemArr.map((picked) => picked.bookId).indexOf(item.bookId) === -1;
+      return selectedItemArr.map((picked) => picked.bookmarkId).indexOf(item.bookmarkId) === -1;
     });
     setWishListData(filteredData);
     resetSelectedItemArr();
@@ -151,21 +153,21 @@ function BookMarkedPage() {
               {wishListData.map((item) => {         
                 const selectedItems = filteredDataByTargetId(
                   selectedItemArr,
-                  item.bookId,
+                  item.bookmarkId,
                 );
-                const pickedNum = selectedItems.map((item) => item.bookId)[0];
-                // item.categories.shift();
+                const pickedNum = selectedItems.map((item) => item.bookmarkId)[0];       
                 return (
                   <div
-                    key={item.bookId + "bookmarkList"}
-                    className={`relative flex items-center pt-40 pb-43 pr-82 border-2 ${item.bookId === pickedNum ? 'border-green' : 'border-gray-1'
+                    key={item.bookmarkId + "bookmarkList"}
+                    className={`relative flex items-center pt-40 pb-43 pr-82 border-2 ${item.bookmarkId === pickedNum ? 'border-green' : 'border-gray-1'
                       } bg-white rounded-[10px]`}>
                     <div
                       className="absolute top-20 right-20 mobile:top-10 right-10 cursor-pointer"
-                      onClick={() => {
+                      onClick={() => {  
+                        deleteBookMarkItemMutation.mutate(String(item.bookmarkId))
                         const filteredWishListData = filteredDataByNotTargetId(
                           wishListData,
-                          item.bookId,
+                          item.bookmarkId,
                         );
                         setWishListData(filteredWishListData);
                       }}>
@@ -181,7 +183,7 @@ function BookMarkedPage() {
                       onClick={() => {
                         setSelectedItemArr((prev) => [...prev, item]);
                         const targetIdx = selectedItemArr.findIndex(
-                          (clickedItem) => clickedItem.bookId === item.bookId,
+                          (clickedItem) => clickedItem.bookmarkId === item.bookmarkId,
                         );
 
                         if (targetIdx !== -1) {
@@ -192,7 +194,7 @@ function BookMarkedPage() {
                       <div className="cursor-pointer w-20 h-20">
                         <Image
                           src={
-                            item.bookId === selectedItems[0]?.bookId
+                            item.bookmarkId === selectedItems[0]?.bookmarkId
                               ? '/icons/CheckedCheckBox.svg'
                               : '/icons/CheckBox.svg'
                           }
