@@ -1,6 +1,6 @@
 import { QUERY_KEY } from '@/constants/queryKey';
 import { Signup, Login, ChangePassword, ChangeImage } from '@/types/api/member';
-import { useFetch } from '@/utils/reactQuery';
+import { useFetch, usePut } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -32,16 +32,9 @@ const putPassword = async (data: ChangePassword) => {
   return result.data;
 };
 
-export const usePutPassword = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (data:ChangePassword) => putPassword(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    } 
-  })
-  return mutation;
-}
+export const usePutPassword = (data: ChangePassword) => {
+  return usePut(putPassword, data);
+};
 
 //프로필이미지 수정
 const putProfileImage = async (data: ChangeImage) => {
@@ -49,13 +42,6 @@ const putProfileImage = async (data: ChangeImage) => {
   return result.data;
 };
 
-export const usePutProfileImage = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (data: ChangeImage) => putProfileImage(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const usePutProfileImage = (data: ChangeImage) => {
+  return usePut(putProfileImage, data);
 };

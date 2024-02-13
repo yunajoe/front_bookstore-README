@@ -5,7 +5,7 @@ import {
   PostCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
-import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -56,13 +56,6 @@ const putCommunity = async (option: PutCommunityOption) => {
   return result.data;
 };
 
-export const usePutCommunity = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (option: PutCommunityOption) => putCommunity(option),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const usePutCommunity = (option: PutCommunityOption) => {
+  return usePut(putCommunity, option)
 };

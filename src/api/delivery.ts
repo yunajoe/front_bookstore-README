@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useFetch, usePost } from '@/utils/reactQuery';
+import { useFetch, usePost, usePut } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -32,7 +32,10 @@ export const usePostDelivery = (option : PostDeliveryOption) => {
 };
 
 //배달상태 수정
-const putDelivery = async (option: { id: number; data: string }) => {
+//TODO : api 나오면 interface type 수정필요
+interface PutDeliveryOption { id: number; data: string; }
+
+const putDelivery = async (option: PutDeliveryOption) => {
   const { id, data } = option;
   const result = await instance.put(`delivery/${id}`, {
     data,
@@ -40,13 +43,6 @@ const putDelivery = async (option: { id: number; data: string }) => {
   return result.data;
 };
 
-export const usePutDelivery = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (option: { id: number; data: string }) => putDelivery(option),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const usePutDelivery = (option: PutDeliveryOption) => {
+  return usePut(putDelivery, option);
 };

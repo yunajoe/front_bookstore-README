@@ -1,5 +1,5 @@
 import { BookParams, putBookPath } from '@/types/api/book';
-import { useFetch } from '@/utils/reactQuery';
+import { useFetch, usePut } from '@/utils/reactQuery';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
@@ -23,18 +23,12 @@ export const useGetBook = (option: GetBookOption) => {
 }
 
 //도서 조회수 증가
-const putBookView = async({ bookId, memberId} : putBookPath) => {
+const putBookView = async (option: putBookPath) => {
+  const { bookId, memberId } = option;
   const result = await instance.put(`/book/${bookId}/${memberId}/view`);
   return result.data
 }
 
-export const usePutBook = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: ({ bookId, memberId }: putBookPath) => putBookView({ bookId, memberId }),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation
+export const usePutBook = (option : putBookPath) => {
+  return usePut(putBookView, option)
 }

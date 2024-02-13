@@ -33,15 +33,14 @@ export const usePost = <T>(mutationFn: (option : T) => Promise<any>, option: T) 
   return mutation
 };
 
-export const useUpdate = <T, S>(
-  url: string,
-  params?: object,
-  updater?: (oldData: T, newData: S) => T,
+export const usePut = <T>(
+  mutationFn: (option: T) => Promise<any>,
+  option: T,
 ) => {
-  return useGenericMutation<T, S>(
-    (data) => api.patch<S>(url, data),
-    url,
-    params,
-    updater,
-  );
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: () => mutationFn(option),
+    onSuccess: () => queryClient.invalidateQueries(),
+  });
+  return mutation;
 };

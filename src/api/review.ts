@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -10,12 +10,16 @@ const getReview = async (reviewId: number) => {
 };
 
 export const useGetReview = (reviewId: number) => {
-  return useFetch(QUERY_KEY.review, getReview, reviewId)
-}
+  return useFetch(QUERY_KEY.review, getReview, reviewId);
+};
 
 //리뷰 등록
 //TODO : api 나오면 interface type 수정필요
-interface PostReviewOption { id: number; data: string; }
+interface PostReviewOption {
+  id: number;
+  data: string;
+}
+
 const postReview = async (option: PostReviewOption) => {
   const { id, data } = option;
   const result = await instance.post(`review/${id}`, {
@@ -29,7 +33,13 @@ export const usePostReview = (option: PostReviewOption) => {
 };
 
 //리뷰 수정
-const putReview = async (option: { id: number; data: string }) => {
+//TODO : api 나오면 interface type 수정필요
+interface PutReviewOption {
+  id: number;
+  data: string;
+}
+
+const putReview = async (option: PutReviewOption) => {
   const { id, data } = option;
   const result = await instance.put(`review/${id}`, {
     data,
@@ -37,16 +47,8 @@ const putReview = async (option: { id: number; data: string }) => {
   return result.data;
 };
 
-
-export const usePutReview = (option: { id: number; data: string }) => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: () => putReview(option),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const usePutReview = (option: PutReviewOption) => {
+  return usePut(putReview, option);
 };
 
 //리뷰 삭제
@@ -55,7 +57,6 @@ const deleteReview = async (id: number) => {
   return result.data;
 };
 
-
 export const useDeleteReview = (id: number) => {
-  return useDelete(deleteReview, id)
+  return useDelete(deleteReview, id);
 };
