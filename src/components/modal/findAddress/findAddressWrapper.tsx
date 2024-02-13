@@ -9,7 +9,6 @@ function FindAddressWrapper({ addressData }: { addressData: Address[] }) {
           zipNo={data.zipNo}
           roadAddr={data.roadAddr}
           jibunAddr={data.jibunAddr}
-          key={data.zipNo}
         />
       ))}
     </div>
