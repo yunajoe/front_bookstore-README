@@ -2,6 +2,8 @@ import { QUERY_KEY } from '@/constants/queryKey';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
+//TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
+
 //배달상태조회
 const getDelivery = async (id: number) => {
   const result = await instance.get(`delivery/${id}`);
@@ -18,7 +20,6 @@ export const useGetDelivery = (id: number) => {
 };
 
 //배달 등록
-//TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
 const postDelivery = async (option: { id: number; data: string }) => {
   const { id, data } = option;
   const result = await instance.post(`delivery/${id}`, {
