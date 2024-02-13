@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useFetch } from '@/utils/reactQuery';
+import { useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -14,7 +14,9 @@ export const useGetReview = (reviewId: number) => {
 }
 
 //리뷰 등록
-const postReview = async (option: { id: number; data: string }) => {
+//TODO : api 나오면 interface type 수정필요
+interface PostReviewOption { id: number; data: string; }
+const postReview = async (option: PostReviewOption) => {
   const { id, data } = option;
   const result = await instance.post(`review/${id}`, {
     data,
@@ -22,15 +24,8 @@ const postReview = async (option: { id: number; data: string }) => {
   return result.data;
 };
 
-export const usePostReview = (option: { id: number; data: string }) => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: () => postReview(option),
-    onSuccess: () => {
-      queryClient.invalidateQueries()
-    }
-  });
-  return mutation
+export const usePostReview = (option: PostReviewOption) => {
+  return usePost(postReview, option);
 };
 
 //리뷰 수정

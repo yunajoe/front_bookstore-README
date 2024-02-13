@@ -1,5 +1,5 @@
 import { BookmarkParams, postBookmarkPath } from '@/types/api/bookmark';
-import { useFetch } from '@/utils/reactQuery';
+import { useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
@@ -31,20 +31,14 @@ export const useGetOptionBookmark = (option: {
 };
 
 //찜 하기
-const postBookmark = async ({bookId, memberId} : postBookmarkPath) => {
+const postBookmark = async (option: postBookmarkPath) => {
+  const { bookId, memberId } = option;
   const result = await instance.post(`/bookmark/${bookId}/${memberId}`);
   return result.data.data;
 }
 
-export const usePostBookmark = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: ({ bookId, memberId } : postBookmarkPath) => postBookmark({ bookId, memberId }),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const usePostBookmark = (option : postBookmarkPath) => {
+  return usePost(postBookmark, option)
 }
 
 //찜 삭제

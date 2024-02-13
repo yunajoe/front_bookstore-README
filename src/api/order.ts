@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useFetch } from '@/utils/reactQuery';
+import { useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -16,7 +16,10 @@ export const useGetOrder = (id:number) => {
 }
 
 //주문 등록
-const postOrder = async (option: { id: number; data: string }) => {
+//TODO : api 나오면 interface type 수정필요
+interface PostOrderOption { id: number; data: string; }
+
+const postOrder = async (option: PostOrderOption) => {
   const { id, data } = option;
   const result = await instance.post(`order/${id}`, {
     data,
@@ -24,15 +27,8 @@ const postOrder = async (option: { id: number; data: string }) => {
   return result.data;
 };
 
-export const usePostOrder = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (option: { id: number; data: string }) => postOrder(option),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const usePostOrder = (option : PostOrderOption) => {
+  return usePost(postOrder, option)
 };
 
 //주문 수정

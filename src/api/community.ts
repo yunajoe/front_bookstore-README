@@ -5,7 +5,7 @@ import {
   PostCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
-import { useFetch } from '@/utils/reactQuery';
+import { useFetch, usePost } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -33,15 +33,8 @@ const postCommunity = async (data: PostCommunityData) => {
   return result.data;
 };
 
-export const usePostCommunity = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (data: PostCommunityData) => postCommunity(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const usePostCommunity = (data : PostCommunityData) => {
+  return usePost(postCommunity, data)
 };
 
 //글 삭제

@@ -1,7 +1,7 @@
 import { instance } from 'src/libs/instance';
 import { QUERY_KEY } from '@/constants/queryKey';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useFetch } from '@/utils/reactQuery';
+import { useFetch, usePost } from '@/utils/reactQuery';
 
 //TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
 
@@ -16,7 +16,9 @@ export const useGetOrder = (id: number) => {
 };
 
 //주문 등록
-const postPayment = async (option: { id: number; data: string }) => {
+//TODO : api 나오면 interface type 수정필요
+interface PostPaymentOption { id: number; data: string; }
+const postPayment = async (option: PostPaymentOption) => {
   const { id, data } = option;
   const result = await instance.post(`payment/${id}`, {
     data,
@@ -24,15 +26,8 @@ const postPayment = async (option: { id: number; data: string }) => {
   return result.data;
 };
 
-export const usePostOrder = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (option: { id: number; data: string }) => postPayment(option),
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-  return mutation;
+export const usePostOrder = (option: PostPaymentOption) => {
+  return usePost(postPayment, option)
 };
 
 //주문 수정
