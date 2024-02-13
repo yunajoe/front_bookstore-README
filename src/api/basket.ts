@@ -1,5 +1,4 @@
 import { PostBasketParams } from '@/types/api/basket';
-import { postBookmarkPath } from '@/types/api/bookmark';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';

@@ -1,5 +1,6 @@
-import { BookCache, BookParams, putBookPath } from '@/types/api/book';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { BookParams, putBookPath } from '@/types/api/book';
+import { useFetch } from '@/utils/reactQuery';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -18,11 +19,7 @@ const getBook = async (option: GetBookOption) => {
 };
 
 export const useGetBook = (option: GetBookOption) => {
-  const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.book, option],
-    queryFn: () => getBook(option),
-    enabled: true,
-  })
+  const {data, ...props } = useFetch(QUERY_KEY.book, getBook, option)
   return {data, ...props}
 }
 
