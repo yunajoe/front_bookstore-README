@@ -5,13 +5,13 @@ import { useAtom } from "jotai";
 import { getBook } from "@/api/book";
 import PreviewBookInfo from "@/components/book/previewBookInfo/previewBookInfo";
 import DropDown from "@/components/dropDown/dropDown";
+import SkeletonPreviewBookInfo from "@/components/skeleton/previewBookInfo/skeleton";
 import useCarouselEnv from "@/hooks/useCarouselEnv";
 import useInfinite from "@/hooks/useInfinite";
 import useCustomInfiniteQuery from "@/hooks/useCustomInfiniteQuery";
 import { LocatedCategoryAtom } from "@/store/state";
 
 import { BOOK_OLDER_STANDARD } from "src/constants/orderList";
-import SkeletonPreviewBookInfo from "@/components/skeleton/previewBookInfo/skeleton";
 
 const CURRENT_ORDER = {
   sort: "VIEW",
