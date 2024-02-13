@@ -9,13 +9,13 @@ interface DeliveryRequestInputProps {
   disabled?: boolean;
 }
 
-const DeliveryRequestInput: React.FC<DeliveryRequestInputProps> = ({
+function DeliveryRequestInput({
   placeholder,
   value,
   onChange,
   className,
   disabled,
-}) => {
+}: DeliveryRequestInputProps) {
   return (
     <input
       type="text"
@@ -26,6 +26,6 @@ const DeliveryRequestInput: React.FC<DeliveryRequestInputProps> = ({
       disabled={disabled}
     />
   );
-};
+}
 
 export default DeliveryRequestInput;
