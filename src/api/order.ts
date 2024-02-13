@@ -1,31 +1,78 @@
+import { QUERY_KEY } from '@/constants/queryKey';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
 //주문조회
-export const getCart = async (id: number) => {
-  const result = await instance.get(`review/${id}`);
+const getOrder = async (id: number) => {
+  const result = await instance.get(`order/${id}`);
   return result.data;
 };
 
+export const useGetOrder = (id:number) => {
+  const { data, ...props } = useQuery({
+    queryKey: [QUERY_KEY.order],
+    queryFn: () => getOrder(id),
+    enabled:true,
+  })
+  return {data, ...props}
+}
+
 //주문 등록
-export const postReview = async (option: { id: number; data: string }) => {
+//TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
+const postOrder = async (option: { id: number; data: string }) => {
   const { id, data } = option;
-  const result = await instance.post(`review/${id}`, {
+  const result = await instance.post(`order/${id}`, {
     data,
   });
   return result.data;
+};
+
+export const usePostOrder = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (option: { id: number; data: string }) => postOrder(option),
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+  return mutation;
 };
 
 //주문 수정
-export const putReview = async (option: { id: number; data: string }) => {
+//TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
+export const putOrder = async (option: { id: number; data: string }) => {
   const { id, data } = option;
-  const result = await instance.put(`review/${id}`, {
+  const result = await instance.put(`order/${id}`, {
     data,
   });
   return result.data;
 };
 
+export const usePutOrder = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (option: { id: number; data: string }) => putOrder(option),
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+  return mutation;
+};
+
 //주문 삭제
-export const deleteReview = async (id: number) => {
-  const result = await instance.delete(`review/${id}`);
+//TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
+export const deleteOrder = async (id: number) => {
+  const result = await instance.delete(`order/${id}`);
   return result.data;
+};
+
+export const useDeleteOrder = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (id:number) => deleteOrder(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+  return mutation;
 };

@@ -6,4 +6,5 @@ export const QUERY_KEY = {
   cart: 'cart',
   community: 'community',
   delivery: 'delivery',
+  order: 'order',
 }
