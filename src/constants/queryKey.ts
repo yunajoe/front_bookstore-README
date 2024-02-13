@@ -3,4 +3,5 @@ export const QUERY_KEY = {
   member: 'member',
   book: 'book',
   bookmark: 'bookmark',
+  cart:'cart',
 }
