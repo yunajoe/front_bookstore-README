@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 
+import { getBook } from "@/api/book";
 import PreviewBookInfo from "@/components/book/previewBookInfo/previewBookInfo";
 import DropDown from "@/components/dropDown/dropDown";
-import { BOOK_OLDER_STANDARD } from "src/constants/orderList";
 import useCarouselEnv from "@/hooks/useCarouselEnv";
+import useInfinite from "@/hooks/useInfinite";
+import { BookParams } from "@/types/api/book";
 import { LocatedCategoryAtom } from "@/store/state";
 
+import { BOOK_OLDER_STANDARD } from "src/constants/orderList";
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
-import { DomesticBookList } from "@/pages/api/mock/domesticBookListMock";
-import { BookParams } from "@/types/api/book";
-import { getBook } from "@/api/book";
 
 const INITIAL_QUERYPARAMS = {
   bookId: "1",
@@ -26,27 +26,33 @@ function MainCategoryBookList() {
   const { env } = useCarouselEnv();
   const [locatedCategory,] = useAtom(LocatedCategoryAtom);
   const [queryParams, setQueryParams] = useState<BookParams>(INITIAL_QUERYPARAMS);
+  const [apiRef, isIntersecting] = useInfinite();
 
-const {
+  const {
     fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
+    isFetchingNextPage, isLoading,
     data
-} = useInfiniteQuery({
-  queryKey: [selectedOrder, locatedCategory.mainId, "main-category-book-list"],
-  queryFn: ({ pageParam = 1 }) => getBook({ endpoint: `${locatedCategory.mainId}/main`, params: { ...queryParams, bookId: String(pageParam) } }),
-  getNextPageParam: (lastPage, allPages) => {
-    return lastPage?.data?.cursorId === -1 ? undefined : lastPage.cursorId
-},
-  initialPageParam: 1,
-  select: (data) => (data.pages ?? [] ).flatMap(page => page?.data?.books)
-})
-  console.log(data)
+  } = useInfiniteQuery({
+    queryKey: [selectedOrder, locatedCategory.mainId, "main-category-book-list"],
+    queryFn: ({pageParam = 1}) => {
+      return getBook({ endpoint: `${locatedCategory.mainId}/main`, params: { ...queryParams, bookId: String(pageParam) } })
+    },
+    getNextPageParam: (lastPage, allPages) =>  lastPage?.data.books.length <= 0 || lastPage?.data.cursorId < 0 ? undefined : lastPage.data.books[lastPage.data.books.length - 1].bookId ,
+    initialPageParam: 1,
+    select: (data) => (data.pages ?? [] ).flatMap(page => page?.data?.books.slice(0, page.data.books.length -1))
+  })
+
+
+  useEffect(() => {
+    if (isIntersecting && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [isIntersecting])
 
   const onSelectedOrder = (menu: string) => {
     setSelectedOrder(menu);
-    if (menu === "조회순") setQueryParams((prev) => { return { ...prev, sort: "VIEW", ascending: "true" } });
-    if (menu === "신상품순") setQueryParams((prev) => { return { ...prev, sort: "NEWEST", ascending: "true" } });
+    if (menu === "조회순") setQueryParams((prev) => { return { ...prev, sort: "VIEW", ascending: "false" } });
+    if (menu === "신상품순") setQueryParams((prev) => { return { ...prev, sort: "NEWEST", ascending: "false" } });
     if (menu === "별점순") setQueryParams((prev) => { return { ...prev, sort: "STAR", ascending: "false" } });
     if (menu === "리뷰 많은순") setQueryParams((prev) => { return { ...prev, sort: "REVIEW", ascending: "false" } });
     if (menu === "낮은 가격순") setQueryParams((prev) => { return { ...prev, sort: "PRICE", ascending: "true" } });
@@ -54,7 +60,7 @@ const {
   }
 
   return (
-      <article className="flex flex-col gap-50 mobile:gap-20 tablet:gap-40">
+      <article className="flex flex-col gap-50 relative h-fit mobile:gap-20 tablet:gap-40 pb-30">
         <div className="flex items-center justify-between">
           <h1 className="text-20 text-black">모든 도서</h1>
           <div className="z-20">
@@ -63,8 +69,8 @@ const {
         </div>
       
         <div
-          className="h-[708px] w-[895px] mobile:h-[1735px] mobile:w-[330px]
-          tablet:h-[1464px] tablet:w-[511px] grid grid-flow-row grid-cols-5 tablet:grid-cols-3 mobile:grid-cols-2 auto-rows-auto gap-x-20 gap-y-40 mobile:gap-y-0 ">
+          className="h-fit w-[895px] mobile:w-[330px]
+           tablet:w-[511px] grid grid-flow-row grid-cols-5 tablet:grid-cols-3 mobile:grid-cols-2 auto-rows-auto gap-x-20 gap-y-40 mobile:gap-y-0 ">
         {data?.map((book) => {
           return (
             <Link href={`/bookdetail/${book.bookId}`} key={book.bookId} className="w-fit h-fit">
@@ -79,7 +85,12 @@ const {
               )
         })}
         
-          </div>
+      </div>
+      {(isFetchingNextPage || isLoading || isIntersecting) && 
+      <div className="h-[300] w-full"></div>
+      }
+      <div className="h-15 w-300" ref={apiRef} ></div>
+
     </article>
   )}
 
