@@ -4,7 +4,7 @@ import EventSection from '@/components/container/eventSection/eventSection';
 import CategoryCarousel from '@/components/carousel/categoryCarousel';
 import { carouselMockData } from '@/pages/api/mock/carouselMock';
 import { responsive } from '@/utils/checkResponsiveEnv';
-import SubCategoryBookList from '@/components/list/categoryBookList/subCategoryBookList';
+import SubCategoryBookList from '@/components/container/categoryBookList/subCategoryBookList';
 
 function CategoryPage() {
   return (
