@@ -1,6 +1,7 @@
 import { instance } from 'src/libs/instance';
 import { QUERY_KEY } from '@/constants/queryKey';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useFetch } from '@/utils/reactQuery';
 
 //TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
 
@@ -11,12 +12,7 @@ const getPayment = async (id: number) => {
 };
 
 export const useGetOrder = (id: number) => {
-  const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.payment, id],
-    queryFn: () => getPayment(id),
-    enabled: true,
-  });
-  return { data, ...props };
+  return useFetch(QUERY_KEY.payment, getPayment, id)
 };
 
 //주문 등록

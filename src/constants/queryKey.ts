@@ -3,7 +3,7 @@ export const QUERY_KEY = {
   member: 'member',
   book: 'book',
   bookmark: 'bookmark',
-  cart: 'cart',
+  basket: 'basket',
   community: 'community',
   delivery: 'delivery',
   order: 'order',

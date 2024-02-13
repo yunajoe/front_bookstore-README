@@ -19,8 +19,7 @@ const getBook = async (option: GetBookOption) => {
 };
 
 export const useGetBook = (option: GetBookOption) => {
-  const {data, ...props } = useFetch(QUERY_KEY.book, getBook, option)
-  return {data, ...props}
+  return useFetch(QUERY_KEY.book, getBook, option)
 }
 
 //도서 조회수 증가

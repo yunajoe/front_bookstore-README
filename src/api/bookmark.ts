@@ -1,4 +1,5 @@
 import { BookmarkParams, postBookmarkPath } from '@/types/api/bookmark';
+import { useFetch } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
@@ -12,27 +13,21 @@ const getBookmark = async (params : BookmarkParams) => {
 };
 
 export const useGetCart = (params: BookmarkParams) => {
-  const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.bookmark],
-    queryFn: () => getBookmark(params),
-    enabled: true,
-  });
-  return {data, ...props}
+  return useFetch(QUERY_KEY.bookmark, getBookmark, params)
 };
 
 //회원 or 상품 찜개수 조회
-const getOptionBookmark = async (id:number, option:string) => {
-  const result = await instance.get(`/bookmark/${id}/${option}`);
-  return result.data.data
-}
+const getOptionBookmark = async (option: { id: string; type: 'member' | 'book' }) => {
+  const { id, type } = option;
+  const result = await instance.get(`/bookmark/${id}/${type}`);
+  return result.data.data;
+};
 
-export const useGetOptionBookmark = (id: number, option: string) => {
-  const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.bookmark, id, option],
-    queryFn: () => getOptionBookmark(id, option),
-    enabled: !!id && !!option,
-  });
-  return {data, ...props}
+export const useGetOptionBookmark = (option: {
+  id: string;
+  type: 'member' | 'book';
+}) => {
+  return useFetch(QUERY_KEY.bookmark, getOptionBookmark, option);
 };
 
 //찜 하기

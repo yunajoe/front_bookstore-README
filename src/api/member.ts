@@ -1,4 +1,6 @@
+import { QUERY_KEY } from '@/constants/queryKey';
 import { Signup, Login, ChangePassword, ChangeImage } from '@/types/api/member';
+import { useFetch } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -21,12 +23,7 @@ const getMember = async (id: number) => {
 };
 
 export const useGetMember = (id: number) => {
-  const { data, ...props } = useQuery({
-    queryKey: ['member', `${id}`],
-    queryFn: () => getMember(id),
-    enabled: true,
-  })
-  return {data, ...props};
+  return useFetch(QUERY_KEY.member, getMember, id)
 };
 
 //비밀번호 수정

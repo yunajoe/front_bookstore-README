@@ -5,6 +5,7 @@ import {
   PostCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
+import { useFetch } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -21,12 +22,7 @@ const getCommunity = async (option: GetCommunityOption) => {
 };
 
 export const useGetCommunity = (option: GetCommunityOption) => {
-  const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.community],
-    queryFn: () => getCommunity(option),
-    enabled: true,
-  });
-  return { data, ...props };
+  return useFetch(QUERY_KEY.community, getCommunity, option)
 };
 
 //글 등록

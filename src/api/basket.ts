@@ -1,4 +1,5 @@
 import { PostBasketParams } from '@/types/api/basket';
+import { useFetch } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
@@ -10,12 +11,7 @@ const getBasket = async (memberId: number) => {
 };
 
 export const useGetCart = (memberId:number) => {
-  const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.cart],
-    queryFn: () => getBasket(memberId),
-    enabled: true,
-  })
-  return {data, ...props}
+  return useFetch(QUERY_KEY.basket, getBasket, memberId);
 }
 
 //장바구니 추가

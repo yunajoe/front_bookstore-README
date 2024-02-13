@@ -1,4 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
+import { useFetch } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -11,12 +12,7 @@ const getDelivery = async (id: number) => {
 };
 
 export const useGetDelivery = (id: number) => {
-  const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.delivery, id],
-    queryFn: () => getDelivery(id),
-    enabled: true,
-  });
-  return { data, ...props };
+  return useFetch(QUERY_KEY.delivery, getDelivery, id)
 };
 
 //배달 등록

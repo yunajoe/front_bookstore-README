@@ -1,4 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
+import { useFetch } from '@/utils/reactQuery';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from 'src/libs/instance';
 
@@ -9,12 +10,7 @@ const getReview = async (reviewId: number) => {
 };
 
 export const useGetReview = (reviewId: number) => {
-  const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.review, reviewId],
-    queryFn: () => getReview(reviewId),
-    enabled: !!reviewId,
-  })
-  return {data, ...props}
+  return useFetch(QUERY_KEY.review, getReview, reviewId)
 }
 
 //리뷰 등록
