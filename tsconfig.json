@@ -16,6 +16,7 @@
     "paths": {
       "@/components/*": ["src/components/*"],
       "@/api/*": ["src/api/*"],
+      "@/constants/*" : ["src/constants/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/store/*": ["src/store/*"],
       "@/pages/*": ["src/pages/*"],
