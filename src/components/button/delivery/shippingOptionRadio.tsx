@@ -9,9 +9,9 @@ function ShippingOptionRadio({
   handleOptionChange,
 }: ShippingOptionRadioProps) {
   return (
-    <div className="inline-flex h-26 items-center">
+    <div className="mb-8 inline-flex h-26 items-center">
       <div className="flex-center inline-flex">
-        <span className="mr-45 text-18 font-bold">배송지</span>
+        <span className="mr-45 text-18 font-bold mobile:mr-43">배송지</span>
         <input
           type="radio"
           id="default"

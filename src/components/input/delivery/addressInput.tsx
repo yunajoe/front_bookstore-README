@@ -21,8 +21,10 @@ function AddressInput({ isDefault, addressLines, onClick }: AddressInputProps) {
   };
 
   return (
-    <div className={`flex text-16 text-gray-3 ${isDefault ? '' : ''}`}>
-      <label htmlFor="address" className="mr-66 inline-flex pc:mt-12">
+    <div className="flex text-16 text-gray-3">
+      <label
+        htmlFor="address"
+        className="mr-66 inline-flex mobile:mr-63 mobile:mt-17 pc:mt-12">
         주소
       </label>
       <div className="flex flex-col gap-y-12">
@@ -31,8 +33,8 @@ function AddressInput({ isDefault, addressLines, onClick }: AddressInputProps) {
             type="text"
             id="addressLine1"
             value={`${isDefault ? addressLines[0] : zipNo}`}
-            className="pointer-events-none mr-12 h-48 w-180 rounded-[5px] border border-gray-1 bg-gray-5
-            pl-12 text-gray-2"
+            className="pointer-events-none mr-12 h-48 w-180 rounded-[5px] border border-gray-1 bg-gray-5 pl-12
+            text-gray-2 mobile:mr-10 mobile:w-119"
             disabled={isDefault}
           />
           <SearchAddressButton onClick={handleFindAddressModalOpen} />
@@ -40,21 +42,22 @@ function AddressInput({ isDefault, addressLines, onClick }: AddressInputProps) {
             <FindAddress onClick={handleFindAddressModalOpen} />
           )}
         </div>
-        <input
-          type="text"
-          id="addressLine2"
-          value={`${isDefault ? addressLines[1] : roadAddr}`}
-          className="pointer-events-none mt-2 h-48 w-462 rounded-[5px] border
-           border-gray-1 bg-gray-5 pl-12
-          text-gray-2"
+        <textarea
+          id="addressLine3"
+          placeholder={`${isDefault ? '' : '상세주소 입력'}`}
+          value={`${isDefault ? addressLines[1] : ''}`}
+          className={`mt-2 h-48 w-462 overflow-hidden rounded-[5px] border border-gray-1 bg-gray-5 pl-12 pt-10 text-16 text-gray-2 mobile:w-237 mobile:py-2 mobile:pt-0 ${
+            isDefault ? 'pointer-events-none' : 'bg-white'
+          }`}
           disabled={isDefault}
         />
+
         <input
           type="text"
           id="addressLine3"
           placeholder={`${isDefault ? '' : '상세주소 입력'}`}
           value={`${isDefault ? addressLines[2] : ''}`}
-          className={`flex-center mt-2 h-48 w-462 rounded-[5px] border border-gray-1 bg-gray-5 pl-12 text-16 text-gray-2 ${
+          className={`mt-2 flex h-48 w-462 items-center overflow-scroll rounded-[5px] border border-gray-1 bg-gray-5 pl-12 text-16 text-gray-2 mobile:w-237 ${
             isDefault ? 'pointer-events-none' : 'bg-white'
           }`}
           disabled={isDefault}

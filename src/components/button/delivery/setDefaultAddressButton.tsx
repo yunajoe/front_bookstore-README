@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import CheckIcon from '@/public/icons/CheckIcon.svg';
-
+/* TODO
+기본 배송지 저장 시 api post/put 요청 연결
+*/
 function SetDefaultAddressButton() {
   const [isClicked, setIsClicked] = useState(false);
 

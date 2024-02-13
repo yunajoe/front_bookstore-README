@@ -10,7 +10,7 @@ function PhoneNumberInput({
   handleChange,
 }: PhoneNumberInputProps) {
   return (
-    <div className="flex text-16  text-gray-3">
+    <div className="flex items-center text-16  text-gray-3">
       <label htmlFor="phoneNumber" className="mr-34">
         전화번호
       </label>
@@ -19,7 +19,7 @@ function PhoneNumberInput({
         id="phoneNumber"
         value={value}
         placeholder="01012345678"
-        className={`h-48 w-300 rounded-[5px] border  border-gray-1 pl-12 text-gray-2 ${
+        className={`h-48 w-300 rounded-[5px] border border-gray-1 pl-12  text-gray-2 mobile:w-237 ${
           isDefault ? 'pointer-events-none bg-gray-5' : 'bg-white'
         }`}
         onChange={handleChange}
