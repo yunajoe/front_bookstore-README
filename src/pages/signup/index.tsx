@@ -22,10 +22,10 @@ import { useMutation } from '@tanstack/react-query';
 import { postLogin, postSignup } from '@/api/member';
 import { Login, Signup } from '@/types/api/member';
 import { useRouter } from 'next/router';    
+import useSignUpMutation from '@/hooks/useSignUpMutation';
 
 
-function SignUp() {  
-  const router = useRouter()  
+function SignUp() {    
   const method = useForm<SignUpValueType>({
     mode: 'onBlur',
     defaultValues: {
@@ -41,26 +41,10 @@ function SignUp() {
     handleSubmit,
     setError,   
     formState: { errors },
-  } = method;   
+  } = method;       
 
 
-  const createMemberMutation = useMutation({
-    mutationFn: async (personData: Signup) => {
-      await postSignup(personData)
-      return personData
-    },
-    onSuccess(data) {
-      loginMutation.mutate({
-        email: data.email,
-        password: data.password,
-      })
-    }
-  })  
-
-  const loginMutation = useMutation({
-    mutationFn: (data: Login) => postLogin(data),
-    onSuccess: () => router.push("/")
-  })  
+  const { createMemberMutation } = useSignUpMutation()  
 
   const onSubmit = (data: SignUpValueType) => {
     const { email, password, repassword, nickname, selectAll } = data;
