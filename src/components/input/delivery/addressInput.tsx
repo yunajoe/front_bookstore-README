@@ -7,10 +7,9 @@ import { zipNoAtom, roadAddrAtom, jibunAddrAtom } from '@/store/address';
 interface AddressInputProps {
   isDefault: boolean;
   addressLines: string[];
-  onClick: () => void;
 }
 
-function AddressInput({ isDefault, addressLines, onClick }: AddressInputProps) {
+function AddressInput({ isDefault, addressLines }: AddressInputProps) {
   const [zipNo] = useAtom(zipNoAtom); // Jotai atom의 값을 읽어옵니다.
   const [roadAddr] = useAtom(roadAddrAtom);
   const [jibunAddr] = useAtom(jibunAddrAtom);
@@ -21,20 +20,20 @@ function AddressInput({ isDefault, addressLines, onClick }: AddressInputProps) {
   };
 
   return (
-    <div className="flex text-16 text-gray-3">
+    <div className="flex w-full text-16 text-gray-3">
       <label
         htmlFor="address"
-        className="mr-66 inline-flex mobile:mr-63 mobile:mt-17 pc:mt-12">
+        className="mr-66 whitespace-nowrap mobile:mr-63 mobile:mt-17 pc:mt-12">
         주소
       </label>
-      <div className="flex flex-col gap-y-12">
+      <div className="flex w-full flex-col gap-y-12">
         <div className="flex items-center">
           <input
             type="text"
             id="addressLine1"
             value={`${isDefault ? addressLines[0] : zipNo}`}
-            className="pointer-events-none mr-12 h-48 w-180 rounded-[5px] border border-gray-1 bg-gray-5 pl-12
-            text-gray-2 mobile:mr-10 mobile:w-119"
+            className="pointer-events-none mr-12 h-48 w-120 rounded-[5px] border border-gray-1 bg-gray-5
+            pl-12 text-gray-2 mobile:mr-10"
             disabled={isDefault}
           />
           <SearchAddressButton onClick={handleFindAddressModalOpen} />
@@ -44,9 +43,8 @@ function AddressInput({ isDefault, addressLines, onClick }: AddressInputProps) {
         </div>
         <textarea
           id="addressLine3"
-          placeholder={`${isDefault ? '' : '상세주소 입력'}`}
-          value={`${isDefault ? addressLines[1] : ''}`}
-          className={`mt-2 h-48 w-462 overflow-hidden rounded-[5px] border border-gray-1 bg-gray-5 pl-12 pt-10 text-16 text-gray-2 mobile:w-237 mobile:py-2 mobile:pt-0 ${
+          value={`${isDefault ? addressLines[1] : roadAddr}`}
+          className={`mt-2 w-full overflow-hidden rounded-[5px] border border-gray-1 bg-gray-5 py-10 pl-12 text-16 text-gray-2 tablet:h-48 pc:h-48 ${
             isDefault ? 'pointer-events-none' : 'bg-white'
           }`}
           disabled={isDefault}
@@ -57,7 +55,7 @@ function AddressInput({ isDefault, addressLines, onClick }: AddressInputProps) {
           id="addressLine3"
           placeholder={`${isDefault ? '' : '상세주소 입력'}`}
           value={`${isDefault ? addressLines[2] : ''}`}
-          className={`mt-2 flex h-48 w-462 items-center overflow-scroll rounded-[5px] border border-gray-1 bg-gray-5 pl-12 text-16 text-gray-2 mobile:w-237 ${
+          className={`mt-2 flex h-48 w-full items-center overflow-scroll rounded-[5px] border border-gray-1 bg-gray-5 pl-12 text-16 text-gray-2 ${
             isDefault ? 'pointer-events-none' : 'bg-white'
           }`}
           disabled={isDefault}

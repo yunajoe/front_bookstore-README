@@ -24,7 +24,7 @@ function DeliveryDropDown() {
   };
 
   return (
-    <div className="pc:w-555 tablet:w-688 flex-col mobile:w-330">
+    <div className="flex w-full flex-col gap-y-12">
       <DropDown
         menus={DELIVERY_MENU}
         selectedItem={selectedItem}
@@ -35,7 +35,7 @@ function DeliveryDropDown() {
         placeholder="직접 입력"
         value={customDelivery}
         onChange={onCustomDeliveryChange}
-        className="mt-2 h-42 w-full min-w-fit max-w-full rounded-[5px] border border-gray-1 bg-gray-5 pl-12 text-14 text-gray-2" // Input의 너비를 상위 요소의 너비와 동일하게 설정합니다.
+        className="mt-2 h-42 w-full min-w-fit max-w-full rounded-[5px] border border-gray-1 bg-white pl-12 text-14 text-gray-2"
       />
     </div>
   );
