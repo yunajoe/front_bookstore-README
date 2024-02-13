@@ -8,8 +8,8 @@ export const getCart = async (id: number) => {
 
 
 // 해당 userID로 찜 list조회
-export const getBookMarkList = async (memberId: number, offset:number, limit: number) => {
-  const result = await instance.get(`/bookmark?memberId=${memberId}&offset=${offset}&limit=${limit}&sort=price`)
+export const getBookMarkList = async (offset:number, limit: number) => {
+  const result = await instance.get(`/bookmark?offset=${offset}&limit=${limit}&sort=price`)
   return result.data  
 }   
 

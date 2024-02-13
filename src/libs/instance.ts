@@ -1,4 +1,3 @@
-import { postLogin } from "@/api/member";
 import axios from "axios";
 
 export const instance = axios.create({
@@ -8,18 +7,5 @@ export const instance = axios.create({
   }
 })
 
-instance.interceptors.response.use((config) => {
-  return config;
-}, () => {
-  refetchToken();
-});  
-
-const refetchToken = async () => {
-  const token = await postLogin({
-    email: 'yunajoe@gmail.com',
-    password: "12345678abc",
-  }); 
-  instance.defaults.headers.common["Authorization"] = token.data.Authentication
-}
 
 

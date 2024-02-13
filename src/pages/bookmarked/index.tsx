@@ -1,71 +1,26 @@
 import { deleteBookMarkItem, getBookMarkList } from '@/api/bookmark';
 import BookRating from '@/components/book/bookRating/bookRating';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import BookMarkedHeader from '@/components/header/bookmarkedHeader';
 import MainLayout from '@/components/layout/mainLayout';
+import useBookMarkInfiniteQuery from '@/hooks/useBookMarkInfiniteQuery';
+import useDeleteBookMarkMuation from '@/hooks/useDeleteBookMarkMuation';
 import useInfinite from '@/hooks/useInfinite';
-import { useInfiniteQuery, useMutation} from '@tanstack/react-query';
+import { BookMarkListData } from '@/types/wishPageType';
+import { threeDigitCommma } from '@/utils/threeDigitComma';  
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { THOUSAND_UNIT } from 'src/constants/price';
-const USER_ID = 3
-const LIMIT = 8
-type WishListData = {   
-  bookId: number
-  bookTitle: string
-  publishedDate: string
-  bookImgUrl: string
-  authors: string[]
-  description: string
-  categories: string[]
-  averageRating: number
-  price: number
-  bookmarkCount: number
-  reviewCount: number
-  viewCount: number
-  quantityCount: any
-  publisher: string
-  createDate: string
-  updateDate: string
-  bookmarkId: number
-}   
 
-const threeDigitCommma = (value: string | number) => {
-  return value.toString().replace(THOUSAND_UNIT, ",");
-}   
 
-function BookMarkedPage() {   
-  const [wishListData, setWishListData] = useState<WishListData[]>([]);
-  const [selectedItemArr, setSelectedItemArr] = useState<WishListData[]>([]);
-  const [ref, isIntersecting] = useInfinite()
+function BookMarkedPage() {
+  const [wishListData, setWishListData] = useState<BookMarkListData[]>([]);
+  const [selectedItemArr, setSelectedItemArr] = useState<BookMarkListData[]>([]);
+  const [ref, isIntersecting] = useInfinite()   
 
-  const {
-    data,     
-    status,
-    fetchNextPage,   
-    fetchPreviousPage,
-    hasNextPage,  
-  } = useInfiniteQuery({
-    queryKey: ['bookMarkUserId', USER_ID],  
-    queryFn: async ({ pageParam }) => {
-      const result = await getBookMarkList(USER_ID, pageParam, LIMIT);
-      return {
-        ...result,
-        pageParam: pageParam,
-      }
-    },
-    getNextPageParam: (lastPage) => {
-      // {status: 200, message: 'Success', data: {…}}
-      console.log("cursorId", lastPage.data.cursorId)
-      return lastPage.data.cursorId === -1 ? undefined : lastPage.pageParam + 1
-    },
-    initialPageParam: 0,
-  })   
+  const {data, status, fetchNextPage, hasNextPage} = useBookMarkInfiniteQuery()
 
-  const deleteBookMarkItemMutation = useMutation({
-     mutationFn: (bookmarkId:string)=> deleteBookMarkItem(bookmarkId)
-  })    
 
-   const selectedBookMarkIds= selectedItemArr.map((item)=> item.bookmarkId)
+  const deleteBookMarkItemMutation = useDeleteBookMarkMuation()
 
   useEffect(() => {
     if (data && status === "success") {
@@ -77,27 +32,25 @@ function BookMarkedPage() {
       }, []);
       setWishListData(bookmarkList);
     }
-  }, [data]);     
+  }, [data]);
 
 
   useEffect(() => {
-    //     getNextPageParam 의 return값이 hasNextPAge
     if (isIntersecting && hasNextPage) {
-      // page값 + 1
       fetchNextPage()
     }
-  }, [isIntersecting])     
+  }, [isIntersecting])
 
   const resetSelectedItemArr = () => setSelectedItemArr([]);
 
-  const filteredDataByTargetId = (arr: WishListData[], targetId: number) =>
+  const filteredDataByTargetId = (arr: BookMarkListData[], targetId: number) =>
     arr.filter((arrItem) => arrItem.bookmarkId === targetId);
 
-  const filteredDataByNotTargetId = (arr: WishListData[], targetId: number) =>
+  const filteredDataByNotTargetId = (arr: BookMarkListData[], targetId: number) =>
     arr.filter((arrItem) => arrItem.bookmarkId !== targetId);
 
   const handleDeleteSelectedItems = () => {
-    const selectedBookMarkIds= selectedItemArr.map((item)=> item.bookmarkId)
+    const selectedBookMarkIds = selectedItemArr.map((item) => item.bookmarkId)
     deleteBookMarkItemMutation.mutate(selectedBookMarkIds.join(","))
     const filteredData = wishListData.filter((item) => {
       return selectedItemArr.map((picked) => picked.bookmarkId).indexOf(item.bookmarkId) === -1;
@@ -110,129 +63,112 @@ function BookMarkedPage() {
 
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <div className="max-w-[1200px] w-full">
+    <div className="flex w-full flex-col items-center">
+      <div className="w-full max-w-[1200px]">
         <MainLayout>
-          <div className="flex flex-col px-60 mobile:px-15 tablet:px-40">
-            <div className="text-black text-20 font-bold">
-              찜목록({wishListData.length})
+          <div className="flex w-full flex-col px-60 mobile:px-15 tablet:px-40">
+            <div className="text-20 font-bold text-black">
+              찜목록{wishListData.length > 0 && `(${wishListData.length})`}
             </div>
-            <div className="flex justify-between my-23 mobile:my-18 tablet:my-23">
-              <div className="flex gap-x-8">
-                <div
-                  className="cursor-pointer w-20 h-20"
-                  onClick={() => {
-                    if (wishListData.length === selectedItemArr.length) {
-                      resetSelectedItemArr();
-                    } else {
-                      setSelectedItemArr([...wishListData]);
-                    }
-                  }}>
-                  <Image
-                    src={
-                      wishListData.length === selectedItemArr.length
-                        ? '/icons/CheckedCheckBox.svg'
-                        : '/icons/CheckBox.svg'
-                    }
-                    alt="체크아이콘"
-                    width={20}
-                    height={20}
-                  />
-                </div>
-                <span className="text-gray-4 text-14">전체선택</span>
-              </div>
-              <span
-                className="text-black text-14 font-normal cursor-pointer"
-                onClick={() => handleDeleteSelectedItems()}>
-                선택항목 삭제
-              </span>
-            </div>
-            <div
-              className="grid grid-cols-2 tablet:grid-cols-1 mobile:grid-cols-1 gap-x-20 tablet: gap-y-20
-                mobile:gap-y-10">
-              {wishListData.map((item) => {         
-                const selectedItems = filteredDataByTargetId(
-                  selectedItemArr,
-                  item.bookmarkId,
-                );
-                const pickedNum = selectedItems.map((item) => item.bookmarkId)[0];       
-                return (
-                  <div
-                    key={item.bookmarkId + "bookmarkList"}
-                    className={`relative flex items-center pt-40 pb-43 pr-82 border-2 ${item.bookmarkId === pickedNum ? 'border-green' : 'border-gray-1'
-                      } bg-white rounded-[10px]`}>
+            {wishListData.length > 0 && (
+              <BookMarkedHeader
+                wishListData={wishListData}
+                selectedItemArr={selectedItemArr}
+                resetSelectedItemArr={resetSelectedItemArr}
+                setSelectedItemArr={setSelectedItemArr}
+                handleDeleteSelectedItems={handleDeleteSelectedItems}
+              />
+            )}
+            {wishListData.length > 0 ? (
+              <div
+                className="tablet: grid grid-cols-2 gap-x-20 gap-y-20 mobile:grid-cols-1 mobile:gap-y-10
+                      tablet:grid-cols-1">
+                {wishListData.map((item) => {
+                  const selectedItems = filteredDataByTargetId(
+                    selectedItemArr,
+                    item.bookmarkId,
+                  );
+                  const pickedNum = selectedItems.map((item) => item.bookmarkId)[0];
+                  return (
                     <div
-                      className="absolute top-20 right-20 mobile:top-10 right-10 cursor-pointer"
-                      onClick={() => {  
-                        deleteBookMarkItemMutation.mutate(String(item.bookmarkId))
-                        const filteredWishListData = filteredDataByNotTargetId(
-                          wishListData,
-                          item.bookmarkId,
-                        );
-                        setWishListData(filteredWishListData);
-                      }}>
-                      <Image
-                        src="/icons/Close.svg"
-                        alt="엑스"
-                        width={24}
-                        height={24}
-                      />
-                    </div>
-                    <div
-                      className="mx-20 mobile:mx-10 w-20"
-                      onClick={() => {
-                        setSelectedItemArr((prev) => [...prev, item]);
-                        const targetIdx = selectedItemArr.findIndex(
-                          (clickedItem) => clickedItem.bookmarkId === item.bookmarkId,
-                        );
-
-                        if (targetIdx !== -1) {
-                          selectedItemArr.splice(targetIdx, 1);
-                          setSelectedItemArr([...selectedItemArr]);
-                        }
-                      }}>
-                      <div className="cursor-pointer w-20 h-20">
+                      key={item.bookmarkId}
+                      className={`relative flex items-center border-2 pb-43 pr-82 pt-40 ${item.bookmarkId === pickedNum ? 'border-green' : 'border-gray-1'
+                        } rounded-[10px] bg-white`}>
+                      <div
+                        className="absolute right-10 right-20 top-20 cursor-pointer mobile:top-10"
+                        onClick={() => {
+                          deleteBookMarkItemMutation.mutate(String(item.bookmarkId))
+                          const filteredWishListData =
+                            filteredDataByNotTargetId(wishListData, item.bookmarkId);
+                          setWishListData(filteredWishListData);
+                        }}>
                         <Image
-                          src={
-                            item.bookmarkId === selectedItems[0]?.bookmarkId
-                              ? '/icons/CheckedCheckBox.svg'
-                              : '/icons/CheckBox.svg'
-                          }
-                          alt="체크아이콘"
-                          width={20}
-                          height={20}
+                          src="/icons/Close.svg"
+                          alt="엑스"
+                          width={24}
+                          height={24}
                         />
                       </div>
-                    </div>
-                    <div className="flex gap-x-20 rounded-[10px]">
-                      <PreviewBookInfo size="sm" />
-                      <div className="w-274 mobile:w-147 flex flex-col gap-y-8 mobile:w-">
-                        <div className="text-15 text-black font-bold break-all line-clamp-2">
-                          {item.bookTitle}
+                      <div
+                        className="mx-20 w-20 mobile:mx-10"
+                        onClick={() => {
+                          setSelectedItemArr((prev) => [...prev, item]);
+                          const targetIdx = selectedItemArr.findIndex(
+                            (clickedItem) => clickedItem.bookmarkId === item.bookmarkId,
+                          );
+
+                          if (targetIdx !== -1) {
+                            selectedItemArr.splice(targetIdx, 1);
+                            setSelectedItemArr([...selectedItemArr]);
+                          }
+                        }}>
+                        <div className="h-20 w-20 cursor-pointer">
+                          <Image
+                            src={
+                              item.bookmarkId === selectedItems[0]?.bookmarkId
+                                ? '/icons/CheckedCheckBox.svg'
+                                : '/icons/CheckBox.svg'
+                            }
+                            alt="체크아이콘"
+                            width={20}
+                            height={20}
+                          />
                         </div>
-                        <span className="text-gray-3 whitespace-nowrap text-ellipsis overflow-hidden">
-                          {item.authors.join(",")}
-                        </span>
-                        <div className="flex">
-                          <BookRating rating={item.averageRating} />
+                      </div>
+                      <div className="flex gap-x-20 rounded-[10px]">
+                        <PreviewBookInfo size="sm" />
+                        <div className="mobile:w- flex w-274 flex-col gap-y-8 mobile:w-147">
+                          <div className="line-clamp-2 break-all text-15 font-bold text-black">
+                            {item.bookTitle}
+                          </div>
+                          <span className="overflow-hidden text-ellipsis whitespace-nowrap text-gray-3">
+                            {item.authors.join(',')}
+                          </span>
+                          <div className="flex">
+                            <BookRating rating={item.averageRating} />
+                          </div>
+                          <span className="text-14">[{item.categories.join(',')}]</span>
+                          <span className="text-color text-14 font-bold">
+                            {threeDigitCommma(item.price)}원
+                          </span>
                         </div>
-                        <span className="text-14">[{item.categories.join(", ")}]</span>
-                        <span className="text-14 text-color font-bold">
-                          {threeDigitCommma(item.price)}원
-                        </span>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="mt-120 w-full">
+                <p className="text-center text-gray-4">찜한 상품이 없어요</p>
+              </div>
+            )}
           </div>
         </MainLayout>
       </div>
-      <div ref={ref}>여기</div>
+      <div ref={ref}></div>
     </div>
   );
 }
+
 
 export default BookMarkedPage;
