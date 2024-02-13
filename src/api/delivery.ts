@@ -12,7 +12,7 @@ const getDelivery = async (id: number) => {
 
 export const useGetDelivery = (id: number) => {
   const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.delivery],
+    queryKey: [QUERY_KEY.delivery, id],
     queryFn: () => getDelivery(id),
     enabled: true,
   });

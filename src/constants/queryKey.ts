@@ -7,4 +7,6 @@ export const QUERY_KEY = {
   community: 'community',
   delivery: 'delivery',
   order: 'order',
+  payment: 'payment',
+  review: 'review',
 }

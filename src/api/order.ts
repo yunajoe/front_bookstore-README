@@ -12,7 +12,7 @@ const getOrder = async (id: number) => {
 
 export const useGetOrder = (id:number) => {
   const { data, ...props } = useQuery({
-    queryKey: [QUERY_KEY.order],
+    queryKey: [QUERY_KEY.order, id],
     queryFn: () => getOrder(id),
     enabled:true,
   })
