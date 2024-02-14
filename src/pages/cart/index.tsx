@@ -1,9 +1,11 @@
+import { getBasketList } from '@/api/cart';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import CartPayment from '@/components/cart/cartPayment';
 import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
 import { myWishListData } from '@/pages/api/wishMock';
 import { WishListData } from '@/types/wishPageType';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { SetStateAction, useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
@@ -64,13 +66,22 @@ function CartPageNav({
 function CartPage() {
   const [wishListData, setWishListData] = useState<WishListData[]>(() =>
     fetchData(),
-  );
-
+  );  
   const [selectedItemArr, setSelectedItemArr] = useState<WishListData[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [totalDiscount, setTotalDisCount] = useState(0);
-
+  const [totalDiscount, setTotalDisCount] = useState(0);  
   const resetSelectedItemArr = () => setSelectedItemArr([]);
+
+ const {data, isError, isFetching, isLoading } =  useQuery({
+   queryKey: ["getBasket"], 
+   queryFn: () => getBasketList(),
+   select: (data) => {
+      return data.data
+    }
+ })
+  
+  console.log("bbb",data)
+  // console.log("bbbaaa",basetKeyQuery.data.data)
 
   const calcBookPlusCount = (
     wishList: WishListData[],
@@ -131,7 +142,7 @@ function CartPage() {
     return acc;
   }, 0);
 
-  console.log('선택', selectedItemArr, '장부가누', wishListData);
+  
 
   return (
     <div className="flex w-full flex-col items-center">
