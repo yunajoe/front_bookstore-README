@@ -1,32 +1,31 @@
 import { SetStateAction, useState } from 'react';
 import Link from 'next/link';
-import {
-  CategoryProps,
-  ReadMeForeignCategoryList,
-  ReadMeDomesticCategoryList,
-} from '@/pages/api/mock';
+import { CategoryProps } from '@/pages/api/mock';
 
 import SelectedAllButton from '@/components/button/header/selectedAllButton';
 import CategoryButton from '@/components/button/header/categoryButton';
+import { CategoryListAtom } from '@/store/state';
+import { useAtom } from 'jotai';
 
 function CategoryTab() {
+  const [categoryList] = useAtom(CategoryListAtom);
   const [selectedCategory, setSelectedCategory] = useState<
     'domestic' | 'foreign'
   >('domestic');
   // 'domestic' 또는 'foreign';
   const [selectedAll, setSelectedAll] = useState('국내도서 전체보기');
-  const [categoryList, setCategoryList] = useState(
-    ReadMeDomesticCategoryList.categoryList,
+  const [middleCategoryList, setMiddleCategoryList] = useState(
+    categoryList.domestic,
   );
 
   const handleCategoryClick = (categoryType: SetStateAction<string>) => {
     if (categoryType === 'domestic') {
       setSelectedCategory('domestic');
-      setCategoryList(ReadMeDomesticCategoryList.categoryList);
+      setMiddleCategoryList(categoryList.domestic);
       setSelectedAll('국내도서 전체보기');
     } else {
       setSelectedCategory('foreign');
-      setCategoryList(ReadMeForeignCategoryList.categoryList);
+      setMiddleCategoryList(categoryList.foreign);
       setSelectedAll('외국도서 전체보기');
     }
   };
@@ -58,7 +57,7 @@ function CategoryTab() {
             label="국내도서"
             onClick={() => {
               handleCategoryClick('domestic');
-              setCategoryList(ReadMeDomesticCategoryList.categoryList);
+              setMiddleCategoryList(categoryList.domestic);
             }}
             style={getButtonStyle('domestic')}
           />
@@ -66,7 +65,7 @@ function CategoryTab() {
             label="외국도서"
             onClick={() => {
               handleCategoryClick('foreign');
-              setCategoryList(ReadMeForeignCategoryList.categoryList);
+              setMiddleCategoryList(categoryList.foreign);
             }}
             style={getButtonStyle('foreign')}
           />
@@ -81,11 +80,11 @@ function CategoryTab() {
       <div
         className={`text-13 mx-30 my-20 flex flex-wrap mobile:mx-20 tablet:h-350 pc:h-350
           ${getLinkLayoutClass()}`}>
-        {categoryList.map(({ title, link }) => (
+        {middleCategoryList.map((el) => (
           <Category
-            key={link}
-            title={title}
-            link={link}
+            key={el.link}
+            title={el.subName as string}
+            link={el.link as string}
             categoryType={selectedCategory}
           />
         ))}
