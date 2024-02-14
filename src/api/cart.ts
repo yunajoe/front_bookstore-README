@@ -28,9 +28,10 @@ export const getBasketList = async () => {
   return result.data;
 };
 
-// http://15.165.141.22:8080/basket?basketIds=1%2C2%2C3 
-// 해당 user의 장바구니에 들어있는 아이템 삭제  
+
+// 해당 user의 장바구니에 들어있는 아이템 삭제
 export const deleteBasketItem = async (basketIds:string) => {
-  const result = await instance.delete(`basket?basketIds=${basketIds}`);  
+  const result = await instance.delete(`basket?basketIds=${encodeURI(basketIds)}`);  
   return result.data
 };
+   

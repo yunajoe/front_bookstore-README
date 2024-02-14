@@ -1,16 +1,16 @@
-import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';
-import { WishListData } from '@/types/wishPageType';
-
+import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';  
+import { CartItem } from '@/types/cartType';  
+import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
-
+import { basketItemList} from '@/store/state';
 type CartPaymentProps = {
   totalAmount: number;
   totalDiscount: number;
   bookTotalCount: number;
-  selectedItemArr: WishListData[];
-  wishListData: WishListData[];
+  selectedItemArr: CartItem[];
+  wishListData: CartItem[];
 };
 
 function CartPayment({
@@ -36,6 +36,22 @@ function CartPayment({
       calculateDeliveryFee(totalAmount, totalDiscount)
     );
   };
+     
+  // const [itemCount, setItemCount] = useAtom(basketItemCount)
+  // const [itemPrice, setItemPrice] = useAtom(basketItemMoneyCount)
+  const [_, setBasketItemList] = useAtom(basketItemList)
+  console.log("ddd", _)
+  const handleMovePayMentPage = () => {
+    setBasketItemList(selectedItemArr)
+    router.push("/")
+  }
+
+
+  useEffect(() => {
+    return () => {
+      console.log("하이이이2", _)
+    }
+  },[])
 
   return (
     <div
@@ -75,8 +91,8 @@ function CartPayment({
           className="w-full text-center bg-green text-white rounded-[5px] py-15"
           onClick={() => {
             selectedItemArr.length
-              ? // 결제페이지로 이동
-                router.push('/')
+              ? 
+                handleMovePayMentPage()                 
               : handleAlertModalOpenClick();
           }}>
           결제하기({bookTotalCount})

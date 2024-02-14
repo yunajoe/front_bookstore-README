@@ -1,27 +1,23 @@
-import { getBasketList } from '@/api/cart';
+import { deleteBasketItem, getBasketList } from '@/api/cart';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import CartPayment from '@/components/cart/cartPayment';
 import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
-import { myWishListData } from '@/pages/api/wishMock';
-import { WishListData } from '@/types/wishPageType';
-import { useQuery } from '@tanstack/react-query';
+
+import { CartItem } from '@/types/cartType'; 
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import { SetStateAction, useEffect, useState } from 'react';
-import { THOUSAND_UNIT } from 'src/constants/price';
+import { THOUSAND_UNIT } from 'src/constants/price';  
 
-type WishListNavProps = {
-  wishListData: WishListData[];
-  selectedItemArr: WishListData[];
+type CartPageProps = {
+  wishListData: CartItem[];
+  selectedItemArr: CartItem[];
   resetSelectedItemArr: Function;
-  setSelectedItemArr: React.Dispatch<SetStateAction<WishListData[]>>;
+  setSelectedItemArr: React.Dispatch<SetStateAction<CartItem[]>>;
   handleDeleteSelectedItems: Function;
-};
-const fetchData = () => {
-  return myWishListData.wishListArray.map((ele, index) => {
-    return { ...ele, clicked: 0 };
-  });
-};
+};      
 
 function CartPageNav({
   wishListData,
@@ -29,7 +25,10 @@ function CartPageNav({
   resetSelectedItemArr,
   setSelectedItemArr,
   handleDeleteSelectedItems,
-}: WishListNavProps) {
+}: CartPageProps) {
+
+
+
   return (
     <div className="flex justify-between">
       <div className="flex gap-x-8">
@@ -64,31 +63,32 @@ function CartPageNav({
 }
 
 function CartPage() {
-  const [wishListData, setWishListData] = useState<WishListData[]>(() =>
-    fetchData(),
-  );  
-  const [selectedItemArr, setSelectedItemArr] = useState<WishListData[]>([]);
+  const [wishListData, setWishListData] = useState<CartItem[]>([]);  
+  const [selectedItemArr, setSelectedItemArr] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalDiscount, setTotalDisCount] = useState(0);  
-  const resetSelectedItemArr = () => setSelectedItemArr([]);
+  const resetSelectedItemArr = () => setSelectedItemArr([]);   
 
- const {data, isError, isFetching, isLoading } =  useQuery({
+
+
+ const { data, isError, isLoading, isSuccess } =  useQuery({
    queryKey: ["getBasket"], 
    queryFn: () => getBasketList(),
    select: (data) => {
-      return data.data
+      return data?.data
     }
  })
   
-  console.log("bbb",data)
-  // console.log("bbbaaa",basetKeyQuery.data.data)
+  const deleteBasketItemMutation = useMutation({
+    mutationFn: (basketItemId: string) => deleteBasketItem(basketItemId)      
+  })      
 
   const calcBookPlusCount = (
-    wishList: WishListData[],
-    item: WishListData,
-    setter: React.Dispatch<React.SetStateAction<WishListData[]>>,
+    wishList: CartItem[],
+    item:  CartItem,
+    setter: React.Dispatch<React.SetStateAction<CartItem[]>>,
   ) => {
-    const itemIdx = wishList.findIndex((data) => data.id === item.id);
+    const itemIdx = wishList.findIndex((data) => data.basketId === item.basketId);
     if (itemIdx > -1) {
       let clickedCount = (wishList[itemIdx]['clicked'] || 1) + 1;
       setter((prev) =>
@@ -100,11 +100,11 @@ function CartPage() {
   };
 
   const calcBookMinusCount = (
-    wishList: WishListData[],
-    item: WishListData,
-    setter: React.Dispatch<React.SetStateAction<WishListData[]>>,
+    wishList: CartItem[],
+    item:  CartItem,
+    setter: React.Dispatch<React.SetStateAction<CartItem[]>>,
   ) => {
-    const itemIdx = wishList.findIndex((data) => data.id === item.id);
+    const itemIdx = wishList.findIndex((data) => data.basketId  === item.basketId);
     if (itemIdx > -1) {
       let clickedCount = (wishList[itemIdx]['clicked'] || 1) - 1;
       setter((prev) =>
@@ -115,15 +115,17 @@ function CartPage() {
     }
   };
 
-  const filteredDataByTargetId = (arr: WishListData[], targetId: number) =>
-    arr.filter((arrItem) => arrItem.id === targetId);
+  const filteredDataByTargetId = (arr: CartItem[], targetId: number) =>
+    arr.filter((arrItem) => arrItem.basketId  === targetId);
 
-  const filteredDataByNotTargetId = (arr: WishListData[], targetId: number) =>
-    arr.filter((arrItem) => arrItem.id !== targetId);
+  const filteredDataByNotTargetId = (arr: CartItem[], targetId: number) =>
+    arr.filter((arrItem) => arrItem.basketId !== targetId);
 
-  const handleDeleteSelectedItems = () => {
+  const handleDeleteSelectedItems = () => {   
+    const selectedBookMarkIds = selectedItemArr.map((item) => item.basketId)  
+    deleteBasketItemMutation.mutate(selectedBookMarkIds.join(','))
     const filteredData = wishListData.filter((item) => {
-      return selectedItemArr.map((picked) => picked.id).indexOf(item.id) === -1;
+      return selectedItemArr.map((picked) => picked.basketId).indexOf(item.basketId) === -1;
     });
     setWishListData(filteredData);
     resetSelectedItemArr();
@@ -140,11 +142,21 @@ function CartPage() {
   const bookTotalCount = selectedItemArr.reduce((acc, item) => {
     acc += item.clicked || 1;
     return acc;
-  }, 0);
+  }, 0);    
 
+  useEffect(() => {
+    if (data && isSuccess) {   
+        setWishListData(data)        
+    }      
+  }, [data])
+
+  if (isError) return <div>Error loading data</div>; 
   
 
-  return (
+  if (isLoading) return <div>Loading...</div>; 
+
+  
+  return (     
     <div className="flex w-full flex-col items-center">
       <div className="w-full max-w-[1200px]">
         <MainLayout>
@@ -157,7 +169,7 @@ function CartPage() {
                   mobile:grid-cols-1 mobile:gap-y-10 tablet:grid-cols-1">
                 <div className="text-20 font-bold text-black">
                   장바구니
-                  {wishListData.length > 0 && `(${wishListData.length})`}
+                  {wishListData && wishListData.length > 0 && `(${wishListData.length})`}
                 </div>
                 {wishListData.length > 0 ? (
                   <CartPageNav
@@ -175,23 +187,23 @@ function CartPage() {
                 {wishListData.map((item) => {
                   const selectedItems = filteredDataByTargetId(
                     selectedItemArr,
-                    item.id,
+                    item.basketId,   
                   );
-                  const pickedItemId = selectedItems.map((item) => item.id)[0];
+                  const pickedItemId = selectedItems.map((item) => item.basketId)[0];
                   return (
                     <div
-                      key={item.id}
+                      key={item.basketId}
                       className={`relative flex flex-1 items-center border-2 pb-43 pr-44 pt-40 mobile:pb-75
-                        mobile:pt-20 ${item.id === pickedItemId ? 'border-green' : 'border-gray-1'} rounded-[10px]
+                        mobile:pt-20 ${item.basketId === pickedItemId ? 'border-green' : 'border-gray-1'} rounded-[10px]
                         bg-white`}>
                       <div
                         className="absolute right-20 top-20 cursor-pointer mobile:right-10 mobile:top-10"
                         onClick={() => {
                           const filteredWishListData =
-                            filteredDataByNotTargetId(wishListData, item.id);
+                            filteredDataByNotTargetId(wishListData, item.basketId);
                           setWishListData(filteredWishListData);
                           const filteredWishListData2 =
-                            filteredDataByNotTargetId(selectedItemArr, item.id);
+                            filteredDataByNotTargetId(selectedItemArr, item.basketId);
                           setSelectedItemArr(filteredWishListData2);
                         }}>
                         <Image
@@ -207,7 +219,7 @@ function CartPage() {
                         onClick={() => {
                           setSelectedItemArr((prev) => [...prev, item]);
                           const targetIdx = selectedItemArr.findIndex(
-                            (clickedItem) => clickedItem.id === item.id,
+                            (clickedItem) => clickedItem.basketId === item.basketId,
                           );
 
                           if (targetIdx !== -1) {
@@ -218,7 +230,7 @@ function CartPage() {
                         <div className="cursor-pointer">
                           <Image
                             src={
-                              item.id === selectedItems[0]?.id
+                              item.basketId === selectedItems[0]?.basketId  
                                 ? '/icons/CheckedCheckBox.svg'
                                 : '/icons/CheckBox.svg'
                             }
@@ -236,12 +248,12 @@ function CartPage() {
                               <div
                                 className="line-clamp-2 w-256 break-all text-15 font-bold text-black mobile:w-147
                                   tablet:w-196">
-                                {item.title}
+                                {item.bookTitle}
                               </div>
                               <div
                                 className="w-256 overflow-hidden text-ellipsis whitespace-nowrap text-gray-3 mobile:w-147
                                   tablet:w-196">
-                                {item.author}
+                                {item.authors.join(", ")}
                               </div>
                             </div>
                             <div className="text-color mb-12 text-14 font-bold">
@@ -310,7 +322,8 @@ function CartPage() {
         </MainLayout>
       </div>
     </div>
-  );
-}
+    );
+  }    
+
 
 export default CartPage;
