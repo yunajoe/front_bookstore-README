@@ -34,13 +34,15 @@ function OrderCompletedSection() {
             titleData={PAYMENT_INFO}
             contentData={PcontentData}
           />
+          <BookPaymentCardList
+            bookData={bookOrderTestData.orderData[0].bookData}
+            label="주문상품"
+          />
         </div>
-        <TotalPriceCard />
+        <div className="h-screen mt-47">
+          <TotalPriceCard />
+        </div>
       </div>
-      <BookPaymentCardList
-        bookData={bookOrderTestData.orderData[0].bookData}
-        label="주문상품"
-      />
     </div>
   );
 }
