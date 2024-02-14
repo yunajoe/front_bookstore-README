@@ -135,8 +135,9 @@ function CartPage() {
 
   return (
     <div className="flex w-full flex-col items-center">
-      <div className="w-full max-w-[1200px]">
-        <MainLayout>
+   
+      <MainLayout>
+           <div className="w-full max-w-[1200px]">
           <div className="relative w-full">
             <div
               className="flex gap-x-30 px-60 mobile:flex-col mobile:gap-x-10 mobile:px-15 tablet:gap-x-20
@@ -296,9 +297,9 @@ function CartPage() {
               />
             </div>
           </div>
+          </div>
         </MainLayout>
-      </div>
-    </div>
+      </div>  
   );
 }
 
