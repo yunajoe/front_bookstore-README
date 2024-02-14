@@ -6,7 +6,7 @@ import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 
 function BookOrderCard({ book, order }: BookOrderType) {
-  if (!book || !order) return;
+  if (!book || !order) return null;
 
   return (
     <div
@@ -18,9 +18,7 @@ function BookOrderCard({ book, order }: BookOrderType) {
         className="relative h-102 min-w-102 bg-gray-1 text-center mobile:h-75 mobile:min-w-75">
         {book.imageUrl ? (
           <Image src={book.imageUrl} alt="책 표지 이미지" layout="fill" />
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
       <div className="relative flex w-full flex-col items-start justify-start gap-12">
         <div className="flex w-full flex-col items-start justify-start gap-4">

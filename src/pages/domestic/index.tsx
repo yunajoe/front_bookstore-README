@@ -3,7 +3,7 @@
 import SidebarLayout from '@/components/layout/sidebarLayout';
 import Spacing from '@/components/container/spacing/spacing';
 import CategoryCarousel from '@/components/carousel/categoryCarousel';
-import CategoryBookList from '@/components/list/categoryBookList/categoryBookList';
+import MainCategoryBookList from '@/components/container/categoryBookList/mainCategoryBookList';
 import EventSection from '@/components/container/eventSection/eventSection';
 
 import { responsive } from '@/utils/checkResponsiveEnv';
@@ -12,7 +12,7 @@ import { carouselMockData } from '../api/mock/carouselMock';
 
 export default function DomesticPage() {
   return (
-      <SidebarLayout isDomestic={true}>
+      <SidebarLayout>
         <Spacing height={[0, 0, 20]} />
 
         <EventSection adsSizeClassName='w-[525px] h-[483px] tablet:w-297 tablet:h-275 mobile:w-330 mobile:h-178' eventSizeClassName='w-[340px] h-[483px] tablet:w-194 tablet:h-275 mobile:w-330 mobile:h-90'/>
@@ -30,7 +30,7 @@ export default function DomesticPage() {
         </article>        
         <Spacing height={[120, 80, 80]} />
 
-        <CategoryBookList mainCategory="domestic"/>
+        <MainCategoryBookList />
       </SidebarLayout>
   );
 }

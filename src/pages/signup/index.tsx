@@ -190,7 +190,7 @@ function SignUp() {
               </div>
             </fieldset>
             <fieldset className="mb-20">
-              <TermsCheckbox />
+              <TermsCheckbox title='약관동의' entire='전체동의' checkContent={TERMS_TITLES}/>
             </fieldset>
             <RegisterButton>회원가입</RegisterButton>
           </form>
