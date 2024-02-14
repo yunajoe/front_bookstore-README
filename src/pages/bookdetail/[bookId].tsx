@@ -1,17 +1,17 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
+import { useGetBook } from '@/api/book';
 import MainLayout from '@/components/layout/mainLayout';
 import BookDetailCard from '@/components/card/bookDetailCard/bookDetailCard';
 import BookDetailNav from '@/components/button/bookDetailNav';
-import { BookDetailMock1 } from '../api/mock/bookDetailMock';
-import { useState } from 'react';
-import { BookDetailNavLocationType } from '@/types/bookDetailtype';
 import RefundTerm from '@/components/container/refundTerm/refundTerm';
 import BookInformation from '@/components/book/bookInformation/bookInformation';
 import Review from '@/components/review/review';
 import Spacing from '@/components/container/spacing/spacing';
 import SideOrderNavigator from '@/components/orderNavigator/sideOrderNavigator';
 import FooterOrderNavitgator from '@/components/orderNavigator/footerOrderNavitgator';
+import { BookDetailNavLocationType } from '@/types/bookDetailtype';
 
 export default function BookDetailPage() {
   const router = useRouter();
@@ -21,19 +21,39 @@ export default function BookDetailPage() {
     useState<BookDetailNavLocationType>('information');
   // 책 구매 수량 state
   const [orderCount, setOrderCount] = useState(1);
+  const {data, isLoading, isError} = useGetBook({
+      endpoint: `${bookId}/detail`,
+      params: {
+        bookId: String(bookId)
+      },
+  })
 
+  // TODO isLoading 에선 스켈레톤 ui 보여주게 할 것.
   return (
     <MainLayout>
         <section className="flex flex-col w-full p-40 mobile:p-19 mobile:flex-center">
           <BookDetailCard
-            bookId={bookId as string}
+          bookId={bookId as string}
+          bookImgUrl={data?.data.bookImgUrl ?? "/"}
+          bookTitle={data?.data.bookTitle ?? ""}
+          price={data?.data.price ?? 0}
+          categories={data?.data.categories ?? ["",""]}
+          authors={data?.data.authors ??[""]}
+          bookmarkCount={data?.data.bookmarkCount ?? 0}
+          
+          isBookmarked={data?.data.isBookmarked ?? false}
+          publishedAt={data?.data.publishedDate ?? ""}
+          publisher={data?.data.publisher ?? ""}
+          rating={data?.data?.rating ?? 0}
+          reviewNum={data?.data.reviewCount ?? 0}
+
             orderCount={orderCount}
             setOrderCount={setOrderCount}
           />
         </section>
         <Spacing height={[80, 80, 40]} />
         <BookDetailNav
-          reviewNum={BookDetailMock1.reviewNum}
+          reviewNum={data?.data.reviewCount}
           location={location}
           setLocation={setLocation}
         />
@@ -48,8 +68,8 @@ export default function BookDetailPage() {
             </div>
             <div className="pc:pt-50 pc:flex hidden">
               <SideOrderNavigator
-                isBookmarked={BookDetailMock1.isBookmarked}
-                price={BookDetailMock1.price}
+                isBookmarked={data?.data.isBookmarked ?? false}
+                price={data?.data.price ?? 0}
                 bookId={bookId as string}
                 orderCount={orderCount}
                 setOrderCount={setOrderCount}
@@ -57,8 +77,8 @@ export default function BookDetailPage() {
             </div>
           </section>
           <FooterOrderNavitgator
-            isBookmarked={BookDetailMock1.isBookmarked}
-            price={BookDetailMock1.price}
+            isBookmarked={data?.data.isBookmarked ?? false}
+            price={data?.data.price ?? 0}
             bookId={bookId as string}
             orderCount={orderCount}
             setOrderCount={setOrderCount}
