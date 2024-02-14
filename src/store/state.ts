@@ -11,8 +11,7 @@ export const CurrentPageStateAtom = atom(1);
 
 
 // 장바구니 money Atom 
-export const basketItemList= atom<CartItem[]>([])
-
+export const basketItemList= atom<CartItem[]>([])   
 
 
 // 맨 처음 카테고리 리스트 데이터를 받아와 저장하는 전역상태

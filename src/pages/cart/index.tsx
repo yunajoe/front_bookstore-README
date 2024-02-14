@@ -1,11 +1,12 @@
-import { deleteBasketItem, getBasketList } from '@/api/cart';
+
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import CartPageHeader from '@/components/button/header/cartHeader';
 import CartPayment from '@/components/cart/cartPayment';
 import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';  
-import { CartItem } from '@/types/cartType'; 
-import { useMutation, useQuery } from '@tanstack/react-query';  
+import useDeleteBasketQuery from '@/hooks/useDeleteBasketQuery';
+import useGetBasKetQuery from '@/hooks/useGetBasKetQuery';
+import { CartItem } from '@/types/cartType';    
 import Image from 'next/image';
 import {  useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';  
@@ -17,21 +18,12 @@ function CartPage() {
   const [selectedItemArr, setSelectedItemArr] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalDiscount, setTotalDisCount] = useState(0);    
-  const resetSelectedItemArr = () => setSelectedItemArr([]);     
+  const resetSelectedItemArr = () => setSelectedItemArr([]);       
+       
+  const { data, isError, isLoading, isSuccess } =  useGetBasKetQuery()     
+  const deleteBasketItemMutation = useDeleteBasketQuery()
 
-
- const { data, isError, isLoading, isSuccess } =  useQuery({
-   queryKey: ["getBasket"], 
-   queryFn: () => getBasketList(),
-   select: (data) => {
-      return data?.data
-    }
- })
   
-  const deleteBasketItemMutation = useMutation({
-    mutationFn: (basketItemId: string) => deleteBasketItem(basketItemId)      
-  })      
-
   const calcBookPlusCount = (
     wishList: CartItem[],
     item:  CartItem,
