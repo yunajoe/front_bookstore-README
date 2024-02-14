@@ -23,6 +23,7 @@ import { postLogin, postSignup } from '@/api/member';
 import { Login, Signup } from '@/types/api/member';
 import { useRouter } from 'next/router';    
 import useSignUpMutation from '@/hooks/useSignUpMutation';
+import { TERMS_TITLES } from '@/constants/sign';
 
 
 function SignUp() {    
