@@ -9,7 +9,7 @@ interface GetBookOption {
 }
 
 //책 전체 가져오기, 도서 단일 조회, 책 페이징 조회,
-const getBook = async (option: GetBookOption) => {
+export const getBook = async (option: GetBookOption) => {
   const { endpoint, params } = option;
   const result = await instance.get(`/book${endpoint ? `/${endpoint}` : ''}`, {
     params,
