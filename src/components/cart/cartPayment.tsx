@@ -1,8 +1,8 @@
 import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';  
 import { CartItem } from '@/types/cartType';  
-import { useAtom } from 'jotai';
+import {useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import { basketItemList} from '@/store/state';
 type CartPaymentProps = {
@@ -37,25 +37,17 @@ function CartPayment({
     );
   };
      
-  // const [itemCount, setItemCount] = useAtom(basketItemCount)
-  // const [itemPrice, setItemPrice] = useAtom(basketItemMoneyCount)
-  const [_, setBasketItemList] = useAtom(basketItemList)
-  console.log("ddd", _)
+
+  const setBasketItemList = useSetAtom(basketItemList)
+
   const handleMovePayMentPage = () => {
     setBasketItemList(selectedItemArr)
-    router.push("/")
-  }
-
-
-  useEffect(() => {
-    return () => {
-      console.log("하이이이2", _)
-    }
-  },[])
-
+    // 결제페이지
+    router.push("/payment")
+  }   
   return (
     <div
-      className="sticky top-297 mt-107 flex h-fit w-340 flex-col rounded-[10px]
+      className="sticky top-297 mt-114 flex h-fit w-340 flex-col rounded-[10px]
         border-2 border-solid border-gray-1 p-30 mobile:mb-165 mobile:mt-20 mobile:w-full mobile:p-20
         tablet:w-216 tablet:p-20">
       <div className="mb-20 flex justify-between">

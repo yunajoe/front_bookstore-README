@@ -1,74 +1,23 @@
 import { deleteBasketItem, getBasketList } from '@/api/cart';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import CartPageHeader from '@/components/button/header/cartHeader';
 import CartPayment from '@/components/cart/cartPayment';
 import OrderBookCount from '@/components/cart/orderBookCount';
-import MainLayout from '@/components/layout/mainLayout';
-
+import MainLayout from '@/components/layout/mainLayout';  
 import { CartItem } from '@/types/cartType'; 
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
+import { useMutation, useQuery } from '@tanstack/react-query';  
 import Image from 'next/image';
-import { SetStateAction, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';  
 
-type CartPageProps = {
-  wishListData: CartItem[];
-  selectedItemArr: CartItem[];
-  resetSelectedItemArr: Function;
-  setSelectedItemArr: React.Dispatch<SetStateAction<CartItem[]>>;
-  handleDeleteSelectedItems: Function;
-};      
 
-function CartPageNav({
-  wishListData,
-  selectedItemArr,
-  resetSelectedItemArr,
-  setSelectedItemArr,
-  handleDeleteSelectedItems,
-}: CartPageProps) {
-
-
-
-  return (
-    <div className="flex justify-between">
-      <div className="flex gap-x-8">
-        <div
-          onClick={() => {
-            if (wishListData.length === selectedItemArr.length) {
-              resetSelectedItemArr();
-            } else {
-              setSelectedItemArr([...wishListData]);
-            }
-          }}>
-          <Image
-            src={
-              wishListData.length === selectedItemArr.length
-                ? '/icons/CheckedCheckBox.svg'
-                : '/icons/CheckBox.svg'
-            }
-            alt="체크아이콘"
-            width={20}
-            height={20}
-          />
-        </div>
-        <span className="text-14 text-gray-4">전체선택</span>
-      </div>
-      <span
-        className="cursor-pointer font-normal text-black"
-        onClick={() => handleDeleteSelectedItems()}>
-        선택항목 삭제
-      </span>
-    </div>
-  );
-}
 
 function CartPage() {
   const [wishListData, setWishListData] = useState<CartItem[]>([]);  
   const [selectedItemArr, setSelectedItemArr] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [totalDiscount, setTotalDisCount] = useState(0);  
-  const resetSelectedItemArr = () => setSelectedItemArr([]);   
-
+  const [totalDiscount, setTotalDisCount] = useState(0);    
+  const resetSelectedItemArr = () => setSelectedItemArr([]);     
 
 
  const { data, isError, isLoading, isSuccess } =  useQuery({
@@ -172,7 +121,7 @@ function CartPage() {
                   {wishListData && wishListData.length > 0 && `(${wishListData.length})`}
                 </div>
                 {wishListData.length > 0 ? (
-                  <CartPageNav
+                  <CartPageHeader
                     wishListData={wishListData}
                     selectedItemArr={selectedItemArr}
                     resetSelectedItemArr={resetSelectedItemArr}
@@ -198,7 +147,8 @@ function CartPage() {
                         bg-white`}>
                       <div
                         className="absolute right-20 top-20 cursor-pointer mobile:right-10 mobile:top-10"
-                        onClick={() => {
+                        onClick={() => {  
+                          deleteBasketItemMutation.mutate(String(item.basketId))
                           const filteredWishListData =
                             filteredDataByNotTargetId(wishListData, item.basketId);
                           setWishListData(filteredWishListData);
