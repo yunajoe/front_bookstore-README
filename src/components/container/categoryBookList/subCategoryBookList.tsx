@@ -25,7 +25,7 @@ function SubCategoryBookList() {
   const [selectedOrder, setSelectedOrder] = useState("조회순");
   const [currentOrder, setCurrentOrder] = useState(CURRENT_ORDER);
   const [apiRef, isIntersecting] = useInfinite();
-  const searchId = useGetCategoryId(locatedCategory.mainId, locatedCategory.subId ?? 0);
+  const searchId = useGetCategoryId(locatedCategory.mainId, locatedCategory.subId as number);
 
   const { data, isFetchingNextPage, hasNextPage } = useCustomInfiniteQuery({
     endpoint: `${searchId}/sub`,
