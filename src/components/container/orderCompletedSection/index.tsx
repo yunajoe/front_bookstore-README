@@ -38,9 +38,12 @@ function OrderCompletedSection() {
             bookData={bookOrderTestData.orderData[0].bookData}
             label="주문상품"
           />
+          <div className="pc:hidden w-full">
+            <TotalPriceCard checkbox={false} button={false} color='text-green' />
+          </div>
         </div>
-        <div className="h-screen mt-47">
-          <TotalPriceCard />
+        <div className="mobile:hidden tablet:hidden pc:mt-47 pc:h-screen w-full">
+          <TotalPriceCard checkbox={false} button={false} color='text-green'/>
         </div>
       </div>
     </div>
