@@ -1,6 +1,5 @@
 /** 책 상세페이지에 들어갈 카드 컴포넌트 */
 
-import { BookDetailMock1 as Mock } from '@/pages/api/mock/bookDetailMock';
 import BookDetailImg from './bookDetailImg';
 import BookDetailInfo from './bookDetailInfo';
 import StaticOrderNavigator from '@/components/orderNavigator/staticOrderNavigator';
@@ -16,7 +15,7 @@ interface BookDetailCardProps {
   isBookmarked: boolean;
   publishedAt: string;
   publisher: string;
-  rating: number;
+  averageRating: number;
   reviewNum: number;
   orderCount: number;
   setOrderCount: (n: number) => void;
@@ -33,7 +32,7 @@ function BookDetailCard({
   isBookmarked,
   publishedAt,
   publisher,
-  rating,
+  averageRating,
   reviewNum,
   orderCount,
   setOrderCount,
@@ -52,7 +51,7 @@ function BookDetailCard({
           bookmarkNum={bookmarkCount}
           publishedAt={publishedAt}
           publisher={publisher}
-          rating={rating}
+          rating={averageRating}
           reviewNum={reviewNum}
           price={price}
         />

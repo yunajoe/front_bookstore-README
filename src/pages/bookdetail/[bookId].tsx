@@ -36,9 +36,6 @@ export default function BookDetailPage() {
   // TODO 로그인한경우 조회수 올라가게 조회수 api 연결
   // TODO 공유하기버튼 연결
   // TODO 장바구니, 구매하기 버튼 연결
-  // TODO 백엔드님 averageRating이랑 ratingDist 값도 넘겨주세요
-  // TODO 백엔드님 이거 이미지 화질 이게 최선이겠죠??ㅠ ㅠㅠㅠㅠ
-  // TODO 백엔드님리뷰가 하나도 없어서 리뷰 페이지네이션이나 리뷰 정렬 기능을 구현 못하고 있는데 혹시 리뷰 랜덤 데이터좀 넣어주실수 있나요 ㅠ
   return (
     <MainLayout>
         <section className="flex flex-col w-full p-40 mobile:p-19 mobile:flex-center">
@@ -53,7 +50,7 @@ export default function BookDetailPage() {
             isBookmarked={data?.data.isBookmarked ?? false}
             publishedAt={data?.data.publishedDate ?? ""}
             publisher={data?.data.publisher ?? ""}
-            rating={data?.data?.rating ?? 0}
+            averageRating={data?.data?.averageRating ?? 0}
             reviewNum={data?.data.reviewCount ?? 0}
             orderCount={orderCount}
             setOrderCount={setOrderCount}
