@@ -29,6 +29,7 @@ function MainCategoryBookList() {
     endpoint: `${locatedCategory.mainId}/main`,
     queryKey: [selectedOrder, String(locatedCategory.mainId), "main-category-book-list"],
     queryFunc: getBook,
+    initialCursorId: 0,
     cursorName: "bookId",
     sort: currentOrder.sort,
     ascending: currentOrder.ascending,
