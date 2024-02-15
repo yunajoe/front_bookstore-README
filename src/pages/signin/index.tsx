@@ -10,7 +10,7 @@ import { checkEmail } from '@/utils/checkSignInSignOut';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValue, FieldValues, useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Login } from '@/types/api/member';
@@ -31,17 +31,24 @@ function SignIn() {
   });
 
   const router = useRouter()
-  const onSubmit = async (data) => {
+  const onSubmit = async (data :FieldValues) => {
     // setError('password', {
     //   type: 'manual',
     //   message: '아이디나 비밀번호가 일치하지 않습니다.',
     // }); 
-    const response = await signIn('signin-credentials', data);
-    console.log(response)
-    if (response) router.push('/');
-    // if (!response?.error) {
-    //   router.push('/')
-    // } 
+    const { email, password } = data;
+    const result = await signIn('signin-credentials', {
+      email,
+      password,
+      redirect: false,
+      callbackUrl: '/',
+      });
+
+      if (result?.url) {
+        // signIn 함수가 성공적으로 callbackUrl로 리다이렉션할 URL을 반환했을 때
+        window.location.href = result.url;
+      } 
+
   };
 
   return (
