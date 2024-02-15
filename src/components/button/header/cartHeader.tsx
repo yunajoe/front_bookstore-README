@@ -1,8 +1,7 @@
 import { CartItem } from '@/types/cartType';
 import { SetStateAction } from 'jotai';
 import Image from 'next/image';
-import React from 'react'
-
+import React from 'react'   
 
 type CartPageProps = {
   wishListData: CartItem[];

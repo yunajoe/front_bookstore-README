@@ -12,7 +12,6 @@ import {  useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';  
 
 
-
 function CartPage() {
   const [wishListData, setWishListData] = useState<CartItem[]>([]);  
   const [selectedItemArr, setSelectedItemArr] = useState<CartItem[]>([]);
@@ -98,8 +97,7 @@ function CartPage() {
 
   
   return (     
-    <div className="flex w-full flex-col items-center">
-   
+    <div className="flex w-full flex-col items-center">     
       <MainLayout>
            <div className="w-full max-w-[1200px]">
           <div className="relative w-full">
