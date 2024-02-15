@@ -38,9 +38,10 @@ function SignIn() {
     // }); 
     const response = await signIn('signin-credentials', data);
     console.log(response)
-    if (!response?.error) {
-      router.push('/')
-    } 
+    if (response) router.push('/');
+    // if (!response?.error) {
+    //   router.push('/')
+    // } 
   };
 
   return (

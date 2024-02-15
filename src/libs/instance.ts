@@ -1,22 +1,5 @@
 import axios from 'axios';
-import { GetServerSidePropsContext } from 'next';
-
-const isServer = () => {
-  return typeof window === 'undefined';
-};
-
-let accessToken = '';
-let context = {};
-
-export const setAccessToken = (_accessToken: string) => {
-  accessToken = _accessToken;
-};
-
-export const getAccessToken = () => accessToken;
-
-export const setContext = (_context: GetServerSidePropsContext) => {
-  context = _context;
-};
+import { getSession } from 'next-auth/react';
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -24,3 +7,20 @@ export const instance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+instance.interceptors.request.use(async (request) => {
+  const session = await getSession();
+  if (session) {
+    request.headers.common['Authorization'] = `Bearer ${session.accessToken}`;
+  }
+  return request;
+});
+
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    console.log(`error`, error);
+  },
+);
