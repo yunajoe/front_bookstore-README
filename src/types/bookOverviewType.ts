@@ -1,4 +1,5 @@
 import { StaticImageData } from 'next/image';
+import { BookData } from './api/book';
 
 interface BookOverviewType {
   book: {
@@ -21,4 +22,13 @@ interface BookOverviewType {
   };
 }
 
-export type { BookOverviewType };
+interface BookOverviewType2 {
+  book: BookData;
+  like?: {
+    userLiked: boolean;
+    count: number;
+  };
+  rank?: number;
+}
+
+export type { BookOverviewType, BookOverviewType2 };
