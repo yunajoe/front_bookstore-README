@@ -12,15 +12,14 @@ function CategoryTab() {
   const [selectedCategory, setSelectedCategory] = useState<
     'domestic' | 'foreign'
   >(mainId ? 'foreign' : 'domestic');
-  const [selectedAll, setSelectedAll] = useState('국내도서 전체보기');
+  const selectedAll =
+    selectedCategory == 'domestic' ? '국내도서 전체보기' : '외국도서 전체보기';
 
   const handleCategoryClick = (categoryType: SetStateAction<string>) => {
     if (categoryType === 'domestic') {
       setSelectedCategory('domestic');
-      setSelectedAll('국내도서 전체보기');
     } else {
       setSelectedCategory('foreign');
-      setSelectedAll('외국도서 전체보기');
     }
   };
   const getButtonStyle = (categoryType: string) => ({
