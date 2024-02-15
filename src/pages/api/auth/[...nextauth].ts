@@ -25,7 +25,7 @@ export default NextAuth({
         if (!response) throw new Error('Wrong User');
 
         if (response.status === 200 && response.data.Authentication) {
-          return { token: response.Authentication.split(' ')[1]};
+          return { token: response.data?.Authentication?.split(' ')[1]};
         } else {
           // 로그인 실패 시 처리
           throw new Error('Login failed!');
@@ -33,15 +33,16 @@ export default NextAuth({
       },
     }),
   ],
-  // callbacks: {
-  //   async jwt({ token, user }) {
-  //     return { ...token, ...user };
-  //   },
-  //   async session({ session, token }) {
-  //     session.user = token as any;
-  //     return session;
-  //   },
-  // },
+  callbacks: {
+    async jwt({ token, user }) {
+      console.log(token)
+      return { ...token, ...user};
+    },
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
+    },
+  },
   pages: {
     signIn: '/signin',
   },
