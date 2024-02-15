@@ -5,11 +5,16 @@ import Sidebar from '@/components/sidebar/sidebar';
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 import { useInitialBestNewestParams } from '@/hooks/useInitialParams';
+import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 
 const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'NEWEST' });
 
 function NewestPage() {
-  const { data } = useGetBook({ endpoint: '0/main', params: INITIAL_PARAMS });
+  const { categoryId } = useCheckCategoryUrl();
+  const { data } = useGetBook({
+    endpoint: `${categoryId}/sub`,
+    params: INITIAL_PARAMS,
+  });
   const bookData: BookData[] = data?.data?.books ?? [];
 
   return (
