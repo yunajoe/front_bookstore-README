@@ -38,10 +38,6 @@ function TestPage() {
 
   return (
     <div className="flex flex-col gap-20 p-20">
-      <BookOverviewCard
-        book={bookOverviews[0]?.book}
-        like={bookOverviews[0]?.like}
-      />
       {/* <SkeletonPreviewBookImage size="sm" />
       <SkeletonPreviewBookImage size="md" />
       <SkeletonPreviewBookImage size="lg" /> */}
