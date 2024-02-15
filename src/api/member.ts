@@ -11,7 +11,6 @@ export const postSignup = async (data: Signup) => {
 
 //로그인
 export const postLogin = async (data: Login) => {
-  console.log('되나')
   const result = await instance.post('/member/sign-in', data);
   return result.data.data;
 };

@@ -33,7 +33,7 @@ function SignIn() {
     //   type: 'manual',
     //   message: '아이디나 비밀번호가 일치하지 않습니다.',
     // }); 
-    const response = await signIn('credentials', { data });
+    const response = await signIn('signin-credentials', data );
   };
 
   return (
