@@ -31,14 +31,15 @@ function BookMarkedPage() {
       }, []);
       setWishListData(bookmarkList);
     }
-  }, [data]);
+  }, [data]);  
 
 
   useEffect(() => {
+
     if (isIntersecting && hasNextPage) {
       fetchNextPage()
     }
-  }, [isIntersecting,hasNextPage])
+  }, [isIntersecting, hasNextPage])
 
   const resetSelectedItemArr = () => setSelectedItemArr([]);
 
@@ -58,8 +59,7 @@ function BookMarkedPage() {
     resetSelectedItemArr();
   };
 
-  if (isError) return "error"
-
+  if (isError) return "error"  
 
   return (
     <div className="flex w-full flex-col items-center"> 
@@ -163,8 +163,8 @@ function BookMarkedPage() {
             )}
           </div>
           </div>
-        </MainLayout>  
-      <div ref={ref} />
+        </MainLayout>      
+      <div ref={ref} className="h-5"></div>
     </div>
   );
 }
