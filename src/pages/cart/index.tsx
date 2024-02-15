@@ -3,14 +3,15 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import CartPageHeader from '@/components/button/header/cartHeader';
 import CartPayment from '@/components/cart/cartPayment';
 import OrderBookCount from '@/components/cart/orderBookCount';
-import MainLayout from '@/components/layout/mainLayout';  
+import Header from '@/components/header';
 import useDeleteBasketQuery from '@/hooks/useDeleteBasketQuery';
 import useGetBasKetQuery from '@/hooks/useGetBasKetQuery';
 import { CartItem } from '@/types/cartType';    
 import Image from 'next/image';
 import {  useEffect, useState } from 'react';
-import { THOUSAND_UNIT } from 'src/constants/price';  
-
+import { THOUSAND_UNIT } from 'src/constants/price';   
+import CheckedCheckBoxIcon from "@/public/icons/CheckedCheckBox.svg"
+import CheckBoxIcon from "@/public/icons/CheckBox.svg"
 
 function CartPage() {
   const [wishListData, setWishListData] = useState<CartItem[]>([]);  
@@ -97,17 +98,18 @@ function CartPage() {
 
   
   return (     
-    <div className="flex w-full flex-col items-center">     
-      <MainLayout>
-           <div className="w-full max-w-[1200px]">
+    <div className="flex w-full flex-col items-center">   
+      <Header isLoggedIn={true} />  
+      <div className="w-full max-w-[1200px]">
+        
           <div className="relative w-full">
             <div
-              className="flex gap-x-30 px-60 mobile:flex-col mobile:gap-x-10 mobile:px-15 tablet:gap-x-20
+              className="w-full flex gap-x-30 px-60 mobile:flex-col mobile:gap-x-10 mobile:px-15 tablet:gap-x-20
                 tablet:px-40">
               <div
-                className="tablet: mt-20 grid flex-1 grid-cols-1 gap-x-20 gap-y-20
+                className="mt-40 mobile:mt-20 w-full tablet:mt-20 grid flex-1 grid-cols-1 gap-x-20 gap-y-20
                   mobile:grid-cols-1 mobile:gap-y-10 tablet:grid-cols-1">
-                <div className="text-20 font-bold text-black">
+                <div className="text-20 font-bold text-black h-27">
                   장바구니
                   {wishListData && wishListData.length > 0 && `(${wishListData.length})`}
                 </div>
@@ -120,7 +122,7 @@ function CartPage() {
                     handleDeleteSelectedItems={handleDeleteSelectedItems}
                   />
                 ) : (
-                  <div className="text-center text-16 text-gray-4 mobile:mb-120 mobile:mt-120">
+                  <div className="w-full text-center text-16 text-gray-4 mobile:mb-120 mobile:mt-120">
                     장바구니에 아직 상품이 없어요!
                   </div>
                 )}
@@ -172,8 +174,8 @@ function CartPage() {
                           <Image
                             src={
                               item.basketId === selectedItems[0]?.basketId  
-                                ? '/icons/CheckedCheckBox.svg'
-                                : '/icons/CheckBox.svg'
+                                ? CheckedCheckBoxIcon
+                                : CheckBoxIcon
                             }
                             alt="체크아이콘"
                             width={20}
@@ -261,7 +263,7 @@ function CartPage() {
             </div>
           </div>
           </div>
-        </MainLayout>
+    
       </div>  
   );
 }

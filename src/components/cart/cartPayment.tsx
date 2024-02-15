@@ -11,8 +11,7 @@ type CartPaymentProps = {
   bookTotalCount: number;
   selectedItemArr: CartItem[];
   wishListData: CartItem[];
-};
-
+};  
 function CartPayment({
   totalAmount,
   totalDiscount,
@@ -47,7 +46,7 @@ function CartPayment({
   }   
   return (
     <div
-      className="sticky top-297 mt-114 flex h-fit w-340 flex-col rounded-[10px]
+      className="sticky top- mt-127 flex h-fit w-340 flex-col rounded-[10px]
         border-2 border-solid border-gray-1 p-30 mobile:mb-165 mobile:mt-20 mobile:w-full mobile:p-20
         tablet:w-216 tablet:p-20">
       <div className="mb-20 flex justify-between">

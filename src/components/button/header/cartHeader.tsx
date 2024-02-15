@@ -2,7 +2,8 @@ import { CartItem } from '@/types/cartType';
 import { SetStateAction } from 'jotai';
 import Image from 'next/image';
 import React from 'react'   
-
+import CheckedCheckBoxIcon from "@/public/icons/CheckedCheckBox.svg"
+import CheckBoxIcon from "@/public/icons/CheckBox.svg"
 type CartPageProps = {
   wishListData: CartItem[];
   selectedItemArr: CartItem[];
@@ -19,7 +20,7 @@ function CartPageHeader({
   handleDeleteSelectedItems,
 }: CartPageProps) {   
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between h-20">
       <div className="flex gap-x-8">
         <div
           onClick={() => {
@@ -32,8 +33,8 @@ function CartPageHeader({
           <Image
             src={
               wishListData.length === selectedItemArr.length
-                ? '/icons/CheckedCheckBox.svg'
-                : '/icons/CheckBox.svg'
+                ? CheckedCheckBoxIcon 
+                : CheckBoxIcon
             }
             alt="체크아이콘"
             width={20}
