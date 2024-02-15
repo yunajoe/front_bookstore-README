@@ -93,7 +93,8 @@ const bookOverviewsMock: BookOverviewType[] = [
     book: {
       bookId: 5,
       bookTitle: '프론트엔드 프로젝트 가이드',
-      bookImgUrl: TestImage2, // 객체 직접 할당
+      bookImgUrl:
+        'https://image.aladin.co.kr/product/33275/70/cover150/8997743600_1.jpg', // 객체 직접 할당
       price: 27000,
       authors: ['박백범'],
       rank: 3,
@@ -113,7 +114,8 @@ const bookOverviewsMock: BookOverviewType[] = [
     book: {
       bookId: 6,
       bookTitle: '타입스크립트 입문',
-      bookImgUrl: TestImage4, // 객체 직접 할당
+      bookImgUrl:
+        'https://image.aladin.co.kr/product/33275/70/cover150/8997743600_1.jpg', // 객체 직접 할당
       price: 30000,
       authors: ['김개발'],
       rank: 15,
@@ -133,7 +135,8 @@ const bookOverviewsMock: BookOverviewType[] = [
     book: {
       bookId: 7,
       bookTitle: '리액트 네이티브 실전 가이드',
-      bookImgUrl: TestImage1, // 객체 직접 할당
+      bookImgUrl:
+        'https://image.aladin.co.kr/product/33275/70/cover150/8997743600_1.jpg', // 객체 직접 할당
       price: 35000,
       authors: ['이모바일'],
       rank: 8,
@@ -173,7 +176,8 @@ const bookOverviewsMock: BookOverviewType[] = [
     book: {
       bookId: 9,
       bookTitle: '데이터베이스 설계와 구축',
-      bookImgUrl: TestImage4, // 객체 직접 할당
+      bookImgUrl:
+        'https://image.aladin.co.kr/product/33275/70/cover150/8997743600_1.jpg', // 객체 직접 할당
       price: 38000,
       authors: ['데이터마스터'],
       rank: 12,
@@ -193,7 +197,8 @@ const bookOverviewsMock: BookOverviewType[] = [
     book: {
       bookId: 10,
       bookTitle: '클라우드 컴퓨팅 입문',
-      bookImgUrl: TestImage1, // 객체 직접 할당
+      bookImgUrl:
+        'https://image.aladin.co.kr/product/33275/70/cover150/8997743600_1.jpg', // 객체 직접 할당
       price: 28000,
       authors: ['클라우드마스터'],
       rank: 18,

@@ -1,4 +1,4 @@
-import { BookOverviewType } from '@/types/bookOverviewType';
+import { BookOverviewType, BookOverviewType2 } from '@/types/bookOverviewType';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import LikeButton from '@/components/button/likeButton';
 import { useState } from 'react';
@@ -8,12 +8,14 @@ import { notify } from '@/components/toast/toast';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
+import BookTitle from '@/components/book/bookTitle/bookTitle';
+import formatDate from '@/hooks/useFormatDate';
 
-function BookOverviewCard({ book, like }: BookOverviewType) {
-  const [isLiked, setIsLiked] = useState(like.userLiked || false);
-  const [likeCount, setIsLikeCount] = useState(like.count || 0);
+function BookOverviewCard({ book, like, rank }: BookOverviewType2) {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setIsLikeCount] = useState(0);
   const router = useRouter();
+  const formattedDate = formatDate(book.publishedDate);
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
@@ -50,26 +52,44 @@ function BookOverviewCard({ book, like }: BookOverviewType) {
           <PreviewBookInfo
             size="sm"
             image={book.bookImgUrl}
-            ranking={book.rank}
+            ranking={rank}
             itemsStart
           />
         </Link>
 
         <div
           role="book-info"
-          className="ml-30 mr-auto flex flex-col items-start justify-start gap-4 whitespace-pre-line
-            mobile:ml-12 mobile:max-w-185 mobile:gap-2">
+          className="relative ml-30 mr-auto flex flex-col items-start justify-start 
+            gap-4 whitespace-pre-line mobile:ml-12 mobile:max-w-185 mobile:gap-2">
           <div
             role="book-title"
-            className="min-w-250 text-15 font-normal mobile:w-185 mobile:min-w-0 tablet:w-200">
-            {book.bookTitle}
+            className="text-overflow2 max-w-500 text-15 font-normal mobile:w-200 tablet:w-250">
+            <BookTitle title={book.bookTitle} />
           </div>
-          <div role="book-author-publisher" className="flex-center gap-4">
-            <BookAuthor authorList={book.authors} publisher={book.publisher} />
+          <div
+            role="book-author-publisher"
+            className="pc:flex-center gap-4 mobile:flex mobile:flex-col tablet:flex tablet:w-150 tablet:flex-col">
+            <div className="text-overflow1">
+              {book.authors?.map((author) => {
+                return (
+                  <span key={author} className="text-14 text-gray-3">
+                    {author}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="text-overflow1 mobile:hidden">
+              {book.publisher && (
+                <>
+                  <span className="mobile:hidden tablet:hidden">| </span>
+                  <span className="text-14 text-gray-3">{book.publisher}</span>
+                </>
+              )}
+            </div>
           </div>
           <div>
             <span className="text-14 text-gray-3 mobile:hidden">
-              {book.publishedDate}
+              {formattedDate}
             </span>
           </div>
 
