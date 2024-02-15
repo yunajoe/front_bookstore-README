@@ -62,9 +62,9 @@ function BookMarkedPage() {
 
 
   return (
-    <div className="flex w-full flex-col items-center">
-      <div className="w-full max-w-[1200px]">
-        <MainLayout>
+    <div className="flex w-full flex-col items-center"> 
+      <MainLayout>
+        <div className="w-full max-w-[1200px]">
           <div className="flex w-full flex-col px-60 mobile:px-15 tablet:px-40">
             <div className="text-20 font-bold text-black">
               찜목록{wishListData.length > 0 && `(${wishListData.length})`}
@@ -162,9 +162,9 @@ function BookMarkedPage() {
               </div>
             )}
           </div>
-        </MainLayout>
-      </div>
-      <div ref={ref}>여기</div>
+          </div>
+        </MainLayout>  
+      <div ref={ref} />
     </div>
   );
 }
