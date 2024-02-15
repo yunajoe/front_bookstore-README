@@ -11,6 +11,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { postLogin } from '@/api/member';
+import { signIn } from 'next-auth/react';
 
 function SignIn() {
   const [isClick, setIsClick] = useState(false);
@@ -26,12 +28,14 @@ function SignIn() {
       password: '',
     },
   });
-  const onSubmit = () => {
-    setError('password', {
-      type: 'manual',
-      message: '아이디나 비밀번호가 일치하지 않습니다.',
-    });
+  const onSubmit = async (data) => {
+    // setError('password', {
+    //   type: 'manual',
+    //   message: '아이디나 비밀번호가 일치하지 않습니다.',
+    // }); 
+    const response = await signIn('credentials', { data });
   };
+
   return (
     <div className="flex-center min-h-dvh w-full bg-white">
       <div className="flex max-w-300 flex-1 flex-col items-center">

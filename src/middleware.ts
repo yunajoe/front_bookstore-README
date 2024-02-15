@@ -6,5 +6,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/mypage/:path*', '/bookmarked/:path*', '/cart/:path*', 'community/writeme' ],
+  matcher: ['/mypage/:path*', '/bookmarked/:path*', '/cart/:path*', '/community/writeme' ],
 };
