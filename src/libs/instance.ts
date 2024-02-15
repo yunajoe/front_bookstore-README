@@ -11,7 +11,7 @@ export const instance = axios.create({
 instance.interceptors.request.use(async (request) => {
   const session = await getSession();
   if (session) {
-    request.headers.common['Authorization'] = `Bearer ${session.accessToken}`;
+    request.headers['Authorization'] = `Bearer ${session.accessToken}`;
   }
   return request;
 });

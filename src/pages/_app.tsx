@@ -24,19 +24,22 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-export default function App({ Component, pageProps : {session, ...pageProps} }: AppPropsWithLayout) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   
   return (
-    <SessionProvider session={session} >
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider session={session}>
         <InitialContainer />
         <HydrationBoundary state={pageProps.dehydratedState}>
           {getLayout(<Component {...pageProps} />)}
         </HydrationBoundary>
         <Toast />
         <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </SessionProvider>
+      </SessionProvider>
+    </QueryClientProvider>
   );
 }

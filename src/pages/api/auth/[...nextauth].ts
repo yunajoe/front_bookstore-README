@@ -1,15 +1,13 @@
 import { postLogin } from '@/api/member';
 import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { signIn } from 'next-auth/react';
-
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
       id: 'signin-credentials',
       name: 'credentials',
-      type:'credentials',
+      type: 'credentials',
       credentials: {
         email: { type: 'text' },
         password: { type: 'password' },
@@ -25,7 +23,7 @@ export default NextAuth({
         if (!response) throw new Error('Wrong User');
 
         if (response.status === 200 && response.data.Authentication) {
-          return { accessToken: response.data?.Authentication?.split(' ')[1]};
+          return { accessToken: response.data?.Authentication?.split(' ')[1] };
         } else {
           // 로그인 실패 시 처리
           throw new Error('Login failed!');
@@ -35,8 +33,7 @@ export default NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      if (user)
-        return true;
+      if (user) return true;
       else return false;
     },
     async jwt({ token, user }) {
