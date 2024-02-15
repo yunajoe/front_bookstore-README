@@ -35,8 +35,7 @@ function SignUp() {
   } = method;
 
   const onSubmit = (data: SignUpValueType) => {
-    const { email, password, repassword, nickname, selectAll } = data;
-   console.log("ee", email)
+    const { email, password, repassword, nickname, selectAll } = data;  
     
     if (!checkEmail.value.test(email)) {
       setError('email', {

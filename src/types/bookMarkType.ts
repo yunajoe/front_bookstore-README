@@ -5,7 +5,7 @@ export type BookMarkListData = {
   bookImgUrl: string
   authors: string[]
   description: string
-  categories: string[]
+  categories:  [string, string]
   averageRating: number
   price: number
   bookmarkCount: number

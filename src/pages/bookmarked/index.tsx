@@ -1,4 +1,3 @@
-import { deleteBookMarkItem, getBookMarkList } from '@/api/bookmark';
 import BookRating from '@/components/book/bookRating/bookRating';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookMarkedHeader from '@/components/header/bookmarkedHeader';
@@ -6,19 +5,19 @@ import MainLayout from '@/components/layout/mainLayout';
 import useBookMarkInfiniteQuery from '@/hooks/useBookMarkInfiniteQuery';
 import useDeleteBookMarkMuation from '@/hooks/useDeleteBookMarkMuation';
 import useInfinite from '@/hooks/useInfinite';
-import { BookMarkListData } from '@/types/wishPageType';
+import { BookMarkListData } from '@/types/bookMarkType';
 import { threeDigitCommma } from '@/utils/threeDigitComma';  
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-
+import CheckedCheckBoxIcon from "@/public/icons/CheckedCheckBox.svg"
+import CheckBoxIcon from "@/public/icons/CheckBox.svg"
 
 function BookMarkedPage() {
   const [wishListData, setWishListData] = useState<BookMarkListData[]>([]);
   const [selectedItemArr, setSelectedItemArr] = useState<BookMarkListData[]>([]);
   const [ref, isIntersecting] = useInfinite()   
 
-  const {data, status, fetchNextPage, hasNextPage} = useBookMarkInfiniteQuery()
-
+  const {data, isError, status, fetchNextPage, hasNextPage} = useBookMarkInfiniteQuery()   
 
   const deleteBookMarkItemMutation = useDeleteBookMarkMuation()
 
@@ -39,7 +38,7 @@ function BookMarkedPage() {
     if (isIntersecting && hasNextPage) {
       fetchNextPage()
     }
-  }, [isIntersecting])
+  }, [isIntersecting,hasNextPage])
 
   const resetSelectedItemArr = () => setSelectedItemArr([]);
 
@@ -59,7 +58,7 @@ function BookMarkedPage() {
     resetSelectedItemArr();
   };
 
-  if (status === "error") return "error"
+  if (isError) return "error"
 
 
   return (
@@ -126,8 +125,8 @@ function BookMarkedPage() {
                           <Image
                             src={
                               item.bookmarkId === selectedItems[0]?.bookmarkId
-                                ? '/icons/CheckedCheckBox.svg'
-                                : '/icons/CheckBox.svg'
+                                ? CheckedCheckBoxIcon
+                                : CheckBoxIcon
                             }
                             alt="체크아이콘"
                             width={20}
@@ -165,7 +164,7 @@ function BookMarkedPage() {
           </div>
         </MainLayout>
       </div>
-      <div ref={ref}></div>
+      <div ref={ref}>여기</div>
     </div>
   );
 }

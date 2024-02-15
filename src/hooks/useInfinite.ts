@@ -6,8 +6,7 @@ function useInfinite(): [LegacyRef<HTMLDivElement>, boolean] {
 
   useEffect(() => {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        console.log("entry", entry.isIntersecting)
+      entries.forEach((entry) => {  
         if (entry.isIntersecting) {
           setIsIntersecting(true);
         } else {

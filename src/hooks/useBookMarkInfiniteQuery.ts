@@ -6,6 +6,7 @@ function useBookMarkInfiniteQuery() {
     const {
     data,
     status,
+    isError,    
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
@@ -24,10 +25,11 @@ function useBookMarkInfiniteQuery() {
   })
   return (
       {
-         data,
-         status,
-        fetchNextPage,
-         hasNextPage,
+      data,
+      isError,
+      status,
+      fetchNextPage,
+      hasNextPage,
    }
   )
 }

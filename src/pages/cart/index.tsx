@@ -3,7 +3,7 @@ import CartPayment from '@/components/cart/cartPayment';
 import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
 import { myWishListData } from '@/pages/api/wishMock';
-import { WishListData } from '@/types/wishPageType';
+import { WishListData } from '@/types/bookMarkType';
 import Image from 'next/image';
 import { SetStateAction, useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';

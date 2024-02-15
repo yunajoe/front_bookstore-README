@@ -1,6 +1,8 @@
-import { BookMarkListData } from "@/types/wishPageType";
+import { BookMarkListData } from "@/types/bookMarkType";
 import Image from "next/image";
 import { SetStateAction } from "react";
+import CheckedCheckBoxIcon from "@/public/icons/CheckedCheckBox.svg"
+import CheckBoxIcon from "@/public/icons/CheckBox.svg"
 
 type BookMarkedHeaderProps = {
   wishListData: BookMarkListData[];
@@ -32,8 +34,8 @@ function BookMarkedHeader({
                     <Image
                         src={
                             wishListData.length === selectedItemArr.length
-                                ? '/icons/CheckedCheckBox.svg'
-                                : '/icons/CheckBox.svg'
+                                ? CheckedCheckBoxIcon
+                                : CheckBoxIcon
                         }
                         alt="체크아이콘"
                         width={20}
