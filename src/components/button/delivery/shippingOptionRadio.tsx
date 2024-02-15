@@ -1,6 +1,6 @@
 interface ShippingOptionRadioProps {
   isDefault: boolean;
-  handleOptionChange: (event: { target: { value: string } }) => void;
+  handleOptionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 function ShippingOptionRadio({
   isDefault,
@@ -14,28 +14,28 @@ function ShippingOptionRadio({
         </span>
         <input
           type="radio"
-          id="default"
+          id="defaultAddress"
           name="addressOption"
-          value="default"
+          value="defaultAddress"
           checked={isDefault}
           onChange={handleOptionChange}
           className="flex-center mr-10 inline-flex h-20 w-20"
         />
       </div>
-      <label htmlFor="default" className="mr-20 whitespace-nowrap">
+      <label htmlFor="defaultAddress" className="mr-20 whitespace-nowrap">
         기본 배송지
       </label>
       <div className="flex-center inline-flex">
         <input
           type="radio"
-          id="new"
+          id="newAddress"
           name="addressOption"
-          value="new"
+          value="newAddress"
           checked={!isDefault}
           onChange={handleOptionChange}
           className="flex-center mr-10 inline-flex h-20 w-20"
         />
-        <label htmlFor="new" className="whitespace-nowrap">
+        <label htmlFor="newAddress" className="whitespace-nowrap">
           신규 입력
         </label>
       </div>

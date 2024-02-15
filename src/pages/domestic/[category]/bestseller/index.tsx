@@ -1,25 +1,30 @@
+import { useGetBook } from '@/api/book';
 import BookOverViewCardList from '@/components/card/bookOverviewCard/bookOverViewCardList';
 import Header from '@/components/header';
 import BestSellerPageLayout from '@/components/layout/bestSellerLayout';
 import Sidebar from '@/components/sidebar/sidebar';
-import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
+
+import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
+import { useInitialBestNewestParams } from '@/hooks/useInitialParams';
+import { BookData } from '@/types/api/book';
+import { useAtom } from 'jotai';
+
+const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'BESTSELLER' });
 
 function BestSellerPage() {
+  const { categoryId } = useCheckCategoryUrl();
+  const { data } = useGetBook({
+    endpoint: `${categoryId}/sub`,
+    params: INITIAL_PARAMS,
+  });
+  const bookData: BookData[] = data?.data?.books ?? [];
+
   return (
     <div>
       <BestSellerPageLayout
         header={<Header isLoggedIn={true} />}
-        sideBar={
-          <Sidebar
-            pageName="bestseller"
-          />
-        }
-        main={
-          <BookOverViewCardList
-            bookData={bookOverviewsMock}
-            title="베스트셀러"
-          />
-        }
+        sideBar={<Sidebar pageName="bestseller" />}
+        main={<BookOverViewCardList bookData={bookData} title="베스트셀러" />}
       />
     </div>
   );
