@@ -93,6 +93,7 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
                     title={book.title}
                     authorList={book.authorList}
                     image={book.bookImg || ''}
+                    bookId={book.bookId}
                   />
                   <MoreLink isVisible={index === 3} />
                 </div>

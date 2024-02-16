@@ -9,6 +9,7 @@ export type CarouselCardProps = {
   authorList: string[];
   imageSize: ImageSize;
   marginRight: number;
+  bookId?: number;
 };
 
 function CarouselCard({
@@ -18,6 +19,7 @@ function CarouselCard({
   authorList,
   imageSize,
   marginRight,
+  bookId,
 }: CarouselCardProps) {
   const { width } = imageSize;
   console.log('title', title);
@@ -31,6 +33,7 @@ function CarouselCard({
           title={title}
           authorList={authorList}
           image={imageUrl}
+          bookId={bookId}
         />
       </div>
     </div>
