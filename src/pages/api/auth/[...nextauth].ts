@@ -19,15 +19,15 @@ export default NextAuth({
           email: credentials?.email,
           password: credentials?.password,
         };
-        const [_, setMemberId] = useAtom(memberIdAtom)
+        // const [_, setMemberId] = useAtom(memberIdAtom)
 
         const response = await postLogin(data);
 
         if (!response) throw new Error('Wrong User');
 
         if (response.status === 200 && response.data.Authentication) {
-          setMemberId(response.data.memberId)
-          return { accessToken: response.data?.Authentication?.split(' ')[1] };
+          // setMemberId(response.data.memberId)
+          return { accessToken: response.data?.Authentication?.split(' ')[1], memberId : response.data.memberId };
         } else {
           // 로그인 실패 시 처리
           throw new Error('Login failed!');
@@ -43,12 +43,14 @@ export default NextAuth({
     async jwt({ token, user }) {
       if (user && 'accessToken' in user && 'memberId' in user) {
         token.accessToken = user.accessToken;
+        token.memberId = user.memberId;
       }
       return token;
     },
     async session({ session, token }) {
       if (token.accessToken) {
         session.accessToken = token.accessToken as string;
+        session.memberId = token.memberId as number;
       }
       return session;
     },
