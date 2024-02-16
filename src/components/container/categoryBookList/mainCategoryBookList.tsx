@@ -8,9 +8,10 @@ import SkeletonPreviewBookInfo from '@/components/skeleton/previewBookInfo/skele
 import useCarouselEnv from '@/hooks/useCarouselEnv';
 import useInfinite from '@/hooks/useInfinite';
 import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
+import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
+import SelectOrder from '@/utils/selectOrder';
 
 import { BOOK_OLDER_STANDARD } from 'src/constants/orderList';
-import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 
 const CURRENT_ORDER = {
   sort: 'VIEW',
@@ -48,34 +49,7 @@ function MainCategoryBookList() {
       });
     },
   });
-
-  const onSelectedOrder = (menu: string) => {
-    setSelectedOrder(menu);
-    if (menu === '조회순')
-      setCurrentOrder((prev) => {
-        return { ...prev, sort: 'VIEW', ascending: false };
-      });
-    if (menu === '신상품순')
-      setCurrentOrder((prev) => {
-        return { ...prev, sort: 'NEWEST', ascending: false };
-      });
-    if (menu === '별점순')
-      setCurrentOrder((prev) => {
-        return { ...prev, sort: 'STAR', ascending: false };
-      });
-    if (menu === '리뷰 많은순')
-      setCurrentOrder((prev) => {
-        return { ...prev, sort: 'REVIEW', ascending: false };
-      });
-    if (menu === '낮은 가격순')
-      setCurrentOrder((prev) => {
-        return { ...prev, sort: 'PRICE', ascending: true };
-      });
-    if (menu === '높은 가격순')
-      setCurrentOrder((prev) => {
-        return { ...prev, sort: 'PRICE', ascending: false };
-      });
-  };
+  const onSelectedOrder = SelectOrder(setSelectedOrder, setCurrentOrder);
 
   return (
     <article className="relative flex h-fit flex-col gap-50 pb-30 mobile:gap-20 tablet:gap-40">
@@ -115,8 +89,7 @@ function MainCategoryBookList() {
         <div
           className="grid min-h-400 w-[895px]
            grid-flow-row auto-rows-auto grid-cols-5 gap-x-20 gap-y-40 mobile:w-[330px] mobile:grid-cols-2 mobile:gap-y-0 tablet:w-[511px] tablet:grid-cols-3 ">
-          {' '}
-          {[0, 1, 2].map((el) => {
+          {[0, 1, 2, 3, 4].map((el) => {
             return <SkeletonPreviewBookInfo key={el} />;
           })}
         </div>
