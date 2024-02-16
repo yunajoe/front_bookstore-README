@@ -16,7 +16,7 @@ function SidebarTab({ pageName}: SidebarProps) {
         mobile:flex-wrap mobile:gap-5 mobile:rounded-[10px] mobile:border-[1px] mobile:border-gray-1 mobile:p-15">
       <Link
         className={`block text-[13px] ${subId ? 'text-gray-2' : 'font-bold text-green'}`}
-        href={`/${mainId === 0 ? 'domestic' : 'foreign'}`}>
+        href={`/${mainId === 0 ? 'domestic' : 'foreign'}/${pageName}`}>
         전체보기
       </Link>
       {(categoryList) && (categoryList[mainId === 0 ? "domestic" : "foreign"] ?? []).map((el, ind) => {
