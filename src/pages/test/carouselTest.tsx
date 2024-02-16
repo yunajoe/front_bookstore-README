@@ -7,11 +7,11 @@ import React from 'react'
 
 function CarouselTest() {
   return (
-      <div>
-      <Carousel data={carouselMockData} responsive={responsive}/>
+    <div>
+      {/* <Carousel data={carouselMockData} responsive={responsive}/>
       <Carousel data={testData} responsive={responsive} />      
       <CategoryCarousel data={carouselMockData} responsive={categoryResponsive}></CategoryCarousel>  
-      <CategoryCarousel data={testData} responsive={categoryResponsive}></CategoryCarousel>
+      <CategoryCarousel data={testData} responsive={categoryResponsive}></CategoryCarousel> */}
     </div>
   )
 }
