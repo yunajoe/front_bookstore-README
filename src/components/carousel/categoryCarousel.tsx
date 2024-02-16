@@ -145,8 +145,10 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
             })}>
             {data.map((item, index) => (
               <CarouselCard
+                authorList={item.authorList}
                 key={index}
-                {...item}
+                imageUrl={item.imageUrl}
+                title={item.title}
                 imageSize={responsive[env].imageSize}
                 marginRight={calcMarginValue(env)}
                 size="sm"

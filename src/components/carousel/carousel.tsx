@@ -1,6 +1,7 @@
 import CarouselCard from '@/components/carousel/carouselCard';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
-import { NewBook, ResponSive } from '@/types/carouselType';
+import { BookData } from '@/types/api/book';
+import { ResponSive } from '@/types/carouselType';
 import { inrange } from '@/utils/inrange';
 import registDragEvent from '@/utils/registerDragEvent';
 import Image from 'next/image';
@@ -9,7 +10,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 const CARD_MARGIN_VALUE = 20;
 
 type CarouselProps = {
-  data: NewBook[];
+  data: BookData[];
   responsive: ResponSive;
 };
 
@@ -116,7 +117,9 @@ function Carousel({ data, responsive }: CarouselProps) {
             {data.map((item, index) => (
               <CarouselCard
                 key={index}
-                {...item}
+                authorList={item.authors}
+                title={item.bookTitle}
+                imageUrl={item.bookImgUrl as string}
                 imageSize={responsive[env].imageSize}
                 marginRight={CARD_MARGIN_VALUE}
                 size="md"
