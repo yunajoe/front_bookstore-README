@@ -47,6 +47,7 @@ function TestPage() {
         image={bookOverviews[0]?.book.bookImgUrl}
         size="sm"
         ranking={100}
+        bookId={bookOverviews[0].book.bookId}
         // itemsStart
       />
       <PreviewBookInfo
@@ -56,6 +57,7 @@ function TestPage() {
         size="md"
         ranking={1}
         itemsStart
+        bookId={bookOverviews[0].book.bookId}
       />
       <PreviewBookInfo
         title="하이용"
@@ -63,6 +65,7 @@ function TestPage() {
         image={bookOverviews[0]?.book.bookImgUrl}
         size="lg"
         ranking={10}
+        bookId={bookOverviews[0].book.bookId}
         // itemsStart
       />
 
