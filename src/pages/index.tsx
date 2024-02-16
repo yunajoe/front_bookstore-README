@@ -3,10 +3,23 @@ import MainLayout from '@/components/layout/mainLayout';
 import CustomSection from '@/components/container/customSection/customSection';
 import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
 import Carousel from '@/components/carousel/carousel';
-import { carouselMockData } from './api/mock/carouselMock';
 import { responsive } from '@/utils/checkResponsiveEnv';
 import TodayBestSection from '@/components/container/todayBestSection/todayBestSection';
+import { useGetBook } from '@/api/book';
+import { BookData } from '@/types/api/book';
 function Home() {
+  const { data } = useGetBook({
+    endpoint: '0/main',
+    params: {
+      bookId: '0',
+      limit: '6',
+      sort: 'NEWEST',
+      ascending: false,
+    },
+  });
+
+  const bookList: Array<BookData> = data ? data.data.books : [];
+
   return (
     <>
       <div
@@ -24,7 +37,7 @@ function Home() {
       </div>
       <CustomSection isLoggedIn={true} isGenreSelected={true} />
       <div className="mt-80 mobile:mb-80 tablet:mb-120 pc:mb-140">
-        <Carousel data={carouselMockData} responsive={responsive} />
+        <Carousel data={bookList} responsive={responsive} />
       </div>
 
       <TodayBestSection />
