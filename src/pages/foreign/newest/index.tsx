@@ -11,7 +11,7 @@ const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'NEWEST' });
 
 function NewestPage() {
   const { mainId } = useCheckCategoryUrl();
-  const { data } = useGetBook({
+  const { data, isLoading } = useGetBook({
     endpoint: `${mainId}/main`,
     params: INITIAL_PARAMS,
   });
@@ -20,9 +20,14 @@ function NewestPage() {
   return (
     <div>
       <BestSellerPageLayout
-        header={<Header isLoggedIn={true} />}
         sideBar={<Sidebar pageName="newest" />}
-        main={<BookOverViewCardList bookData={bookData} title="신간 도서" />}
+        main={
+          <BookOverViewCardList
+            bookData={bookData}
+            title="신간 도서"
+            isLoading={isLoading}
+          />
+        }
       />
     </div>
   );

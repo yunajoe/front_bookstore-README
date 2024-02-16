@@ -11,7 +11,7 @@ const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'BESTSELLER' });
 
 function BestSellerPage() {
   const { categoryId } = useCheckCategoryUrl();
-  const { data } = useGetBook({
+  const { data, isLoading } = useGetBook({
     endpoint: `${categoryId}/sub`,
     params: INITIAL_PARAMS,
   });
@@ -20,9 +20,14 @@ function BestSellerPage() {
   return (
     <div>
       <BestSellerPageLayout
-        header={<Header isLoggedIn={true} />}
         sideBar={<Sidebar pageName="bestseller" />}
-        main={<BookOverViewCardList bookData={bookData} title="베스트셀러" />}
+        main={
+          <BookOverViewCardList
+            bookData={bookData}
+            title="베스트셀러"
+            isLoading={isLoading}
+          />
+        }
       />
     </div>
   );
