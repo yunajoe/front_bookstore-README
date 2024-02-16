@@ -1,5 +1,5 @@
 import { PostBasketParams } from '@/types/api/basket';
-import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, usePost, usePostType } from '@/utils/reactQuery';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -14,14 +14,28 @@ export const useGetCart = (memberId: number) => {
 };
 
 //장바구니 추가
-const postBasket = async (option: PostBasketParams) => {
-  const { bookId, memberId } = option;
-  const result = await instance.post(`basket/${bookId}/${memberId}`);
+export const postBasket = async ({ bookId, token }: PostBasketParams) => {
+  const result = await instance.post(
+    `/basket/${bookId}`,
+    {},
+    {
+      headers: {
+        Authorization: token,
+      },
+    },
+  );
   return result.data;
 };
 
-export const usePostCart = (option: PostBasketParams) => {
-  return usePost(postBasket, option);
+export const usePostBasket = (
+  { bookId, token }: PostBasketParams,
+  { onSuccess, onError, onSettled }: usePostType = {},
+) => {
+  return usePost(
+    postBasket,
+    { bookId, token },
+    { onSuccess, onError, onSettled },
+  );
 };
 
 //장바구니 물건 삭제

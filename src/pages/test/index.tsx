@@ -1,7 +1,5 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard';
 import ShippingAddressSection from '@/components/container/shippingAddressSection/shippingAddressSection';
-import SkeletonBookOverviewCard from '@/components/skeleton/bookOverviewCard/skeleton';
 import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 import { useState } from 'react';
@@ -38,15 +36,13 @@ function TestPage() {
 
   return (
     <div className="flex flex-col gap-20 p-20">
-      {/* <SkeletonPreviewBookImage size="sm" />
-      <SkeletonPreviewBookImage size="md" />
-      <SkeletonPreviewBookImage size="lg" /> */}
       <PreviewBookInfo
         title="하이용"
         authorList={['얌얌', '능이버섯']}
         image={bookOverviews[0]?.book.bookImgUrl}
         size="sm"
         ranking={100}
+        bookId={bookOverviews[0].book.bookId}
         // itemsStart
       />
       <PreviewBookInfo
@@ -56,6 +52,7 @@ function TestPage() {
         size="md"
         ranking={1}
         itemsStart
+        bookId={bookOverviews[0].book.bookId}
       />
       <PreviewBookInfo
         title="하이용"
@@ -63,10 +60,10 @@ function TestPage() {
         image={bookOverviews[0]?.book.bookImgUrl}
         size="lg"
         ranking={10}
+        bookId={bookOverviews[0].book.bookId}
         // itemsStart
       />
 
-      <SkeletonBookOverviewCard />
       <div className="flex gap-10">
         <SkeletonPreviewBookImage size="lg" />
         <SkeletonPreviewBookImage size="md" />

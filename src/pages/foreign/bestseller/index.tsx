@@ -3,24 +3,31 @@ import BookOverViewCardList from '@/components/card/bookOverviewCard/bookOverVie
 import Header from '@/components/header';
 import BestSellerPageLayout from '@/components/layout/bestSellerLayout';
 import Sidebar from '@/components/sidebar/sidebar';
+import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
+import { useInitialBestNewestParams } from '@/hooks/useInitialParams';
 import { BookData } from '@/types/api/book';
 
-const INITIAL_PARAMS = {
-  limit: '100',
-  sort: 'STAR' as const,
-  ascending: false,
-};
+const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'BESTSELLER' });
 
 function BestSellerPage() {
-  const { data } = useGetBook({ endpoint: '1/main', params: INITIAL_PARAMS });
+  const { mainId } = useCheckCategoryUrl();
+  const { data, isLoading } = useGetBook({
+    endpoint: `${mainId}/main`,
+    params: INITIAL_PARAMS,
+  });
   const bookData: BookData[] = data?.data?.books ?? [];
 
   return (
     <div>
       <BestSellerPageLayout
-        header={<Header isLoggedIn={true} />}
         sideBar={<Sidebar pageName="bestseller" />}
-        main={<BookOverViewCardList bookData={bookData} title="베스트셀러" />}
+        main={
+          <BookOverViewCardList
+            bookData={bookData}
+            title="베스트셀러"
+            isLoading={isLoading}
+          />
+        }
       />
     </div>
   );

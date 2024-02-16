@@ -6,21 +6,35 @@ export type CarouselCardProps = {
   size: 'sm' | 'md' | 'lg';
   imageUrl: string;
   title: string;
-  authorname: string;
+  authorList: string[];
   imageSize: ImageSize;
   marginRight: number;
+  bookId?: number;
 };
 
-function CarouselCard(props: CarouselCardProps) {
-  const { imageUrl, title, authorname, imageSize, marginRight, size } = props;
+function CarouselCard({
+  size,
+  imageUrl,
+  title,
+  authorList,
+  imageSize,
+  marginRight,
+  bookId,
+}: CarouselCardProps) {
   const { width } = imageSize;
+  console.log('title', title);
   return (
     <div>
       <div
-        className={`text-white relative select-none`}
+        className={`relative select-none text-white`}
         style={{ width, marginRight }}>
-        <PreviewBookInfo size={size} title={title} authorList={[authorname]} />
-
+        <PreviewBookInfo
+          size={size}
+          title={title}
+          authorList={authorList}
+          image={imageUrl}
+          bookId={bookId}
+        />
       </div>
     </div>
   );

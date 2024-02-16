@@ -1,36 +1,36 @@
-import { BookOverviewType, BookOverviewType2 } from '@/types/bookOverviewType';
+import { BookOverviewType2 } from '@/types/bookOverviewType';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import LikeButton from '@/components/button/likeButton';
 import { useState } from 'react';
 import BookRating from '@/components/book/bookRating/bookRating';
 import ActionButton from '@/components/button/actionButton';
-import { notify } from '@/components/toast/toast';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
+import { useAddToBasket } from '@/hooks/api/useAddToBasket';
+import MobileBookOverViewCard from './bookOverviewMobile';
 
-function BookOverviewCard({ book, like, rank }: BookOverviewType2) {
+function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setIsLikeCount] = useState(0);
+  const [likeCount, setIsLikeCount] = useState(book.bookmarkCount);
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
+  const token = process.env.NEXT_PUBLIC_ACCESS_TOKEN as string;
+  const { addToBasket, isAddToBasketPending } = useAddToBasket({
+    bookId: book.bookId,
+    token: token,
+  });
 
-  const handleLikeClick = () => {
+  const handleAddToBookmark = () => {
     setIsLiked(!isLiked);
     if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
     else setIsLikeCount((prevCount) => prevCount - 1);
   };
 
-  const handleAddToCart = () => {
-    notify({
-      type: 'success',
-      text: '장바구니에 담았어요 🛒',
-    });
-    //TODO
-    //1. 유저 장바구니에 추가(서버연결)
-    //2. 성공시 장바구니 아이콘 변경
+  const handleAddToBasket = async () => {
+    addToBasket();
   };
 
   const handleAddForPayment = () => {
@@ -54,6 +54,7 @@ function BookOverviewCard({ book, like, rank }: BookOverviewType2) {
             image={book.bookImgUrl}
             ranking={rank}
             itemsStart
+            bookId={book.bookId}
           />
         </Link>
 
@@ -78,7 +79,7 @@ function BookOverviewCard({ book, like, rank }: BookOverviewType2) {
                 );
               })}
             </div>
-            <div className="text-overflow1 mobile:hidden">
+            <div className="text-overflow1 mobile:hidden tablet:hidden">
               {book.publisher && (
                 <>
                   <span className="mobile:hidden tablet:hidden">| </span>
@@ -122,7 +123,7 @@ function BookOverviewCard({ book, like, rank }: BookOverviewType2) {
           className="flex flex-col items-end gap-30 mobile:absolute mobile:bottom-16 mobile:right-0
             tablet:absolute tablet:right-0">
           <div role="like-button" className="flex-center flex-col gap-2">
-            <LikeButton onClick={handleLikeClick} isLiked={isLiked} />
+            <LikeButton onClick={handleAddToBookmark} isLiked={isLiked} />
             <span className="text-12 text-black">{likeCount}</span>
           </div>
           <div
@@ -131,7 +132,8 @@ function BookOverviewCard({ book, like, rank }: BookOverviewType2) {
             <ActionButton
               label="장바구니"
               variant="primary"
-              onClick={handleAddToCart}
+              onClick={handleAddToBasket}
+              disabled={isAddToBasketPending}
             />
             <ActionButton
               label="구매하기"
@@ -143,23 +145,12 @@ function BookOverviewCard({ book, like, rank }: BookOverviewType2) {
       </div>
 
       {/* 모바일에서만 보이는 컴포넌트(장바구니/구매하기 버튼)*/}
-      <div role="mobile-section" className="pt-10 tablet:hidden pc:hidden">
-        <div className="border-b-1 absolute bottom-70 left-0 w-328 border border-gray-1"></div>
-        <div role="mobile-cart-button" className="flex gap-10">
-          <ActionButton
-            label="장바구니"
-            variant="primary"
-            mobile
-            onClick={handleAddToCart}
-          />
-          <ActionButton
-            label="구매하기"
-            variant="secondary"
-            mobile
-            onClick={handleAddForPayment}
-          />
-        </div>
-      </div>
+      <MobileBookOverViewCard
+        basketOnClick={handleAddToBasket}
+        buyOnClick={handleAddForPayment}
+        // TODO: 구매하기 버튼 pending 값도 함께 넣기
+        disabled={isAddToBasketPending}
+      />
     </div>
   );
 }

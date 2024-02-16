@@ -1,17 +1,15 @@
+import { PreviewBookInfoSizeProps } from '@/types/previewBookInfoType';
 import { SKELETON_COMMON_STYLE } from 'src/constants/style/skeletonCommonStyle';
+import SkeletonPreviewBookImage from '../previewBookImage/skeleton';
 
-SKELETON_COMMON_STYLE;
-
-function SkeletonBookOverviewCard() {
+function SkeletonBookOverviewCard({ size }: PreviewBookInfoSizeProps) {
   return (
     <div
       role="card-container"
       className="relative flex h-220 animate-pulse flex-col justify-between rounded-lg border-2
         border-gray-1 p-30 mobile:h-251 mobile:w-330 mobile:p-15 mobile:pb-15">
       <div role="book-info-container" className="relative flex">
-        <div
-          role="image"
-          className="h-170 w-112 mobile:h-141 mobile:w-93"></div>
+        <SkeletonPreviewBookImage size={size} />
         <div
           role="book-info"
           className="ml-30 mr-auto flex flex-col items-start justify-start gap-8 mobile:ml-12
