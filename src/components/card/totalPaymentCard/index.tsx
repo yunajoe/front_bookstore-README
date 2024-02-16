@@ -43,3 +43,5 @@ function TotalPriceCard({
     </div>
   );
 }
+
+export default TotalPriceCard;
