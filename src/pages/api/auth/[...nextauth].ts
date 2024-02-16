@@ -21,7 +21,7 @@ export default NextAuth({
         const response = await postLogin(data);
 
         if (!response) throw new Error('Wrong User');
-
+        
         if (response.status === 200 && response.data.Authentication) {
           return { accessToken: response.data?.Authentication?.split(' ')[1], memberId : response.data.memberId };
         } else {
