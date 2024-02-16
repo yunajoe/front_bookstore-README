@@ -120,7 +120,9 @@ function CustomPage() {
                       <div>선호 장르 분석을 통해 도서를 추천해드려요</div>
                     </div>
                     <div className="rounded-[5px] border-2 border-green bg-white px-45 py-13 text-green">
-                      <Link href="/signin">선호 장르 선택하러 가기</Link>
+                      <Link href="/mypage/setting/selectGenre">
+                        선호 장르 선택하러 가기
+                      </Link>
                     </div>
                   </div>
                 </>
@@ -144,6 +146,7 @@ function CustomPage() {
                             authorList={book.authors}
                             category={[book.categories[1]].join('')}
                             price={book.price}
+                            isUnit={true}
                           />
                         </div>
                       </Link>
