@@ -1,5 +1,5 @@
 export type NewBook = {
-  bookId: number;
+  bookId?: number;
   bookImgUrl: string;
   bookTitle: string;
   authors: string[];
