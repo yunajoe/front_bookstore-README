@@ -1,6 +1,4 @@
 import { postLogin } from '@/api/member';
-import { memberIdAtom } from '@/store/state';
-import { useAtom } from 'jotai';
 import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
@@ -19,14 +17,12 @@ export default NextAuth({
           email: credentials?.email,
           password: credentials?.password,
         };
-        // const [_, setMemberId] = useAtom(memberIdAtom)
 
         const response = await postLogin(data);
 
         if (!response) throw new Error('Wrong User');
 
         if (response.status === 200 && response.data.Authentication) {
-          // setMemberId(response.data.memberId)
           return { accessToken: response.data?.Authentication?.split(' ')[1], memberId : response.data.memberId };
         } else {
           // 로그인 실패 시 처리
