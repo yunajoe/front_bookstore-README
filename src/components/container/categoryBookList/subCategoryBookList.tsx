@@ -81,7 +81,7 @@ function SubCategoryBookList() {
     <article className="relative flex h-fit flex-col gap-50 pb-30 mobile:gap-20 tablet:gap-40">
       <div className="flex items-center justify-between">
         <h1 className="text-20 text-black">모든 도서</h1>
-        <div className="z-20">
+        <div className="z-20 w-120">
           <DropDown
             menus={BOOK_OLDER_STANDARD}
             selectedItem={selectedOrder}
