@@ -10,10 +10,9 @@ import { checkEmail } from '@/utils/checkSignInSignOut';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { FieldValue, FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { Login } from '@/types/api/member';
 
 function SignIn() {
   const [isClick, setIsClick] = useState(false);
@@ -44,16 +43,15 @@ function SignIn() {
       callbackUrl: '/',
       });
 
-      if (result?.url) {
+      if (result?.url && typeof window !== 'undefined') {
         window.location.href = result.url;
       } 
-
   };
 
   return (
     <div className="flex-center min-h-dvh w-full bg-white">
       <div className="flex max-w-300 flex-1 flex-col items-center">
-        <p className="mb-57 text-24 font-bold text-green">Read Me</p>
+        <Link href='/' className="mb-57 text-24 font-bold text-green">Read Me</Link>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <fieldset>
             <TextInput
