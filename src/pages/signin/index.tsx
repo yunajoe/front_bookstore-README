@@ -45,7 +45,6 @@ function SignIn() {
       });
 
       if (result?.url) {
-        // signIn 함수가 성공적으로 callbackUrl로 리다이렉션할 URL을 반환했을 때
         window.location.href = result.url;
       } 
 

@@ -39,6 +39,7 @@ const withOutAuth = async (
 
 export default async function middleware(req: NextRequest) {
   const token = await getToken({ req });
+  console.log(token)
   const { pathname } = req.nextUrl;
 
   const { searchParams } = req.nextUrl;
