@@ -50,6 +50,13 @@ const deleteBookmark = async (bookmarkId: string) => {
 };
 
 
+export const useDeleteBookmark = (bookmarkId: string) => {
+  return useDelete(deleteBookmark, bookmarkId);
+};
+
+
+
+
 // 해당 userID로 찜 list조회
 export const getBookMarkList = async (offset:number, limit: number) => {
   const result = await instance.get(`/bookmark?offset=${offset}&limit=${limit}&sort=price`)
@@ -61,7 +68,3 @@ export const deleteBookMarkItem = async (bookmarkId:string) => {
   const result = await instance.delete(`/bookmark?bookmarkIds=${encodeURI(bookmarkId)}`)  
   return result.data
 }
-
-export const useDeleteBookmark = (bookmarkId: string) => {
-  return useDelete(deleteBookmark, bookmarkId);
-};

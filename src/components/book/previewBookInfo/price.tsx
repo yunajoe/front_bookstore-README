@@ -6,7 +6,7 @@ interface BookPriceProps {
 
 function BookPrice({ price }: BookPriceProps) {
   return (
-    <div className="text-black text-14 font-bold mt-4">
+    <div className="mt-4 text-14 font-bold text-black">
       {price.toString().replace(THOUSAND_UNIT, ',')}
     </div>
   );
