@@ -13,13 +13,13 @@ TODO
 */
 function ShippingAddressSection() {
   const [isDefault, setIsDefault] = useState(true);
+
   const handleOptionChange = (event: { target: { value: string } }) => {
     setIsDefault(event.target.value === 'default');
   };
 
-
   return (
-    <div className="flex w-5/6 flex-col gap-y-12 text-16 pc:mx-93 pc:w-1/2">
+    <div className="flex w-full flex-col gap-y-12 text-16 pc:mx-93">
       <div className="mb-28  mt-40 text-20 font-bold">결제</div>
       <ShippingOptionRadio
         isDefault={isDefault}
