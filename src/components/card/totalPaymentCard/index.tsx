@@ -2,6 +2,7 @@ import TermsCheckbox from '@/components/container/terms/terms';
 import TotalPrice from '@/components/card/totalPaymentCard/totalPrice';
 import RegisterButton from '@/components/button/register/registerButton';
 import { REQUIRED_FOR_PAYMENT } from 'src/constants/sign';
+import Link from 'next/link';
 
 interface TotalPriceCardProps {
   checkbox?: boolean;
@@ -36,9 +37,9 @@ function TotalPriceCard({
         />
       )}
       {button && (
-        <div className="mobile:hidden tablet:hidden">
+        <Link className="mobile:hidden tablet:hidden" href="/paymented">
           <RegisterButton>23500원 결제하기</RegisterButton>
-        </div>
+        </Link>
       )}
     </div>
   );
