@@ -21,3 +21,6 @@ export const CategoryListAtom = atom<CategoryAtomType>({"domestic": [], "foreign
 export const LocatedCategoryAtom = atom<CategoryType>({
   mainId: 0,
 });
+
+//로그인시 memberId값 저장
+export const memberIdAtom = atom(0);
