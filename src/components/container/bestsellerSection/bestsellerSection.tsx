@@ -38,13 +38,14 @@ function BestSellerSection() {
       </div>
 
       <div className="flex w-full flex-wrap justify-start gap-x-20 gap-y-62 mobile:hidden pc:hidden">
-        {bookList.map((book) => (
+        {bookList.map((book, index) => (
           <PreviewBookInfo
             key={book.bookId}
             size={'sm'}
             title={book.bookTitle}
             image={book.bookImgUrl}
             authorList={book.authors}
+            ranking={index + 1}
           />
         ))}
       </div>
