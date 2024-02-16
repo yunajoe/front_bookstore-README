@@ -17,7 +17,6 @@ function CategoryPage() {
       ...INITIAL_PARAMS,
     },
   });
-  console.log(data);
 
   return (
     <SidebarLayout>
@@ -42,7 +41,7 @@ function CategoryPage() {
           <SubCategoryBookList />
         </>
       ) : (
-        <div className="flex-center w-full pt-120 text-gray-4">
+        <div className="flex-center w-full pt-120 text-gray-4 mobile:pt-80">
           이 카테고리에 등록된 도서가 없어요!
         </div>
       )}
