@@ -1,6 +1,6 @@
 import { QUERY_KEY } from '@/constants/queryKey';
 import { Signup, Login, ChangePassword, ChangeImage } from '@/types/api/member';
-import { useFetch, usePut } from '@/utils/reactQuery';
+import { useFetch, usePost, usePut } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //회원가입
@@ -12,7 +12,7 @@ export const postSignup = async (data: Signup) => {
 //로그인
 export const postLogin = async (data: Login) => {
   const result = await instance.post('/member/sign-in', data);
-  return result.data.data;
+  return result.data;
 };
 
 //회원조회
