@@ -1,8 +1,10 @@
 /** 책 상세페이지에 들어갈 리뷰 컴포넌트 */
 import Image from 'next/image';
 import BookRating from '@/components/book/bookRating/bookRating';
-import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
+import useFormatDate from '@/hooks/useFormatDate';
 import { ReviewData } from '@/types/api/review';
+
+import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 
 interface BookReviewProfileType {
   userNickname: string;
@@ -17,6 +19,8 @@ function BookReviewProfile({
   reviewRating,
   createDate,
 }: BookReviewProfileType) {
+  const customedDate = useFormatDate(createDate);
+
   return (
     <div className="flex items-start justify-between">
       <div className="flex gap-12">
@@ -32,7 +36,7 @@ function BookReviewProfile({
           <BookRating rating={reviewRating} />
         </div>
       </div>
-      <div className="text-12 text-gray-4">{createDate}</div>
+      <div className="text-12 text-gray-4">{customedDate}</div>
     </div>
   );
 }
