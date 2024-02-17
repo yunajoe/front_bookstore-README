@@ -19,7 +19,6 @@ function CartPayment({
   selectedItemArr,
   wishListData,
 }: CartPaymentProps) {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const handleAlertModalOpenClick = () => {
@@ -30,11 +29,7 @@ function CartPayment({
   };
 
   const calculatePaymentFee = (totalAmount: number, totalDiscount: number) => {
-    return (
-      totalAmount -
-      totalDiscount -
-      calculateDeliveryFee(totalAmount, totalDiscount)
-    );
+    return totalAmount + calculateDeliveryFee(totalAmount, totalDiscount);
   };
 
   const setBasketItemList = useSetAtom(basketItemList);
@@ -43,7 +38,7 @@ function CartPayment({
     // selectedItemArr 배열의 각 항목에 clicked 값이 없는 경우 4로 설정
     const modifiedItemList = selectedItemArr.map((item) => ({
       ...item,
-      clicked: item.count
+      clicked: item.count,
     }));
 
     // 수정된 배열을 사용하여 setBasketItemList 함수 호출
