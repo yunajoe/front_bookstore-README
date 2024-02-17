@@ -52,89 +52,83 @@ function CustomPage() {
   }, [genreArr.length]);
 
   return (
-    <div className="flex-1">
-      <div className="flex w-full flex-col items-center">
-        <MainLayout>
-          <div className="w-full max-w-[1200px]">
-            <CustomPageContentsLayout>
-              <div
-                className="no-scrollbar mb-40 mt-30 flex w-full flex-wrap gap-8
+    <MainLayout>
+      <div className="w-full max-w-[1200px]">
+        <CustomPageContentsLayout>
+          <div
+            className="no-scrollbar mb-40 mt-30 flex w-full flex-wrap gap-8
                   mobile:flex-nowrap mobile:overflow-auto">
-                {genreArr.length > 0 ? (
-                  genres.map((genre, index) => {
-                    const { title } = genre;
-                    const selectedTitleArr = genreArr.map((item) => item.title);
-                    return (
-                      <div key={index}>
-                        <CustomPageGenreButton
-                          title={genre.title}
-                          selected={selectedTitleArr.includes(title)}
-                          editMode={true}
-                          onClick={() => {
-                            if (!selectedTitleArr.includes(title)) {
-                              setGenreArr((prev) => [
-                                ...prev,
-                                {
-                                  title,
-                                  selected: true,
-                                },
-                              ]);
-                            } else {
-                              if (genreArr.length > 1) {
-                                setGenreArr((prev) =>
-                                  prev.filter((genre) => genre.title !== title),
-                                );
-                              }
-                            }
-                          }}
-                        />
-                      </div>
-                    );
-                  })
-                ) : (
-                  <>
-                    <div className="mt-120 flex w-full flex-col items-center gap-y-10 mobile:mt-80">
-                      <div className="mb-20 flex flex-col items-center">
-                        <div className="text-20">
-                          <span className="font-bold text-green">
-                            맞춤 도서
-                          </span>
-                          <span className="font-bold text-black">
-                            를 추천받아 보세요!
-                          </span>
-                        </div>
-                        <div>선호 장르 분석을 통해 도서를 추천해드려요</div>
-                      </div>
-                      <div className="rounded-[5px] border-2 border-green px-45 py-13 text-green">
-                        <Link href="/signin">선호 장르 선택하러 가기</Link>
-                      </div>
+            {genreArr.length > 0 ? (
+              genres.map((genre, index) => {
+                const { title } = genre;
+                const selectedTitleArr = genreArr.map((item) => item.title);
+                return (
+                  <div key={index}>
+                    <CustomPageGenreButton
+                      title={genre.title}
+                      selected={selectedTitleArr.includes(title)}
+                      editMode={true}
+                      onClick={() => {
+                        if (!selectedTitleArr.includes(title)) {
+                          setGenreArr((prev) => [
+                            ...prev,
+                            {
+                              title,
+                              selected: true,
+                            },
+                          ]);
+                        } else {
+                          if (genreArr.length > 1) {
+                            setGenreArr((prev) =>
+                              prev.filter((genre) => genre.title !== title),
+                            );
+                          }
+                        }
+                      }}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <>
+                <div className="mt-120 flex w-full flex-col items-center gap-y-10 mobile:mt-80">
+                  <div className="mb-20 flex flex-col items-center">
+                    <div className="text-20">
+                      <span className="font-bold text-green">맞춤 도서</span>
+                      <span className="font-bold text-black">
+                        를 추천받아 보세요!
+                      </span>
                     </div>
-                  </>
-                )}
-              </div>
-              <div
-                className="grid grid-cols-5 gap-x-30 gap-y-40 mobile:grid-cols-2 mobile:gap-x-10
-                  mobile:gap-y-30 mobile:pr-15 tablet:grid-cols-4 tablet:gap-x-20">
-                {filterBooksArray?.map((book) => {
-                  return (
-                    <div key={book.bookId}>
-                      <PreviewBookInfo
-                        size="lg"
-                        title={book.bookTitle}
-                        authorList={book.authors}
-                        category={[book.categories[1]].join('')}
-                        price={book.price}
-                        bookId={book.bookId}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </CustomPageContentsLayout>
+                    <div>선호 장르 분석을 통해 도서를 추천해드려요</div>
+                  </div>
+                  <div className="rounded-[5px] border-2 border-green px-45 py-13 text-green">
+                    <Link href="/signin">선호 장르 선택하러 가기</Link>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-        </MainLayout>
+          <div
+            className="grid grid-cols-5 gap-x-30 gap-y-40 mobile:grid-cols-2 mobile:gap-x-10
+                  mobile:gap-y-30 mobile:pr-15 tablet:grid-cols-4 tablet:gap-x-20">
+            {filterBooksArray?.map((book) => {
+              return (
+                <div key={book.bookId}>
+                  <PreviewBookInfo
+                    size="lg"
+                    title={book.bookTitle}
+                    authorList={book.authors}
+                    category={[book.categories[1]].join('')}
+                    price={book.price}
+                    bookId={book.bookId}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </CustomPageContentsLayout>
       </div>
-    </div>
+    </MainLayout>
   );
 }
 
