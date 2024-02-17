@@ -57,6 +57,7 @@ function Review({
   }, [reviewCurrentPage, currentOrder]);
 
   let reviewList: Array<ReviewData> = data?.data.reviews ?? [];
+  console.log(reviewList);
 
   const onSelectedOrder = (menu: string) => {
     setSelectedOrder(menu);
@@ -88,8 +89,8 @@ function Review({
         reviewNum={reviewCount}
         ratingDist={ratingDist}
       />
-      <div className="flex justify-end pt-20">
-        <div className="z-1 w-120">
+      <div className="flex w-full justify-end pt-20">
+        <div className="z-30 w-120">
           <DropDown
             menus={REVIEW_ORDER_STANDARD}
             selectedItem={selectedOrder}
@@ -109,17 +110,16 @@ function Review({
             <article className="mobile:flex-center flex w-full flex-col gap-20 pt-40 mobile:gap-10">
               {reviewList.map((el) => {
                 return (
-                  <div key={el.reviewId}>{el?.reviewRating}</div>
-                  // <BookReviewCard
-                  //   key={el.reviewId}
-                  //   createdAt={el.createdAt}
-                  //   reviewProfileImg={el.reviewProfileImg}
-                  //   userNickname={el.userNickname}
-                  //   reviewContent={el.reviewContent}
-                  //   reviewRating={el.reviewRating}
-                  //   reviewId={el.reviewId}
-                  //   isOwner={el.isOwner}
-                  // />
+                  <BookReviewCard
+                    key={el.reviewId}
+                    createDate={el.createDate}
+                    profileImg={el.profileImg}
+                    userNickname={el.userNickname}
+                    content={el.content}
+                    reviewRating={el.reviewRating}
+                    reviewId={el.reviewId}
+                    updateDate={el.updateDate}
+                  />
                 );
               })}
               <Pagination totalCount={reviewCount} standard={5} />

@@ -13,8 +13,8 @@ export interface ReviewData {
   reviewId: number;
   content: string;
   reviewRating: number;
-  createdDate: string;
-  updatedDate: string;
+  createDate: string;
+  updateDate: string;
   userNickname: string;
   profileImg?: string | null;
 }

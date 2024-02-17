@@ -25,7 +25,7 @@ function BookDetailNav({
 
   return (
     <div
-      className="mobile:flex-center sticky top-170 z-10 flex h-70 w-full items-center
+      className="mobile:flex-center sticky top-170 z-50 flex h-70 w-full items-center
         justify-start gap-80 border-b-[1px] border-gray-1 bg-gray-5 px-70 mobile:top-90
         mobile:h-50 mobile:px-0">
       <div
