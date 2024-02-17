@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { getBook } from '@/api/book';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import DropDown from '@/components/dropDown/dropDown';
-import SkeletonPreviewBookInfo from '@/components/skeleton/previewBookInfo/skeleton';
+import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
 import useInfinite from '@/hooks/useInfinite';
 import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
@@ -90,7 +90,7 @@ function MainCategoryBookList() {
           className="grid min-h-400 w-[895px]
            grid-flow-row auto-rows-auto grid-cols-5 gap-x-20 gap-y-40 mobile:w-[330px] mobile:grid-cols-2 mobile:gap-y-0 tablet:w-[511px] tablet:grid-cols-3 ">
           {[0, 1, 2, 3, 4].map((el) => {
-            return <SkeletonPreviewBookInfo key={el} />;
+            return <SkeletonPreviewBookImage size="md" key={el} />;
           })}
         </div>
       )}
