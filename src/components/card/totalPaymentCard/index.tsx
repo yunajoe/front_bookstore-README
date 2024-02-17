@@ -3,7 +3,7 @@ import TotalPrice from '@/components/card/totalPaymentCard/totalPrice';
 import RegisterButton from '@/components/button/register/registerButton';
 import { REQUIRED_FOR_PAYMENT } from 'src/constants/sign';
 import Link from 'next/link';
-import useGetTotalPrice from '@/hooks/common/useCalculateTotalPrice';
+import useCalculateTotalPrice from '@/hooks/common/useCalculateTotalPrice';
 import useCalculateProductsPrice from '@/hooks/common/useCalculateProductsPrice';
 
 interface TotalPriceCardProps {
@@ -23,7 +23,7 @@ function TotalPriceCard({
 }: TotalPriceCardProps) {
   const bookPrice = useCalculateProductsPrice();
   const delivery = bookPrice > 30000 ? 0 : 3000;
-  const totalPrice = useGetTotalPrice({
+  const totalPrice = useCalculateTotalPrice({
     delivery: delivery,
     discount: discount,
   });
