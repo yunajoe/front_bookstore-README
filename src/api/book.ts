@@ -1,5 +1,5 @@
 import { BookParams, putBookPath } from '@/types/api/book';
-import { useFetch, usePut } from '@/utils/reactQuery';
+import { useFetch, useUpdate } from '@/utils/reactQuery';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -29,5 +29,17 @@ const putBookView = async (option: putBookPath) => {
 };
 
 export const usePutBook = (option: putBookPath) => {
-  return usePut(putBookView, option);
+  return useUpdate(putBookView, option);
 };
+
+
+// http://15.165.141.22:8080/book/favorite?categoryId=1%2C2%2C3&isRandom=false
+
+
+// 랜덤하게 Book 100권가져오기
+export const getRandomBookList = async (categoryId:string, isRandom:boolean) => {
+  const result = await instance.get(`/book/favorite?categoryId=${encodeURI(categoryId)}&isRandom=${isRandom}`)
+  return result.data
+};
+
+

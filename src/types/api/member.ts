@@ -11,7 +11,6 @@ export interface Login {
 }
 
 export interface ChangePassword {
-  memberId: number;
   newPassword: string;
 }
 
