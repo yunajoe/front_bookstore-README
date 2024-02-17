@@ -9,8 +9,7 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import CustomPageGenreButton from '@/components/button/genre/customPageGenreButton';
 import Link from 'next/link';
 import { filteredBooks } from '@/utils/compareBooks';
-import ToolTip from '@/components/dropDown/toolTip';
-import Header from '@/components/header';
+import ToolTip from '@/components/dropDown/toolTip';  
 import VacantCustomLayout from '@/components/layout/vacantCustomLayout';
 import { useQuery } from '@tanstack/react-query';
 import { getCustomCategoryList } from '@/api/category';
@@ -135,19 +134,18 @@ function CustomPage() {
                   mobile:gap-y-30 mobile:pr-15 tablet:grid-cols-4 tablet:gap-x-20">
               {getRandomOneHundredBookList.data?.map((book: CusTomBookType) => {
                 return (
-                  <Link href={`/bookdetail/${book.bookId}`}>
-                    <div key={book.bookId}>
-                      <PreviewBookInfo
-                        size="lg"
-                        image={book.bookImgUrl}
-                        title={book.bookTitle}
-                        authorList={book.authors}
-                        category={[book.categories[1]].join('')}
-                        price={book.price}
-                        isUnit={true}
-                      />
-                    </div>
-                  </Link>
+                  <div key={book.bookId}>
+                    <PreviewBookInfo
+                      size="lg"
+                      bookId={book.bookId}
+                      image={book.bookImgUrl}
+                      title={book.bookTitle}
+                      authorList={book.authors}
+                      category={[book.categories[1]].join('')}
+                      price={book.price}
+                      isUnit={true}
+                    />
+                  </div>
                 );
               })}
             </div>
