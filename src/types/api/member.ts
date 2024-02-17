@@ -6,12 +6,11 @@ export interface Signup {
 }
 
 export interface Login {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
 }
 
 export interface ChangePassword {
-  memberId: number;
   newPassword: string;
 }
 
