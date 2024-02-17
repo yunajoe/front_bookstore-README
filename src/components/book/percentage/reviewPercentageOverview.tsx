@@ -25,7 +25,7 @@ function ReviewPercentageOverview({
             <Percentage num={el} total={reviewNum} />
             <div
               className={`text-12 text-gray-2 ${major === ind + 1 ? 'font-bold text-green' : ''}`}>
-              {reviewNum === 0 ? 0 : (el * 100) / reviewNum} %
+              {reviewNum === 0 ? 0 : Math.floor((el * 100) / reviewNum)} %
             </div>
           </div>
         );

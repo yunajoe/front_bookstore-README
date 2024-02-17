@@ -1,18 +1,33 @@
-/** 상품 상세페이지 하위에 들어갈 리뷰 섹션 컴포넌트
- *
- *
- */
-import { ReviewListMock1 } from '@/pages/api/mock/bookDetailMock';
-import ReviewOverviewCard from '../card/bookReviewCard/reviewOverviewCard';
-import BookReviewCard from '../card/bookReviewCard/bookReviewCard';
+/** 상품 상세페이지 하위에 들어갈 리뷰 섹션 컴포넌트*/
+
+import { useGetReviewList } from '@/api/review';
+import ReviewOverviewCard from '@/components/card/bookReviewCard/reviewOverviewCard';
+import BookReviewCard from '@/components/card/bookReviewCard/bookReviewCard';
 
 interface ReviewProps {
-  reviewNum: number;
-  rating?: number;
-  ratingDist?: [number, number, number, number, number];
-  reviewList?: any[];
+  bookId: string;
+  ratingDist: [number, number, number, number, number];
+  averageRating: number;
+  reviewCount: number;
 }
-function Review({ reviewNum, rating=0, ratingDist=[0,0,0,0,0], reviewList = [] }: ReviewProps) {
+
+function Review({
+  bookId,
+  ratingDist,
+  averageRating,
+  reviewCount,
+}: ReviewProps) {
+  const { data, isLoading, isError } = useGetReviewList({
+    bookId: bookId,
+    params: {
+      offset: '0',
+      limit: '8',
+      sort: 'NEWEST',
+      ascending: false,
+    },
+  });
+  console.log(data?.data);
+
   return (
     <section className="mobile:flex-center flex flex-col gap-20">
       <h3
@@ -20,16 +35,16 @@ function Review({ reviewNum, rating=0, ratingDist=[0,0,0,0,0], reviewList = [] }
           text-gray-4 mobile:w-330">
         리뷰
         <span className="pl-10 text-20 font-bold text-green">
-          {reviewNum}
+          {reviewCount}
         </span>
       </h3>
       <ReviewOverviewCard
-        rating={rating}
-        reviewNum={reviewNum}
+        rating={averageRating}
+        reviewNum={reviewCount}
         ratingDist={ratingDist}
       />
-      <article className="flex flex-col gap-20 w-full pt-40 mobile:flex-center mobile:gap-10">
-        {reviewList.map((el) => {
+      <article className="mobile:flex-center flex w-full flex-col gap-20 pt-40 mobile:gap-10">
+        {/* {reviewList.map((el) => {
           return (
             <BookReviewCard
               key={el.reviewId}
@@ -42,7 +57,7 @@ function Review({ reviewNum, rating=0, ratingDist=[0,0,0,0,0], reviewList = [] }
               isOwner={el.isOwner}
             />
           );
-        })}
+        })} */}
       </article>
       페이지네이션, order드롭다운 아직 구현 안 했습니다, !!
     </section>
