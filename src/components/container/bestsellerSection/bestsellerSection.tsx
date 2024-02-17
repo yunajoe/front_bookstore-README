@@ -25,7 +25,7 @@ function BestSellerSection({ page, bookList }: BestSellerSectionProps) {
         {bookList?.map((book, index) => (
           <PreviewBookInfo
             key={book.bookId}
-            size={'lg'}
+            size={page === 'main' ? 'lg' : 'md'}
             title={book.bookTitle}
             image={book.bookImgUrl}
             authorList={book.authors}
