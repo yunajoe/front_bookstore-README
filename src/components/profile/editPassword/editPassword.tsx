@@ -2,7 +2,7 @@ import { PasswordInput } from '@/components/input/signInput/signInput';
 import { EditPasswordType } from '@/types/editProfileTypes';
 import { FormProvider, useForm } from 'react-hook-form';
 import RegisterButton from '@/components/button/register/registerButton';
-import { notify } from '@/components/toast/toast';
+import { useEditPassword } from '@/hooks/api/useEditPassword';
 
 function EditPassword() {
   const method = useForm<EditPasswordType>({
@@ -30,12 +30,13 @@ function EditPassword() {
       return passwordValue === value || '비밀번호가 다릅니다';
     },
   };
+  const newPassword = getValues('checkPassword');
+  const { changePassword, isPending } = useEditPassword({
+    newPassword: newPassword,
+  });
 
   const onSubmit = () => {
-    // 서버로 비밀번호를 보낼거에용
-    console.log(getValues('checkPassword'));
-    // 성공시 토스트 메시지 띄우기
-    notify({ type: 'success', text: '비밀번호가 변경되었어요 🔐' });
+    changePassword();
   };
 
   return (
@@ -95,7 +96,9 @@ function EditPassword() {
               )}
             </div>
           </div>
-          <RegisterButton type="submit">비밀번호 변경</RegisterButton>
+          <RegisterButton type="submit" disabled={!isPending}>
+            비밀번호 변경
+          </RegisterButton>
         </form>
       </div>
     </FormProvider>
