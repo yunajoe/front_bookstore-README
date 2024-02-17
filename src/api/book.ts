@@ -23,8 +23,8 @@ export const useGetBook = (option: GetBookOption) => {
 
 //도서 조회수 증가
 const putBookView = async (option: putBookPath) => {
-  const { bookId, memberId } = option;
-  const result = await instance.put(`/book/${bookId}/${memberId}/view`);
+  const { bookId } = option;
+  const result = await instance.put(`/book/${bookId}/view`);
   return result.data;
 };
 

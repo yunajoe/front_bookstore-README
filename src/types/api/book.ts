@@ -19,7 +19,6 @@ export interface BookParams extends SortType {
 
 export interface putBookPath {
   bookId: number;
-  memberId: number;
 }
 
 export interface BookData {
