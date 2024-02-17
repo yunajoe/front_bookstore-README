@@ -41,7 +41,9 @@ export default function DomesticPage() {
       {data ? (
         <CategoryCarousel data={data?.data.books} responsive={responsive} />
       ) : null}
+      <Spacing height={[120, 80, 80]} />
       <BestSellerSection page="category" bookList={bestList} />
+      <Spacing height={[120, 80, 80]} />
       <Spacing height={[120, 80, 80]} />
 
       <MainCategoryBookList />

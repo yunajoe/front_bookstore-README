@@ -21,11 +21,24 @@ function BestSellerSection({ page, bookList }: BestSellerSectionProps) {
           더보기
         </Link>
       </div>
-      <div className="flex-center flex flex-wrap justify-start gap-x-10 gap-y-62 tablet:hidden pc:gap-x-30">
+      <div className="flex-center flex flex-wrap justify-start gap-x-10 gap-y-62 mobile:hidden tablet:hidden pc:gap-x-30">
         {bookList?.map((book, index) => (
           <PreviewBookInfo
             key={book.bookId}
             size={page === 'main' ? 'lg' : 'md'}
+            title={book.bookTitle}
+            image={book.bookImgUrl}
+            authorList={book.authors}
+            ranking={index + 1}
+            bookId={book.bookId}
+          />
+        ))}
+      </div>
+      <div className="flex-center flex flex-wrap justify-start gap-x-10 gap-y-62 tablet:hidden pc:hidden pc:gap-x-30">
+        {bookList?.map((book, index) => (
+          <PreviewBookInfo
+            key={book.bookId}
+            size="lg"
             title={book.bookTitle}
             image={book.bookImgUrl}
             authorList={book.authors}

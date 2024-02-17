@@ -42,8 +42,9 @@ function CategoryPage() {
       {data && data?.data.books.length > 0 ? (
         <>
           <CategoryCarousel data={data?.data.books} responsive={responsive} />
+          <Spacing height={[120, 80, 80]} />
           <BestSellerSection page="category" bookList={bestList} />
-
+          <Spacing height={[120, 80, 80]} />
           <SubCategoryBookList />
         </>
       ) : (
