@@ -9,19 +9,22 @@ interface BestSellerSectionProps {
 
 function BestSellerSection({ page, bookList }: BestSellerSectionProps) {
   // page 값이 'main'이면 mx 값을 표시해주고, 아니면 제거합니다.
-  const mxClass = page === 'main' ? 'tablet:mx-40 mobile:mx-15' : '';
+  const mxClass =
+    page === 'main'
+      ? 'tablet:mx-40  tablet:w-[690px] mobile:mx-15 pc:w-[1080px] tablet:my-120 pc:my-120'
+      : 'pc:w-[895px] tablet:w-[511px]';
 
   return (
     <div
-      className={`flex-col  mobile:my-80 mobile:w-330 ${mxClass} tablet:my-120
-        tablet:w-[690px] pc:my-120 pc:w-[1080px]`}>
+      className={`flex-col flex-wrap mobile:my-80 ${mxClass} mobile:w-330 
+        `}>
       <div className="flex justify-between mobile:mb-20 tablet:mb-40 pc:mb-50">
         <div className="text-20 font-bold">베스트셀러</div>
         <Link href="/domestic/bestseller" className="text-green">
           더보기
         </Link>
       </div>
-      <div className="flex-center flex flex-wrap justify-start gap-x-10 gap-y-62 mobile:hidden tablet:hidden pc:gap-x-30">
+      <div className="flex-center flex flex-wrap justify-start gap-x-10 gap-y-62 overflow-auto mobile:hidden tablet:hidden pc:gap-x-30">
         {bookList?.map((book, index) => (
           <PreviewBookInfo
             key={book.bookId}

@@ -44,8 +44,6 @@ export default function DomesticPage() {
       <Spacing height={[120, 80, 80]} />
       <BestSellerSection page="category" bookList={bestList} />
       <Spacing height={[120, 80, 80]} />
-      <Spacing height={[120, 80, 80]} />
-
       <MainCategoryBookList />
     </SidebarLayout>
   );
