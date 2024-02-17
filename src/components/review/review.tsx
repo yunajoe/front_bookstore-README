@@ -57,7 +57,6 @@ function Review({
   }, [reviewCurrentPage, currentOrder]);
 
   let reviewList: Array<ReviewData> = data?.data.reviews ?? [];
-  console.log(reviewList);
 
   const onSelectedOrder = (menu: string) => {
     setSelectedOrder(menu);
