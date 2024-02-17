@@ -88,7 +88,7 @@ function Review({
         reviewNum={reviewCount}
         ratingDist={ratingDist}
       />
-      <div className="flex w-full justify-end pt-20">
+      <div className="flex w-full justify-end pt-20  mobile:w-330">
         <div className="z-30 w-120">
           <DropDown
             menus={REVIEW_ORDER_STANDARD}
