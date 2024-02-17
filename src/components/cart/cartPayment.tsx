@@ -19,6 +19,7 @@ function CartPayment({
   selectedItemArr,
   wishListData,
 }: CartPaymentProps) {
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const handleAlertModalOpenClick = () => {
@@ -39,10 +40,19 @@ function CartPayment({
   const setBasketItemList = useSetAtom(basketItemList);
 
   const handleMovePayMentPage = () => {
-    setBasketItemList(selectedItemArr);
-    router.push('/order');
+    // selectedItemArr 배열의 각 항목에 clicked 값이 없는 경우 4로 설정
+    const modifiedItemList = selectedItemArr.map((item) => ({
+      ...item,
+      clicked: item.count
+    }));
 
+    // 수정된 배열을 사용하여 setBasketItemList 함수 호출
+    setBasketItemList(modifiedItemList);
+
+    // 페이지 이동
+    router.push('/order');
   };
+
   return (
     <div
       className="top- sticky mt-127 flex h-fit w-340 flex-col rounded-[10px]
@@ -80,7 +90,7 @@ function CartPayment({
         <button
           className="w-full rounded-[5px] bg-green py-15 text-center text-white"
           onClick={() => {
-            selectedItemArr.length
+            selectedItemArr.length > 0
               ? handleMovePayMentPage()
               : handleAlertModalOpenClick();
           }}>

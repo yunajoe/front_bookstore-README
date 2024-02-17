@@ -21,7 +21,7 @@ function BookPaymentCard({
   cost,
   count,
 }: BookPaymentCardProps) {
-  console.log('개수라옹' + count);
+
   return (
     <div
       role="card-container"
