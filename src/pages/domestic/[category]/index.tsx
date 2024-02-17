@@ -1,13 +1,16 @@
+import { useGetBook } from '@/api/book';
 import SidebarLayout from '@/components/layout/sidebarLayout';
 import Spacing from '@/components/container/spacing/spacing';
 import EventSection from '@/components/container/eventSection/eventSection';
 import CategoryCarousel from '@/components/carousel/categoryCarousel';
-import { carouselMockData } from '@/pages/api/mock/carouselMock';
-import { responsive } from '@/utils/checkResponsiveEnv';
 import SubCategoryBookList from '@/components/container/categoryBookList/subCategoryBookList';
 import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
+import { responsive } from '@/utils/checkResponsiveEnv';
+
+import { carouselMockData } from '@/pages/api/mock/carouselMock';
+import { useCategoryCarouselParams } from '@/hooks/useInitialParams';
 import { BookData } from '@/types/api/book';
-import { useGetBook } from '@/api/book';
+import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 
 function CategoryPage() {
   const { data: bestsellers } = useGetBook({
@@ -20,6 +23,15 @@ function CategoryPage() {
     },
   });
   const bestList: Array<BookData> = bestsellers ? bestsellers.data.books : [];
+  const INITIAL_PARAMS = useCategoryCarouselParams();
+  const { categoryId } = useCheckCategoryUrl();
+  const { data } = useGetBook({
+    endpoint: `${categoryId}/sub`,
+    params: {
+      ...INITIAL_PARAMS,
+    },
+  });
+
   return (
     <SidebarLayout>
       <Spacing height={[0, 0, 20]} />
@@ -31,7 +43,6 @@ function CategoryPage() {
       <Spacing height={[60, 40, 40]} />
 
       <CategoryCarousel data={carouselMockData} responsive={responsive} />
-
       <BestSellerSection page="category" bookList={bestList} />
 
       <SubCategoryBookList />

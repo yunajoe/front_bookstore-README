@@ -8,12 +8,21 @@ import EventSection from '@/components/container/eventSection/eventSection';
 
 import { responsive } from '@/utils/checkResponsiveEnv';
 
-import { carouselMockData } from '../api/mock/carouselMock';
+import { useCategoryCarouselParams } from '@/hooks/useInitialParams';
+import { useGetBook } from '@/api/book';
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
 
-export default function DomesticPage() {
+export default function ForeignPage() {
+  const INITIAL_PARAMS = useCategoryCarouselParams();
+  const { data } = useGetBook({
+    endpoint: `1/main`,
+    params: {
+      ...INITIAL_PARAMS,
+    },
+  });
+
   const { data: bestsellers } = useGetBook({
     endpoint: `1/sub`,
     params: {
@@ -34,11 +43,10 @@ export default function DomesticPage() {
       />
       <Spacing height={[60, 40, 40]} />
 
-      <CategoryCarousel data={carouselMockData} responsive={responsive} />
-      <Spacing height={[120, 80, 80]} />
-
+      {data ? (
+        <CategoryCarousel data={data?.data.books} responsive={responsive} />
+      ) : null}
       <BestSellerSection page="category" bookList={bestList} />
-      <Spacing height={[120, 80, 80]} />
 
       <MainCategoryBookList />
     </SidebarLayout>
