@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAtom } from 'jotai';
-import { CurrentPageStateAtom } from '@/store/state';
+import { CurrentPageStateAtom, CurrentPageArrayIndexAtom } from '@/store/state';
 
 function usePagination(totalCount: number, standard: number) {
   const totalPage = Math.ceil(totalCount / standard);
@@ -18,9 +18,10 @@ function usePagination(totalCount: number, standard: number) {
   }
 
   // 현재 페이지 배열 인덱스를 관리하기 위한 상태
-  const [currentPageArrayIndex, setCurrentPageArrayIndex] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [, setCurrentPageState] = useAtom(CurrentPageStateAtom)
+  const [currentPageArrayIndexState, setCurrentPageArrayIndexState ] = useAtom(CurrentPageArrayIndexAtom);
+  const [currentPageState, setCurrentPageState] = useAtom(CurrentPageStateAtom)
+  const [currentPageArrayIndex, setCurrentPageArrayIndex] = useState(currentPageArrayIndexState ?? 0);
+  const [currentPage, setCurrentPage] = useState(currentPageState ?? 1);
 
   // 이전 페이지 배열로 이동
   const goToPrevPageArray = () => {
@@ -41,7 +42,8 @@ function usePagination(totalCount: number, standard: number) {
 
   useEffect(() => {
     setCurrentPageState(currentPage)
-  },[currentPage])
+    setCurrentPageArrayIndexState(currentPageArrayIndex)
+  },[currentPage, currentPageArrayIndex])
 
   return {pageArrays, currentPageArrayIndex, currentPage, goToPrevPageArray, goToNextPageArray, changeCurrentPage}
 }
