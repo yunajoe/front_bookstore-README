@@ -1,7 +1,7 @@
 import RegisterButton from '@/components/button/register/registerButton';
 import useFormControl from '@/hooks/useFormControl';
 import ModalSearchInput from '@/components/input/modalSearchInput';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAtom } from 'jotai';
 import { CurrentPageStateAtom } from '@/store/state';
 import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previewBookInfoPagination';
