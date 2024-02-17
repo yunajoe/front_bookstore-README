@@ -9,8 +9,21 @@ import EventSection from '@/components/container/eventSection/eventSection';
 import { responsive } from '@/utils/checkResponsiveEnv';
 
 import { carouselMockData } from '../api/mock/carouselMock';
+import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
+import { useGetBook } from '@/api/book';
+import { BookData } from '@/types/api/book';
 
 export default function DomesticPage() {
+  const { data: bestsellers } = useGetBook({
+    endpoint: `1/sub`,
+    params: {
+      bookId: '0',
+      limit: '10',
+      sort: 'BESTSELLER',
+      ascending: false,
+    },
+  });
+  const bestList: Array<BookData> = bestsellers ? bestsellers.data.books : [];
   return (
     <SidebarLayout>
       <Spacing height={[0, 0, 20]} />
@@ -22,15 +35,7 @@ export default function DomesticPage() {
       <Spacing height={[60, 40, 40]} />
 
       <CategoryCarousel data={carouselMockData} responsive={responsive} />
-      <Spacing height={[120, 80, 80]} />
-
-      <article className="flex flex-col gap-50 mobile:gap-20 tablet:gap-40">
-        <h1 className="text-20 text-black">베스트셀러</h1>
-        <div
-          role="temp"
-          className="h-[500px] w-[895px] bg-gray-1 mobile:w-[330px]
-            tablet:w-[511px]"></div>
-      </article>
+      <BestSellerSection page="category" bookList={bestList} />
       <Spacing height={[120, 80, 80]} />
 
       <MainCategoryBookList />
