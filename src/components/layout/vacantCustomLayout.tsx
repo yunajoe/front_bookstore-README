@@ -13,7 +13,7 @@ function VacantCustomLayout() {
         </p>
       </div>
       <div className="h-50 w-287 rounded-[5px] border border-solid border-green bg-white px-45 py-13 text-center text-14 font-normal text-green">
-        <Link href="/mypage/setting/selectGenre">선호장르선택하러가기</Link>
+        <Link href="/mypage/setting/selectGenre">선호장르 선택하러가기</Link>
       </div>
     </div>
   );
