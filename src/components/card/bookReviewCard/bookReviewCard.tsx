@@ -4,7 +4,7 @@ import BookRating from '@/components/book/bookRating/bookRating';
 import useFormatDate from '@/hooks/useFormatDate';
 import { ReviewData } from '@/types/api/review';
 
-import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
+import Noprofile from '@/public/icons/Noprofile.svg';
 
 interface BookReviewProfileType {
   userNickname: string;
@@ -26,7 +26,7 @@ function BookReviewProfile({
       <div className="flex gap-12">
         <div className="relative h-48 w-48 overflow-hidden rounded-[50%] border-[1px] border-gray-5">
           <Image
-            src={profileImg ?? TestImage1}
+            src={profileImg ?? Noprofile}
             alt="리뷰 작성자 프로필 이미지"
             fill
           />
