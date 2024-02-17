@@ -1,7 +1,7 @@
 import { THOUSAND_UNIT } from 'src/constants/price';
 
 interface BookPaymentCostProps {
-  orderCount: number;
+  orderCount: number | undefined;
   cost: number;
   mobileHidden?: boolean;
 }
@@ -11,7 +11,7 @@ function BookPaymentCost({
   cost,
   mobileHidden,
 }: BookPaymentCostProps) {
-  // if (!orderCount) orderCount = 1;
+  if (!orderCount) orderCount = 1;
   return (
     <div
       role="payment"

@@ -2,7 +2,7 @@
  */
 
 interface BookAuthorProps {
-  authorList?: string[] | null | string;
+  authorList?: string[] | null;
   publisher?: string;
   fontSize?: number;
   classNames?: string;

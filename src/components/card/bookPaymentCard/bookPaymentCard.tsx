@@ -7,7 +7,7 @@ import BookPaymentCost from './bookPaymentCost';
 interface BookPaymentCardProps {
   bookId: number | undefined;
   imageUrl: string;
-  authors?: string;
+  authors?: string[];
   title: string;
   cost: number;
   count?: number;
@@ -21,7 +21,6 @@ function BookPaymentCard({
   cost,
   count,
 }: BookPaymentCardProps) {
-
   return (
     <div
       role="card-container"
