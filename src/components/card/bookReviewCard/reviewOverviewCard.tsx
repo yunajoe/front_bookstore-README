@@ -10,9 +10,9 @@ interface ReviewOverviewCardProps {
 }
 
 function ReviewOverviewCard({
-  rating,
-  reviewNum,
-  ratingDist,
+  rating = 0,
+  reviewNum = 0,
+  ratingDist = [0, 0, 0, 0, 0],
 }: ReviewOverviewCardProps) {
   return (
     <div

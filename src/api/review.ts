@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import {  ReviewParams } from '@/types/api/book';
+import {  ReviewParams } from '@/types/api/review';
 import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
