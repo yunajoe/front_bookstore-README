@@ -18,7 +18,6 @@ function CartPage() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalDiscount, setTotalDisCount] = useState(0);
   const resetSelectedItemArr = () => setSelectedItemArr([]);
-
   const { data, isError, isLoading, isSuccess } = useGetBasKetQuery();
   const deleteBasketItemMutation = useDeleteBasketQuery();
 
@@ -31,10 +30,10 @@ function CartPage() {
       (data) => data.basketId === item.basketId,
     );
     if (itemIdx > -1) {
-      let clickedCount = (wishList[itemIdx]['clicked'] || 1) + 1;
+      let clickedCount = wishList[itemIdx].count + 1;
       setter((prev) =>
         prev.map((ele, index) =>
-          index === itemIdx ? { ...ele, clicked: clickedCount } : ele,
+          index === itemIdx ? { ...ele, count: clickedCount } : ele,
         ),
       );
     }
@@ -49,10 +48,10 @@ function CartPage() {
       (data) => data.basketId === item.basketId,
     );
     if (itemIdx > -1) {
-      let clickedCount = (wishList[itemIdx]['clicked'] || 1) - 1;
+      let clickedCount = wishList[itemIdx].count - 1;
       setter((prev) =>
         prev.map((ele, index) =>
-          index === itemIdx ? { ...ele, clicked: clickedCount } : ele,
+          index === itemIdx ? { ...ele, count: clickedCount } : ele,
         ),
       );
     }
@@ -80,14 +79,14 @@ function CartPage() {
 
   useEffect(() => {
     const totalPrice = selectedItemArr.reduce((acc, item) => {
-      acc += item.price * (item.clicked || 1);
+      acc += item.price * item.count;
       return acc;
     }, 0);
     setTotalAmount(totalPrice);
   }, [selectedItemArr]);
 
   const bookTotalCount = selectedItemArr.reduce((acc, item) => {
-    acc += item.clicked || 1;
+    acc += item.count;
     return acc;
   }, 0);
 
@@ -239,7 +238,7 @@ function CartPage() {
                                 setSelectedItemArr,
                               );
                             }}
-                            count={item.clicked ?? 1}
+                            count={item.count}
                           />
                         </div>
                       </div>
@@ -248,8 +247,8 @@ function CartPage() {
                             mobile:w-full mobile:flex-row mobile:justify-between mobile:border-t-2 mobile:px-20
                             mobile:py-16">
                         <span className="text-20 font-bold text-black">
-                          {(item.clicked && item.clicked > 0
-                            ? item.price * item.clicked
+                          {(item.count && item.count > 0
+                            ? item.price * item.count
                             : item.price
                           )
                             .toString()
