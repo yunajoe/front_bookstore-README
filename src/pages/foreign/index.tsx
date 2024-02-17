@@ -10,7 +10,6 @@ import { responsive } from '@/utils/checkResponsiveEnv';
 
 import { useCategoryCarouselParams } from '@/hooks/useInitialParams';
 import { useGetBook } from '@/api/book';
-import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
 
@@ -24,7 +23,7 @@ export default function ForeignPage() {
   });
 
   const { data: bestsellers } = useGetBook({
-    endpoint: `1/sub`,
+    endpoint: `1/main`,
     params: {
       bookId: '0',
       limit: '10',

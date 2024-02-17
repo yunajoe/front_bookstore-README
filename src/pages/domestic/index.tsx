@@ -1,6 +1,4 @@
 /** 카테고리 페이지 > 국내 > 전체*/
-
-import { useGetBook } from '@/api/book';
 import SidebarLayout from '@/components/layout/sidebarLayout';
 import Spacing from '@/components/container/spacing/spacing';
 import CategoryCarousel from '@/components/carousel/categoryCarousel';
@@ -14,7 +12,7 @@ import { BookData } from '@/types/api/book';
 
 export default function DomesticPage() {
   const { data: bestsellers } = useGetBook({
-    endpoint: `1/sub`,
+    endpoint: `0/main`,
     params: {
       bookId: '0',
       limit: '10',

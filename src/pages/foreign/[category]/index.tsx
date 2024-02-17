@@ -8,9 +8,7 @@ import { useCategoryCarouselParams } from '@/hooks/useInitialParams';
 import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 import { responsive } from '@/utils/checkResponsiveEnv';
 import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
-import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
-import { useRouter } from 'next/router';
 
 function CategoryPage() {
   const INITIAL_PARAMS = useCategoryCarouselParams();
@@ -21,9 +19,8 @@ function CategoryPage() {
       ...INITIAL_PARAMS,
     },
   });
-
   const { data: bestsellers } = useGetBook({
-    endpoint: `1/sub`,
+    endpoint: `${categoryId}/sub`,
     params: {
       bookId: '0',
       limit: '10',
@@ -31,7 +28,6 @@ function CategoryPage() {
       ascending: false,
     },
   });
-
   const bestList: Array<BookData> = bestsellers ? bestsellers.data.books : [];
 
   return (
@@ -45,6 +41,7 @@ function CategoryPage() {
         <>
           <Spacing height={[60, 40, 40]} />
           <CategoryCarousel data={data?.data.books} responsive={responsive} />
+          <Spacing height={[120, 80, 80]} />
           <BestSellerSection page="category" bookList={bestList} />
           <SubCategoryBookList />
         </>
