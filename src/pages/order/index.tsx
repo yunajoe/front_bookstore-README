@@ -1,16 +1,15 @@
 import RegisterButton from '@/components/button/register/registerButton';
 import ShippingAddressSection from '@/components/container/shippingAddressSection/shippingAddressSection';
 import BookPaymentCardList from '@/components/card/bookPaymentCard/bookPaymentCardList';
-import { bookOrderTestData } from '@/pages/api/mock/bookOrderMock';
-
 import { ReactElement } from 'react';
 import MainLayout from '@/components/layout/mainLayout';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
 import Link from 'next/link';
-
-const testData = bookOrderTestData;
+import { basketItemList } from '@/store/state';
+import { useAtomValue } from 'jotai';
 
 export default function Order() {
+  const items = useAtomValue(basketItemList);
   return (
     <div className="flex w-full justify-center">
       <div className=" flex h-full w-full justify-center mobile:flex-col tablet:flex-col pc:gap-x-93">
@@ -18,10 +17,7 @@ export default function Order() {
           <ShippingAddressSection />
 
           <div className="mt-60">
-            <BookPaymentCardList
-              bookData={testData.orderData[0].bookData}
-              label="주문상품"
-            />
+            <BookPaymentCardList bookData={items} label="주문 상품" />
           </div>
         </div>
         <div className="sticky top-177 mx-40 mb-180 mobile:mt-80 tablet:mt-80">

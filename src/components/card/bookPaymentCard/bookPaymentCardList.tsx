@@ -1,12 +1,12 @@
-import { BookOrderType } from '@/types/bookOrderType';
-
+import { PayMentAtom } from '@/types/cartType';
 import BookPaymentCard from './bookPaymentCard';
 interface BookPaymentCardListProps {
-  bookData: BookOrderType[];
+  bookData: PayMentAtom[];
   label: string;
 }
 
 function BookPaymentCardList({ bookData, label }: BookPaymentCardListProps) {
+
   return (
     <div
       role="list-container"
@@ -15,9 +15,12 @@ function BookPaymentCardList({ bookData, label }: BookPaymentCardListProps) {
       <div role="list-section" className="flex flex-col gap-20">
         {bookData.map((data) => (
           <BookPaymentCard
-            key={data.book.productId}
-            order={data.order}
-            book={data.book}
+            key={data.bookId}
+            bookId={data.bookId}
+            imageUrl={data.bookImgUrl}
+            cost={data.price}
+            count={data.clicked}
+            title={data.bookTitle}
           />
         ))}
       </div>

@@ -11,6 +11,7 @@ function BookPaymentCost({
   cost,
   mobileHidden,
 }: BookPaymentCostProps) {
+  if (!orderCount) orderCount = 1;
   return (
     <div
       role="payment"
