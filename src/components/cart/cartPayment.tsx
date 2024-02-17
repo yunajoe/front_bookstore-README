@@ -25,7 +25,7 @@ function CartPayment({
     setIsModalOpen(!isModalOpen);
   };
   const calculateDeliveryFee = (totalAmount: number, totalDiscount: number) => {
-    return totalAmount - totalDiscount >= 30000 ? 3000 : 0;
+    return totalAmount - totalDiscount >= 30000 ? 0 : 3000;
   };
 
   const calculatePaymentFee = (totalAmount: number, totalDiscount: number) => {

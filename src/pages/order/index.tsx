@@ -10,6 +10,7 @@ import { useAtomValue } from 'jotai';
 
 export default function Order() {
   const items = useAtomValue(basketItemList);
+
   return (
     <div className="flex w-full justify-center">
       <div className=" flex h-full w-full justify-center mobile:flex-col tablet:flex-col pc:gap-x-93">
