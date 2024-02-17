@@ -26,7 +26,6 @@ function BookMarkedPage() {
   useEffect(() => {
     if (data && status === 'success') {
       const bookmarkList = data.pages[data.pages.length - 1].data.bookmarks;
-      console.log('ddd', bookmarkList);
       setWishListData((prev) => [...prev, ...bookmarkList]);
     }
   }, [data]);
