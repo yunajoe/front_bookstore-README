@@ -1,6 +1,5 @@
 import { PayMentAtom } from '@/types/cartType';
 import { atom } from 'jotai';
-
 import { CategoryAtomType, CategoryType } from '@/types/api/category';
 
 export const countAtom = atom(0);
