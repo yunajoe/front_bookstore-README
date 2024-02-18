@@ -6,6 +6,8 @@ export const countAtom = atom(0);
 
 export const pointVisibleAtom = atom(true);
 
+export const CurrentPageArrayIndexAtom = atom(0);
+
 export const CurrentPageStateAtom = atom(1);
 
 // 장바구니 money Atom

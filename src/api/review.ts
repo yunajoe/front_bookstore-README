@@ -1,6 +1,12 @@
 import { QUERY_KEY } from '@/constants/queryKey';
+import {  ReviewParams } from '@/types/api/review';
 import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
+
+interface GetReviewOption {
+  bookId: string;
+  params?: ReviewParams;
+}
 
 //리뷰조회, 단일조회
 const getReview = async (reviewId: number) => {
@@ -58,4 +64,17 @@ const deleteReview = async (id: number) => {
 
 export const useDeleteReview = (id: number) => {
   return useDelete(deleteReview, id);
+};
+
+// 도서 아이디로 리뷰 전체 페이징 조회
+export const getReviewList = async (option: GetReviewOption) => {
+  const { bookId, params } = option;
+  const result = await instance.get(`/review/${bookId}/book`, {
+    params,
+  });
+  return result.data;
+};
+
+export const useGetReviewList = (option: GetReviewOption) => {
+  return useFetch(QUERY_KEY.book, getReviewList, option);
 };
