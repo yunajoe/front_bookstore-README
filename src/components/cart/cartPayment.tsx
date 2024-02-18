@@ -41,6 +41,7 @@ function CartPayment({
   const handleMovePayMentPage = () => {
     setBasketItemList(selectedItemArr);
     router.push('/order');
+
   };
   return (
     <div
