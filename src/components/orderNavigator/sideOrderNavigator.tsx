@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import BookPrice from '../book/bookPrice/bookPrice';
-import LikeButton from '../button/likeButton';
-import OrderBookCount from '../cart/orderBookCount';
+
+import BookPrice from '@/components/book/bookPrice/bookPrice';
+import LikeButton from '@/components/button/likeButton';
+import OrderBookCount from '@/components/cart/orderBookCount';
 import usePayNowItem from '@/hooks/usePayNowItem';
 import useAddItemBasket from '@/hooks/useAddItemBasket';
 

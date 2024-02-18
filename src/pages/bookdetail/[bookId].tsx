@@ -92,9 +92,12 @@ export default function BookDetailPage() {
         </section>
 
         <FooterOrderNavitgator
+          bookId={bookId as string}
+          bookImgUrl={data?.data.bookImgUrl ?? '/.'}
+          bookTitle={data?.data.bookTitle}
+          authors={data?.data.authors}
           isBookmarked={false}
           price={data?.data.price ?? 0}
-          bookId={bookId as string}
           orderCount={orderCount}
           setOrderCount={setOrderCount}
         />
