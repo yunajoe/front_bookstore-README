@@ -1,9 +1,20 @@
 import { BookOrderCardListProps } from '@/components/card/bookOrderCard/bookOrderCardList';
-import { OrderDateProps } from '@/components/container/orderDate/orderDate';
 import { OrderOverViewProps } from '@/components/container/orderDate/orderOverView';
 import { Person } from '@/types/orderDateType';
 import { Dispatch, SetStateAction } from 'react';
-
+import { PayMentAtom } from '@/types/cartType';
+export const bookOrderTestData2: PayMentAtom[] = [
+  {
+    basketId: 1,
+    bookId: 22,
+    bookImgUrl:
+      'https://image.aladin.co.kr/product/33341/98/cover200/k222938702_1.jpg',
+    bookTitle: '첫 번째 책 이름이 길어요오오오오오오오오오오',
+    price: 17000,
+    authors: ['저자 A', '저자 B'],
+    clicked: 1,
+  },
+];
 export const bookOrderTestData: BookOrderCardListProps = {
   orderData: [
     {

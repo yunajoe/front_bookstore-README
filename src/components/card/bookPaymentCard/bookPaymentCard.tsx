@@ -1,13 +1,26 @@
 import { THOUSAND_UNIT } from 'src/constants/price';
 import Link from 'next/link';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import { BookOrderType } from '@/types/bookOrderType';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookPaymentCost from './bookPaymentCost';
 
-function BookPaymentCard({ book, order }: BookOrderType) {
-  if (!book || !order) return null;
+interface BookPaymentCardProps {
+  bookId: number | undefined;
+  imageUrl: string;
+  authors?: string[];
+  title: string;
+  cost: number;
+  count?: number;
+}
 
+function BookPaymentCard({
+  bookId,
+  imageUrl,
+  authors,
+  title,
+  cost,
+  count,
+}: BookPaymentCardProps) {
   return (
     <div
       role="card-container"
@@ -16,13 +29,13 @@ function BookPaymentCard({ book, order }: BookOrderType) {
       <div role="book-info-container" className="flex">
         <Link
           role="book-img"
-          href={`bookdetail/${book.productId}`}
+          href={`bookdetail/${bookId}`}
           className="h-170 bg-white mobile:h-134 mobile:min-w-93">
           <PreviewBookInfo
             size="sm"
-            image={book.imageUrl}
+            image={imageUrl}
             itemsStart
-            bookId={book.productId}
+            bookId={bookId}
           />
         </Link>
 
@@ -32,23 +45,19 @@ function BookPaymentCard({ book, order }: BookOrderType) {
           <div
             role="book-title"
             className="min-w-250 text-15 font-normal mobile:w-185 mobile:min-w-0">
-            {book.title}
+            {title}
           </div>
           <div role="book-author-publisher" className="flex-center gap-4">
-            <BookAuthor authorList={book.authors} />
+            <BookAuthor authorList={authors} />
           </div>
           <div
             role="book-price"
             className="flex-center flex-col gap-10 whitespace-nowrap mobile:flex-row">
             <div role="price-div" className="text-14 font-bold text-black">
-              {book.cost.toString().replace(THOUSAND_UNIT, ',')}원
+              {cost.toString().replace(THOUSAND_UNIT, ',')}원
             </div>
           </div>
-          <BookPaymentCost
-            orderCount={order.orderCount}
-            cost={book.cost}
-            mobileHidden
-          />
+          <BookPaymentCost orderCount={count} cost={cost} mobileHidden />
         </div>
       </div>
       {/* 모바일에서만 보이는 컴포넌트(결제금액)*/}
@@ -56,7 +65,7 @@ function BookPaymentCard({ book, order }: BookOrderType) {
         role="mobile-section"
         className="flex justify-end tablet:hidden pc:hidden">
         <div className="border-b-1 absolute bottom-65 left-0 w-328 border border-gray-1"></div>
-        <BookPaymentCost orderCount={order.orderCount} cost={book.cost} />
+        <BookPaymentCost orderCount={count} cost={cost} />
       </div>
     </div>
   );
