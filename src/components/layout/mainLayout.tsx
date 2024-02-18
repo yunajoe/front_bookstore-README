@@ -25,7 +25,7 @@ function MainLayout({ children }: MainLayoutProps) {
     <>
       <Header
         isLoggedIn={status === 'authenticated'}
-        numItemsOfCart={data.length} // basketItems의 길이로 업데이트
+        numItemsOfCart={data?.length} // basketItems의 길이로 업데이트
       />
       <div className="relative grid auto-rows-auto place-items-center">
         <div className="h-20 w-300" ref={ref} />
