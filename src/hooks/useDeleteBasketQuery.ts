@@ -1,11 +1,13 @@
-import { deleteBasketItem } from '@/api/cart'
-import { useMutation } from '@tanstack/react-query'
+import { deleteBasketItem } from '@/api/cart';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-function useDeleteBasketQuery() {  
-   const deleteBasketItemMutation = useMutation({
-    mutationFn: (basketItemId: string) => deleteBasketItem(basketItemId)      
-  })      
-  return deleteBasketItemMutation
+function useDeleteBasketQuery() {
+  const queryClient = useQueryClient();
+  const deleteBasketItemMutation = useMutation({
+    mutationFn: (basketItemId: string) => deleteBasketItem(basketItemId),
+    onSuccess: () => queryClient.invalidateQueries(),
+  });
+  return deleteBasketItemMutation;
 }
 
-export default useDeleteBasketQuery
+export default useDeleteBasketQuery;
