@@ -1,6 +1,4 @@
 /** 카테고리 페이지 > 국내 > 전체*/
-
-import { useGetBook } from '@/api/book';
 import SidebarLayout from '@/components/layout/sidebarLayout';
 import Spacing from '@/components/container/spacing/spacing';
 import CategoryCarousel from '@/components/carousel/categoryCarousel';
@@ -8,8 +6,21 @@ import MainCategoryBookList from '@/components/container/categoryBookList/mainCa
 import EventSection from '@/components/container/eventSection/eventSection';
 import { useCategoryCarouselParams } from '@/hooks/useInitialParams';
 import { responsive } from '@/utils/checkResponsiveEnv';
+import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
+import { useGetBook } from '@/api/book';
+import { BookData } from '@/types/api/book';
 
 export default function DomesticPage() {
+  const { data: bestsellers } = useGetBook({
+    endpoint: `0/main`,
+    params: {
+      bookId: '0',
+      limit: '10',
+      sort: 'BESTSELLER',
+      ascending: false,
+    },
+  });
+  const bestList: Array<BookData> = bestsellers ? bestsellers.data.books : [];
   const INITIAL_PARAMS = useCategoryCarouselParams();
   const { data } = useGetBook({
     endpoint: '0/main',
@@ -31,16 +42,8 @@ export default function DomesticPage() {
         <CategoryCarousel data={data?.data.books} responsive={responsive} />
       ) : null}
       <Spacing height={[120, 80, 80]} />
-
-      <article className="flex flex-col gap-50 mobile:gap-20 tablet:gap-40">
-        <h1 className="text-20 text-black">베스트셀러</h1>
-        <div
-          role="temp"
-          className="h-[500px] w-[895px] bg-gray-1 mobile:w-[330px]
-            tablet:w-[511px]"></div>
-      </article>
+      <BestSellerSection page="category" bookList={bestList} />
       <Spacing height={[120, 80, 80]} />
-
       <MainCategoryBookList />
     </SidebarLayout>
   );

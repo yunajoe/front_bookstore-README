@@ -10,6 +10,8 @@ import { responsive } from '@/utils/checkResponsiveEnv';
 
 import { useCategoryCarouselParams } from '@/hooks/useInitialParams';
 import { useGetBook } from '@/api/book';
+import { BookData } from '@/types/api/book';
+import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
 
 export default function ForeignPage() {
   const INITIAL_PARAMS = useCategoryCarouselParams();
@@ -20,6 +22,16 @@ export default function ForeignPage() {
     },
   });
 
+  const { data: bestsellers } = useGetBook({
+    endpoint: `1/main`,
+    params: {
+      bookId: '0',
+      limit: '10',
+      sort: 'BESTSELLER',
+      ascending: false,
+    },
+  });
+  const bestList: Array<BookData> = bestsellers ? bestsellers.data.books : [];
   return (
     <SidebarLayout>
       <Spacing height={[0, 0, 20]} />
@@ -34,16 +46,8 @@ export default function ForeignPage() {
         <CategoryCarousel data={data?.data.books} responsive={responsive} />
       ) : null}
       <Spacing height={[120, 80, 80]} />
-
-      <article className="flex flex-col gap-50 mobile:gap-20 tablet:gap-40">
-        <h1 className="text-20 text-black">베스트셀러</h1>
-        <div
-          role="temp"
-          className="h-[500px] w-[895px] bg-gray-1 mobile:w-[330px]
-            tablet:w-[511px]"></div>
-      </article>
+      <BestSellerSection page="category" bookList={bestList} />
       <Spacing height={[120, 80, 80]} />
-
       <MainCategoryBookList />
     </SidebarLayout>
   );
