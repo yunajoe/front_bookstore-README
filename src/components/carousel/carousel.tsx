@@ -63,7 +63,7 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
   useEffect(resetCurrentIndex, [env]);
 
-
+  console.log('aaa', maxPage, currentIndex);
   return (
     <div className="relative w-[1200px] overflow-hidden bg-white mobile:w-360 tablet:w-[768px]">
       <div
@@ -128,7 +128,7 @@ function Carousel({ data, responsive }: CarouselProps) {
               />
             ))}
           </div>
-        </div> 
+        </div>
         <button
           onClick={btnpressnext}
           className="right-0 flex h-full w-10 items-center justify-center bg-transparent
@@ -136,7 +136,7 @@ function Carousel({ data, responsive }: CarouselProps) {
           <div className="relative h-16 w-10">
             <Image
               src={
-                (currentIndex === maxPage && maxPage !== 0 || maxPage <0)
+                currentIndex === maxPage
                   ? '/icons/CarouselRightInActivateArrow.svg'
                   : '/icons/CarouselRightActivateArrow.svg'
               }
