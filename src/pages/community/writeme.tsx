@@ -1,12 +1,14 @@
-import { myCommunityCard } from '@/pages/api/mock';
 import CommunityLayout from '@/components/layout/communityLayout';
+import { useSession } from 'next-auth/react';
 
 function WriteMe() {
+  const { data: session } = useSession();
+  
   return (
     <CommunityLayout
-      communityData={myCommunityCard}
       isSelected="내 글 보기"
       kebab={true}
+      memberId={session?.memberId}
     />
   );
 }

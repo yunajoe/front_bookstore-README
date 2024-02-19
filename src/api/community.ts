@@ -8,7 +8,7 @@ import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //커뮤니티 글 전체조회, 내가쓴글 조회,
-const getCommunity = async (option: GetCommunityOption) => {
+export const getCommunity = async (option: GetCommunityOption) => {
   const { memberId, params } = option;
   const result = await instance.get(
     `community${memberId ? `/${memberId}` : ''}`,
@@ -16,7 +16,7 @@ const getCommunity = async (option: GetCommunityOption) => {
       params,
     },
   );
-  return result.data;
+  return result.data.data;
 };
 
 export const useGetCommunity = (option: GetCommunityOption) => {

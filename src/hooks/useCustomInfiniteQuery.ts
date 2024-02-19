@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { GetNextPageParamFunction, InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 
 interface useCustomInfiniteQueryProps {
-  endpoint: string;
+  endpoint?: string;
   queryKey: string[];
   queryFunc: any;
   cursorName: string;
@@ -24,8 +24,8 @@ function useCustomInfiniteQuery({
   cursorName,
   initialCursorId = 1,
   limit = 10,
-  sort="NEWEST",
-  ascending = false,
+  sort,
+  ascending,
   refetchTrigger = false,
   getNextPageParamsFunc,
   selectFunc,
@@ -38,9 +38,9 @@ function useCustomInfiniteQuery({
     data
   } = useInfiniteQuery({
     queryKey: [...queryKey],
-    queryFn: ({pageParam = initialCursorId}) => {
+    queryFn: ({ pageParam = initialCursorId }) => {
       return queryFunc({
-        endpoint: `${endpoint}`, params: {
+        endpoint: `${endpoint ? `${ endpoint }` :null}`, params: {
           [cursorName]: String(pageParam),
           limit: String(limit),
           sort: String(sort),
