@@ -20,7 +20,7 @@ function CommunityCardList({ communityData, kebab }: CommunityCardListProps) {
                   key={card?.bookInfo.bookId}
                   profileImg={card?.writer?.profileImg}
                   userNickname={card?.writer.nickname}
-                  createAt={card?.createDate}
+                  createAt={card?.createDate.split('T')[0].replace(/-/g, '.')}
                   bookCover={card?.bookInfo.bookImgUrl}
                   bookTitle={card?.bookInfo.bookTitle}
                   review={card?.content}

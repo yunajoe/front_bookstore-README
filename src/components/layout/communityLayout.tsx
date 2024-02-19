@@ -3,7 +3,7 @@ import PageTab from '@/components/header/pageTab';
 import CommunityCardList from '@/components/card/communityCard/communityCardList';
 import useInfinite from '@/hooks/useInfinite';
 import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
-import { getCommunity} from '@/api/community';
+import { getCommunity } from '@/api/community';
 
 interface CommunityLayoutProps {
   isSelected: string;
@@ -16,18 +16,19 @@ function CommunityLayout({
   kebab,
   memberId,
 }: CommunityLayoutProps) {
-    const [ref, isIntersecting] = useInfinite();
-    const { data, hasNextPage } = useCustomInfiniteQuery({
-      endpoint: `${isSelected === '내 글 보기' ? `${memberId}` : null}`,
-      queryKey: ['community', `${memberId}`],
-      queryFunc: getCommunity,
-      initialCursorId: 0,
-      limit: 9,
-      cursorName: 'cursorId',
-      getNextPageParamsFunc: (lastPage) => lastPage.cursorId === -1 ? undefined : lastPage.cursorId,
-      refetchTrigger: isIntersecting,
-    });
-  
+  const [ref, isIntersecting] = useInfinite();
+  const { data, hasNextPage } = useCustomInfiniteQuery({
+    endpoint: `${memberId}`,
+    queryKey: ['community', `${memberId}`],
+    queryFunc: getCommunity,
+    initialCursorId: 0,
+    limit: 12,
+    cursorName: 'cursorId',
+    getNextPageParamsFunc: (lastPage) =>
+      lastPage.cursorId === -1 ? undefined : lastPage.cursorId,
+    refetchTrigger: isIntersecting,
+  });
+
   return (
     <MainLayout>
       <div className="mb-198 flex flex-col">
