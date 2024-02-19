@@ -19,6 +19,7 @@
   --gray-6: 232 232 232;
   --primary: 31 65 114;
   --secondary: 255 150 150;
+  --light-pink: 250 243 243;
 }
 
 @layer utilities {
