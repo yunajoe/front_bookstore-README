@@ -9,7 +9,14 @@ export interface CommunityCardsProps {
   kebab?:boolean
 }
 
-export interface CommunityCardProps {
+export interface CommunityPagesProps {
+  cards: CommunityCardsProps[];
+  cursorId: number;
+  limit: number;
+  total :number;
+}
+
+interface CommunityCardProps {
   profileImg :string;
   userNickname : string;
   createAt: string;

@@ -1,8 +1,8 @@
-import { CommunityCardsProps } from '@/types/communityCardType';
+import { CommunityPagesProps, CommunityCardsProps } from '@/types/communityCardType';
 import CommunityCard from './communityCard';
 
 interface CommunityCardListProps {
-  communityData: CommunityCardsProps[];
+  communityData: CommunityPagesProps[];
   kebab?: boolean;
 }
 
@@ -12,7 +12,7 @@ function CommunityCardList({ communityData, kebab }: CommunityCardListProps) {
       {communityData?.map((data, index) => {
         return (
           <div key={index}>
-            {data?.cards.map((card) => {
+            {data?.cards.map((card : CommunityCardsProps) => {
               return (
                 <CommunityCard
                   key={card?.bookInfo.bookId}
