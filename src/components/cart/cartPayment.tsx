@@ -83,7 +83,7 @@ function CartPayment({
       </div>
       <div className="bottom-0 left-0 w-full bg-white mobile:fixed mobile:px-15 mobile:py-10">
         <button
-          className="w-full rounded-[5px] bg-green py-15 text-center text-white"
+          className="bg-primary w-full rounded-[5px] py-15 text-center text-white"
           onClick={() => {
             selectedItemArr.length > 0
               ? handleMovePayMentPage()

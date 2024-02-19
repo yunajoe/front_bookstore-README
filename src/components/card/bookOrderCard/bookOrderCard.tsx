@@ -49,13 +49,13 @@ function BookOrderCard({ book, order }: BookOrderType) {
           mobile:right-0">
         {order.deliveryStatus !== '구매 확정' && (
           <button
-            className="flex-center text-primary h-40 w-130 rounded-md border-2 border-green bg-white
+            className="flex-center text-primary border-primary h-40 w-130 rounded-md border-2 bg-white
           mobile:w-full">
             교환/환불
           </button>
         )}
         <button
-          className="flex-center h-40 w-130 rounded-md border-2 border-green bg-green text-white
+          className="flex-center border-primary bg-primary h-40 w-130 rounded-md border-2 text-white
             mobile:w-full">
           리뷰쓰기
         </button>

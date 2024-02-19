@@ -31,7 +31,7 @@ function BookDetailNav({
       <div
         className={`${
           location === 'information'
-            ? 'flex-center h-full border-b-[3px] border-green'
+            ? 'flex-center border-primary h-full border-b-[3px]'
             : 'border-none'
         }`}>
         <button
@@ -44,7 +44,7 @@ function BookDetailNav({
       <div
         className={`${
           location === 'review'
-            ? 'flex-center h-full border-b-[3px] border-green'
+            ? 'flex-center border-primary h-full border-b-[3px]'
             : 'border-none'
         }`}>
         <button
@@ -62,7 +62,7 @@ function BookDetailNav({
       <div
         className={`${
           location === 'currency'
-            ? 'flex-center h-full border-b-[3px] border-green'
+            ? 'flex-center border-primary h-full border-b-[3px]'
             : 'border-none'
         }`}>
         <button

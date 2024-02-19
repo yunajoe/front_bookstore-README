@@ -117,7 +117,7 @@ function CustomPage() {
                     </div>
                     <div>선호 장르 분석을 통해 도서를 추천해드려요</div>
                   </div>
-                  <div className="text-primary rounded-[5px] border-2 border-green bg-white px-45 py-13">
+                  <div className="text-primary border-primary rounded-[5px] border-2 bg-white px-45 py-13">
                     <Link href="/mypage/setting/selectGenre">
                       선호 장르 선택하러 가기
                     </Link>

@@ -84,7 +84,7 @@ function SignIn() {
             <label htmlFor="loginSaved " className="flex-center mb-40 gap-x-8">
               <div
                 onClick={() => setIsClick(!isClick)}
-                className={`flex-center ${isClick ? 'bg-green' : ''} h-20 w-20 cursor-pointer rounded-full
+                className={`flex-center ${isClick ? 'bg-primary' : ''} h-20 w-20 cursor-pointer rounded-full
                   border-2 border-solid border-gray-1`}>
                 {isClick && (
                   <Image

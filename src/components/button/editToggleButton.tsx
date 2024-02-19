@@ -6,7 +6,7 @@ interface EditToggleButtonProps {
 function EditToggleButton({ isEditMode, onClick }: EditToggleButtonProps) {
   const buttonStyle = 'w-134 h-40 rounded-[5px] flex-center';
   const buttonClass = isEditMode
-    ? `${buttonStyle} bg-green text-white`
+    ? `${buttonStyle} bg-primary text-white`
     : `${buttonStyle} bg-white border text-primary`;
 
   return (

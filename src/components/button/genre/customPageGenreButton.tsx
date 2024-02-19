@@ -20,8 +20,8 @@ function CustomPageGenreButton({
   return (
     <button
       className={`text-13 flex-center h-33 w-fit whitespace-nowrap rounded-[53px] border ${
-        selected ? 'text-primary border-green' : 'border-gray-1'
-      } pc:text-14 ${editMode ? 'desktop:hover:border-green desktop:hover:text-primary tablet:hover:text-primary tablet:hover:border-green' : ''}`}
+        selected ? 'text-primary border-primary' : 'border-gray-1'
+      } pc:text-14 ${editMode ? 'desktop:hover:border-primary desktop:hover:text-primary tablet:hover:text-primary tablet:hover:border-primary' : ''}`}
       onClick={handleClick}>
       <div className="mx-30">{title}</div>
     </button>
