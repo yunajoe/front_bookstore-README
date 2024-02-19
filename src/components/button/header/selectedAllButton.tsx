@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import GreenArrowRightIcon from '@/public/icons/GreenRightArrow.svg';
+import PrimaryArrowRightIcon from '@/public/icons/PrimaryArrowRight.svg';
 interface SelectedAllButtonProps {
   selectedCategory: string;
   selectedAll: string;
@@ -20,7 +20,7 @@ function SelectedAllButton({
         <p className="text-13 text-primary">
           {selectedAll}
           <Image
-            src={GreenArrowRightIcon}
+            src={PrimaryArrowRightIcon}
             alt="전체보기 화살표"
             width={8}
             height={13}
@@ -33,7 +33,7 @@ function SelectedAllButton({
         className="text-primary bg-white text-[13px] tablet:hidden pc:hidden">
         전체
         <Image
-          src={GreenArrowRightIcon}
+          src={PrimaryArrowRightIcon}
           alt="전체보기 화살표"
           width={8}
           height={13}

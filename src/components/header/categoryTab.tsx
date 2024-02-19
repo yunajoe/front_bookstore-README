@@ -25,9 +25,9 @@ function CategoryTab() {
   const getButtonStyle = (categoryType: string) => ({
     borderBottom:
       selectedCategory === categoryType
-        ? '2px solid green'
+        ? '2px solid primary'
         : '2px solid transparent',
-    color: selectedCategory === categoryType ? 'green' : 'black',
+    color: selectedCategory === categoryType ? 'primary' : 'black',
     marginBottom: '-22px',
     '@screen tablet': {
       marginBottom: '-33px',
