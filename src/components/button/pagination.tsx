@@ -4,7 +4,13 @@ import PrevPageIcon from '@/public/icons/PrevIcon.svg';
 import NextPageIcon from '@/public/icons/NextIcon.svg';
 import usePagination from '@/hooks/usePagination';
 
-function Pagination({ totalCount, standard }: { totalCount: number; standard: number; }) {
+function Pagination({
+  totalCount,
+  standard,
+}: {
+  totalCount: number;
+  standard: number;
+}) {
   const {
     pageArrays,
     currentPage,
@@ -23,15 +29,15 @@ function Pagination({ totalCount, standard }: { totalCount: number; standard: nu
           width={22}
           height={22}
           onClick={goToPrevPageArray}
-          style={{cursor:'pointer'}}
+          style={{ cursor: 'pointer' }}
         />
       )}
-      <div className="flex-center gap-20 w-200">
+      <div className="flex-center w-200 gap-20">
         {pageArrays[currentPageArrayIndex]?.map((page) => (
           <span
             key={page + 1}
             className={`${currentPage === page ? 'text-green' : 'text-gray-4'}`}
-            style={{cursor:'pointer'}}
+            style={{ cursor: 'pointer' }}
             onClick={() => changeCurrentPage(page)}>
             {page}{' '}
           </span>
@@ -44,7 +50,7 @@ function Pagination({ totalCount, standard }: { totalCount: number; standard: nu
           width={22}
           height={22}
           onClick={goToNextPageArray}
-          style={{cursor:'pointer'}}
+          style={{ cursor: 'pointer' }}
         />
       )}
     </div>

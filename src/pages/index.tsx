@@ -8,7 +8,7 @@ import TodayBestSection from '@/components/container/todayBestSection/todayBestS
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 function Home() {
-  const { data } = useGetBook({
+  const { data: newest } = useGetBook({
     endpoint: '0/main',
     params: {
       bookId: '0',
@@ -18,7 +18,19 @@ function Home() {
     },
   });
 
-  const bookList: Array<BookData> = data ? data.data.books : [];
+  const newestList: Array<BookData> = newest ? newest.data.books : [];
+
+  const { data: bestsellers } = useGetBook({
+    endpoint: '0/main',
+    params: {
+      bookId: '0',
+      limit: '10',
+      sort: 'BESTSELLER',
+      ascending: false,
+    },
+  });
+
+  const bestList: Array<BookData> = bestsellers ? bestsellers.data.books : [];
 
   return (
     <>
@@ -37,11 +49,11 @@ function Home() {
       </div>
       <CustomSection isLoggedIn={true} isGenreSelected={true} />
       <div className="mt-80 mobile:mb-80 tablet:mb-120 pc:mb-140">
-        <Carousel data={bookList} responsive={responsive} />
+        <Carousel data={newestList} responsive={responsive} />
       </div>
 
       <TodayBestSection />
-      <BestSellerSection />
+      <BestSellerSection page="main" bookList={bestList} />
     </>
   );
 }

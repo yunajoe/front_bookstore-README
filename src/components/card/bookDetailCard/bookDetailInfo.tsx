@@ -6,6 +6,7 @@ import BookRating from '@/components/book/bookRating/bookRating';
 import LikeButton from '@/components/button/likeButton';
 import Spacing from '@/components/container/spacing/spacing';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
+import useFormatDate from '@/hooks/useFormatDate';
 
 interface BookDetailInfoProps {
   bookTitle: string;
@@ -32,18 +33,17 @@ function BookDetailInfo({
   reviewCount,
   price,
 }: BookDetailInfoProps) {
-
-  const handleBookmarkClick = () => {
-  };
+  const customedPublishedDate = useFormatDate(publishedDate);
+  const handleBookmarkClick = () => {};
 
   return (
     <article
       role="info"
-      className="flex flex-col max-w-[525px] justify-start items-start grow mobile:w-full">
+      className="flex max-w-[525px] grow flex-col items-start justify-start mobile:w-full">
       <BookCategory categories={categories} />
       <Spacing height={[4, 4, 4]} />
-      <div className="flex justify-between items-center w-full gap-20">
-        <h3 className="font-bold text-[22px] text-gray-4 text-pretty">
+      <div className="flex w-full items-center justify-between gap-20">
+        <h3 className="text-pretty text-[22px] font-bold text-gray-4">
           {bookTitle}
         </h3>
         <div className="flex justify-center gap-24">
@@ -56,25 +56,27 @@ function BookDetailInfo({
             />
             {bookmarkCount}
           </div>
-          <button className="relative w-30 h-30">
+          <button className="relative h-30 w-30">
             <Image src="/icons/ShareIcon.svg" fill alt="공유 버튼" />
           </button>
         </div>
       </div>
       <Spacing height={[12, 12, 12]} />
       <BookAuthor authorList={authors} />
-      <div className="h-[1px] w-full bg-gray-1 max-w-[525px] my-20 mobile:my-12"></div>
+      <div className="my-20 h-[1px] w-full max-w-[525px] bg-gray-1 mobile:my-12"></div>
       <div className="text-14 text-gray-3">
-        {publisher} | {publishedDate}
+        {publisher} | {customedPublishedDate}
       </div>
       <Spacing height={[12, 12, 12]} />
 
       <div role="rating" className="flex gap-6">
         <BookRating rating={averageRating} size="md" />
-        <span className="relative top-12 text-gray-3 text-14">
+        <span className="relative top-12 text-14 text-gray-3">
           ({reviewCount})
         </span>
-        <span className="text-green font-bold text-[24px]">{averageRating}</span>
+        <span className="text-[24px] font-bold text-green">
+          {averageRating}
+        </span>
       </div>
       <Spacing height={[12, 12, 12]} />
       <BookPrice

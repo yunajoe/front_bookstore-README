@@ -22,7 +22,7 @@ function Home() {
       </div>
       <CustomSection isLoggedIn={true} isGenreSelected={true} />
       <TodayBestSection />
-      <BestSellerSection />
+      <BestSellerSection page={'main'} />
       <Footer />
     </>
   );

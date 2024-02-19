@@ -80,8 +80,10 @@ export default function BookDetailPage() {
             {location === 'information' && <BookInformation />}
             {location === 'review' && (
               <Review
-                reviewNum={data?.data?.reviewCount}
-                reviewList={data?.data?.reviews}
+                bookId={bookId as string}
+                ratingDist={data?.data.ratingDist}
+                averageRating={data?.data.averageRating}
+                reviewCount={data?.data.reviewCount}
               />
             )}
             {location === 'currency' && <RefundTerm />}

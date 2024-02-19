@@ -14,8 +14,8 @@ TODO
 function ShippingAddressSection() {
   const [isDefault, setIsDefault] = useState(true);
 
-  const handleOptionChange = (event: { target: { value: string } }) => {
-    setIsDefault(event.target.value === 'default');
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsDefault(event.target.id === 'defaultAddress');
   };
 
   return (

@@ -1,7 +1,7 @@
 import BookPaymentCardList from '@/components/card/bookPaymentCard/bookPaymentCardList';
 import InfoCard from '@/components/card/infoCard';
 import TitleContentCard from '@/components/card/titleContentCard';
-import { bookOrderTestData } from '@/pages/api/mock/bookOrderMock';
+import { bookOrderTestData2} from '@/pages/api/mock/bookOrderMock';
 import { DELIVERY_INFO, PAYMENT_INFO } from 'src/constants/payment';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
 
@@ -34,16 +34,17 @@ function OrderCompletedSection() {
             titleData={PAYMENT_INFO}
             contentData={PcontentData}
           />
-          <BookPaymentCardList
-            bookData={bookOrderTestData.orderData[0].bookData}
-            label="주문상품"
-          />
-          <div className="pc:hidden w-full">
-            <TotalPriceCard checkbox={false} button={false} color='text-green' />
+          <BookPaymentCardList bookData={bookOrderTestData2} label="주문상품" />
+          <div className="w-full pc:hidden">
+            <TotalPriceCard
+              checkbox={false}
+              button={false}
+              color="text-green"
+            />
           </div>
         </div>
-        <div className="mobile:hidden tablet:hidden pc:mt-47 pc:h-screen w-full">
-          <TotalPriceCard checkbox={false} button={false} color='text-green'/>
+        <div className="w-full mobile:hidden tablet:hidden pc:mt-47 pc:h-screen">
+          <TotalPriceCard checkbox={false} button={false} color="text-green" />
         </div>
       </div>
     </div>

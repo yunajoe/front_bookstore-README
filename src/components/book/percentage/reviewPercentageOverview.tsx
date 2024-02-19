@@ -12,7 +12,13 @@ function ReviewPercentageOverview({
   reviewNum,
   ratingDist,
 }: ReviewOverviewCardProps) {
-  const major = Math.round(rating);
+  const major = Math.max(
+    ratingDist[0],
+    ratingDist[1],
+    ratingDist[2],
+    ratingDist[3],
+    ratingDist[4],
+  );
   return (
     <div className="flex flex-col gap-13 mobile:gap-9">
       {ratingDist.map((el, ind) => {
@@ -24,8 +30,8 @@ function ReviewPercentageOverview({
             </div>
             <Percentage num={el} total={reviewNum} />
             <div
-              className={`text-12 text-gray-2 ${major === ind + 1 ? 'font-bold text-green' : ''}`}>
-              {reviewNum === 0 ? 0 : (el * 100) / reviewNum} %
+              className={`text-12 text-gray-2 ${major === el ? 'font-bold text-green' : ''}`}>
+              {reviewNum === 0 ? 0 : Math.floor((el * 100) / reviewNum)} %
             </div>
           </div>
         );
