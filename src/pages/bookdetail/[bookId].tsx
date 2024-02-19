@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
-import { useGetBook } from '@/api/book';
+import { useGetBook, usePutBook } from '@/api/book';
 import MainLayout from '@/components/layout/mainLayout';
 import BookDetailCard from '@/components/card/bookDetailCard/bookDetailCard';
 import BookDetailNav from '@/components/button/bookDetailNav';
@@ -29,6 +30,17 @@ export default function BookDetailPage() {
       bookId: String(bookId),
     },
   });
+
+  // 로그인 한 상태라면 조회수 1 증가
+  const { status } = useSession();
+  const { mutate } = usePutBook({
+    bookId: Number(bookId),
+  });
+  useEffect(() => {
+    if (status === 'authenticated') {
+      mutate();
+    }
+  }, [status]);
 
   return (
     <MainLayout>
