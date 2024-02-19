@@ -36,12 +36,12 @@ export const usePostCommunity = (data: PostCommunityData) => {
 };
 
 //글 삭제
-const deleteCommunity = async (communityId: number) => {
+const deleteCommunity = async (communityId?: number) => {
   const result = await instance.delete(`community/${communityId}`);
   return result.data;
 };
 
-export const useDeleteCommunity = (communityId: number) => {
+export const useDeleteCommunity = (communityId?: number) => {
   return useDelete(deleteCommunity, communityId);
 };
 

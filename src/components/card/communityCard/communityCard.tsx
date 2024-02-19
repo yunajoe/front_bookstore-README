@@ -5,6 +5,7 @@ import { CommunityCardProps } from '@/types/communityCardType';
 import NoProfileImg from '@/public/icons/Noprofile.svg';
 
 function CommunityCard({
+  communityId,
   profileImg,
   userNickname,
   createAt,
@@ -25,7 +26,7 @@ function CommunityCard({
           <p className="text-14 font-bold text-gray-4">{userNickname}</p>
           <p className="text-12 font-normal text-gray-3">{createAt}</p>
         </div>
-        {kebab && <KebabButton title1="수정하기" title2="삭제하기" />}
+        {kebab && <KebabButton title1="수정하기" title2="삭제하기" id={communityId} />}
       </div>
       <div className="flex-center h-180 w-full bg-gray-5 overflow-hidden">
         <Image

@@ -17,6 +17,7 @@ export interface CommunityPagesProps {
 }
 
 export interface CommunityCardProps {
+  communityId: number;
   profileImg: string;
   userNickname: string;
   createAt: string;
