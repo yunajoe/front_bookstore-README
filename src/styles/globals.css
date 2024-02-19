@@ -18,6 +18,7 @@
   --gray-5: 245 245 245;
   --gray-6: 232 232 232;
   --primary: 31 65 114;
+  --secondary: 255 150 150;
 }
 
 @layer utilities {
