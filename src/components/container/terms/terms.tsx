@@ -52,7 +52,7 @@ function TermsCheckbox({
   return (
     <div className="w-full">
       {title && <span className="inline-block pb-8 font-bold">{title}</span>}
-      <div className="relative flex h-48 items-center gap-8 border-0 border-b-[1px] border-b-[#DBDBDB]">
+      <div className="relative flex h-48 items-center gap-8 border-0 border-b-[1px] border-b-gray-1">
         <label htmlFor="selectAll" className="font-medium text-15">
           <Image
             src={CheckIcon}
