@@ -17,7 +17,7 @@ function SelectedAllButton({
   return (
     <div className="flex tablet:mt-10 pc:mt-10">
       <Link href={`/${selectedCategory}`} className="bg-white mobile:hidden">
-        <p className="text-13 text-green">
+        <p className="text-13 text-primary">
           {selectedAll}
           <Image
             src={GreenArrowRightIcon}
@@ -30,7 +30,7 @@ function SelectedAllButton({
       </Link>
       <Link
         href={`/${selectedCategory}`}
-        className="bg-white text-[13px] text-green tablet:hidden pc:hidden">
+        className="text-primary bg-white text-[13px] tablet:hidden pc:hidden">
         전체
         <Image
           src={GreenArrowRightIcon}

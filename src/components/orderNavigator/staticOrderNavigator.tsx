@@ -53,8 +53,8 @@ function StaticOrderNavigator({
       </div>
       <div className="flex-center grow gap-10">
         <button
-          className="flex-center h-54 w-full rounded-[5px] border-2 border-green bg-white text-[17px]
-            font-bold text-green"
+          className="flex-center text-primary h-54 w-full rounded-[5px] border-2 border-green bg-white
+            text-[17px] font-bold"
           onClick={handleAddToBasket}>
           장바구니
         </button>

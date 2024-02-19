@@ -39,7 +39,7 @@ function BookOrderCard({ book, order }: BookOrderType) {
         </div>
         <div
           role="delivery-div"
-          className="text-14 text-green mobile:absolute mobile:bottom-65 mobile:right-0">
+          className="text-primary text-14 mobile:absolute mobile:bottom-65 mobile:right-0">
           {order.deliveryStatus}
         </div>
       </div>
@@ -49,7 +49,7 @@ function BookOrderCard({ book, order }: BookOrderType) {
           mobile:right-0">
         {order.deliveryStatus !== '구매 확정' && (
           <button
-            className="flex-center h-40 w-130 rounded-md border-2 border-green bg-white text-green
+            className="flex-center text-primary h-40 w-130 rounded-md border-2 border-green bg-white
           mobile:w-full">
             교환/환불
           </button>

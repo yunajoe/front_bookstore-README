@@ -73,8 +73,8 @@ function CartPayment({
         <span>{totalDiscount.toString().replace(THOUSAND_UNIT, ',')}원</span>
       </div>
       <div className="mb-40 flex justify-between mobile:mb-10">
-        <span className="text-15 font-bold text-green">결제 금액</span>
-        <span className="text-25 font-bold text-green">
+        <span className="text-primary text-15 font-bold">결제 금액</span>
+        <span className="text-25 text-primary font-bold">
           {calculatePaymentFee(totalAmount, totalDiscount)
             .toString()
             .replace(THOUSAND_UNIT, ',')}

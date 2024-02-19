@@ -50,7 +50,7 @@ function SignIn() {
   return (
     <div className="flex-center min-h-dvh w-full bg-white">
       <div className="flex max-w-300 flex-1 flex-col items-center">
-        <Link href="/" className="mb-57 text-24 font-bold text-green">
+        <Link href="/" className="text-primary mb-57 text-24 font-bold">
           Read Me
         </Link>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
@@ -102,7 +102,7 @@ function SignIn() {
         </form>
         <div className="mb-40 mt-20 flex gap-x-4">
           <p className="text-gray-3">아이디가 없으신가요?</p>
-          <Link href="/signup" className="font-normal text-green">
+          <Link href="/signup" className="text-primary font-normal">
             회원가입
           </Link>
         </div>

@@ -73,8 +73,8 @@ function FooterOrderNavitgator({
           />
         </div>
         <button
-          className="flex-center h-50 w-135 rounded-[5px] border-2 border-green bg-white text-[17px]
-            font-bold text-green mobile:hidden"
+          className="flex-center text-primary h-50 w-135 rounded-[5px] border-2 border-green bg-white
+            text-[17px] font-bold mobile:hidden"
           onClick={handleAddToBasket}>
           장바구니
         </button>

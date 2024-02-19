@@ -56,14 +56,14 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
         mobile:flex-col tablet:h-[665px] tablet:flex-col pc:gap-x-20">
       <Link
         href="/custom"
-        className="absolute right-60 top-20 flex text-green tablet:top-60 pc:hidden">
+        className="text-primary absolute right-60 top-20 flex tablet:top-60 pc:hidden">
         더보기
       </Link>
       <div
         className="flex-center mt-80 w-314 flex-col mobile:mx-auto mobile:mt-50 tablet:mx-auto
           tablet:h-244 pc:h-342 pc:w-347">
         <div className="mb-8 text-24 font-bold">
-          <span className="text-green">맞춤도서</span>를 가져왔어요
+          <span className="text-primary">맞춤도서</span>를 가져왔어요
         </div>
         <div className="mb-30 text-gray-4 mobile:mb-20">
           선호 장르 분석을 통해 도서를 추천해요
