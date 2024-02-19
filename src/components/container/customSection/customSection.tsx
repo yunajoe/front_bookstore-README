@@ -52,7 +52,7 @@ function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
 
   return (
     <div
-      className="flex-center relative h-500 w-full bg-gray-1 mobile:h-[886px]
+      className="flex-center bg-pink relative h-500 w-full mobile:h-[886px]
         mobile:flex-col tablet:h-[665px] tablet:flex-col pc:gap-x-20">
       <Link
         href="/custom"
