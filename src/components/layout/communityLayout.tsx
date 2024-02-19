@@ -1,6 +1,6 @@
 import MainLayout from '@/components/layout/mainLayout';
 import PageTab from '@/components/header/pageTab';
-import CommunityCardList from '../card/communityCard/communityCardList';
+import CommunityCardList from '@/components/card/communityCard/communityCardList';
 import useInfinite from '@/hooks/useInfinite';
 import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
 import { getCommunity} from '@/api/community';
@@ -17,13 +17,14 @@ function CommunityLayout({
   memberId,
 }: CommunityLayoutProps) {
     const [ref, isIntersecting] = useInfinite();
-    const { data } = useCustomInfiniteQuery({
+    const { data, hasNextPage } = useCustomInfiniteQuery({
       endpoint: `${isSelected === '내 글 보기' ? `${memberId}` : null}`,
       queryKey: ['community', `${memberId}`],
       queryFunc: getCommunity,
       initialCursorId: 0,
+      limit: 9,
       cursorName: 'cursorId',
-      getNextPageParamsFunc: (lastPage) => lastPage.cursorId === -1 ? undefined : lastPage.cursorId ,
+      getNextPageParamsFunc: (lastPage) => lastPage.cursorId === -1 ? undefined : lastPage.cursorId,
       refetchTrigger: isIntersecting,
     });
   
@@ -37,9 +38,11 @@ function CommunityLayout({
           addHref="/community/writeme"
           isSelected={isSelected}
         />
-          <CommunityCardList communityData={data?.pages} kebab={kebab} />
-        <div className="border-1 h-100 w-300 border border-red" ref={ref} />
+        <CommunityCardList communityData={data?.pages} kebab={kebab} />
       </div>
+      <div
+        className={`h-5 w-300 ${hasNextPage ? 'block' : 'hidden'}`}
+        ref={ref}></div>
     </MainLayout>
   );
 }

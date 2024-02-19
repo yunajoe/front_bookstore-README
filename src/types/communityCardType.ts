@@ -6,19 +6,19 @@ export interface CommunityCardsProps {
   updateDate: string;
   emojiInfo: CommunityEmojiInfo;
   writer: CommunityWriter;
-  kebab?:boolean
+  kebab?: boolean;
 }
 
 export interface CommunityPagesProps {
   cards: CommunityCardsProps[];
   cursorId: number;
   limit: number;
-  total :number;
+  total: number;
 }
 
-interface CommunityCardProps {
-  profileImg :string;
-  userNickname : string;
+export interface CommunityCardProps {
+  profileImg: string;
+  userNickname: string;
   createAt: string;
   bookCover: string;
   bookTitle: string;
