@@ -37,7 +37,7 @@ function CommunityLayout({
           addHref="/community/writeme"
           isSelected={isSelected}
         />
-        <CommunityCardList communityData={data?.pages[0].cards} kebab={kebab} />
+          <CommunityCardList communityData={data?.pages} kebab={kebab} />
         <div className="border-1 h-100 w-300 border border-red" ref={ref} />
       </div>
     </MainLayout>
