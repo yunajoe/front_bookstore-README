@@ -91,6 +91,10 @@ export default function BookDetailPage() {
 
           <div className="hidden pc:flex pc:pt-50">
             <SideOrderNavigator
+              bookId={bookId as string}
+              bookImgUrl={data?.data.bookImgUrl ?? '/.'}
+              bookTitle={data?.data.bookTitle}
+              authors={data?.data.authors}
               isBookmarked={false}
               price={data?.data.price ?? 0}
               orderCount={orderCount}
@@ -100,9 +104,12 @@ export default function BookDetailPage() {
         </section>
 
         <FooterOrderNavitgator
+          bookId={bookId as string}
+          bookImgUrl={data?.data.bookImgUrl ?? '/.'}
+          bookTitle={data?.data.bookTitle}
+          authors={data?.data.authors}
           isBookmarked={false}
           price={data?.data.price ?? 0}
-          bookId={bookId as string}
           orderCount={orderCount}
           setOrderCount={setOrderCount}
         />

@@ -1,11 +1,17 @@
 import { useState } from 'react';
-import OrderBookCount from '../cart/orderBookCount';
-import LikeButton from '../button/likeButton';
-import BookPrice from '../book/bookPrice/bookPrice';
+
+import OrderBookCount from '@/components/cart/orderBookCount';
+import LikeButton from '@/components/button/likeButton';
+import BookPrice from '@/components/book/bookPrice/bookPrice';
+import useAddItemBasket from '@/hooks/useAddItemBasket';
+import usePayNowItem from '@/hooks/usePayNowItem';
 
 interface SideOrderNavigatorProps {
   orderCount: number;
   setOrderCount: (s: number) => void;
+  bookImgUrl: string;
+  bookTitle: string;
+  authors: string[];
   price: number;
   bookId: string;
   isBookmarked: boolean;
@@ -16,18 +22,36 @@ function FooterOrderNavitgator({
   setOrderCount,
   price,
   bookId,
+  bookImgUrl,
+  bookTitle,
+  authors,
   isBookmarked,
 }: SideOrderNavigatorProps) {
   const [checkBookmarked, setIsBookmarked] = useState(isBookmarked || false);
+
+  // 구매하기 버튼 함수
+  const { handlePayNowButton } = usePayNowItem({
+    bookId: Number(bookId),
+    bookImgUrl,
+    bookTitle,
+    authors,
+    price,
+    count: orderCount,
+  });
+  //장바구니 버튼 함수
+  const { handleAddToBasket } = useAddItemBasket({
+    bookId: Number(bookId),
+    count: orderCount,
+  });
 
   const handleBookmarkClick = () => {
     setIsBookmarked(!checkBookmarked);
   };
   return (
     <div
-      className="pc:hidden flex justify-between w-full bg-white border-t-[1px] border-gray-5
-        sticky bottom-0 h-70 z-10 px-40 py-10 mobile:px-15">
-      <div className="flex items-center gap-18 justify-between">
+      className="sticky bottom-0 z-10 flex h-70 w-full justify-between
+        border-t-[1px] border-gray-5 bg-white px-40 py-10 mobile:px-15 pc:hidden">
+      <div className="flex items-center justify-between gap-18">
         <div>
           <OrderBookCount
             count={orderCount}
@@ -39,8 +63,8 @@ function FooterOrderNavitgator({
         </div>
         <BookPrice isBold fontSize={20} price={price * orderCount} hasUnit />
       </div>
-      <div className="flex justify-end items-center gap-10 grow">
-        <div className="mobile:hidden w-50 h-50 border-[1px] border-gray-5 rounded-[5px] flex-center">
+      <div className="flex grow items-center justify-end gap-10">
+        <div className="flex-center h-50 w-50 rounded-[5px] border-[1px] border-gray-5 mobile:hidden">
           <LikeButton
             isLiked={checkBookmarked}
             onClick={handleBookmarkClick}
@@ -49,13 +73,15 @@ function FooterOrderNavitgator({
           />
         </div>
         <button
-          className="mobile:hidden bg-white text-green border-2 border-green rounded-[5px] w-135 h-50
-            flex-center font-bold text-[17px]">
+          className="flex-center h-50 w-135 rounded-[5px] border-2 border-green bg-white text-[17px]
+            font-bold text-green mobile:hidden"
+          onClick={handleAddToBasket}>
           장바구니
         </button>
         <button
-          className="bg-green text-white border-2 border-green rounded-[5px] w-135 h-50 flex-center
-            font-bold text-[17px]">
+          className="flex-center h-50 w-135 rounded-[5px] border-2 border-green bg-green text-[17px]
+            font-bold text-white"
+          onClick={handlePayNowButton}>
           구매하기
         </button>
       </div>

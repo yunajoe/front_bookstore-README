@@ -38,11 +38,11 @@ function BookDetailCard({
   setOrderCount,
 }: BookDetailCardProps) {
   return (
-    <section className="flex justify-start gap-20 items-start mobile:flex-col mobile:flex-center">
+    <section className="mobile:flex-center flex items-start justify-start gap-20 mobile:flex-col">
       <BookDetailImg imageUrl={bookImgUrl} />
       <article
         role="info"
-        className="flex flex-col gap-40 mobile:gap-30 justify-start items-start w-full max-w-[525px]">
+        className="flex w-full max-w-[525px] flex-col items-start justify-start gap-40 mobile:gap-30">
         <BookDetailInfo
           bookTitle={bookTitle}
           categories={categories}
@@ -57,6 +57,9 @@ function BookDetailCard({
         />
         <StaticOrderNavigator
           bookId={bookId}
+          bookImgUrl={bookImgUrl}
+          bookTitle={bookTitle}
+          authors={authors}
           price={price}
           orderCount={orderCount}
           setOrderCount={setOrderCount}
