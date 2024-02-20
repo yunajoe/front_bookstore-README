@@ -63,7 +63,6 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
   useEffect(resetCurrentIndex, [env]);
 
-  console.log('aaa', maxPage, currentIndex);
   return (
     <div className="relative w-[1200px] overflow-hidden bg-white mobile:w-360 tablet:w-[768px]">
       <div
