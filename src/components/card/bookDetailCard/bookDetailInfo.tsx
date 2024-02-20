@@ -7,6 +7,7 @@ import LikeButton from '@/components/button/likeButton';
 import Spacing from '@/components/container/spacing/spacing';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import useFormatDate from '@/hooks/useFormatDate';
+import useCopyLink from '@/hooks/common/useCopyLink';
 
 interface BookDetailInfoProps {
   bookTitle: string;
@@ -34,6 +35,7 @@ function BookDetailInfo({
   price,
 }: BookDetailInfoProps) {
   const customedPublishedDate = useFormatDate(publishedDate);
+  const { copyURL } = useCopyLink();
   const handleBookmarkClick = () => {};
 
   return (
@@ -56,7 +58,7 @@ function BookDetailInfo({
             />
             {bookmarkCount}
           </div>
-          <button className="relative h-30 w-30">
+          <button className="relative h-30 w-30" onClick={() => copyURL()}>
             <Image src="/icons/ShareIcon.svg" fill alt="공유 버튼" />
           </button>
         </div>
@@ -74,7 +76,7 @@ function BookDetailInfo({
         <span className="relative top-12 text-14 text-gray-3">
           ({reviewCount})
         </span>
-        <span className="text-primary text-[24px] font-bold">
+        <span className="text-[24px] font-bold text-primary">
           {averageRating}
         </span>
       </div>
