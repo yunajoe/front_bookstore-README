@@ -51,3 +51,20 @@ const putDelivery = async (option: PutDeliveryOption) => {
 export const usePutDelivery = (option: PutDeliveryOption) => {
   return useUpdate(putDelivery, option);
 };
+
+// 회원배송목록조회
+export const getDeliveryList = async () => {
+  const result = await instance.get('delivery');
+  return result.data;
+};
+
+type DeliveryStatus = {
+  deliveryId: number;
+  deliveryStatus: string;
+};
+
+// 회원배송상태변경
+const putDeliveryStatus = async (data: DeliveryStatus) => {
+  const result = await instance.put('delivery', data);
+  return result.data;
+};
