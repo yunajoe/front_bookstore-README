@@ -46,17 +46,18 @@ function CommunityLayout({
             {Array.from({
               length: 6,
             }).map((_, index) => (
-              <SkeletonCommunityCard />
+              <SkeletonCommunityCard key={index}/>
             ))}
           </div>
         ) : (
+            //@ts-ignore
           <CommunityCardList communityData={data?.pages} kebab={kebab} />
         )}
       </div>
       <AddCommunityButton />
       <div
         className={`h-5 w-300 ${hasNextPage ? 'block' : 'hidden'}`}
-        ref={ref}></div>
+        ref={ref}/>
     </MainLayout>
   );
 }
