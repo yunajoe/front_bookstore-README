@@ -4,6 +4,7 @@ import CommunityCardList from '@/components/card/communityCard/communityCardList
 import useInfinite from '@/hooks/useInfinite';
 import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
 import { getCommunity } from '@/api/community';
+import AddCommunityButton from '../button/addcommunityButton';
 
 interface CommunityLayoutProps {
   isSelected: string;
@@ -41,6 +42,7 @@ function CommunityLayout({
         />
         <CommunityCardList communityData={data?.pages} kebab={kebab} />
       </div>
+      <AddCommunityButton />
       <div
         className={`h-5 w-300 ${hasNextPage ? 'block' : 'hidden'}`}
         ref={ref}></div>
