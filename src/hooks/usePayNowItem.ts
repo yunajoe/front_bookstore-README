@@ -25,7 +25,7 @@ function usePayNowItem({bookId, bookImgUrl, bookTitle, price, authors, count=1}:
       bookTitle: bookTitle,
       price: price,
       authors: authors,
-      clicked: count,
+      count: count,
     },
   ];
 
