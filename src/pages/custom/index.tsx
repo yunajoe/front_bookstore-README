@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { filteredBooks } from '@/utils/compareBooks';
 import ToolTip from '@/components/dropDown/toolTip';
 import VacantCustomLayout from '@/components/layout/vacantCustomLayout';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getCustomCategoryList } from '@/api/category';
 import { getRandomBookList } from '@/api/book';
 import Skeleton from '@/components/skeleton/customSkeleton/skeleton';
