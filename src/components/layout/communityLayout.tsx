@@ -14,11 +14,11 @@ interface CommunityLayoutProps {
 function CommunityLayout({
   isSelected,
   kebab,
-  memberId = 1,
+  memberId,
 }: CommunityLayoutProps) {
   const [ref, isIntersecting] = useInfinite();
   const { data, hasNextPage } = useCustomInfiniteQuery({
-    endpoint: `${memberId}`,
+    endpoint: `${memberId ? `${memberId}` : ''}`,
     queryKey: ['community', `${memberId}`],
     queryFunc: getCommunity,
     initialCursorId: 0,

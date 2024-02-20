@@ -28,7 +28,7 @@ function CommunityCard({
         </div>
         {kebab && <KebabButton title1="수정하기" title2="삭제하기" id={communityId} />}
       </div>
-      <div className="flex-center h-180 w-full bg-gray-5 overflow-hidden">
+      <div className="flex-center h-[180px] w-full bg-gray-5 overflow-hidden">
         <Image
           src={bookCover}
           alt="책표지"
@@ -40,7 +40,7 @@ function CommunityCard({
         />
       </div>
       <div className="flex flex-col px-20">
-        <p className="text-16 font-bold text-gray-4 h-48 overflow-hidden">{bookTitle}</p>
+        <p className="text-16 font-bold text-gray-4 h-23 truncate">{bookTitle}</p>
         <p className="h-60 text-14 font-light text-gray-3">{review}</p>
       </div>
       <EmojiButtonContainer />
