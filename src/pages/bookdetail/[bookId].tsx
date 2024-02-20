@@ -35,6 +35,7 @@ export default function BookDetailPage() {
   });
   let bookData = data?.data;
 
+  // 로그인 한 상태라면 찜 여부 체크하기
   const { data: bookmarkData } = useGetIsBookmarked({
     bookId: String(bookId),
     enabled: status === 'authenticated',
