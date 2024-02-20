@@ -35,7 +35,7 @@ function CommunityCard({
           width={0}
           height={0}
           sizes="height:180px"
-          className="h-auto w-auto"
+          className="h-full w-auto"
           priority
         />
       </div>
