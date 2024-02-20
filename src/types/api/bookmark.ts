@@ -7,5 +7,16 @@ export interface BookmarkParams {
 
 export interface postBookmarkPath {
   bookId: number;
-  memberId: number;
+  onSuccess?: (data:any) => void;
+  onSettle?: (data:any) => void;
+  onMutate?: (data:any) => void;
+  onError?: (data:any) => void;
+}
+
+export interface deleteBookmarkPath {
+  bookmarkId: string;
+  onSuccess?: (data:any) => void;
+  onSettle?: (data:any) => void;
+  onMutate?: (data:any) => void;
+  onError?: (data:any) => void;
 }

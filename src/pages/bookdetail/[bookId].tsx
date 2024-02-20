@@ -14,6 +14,7 @@ import Spacing from '@/components/container/spacing/spacing';
 import SideOrderNavigator from '@/components/orderNavigator/sideOrderNavigator';
 import FooterOrderNavitgator from '@/components/orderNavigator/footerOrderNavitgator';
 import SkeletonBookDetailCard from '@/components/skeleton/bookDetailCard/skeleton';
+import useClickLikeButton from '@/hooks/useClickLikeButton';
 
 type BookDetailNavLocationType = 'information' | 'review' | 'currency';
 
@@ -39,6 +40,11 @@ export default function BookDetailPage() {
   const { data: bookmarkData } = useGetIsBookmarked({
     bookId: String(bookId),
     enabled: status === 'authenticated',
+  });
+  const { bookmarkState, handleBookmarkClick } = useClickLikeButton({
+    bookId: String(bookId),
+    bookmarkId: bookmarkData?.bookmarkId ?? -1,
+    isBookmarked: bookmarkData?.marked ?? false,
   });
 
   const { mutate: handleViewCountMutate } = usePutBook({
@@ -66,7 +72,8 @@ export default function BookDetailPage() {
             categories={bookData.categories}
             authors={bookData.authors}
             bookmarkCount={bookData.bookmarkCount}
-            isBookmarked={bookmarkData ?? false}
+            isBookmarked={bookmarkState}
+            handleBookmarkClick={handleBookmarkClick}
             publishedDate={bookData.publishedDate}
             publisher={bookData.publisher}
             averageRating={bookData.averageRating}
@@ -105,7 +112,8 @@ export default function BookDetailPage() {
               bookImgUrl={bookData?.bookImgUrl ?? './'}
               bookTitle={bookData?.bookTitle}
               authors={bookData?.authors}
-              isBookmarked={bookmarkData ?? false}
+              isBookmarked={bookmarkState}
+              handleBookmarkClick={handleBookmarkClick}
               price={bookData?.price ?? 0}
               orderCount={orderCount}
               setOrderCount={setOrderCount}
@@ -118,7 +126,8 @@ export default function BookDetailPage() {
           bookImgUrl={bookData?.bookImgUrl ?? './'}
           bookTitle={bookData?.bookTitle}
           authors={bookData?.authors}
-          isBookmarked={bookmarkData ?? false}
+          isBookmarked={bookmarkState}
+          handleBookmarkClick={handleBookmarkClick}
           price={bookData?.price ?? 0}
           orderCount={orderCount}
           setOrderCount={setOrderCount}
