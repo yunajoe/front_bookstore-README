@@ -35,15 +35,8 @@ function CartPayment({
   const setBasketItemList = useSetAtom(basketItemList);
 
   const handleMovePayMentPage = () => {
-    // selectedItemArr 배열의 각 항목에 clicked 값이 없는 경우 4로 설정
-    const modifiedItemList = selectedItemArr.map((item) => ({
-      ...item,
-      clicked: item.count,
-    }));
-
     // 수정된 배열을 사용하여 setBasketItemList 함수 호출
-    setBasketItemList(modifiedItemList);
-
+    setBasketItemList(selectedItemArr);
     // 페이지 이동
     router.push('/order');
   };
