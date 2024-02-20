@@ -5,6 +5,7 @@ import useInfinite from '@/hooks/useInfinite';
 import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
 import { getCommunity } from '@/api/community';
 import AddCommunityButton from '../button/addcommunityButton';
+import SkeletonCommunityCard from '../skeleton/communityCard/skeleton';
 
 interface CommunityLayoutProps {
   isSelected: string;
@@ -18,7 +19,7 @@ function CommunityLayout({
   memberId,
 }: CommunityLayoutProps) {
   const [ref, isIntersecting] = useInfinite();
-  const { data, hasNextPage } = useCustomInfiniteQuery({
+  const { data, hasNextPage, isRefetching } = useCustomInfiniteQuery({
     endpoint: `${memberId ? `${memberId}` : ''}`,
     queryKey: ['community', `${memberId}`],
     queryFunc: getCommunity,
@@ -29,7 +30,7 @@ function CommunityLayout({
       lastPage.cursorId === -1 ? undefined : lastPage.cursorId,
     refetchTrigger: isIntersecting,
   });
-
+  
   return (
     <MainLayout>
       <div className="mb-198 flex flex-col">
@@ -40,7 +41,17 @@ function CommunityLayout({
           addHref="/community/writeme"
           isSelected={isSelected}
         />
-        <CommunityCardList communityData={data?.pages} kebab={kebab} />
+        {isRefetching ? (
+          <div className="grid auto-rows-auto grid-cols-3 gap-20 mobile:grid-cols-1 tablet:grid-cols-2 mb-20">
+            {Array.from({
+              length: 6,
+            }).map((_, index) => (
+              <SkeletonCommunityCard />
+            ))}
+          </div>
+        ) : (
+          <CommunityCardList communityData={data?.pages} kebab={kebab} />
+        )}
       </div>
       <AddCommunityButton />
       <div
