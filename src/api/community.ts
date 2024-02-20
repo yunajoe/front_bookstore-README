@@ -9,9 +9,9 @@ import { instance } from 'src/libs/instance';
 
 //커뮤니티 글 전체조회, 내가쓴글 조회,
 export const getCommunity = async (option: GetCommunityOption) => {
-  const { memberId, params } = option;
+  const { endpoint, params } = option;
   const result = await instance.get(
-    `community${memberId ? `/${memberId}` : ''}`,
+    `community${endpoint ? `/${endpoint}` : ''}`,
     {
       params,
     },

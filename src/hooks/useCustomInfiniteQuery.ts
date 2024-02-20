@@ -30,6 +30,7 @@ function useCustomInfiniteQuery({
   getNextPageParamsFunc,
   selectFunc,
 }: useCustomInfiniteQueryProps) {
+  console.log(endpoint)
   const { fetchNextPage, isFetchingNextPage, hasNextPage, isRefetching, data } =
     useInfiniteQuery({
       queryKey: [...queryKey],

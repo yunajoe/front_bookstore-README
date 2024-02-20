@@ -14,7 +14,7 @@ interface CommunityLayoutProps {
 function CommunityLayout({
   isSelected,
   kebab,
-  memberId,
+  memberId = 1,
 }: CommunityLayoutProps) {
   const [ref, isIntersecting] = useInfinite();
   const { data, hasNextPage } = useCustomInfiniteQuery({
