@@ -18,7 +18,7 @@ function useCopyLink() {
         .catch(() => {
           notify({
             type: 'error',
-            text: '앗! 다시 시도해주세요. 🥲',
+             text: '앗! 다시 시도해주세요. 🥲',
           });
         });
       }
