@@ -1,4 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
+import { convertDateType } from '@/utils/convertDate';
 import { useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
@@ -52,19 +53,18 @@ export const usePutDelivery = (option: PutDeliveryOption) => {
   return useUpdate(putDelivery, option);
 };
 
-// http://15.165.141.22:8080/delivery?deliveryStatus=ALL&startDate=2024-02-21&endDate=2024-02-21
-// 배송상태값, All, READY,DELIVERING, COMPLETE, EXCHANGE_AND_REFUND,CONFIRM, CANCEL
-// 회원배송목록조회
-export const getDeliveryList = async () =>
-  // deliveryStatus: string,
-  // startData: string,
-  // endDate: string,
-  {
-    const result = await instance.get(
-      'delivery?deliveryStatus=ALL&startDate=2024-02-21&endDate=2024-02-21',
-    );
-    return result.data;
-  };
+export const getDeliveryList = async (
+  startDate: convertDateType,
+  endDate: convertDateType,
+) => {
+  const startDateFormat = `${startDate.year}-${startDate.month < 10 ? `0${startDate.month}` : startDate.month}-${startDate.day < 10 ? `0${startDate.day}` : startDate.day}`;
+  const endDateFormat = `${endDate.year}-${endDate.month < 10 ? `0${endDate.month}` : endDate.month}-${endDate.day < 10 ? `0${endDate.day}` : endDate.day}`;
+
+  const result = await instance.get(
+    `delivery?deliveryStatus=ALL&startDate=${startDateFormat}&endDate=${endDateFormat}`,
+  );
+  return result.data;
+};
 
 type DeliveryStatus = {
   deliveryId: number;

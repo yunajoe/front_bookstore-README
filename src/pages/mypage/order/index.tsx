@@ -9,10 +9,9 @@ import { ORDER_DROPDOWN_MENUS } from '@/constants/ORDER_DROPDOWN_MENUS';
 import { myOrderStatus } from '@/constants/myOrderStatus';
 import { QUERY_KEY } from '@/constants/queryKey';
 import { DeliveryItem, OrderOverViewItem } from '@/types/deliveryType';
+import { convertDate } from '@/utils/convertDate';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-
-// const { orderData } = bookOrderTestData;
 
 function MyOrderPage() {
   const [startDate, setStartDate] = useState(new Date());
@@ -21,10 +20,12 @@ function MyOrderPage() {
   const onSelectedItem = (menu: string) => setSelectedItem(menu);
   const onStartDate = (startDate: Date) => setStartDate(startDate);
   const onEndDate = (endDate: Date) => setEndDate(endDate);
+  const startDateFormat = convertDate(startDate.toString());
+  const endDateFormat = convertDate(endDate.toString());
 
   const getMyOrderQuery = useQuery({
-    queryKey: [QUERY_KEY.delivery],
-    queryFn: () => getDeliveryList(),
+    queryKey: [QUERY_KEY.delivery, startDate.toString(), endDate.toString()],
+    queryFn: () => getDeliveryList(startDateFormat, endDateFormat),
     select: (data) => data.data,
     initialData: { data: [] },
   });
@@ -45,14 +46,12 @@ function MyOrderPage() {
     }
   }, [getMyOrderQuery.data]);
 
-  const person = {
-    id: 1,
-    name: '유저',
-    isPurchased: false,
-    firstPurchasedDate: new Date().toString(),
-  };
-
-  const orderData = getMyOrderQuery?.data?.map((item) => item.orderDto);
+  const orderData = getMyOrderQuery?.data?.map((item: DeliveryItem) => {
+    return {
+      ...item.orderDto,
+      deliveryStatus: item.deliveryStatus,
+    };
+  });
 
   return (
     <MyOrderPageLayout
@@ -65,7 +64,7 @@ function MyOrderPage() {
       }
       orderDate={
         <OrderDate
-          person={person}
+          // person={person}
           pastDate={selectedItem}
           startDate={startDate}
           endDate={endDate}
@@ -76,7 +75,7 @@ function MyOrderPage() {
       }
       overview={<OrderOverView orderView={myOrderList} />}
       main={
-        orderData ? (
+        orderData.length > 0 ? (
           <BookOrderCardList orderData={orderData} />
         ) : (
           <BookOrderEmptyCard />
