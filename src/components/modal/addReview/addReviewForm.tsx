@@ -9,14 +9,14 @@ import { useState } from 'react';
 import { usePostReview } from '@/api/review';
 import { OnClickProps } from '@/types/onClickType';
 
-function AddReviewForm({onClick} : OnClickProps) {
+function AddReviewForm({ onClick }: OnClickProps) {
   const [newRating, setNewRating] = useState(0);
-  const {
-    control,
-    handleSubmit,
-    isButtonActive,
-    onSubmit,
-  } = useFormControl({postFn : usePostReview, option : {required : newRating}, bookId: 35, onClick: onClick});
+  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
+    postFn: usePostReview,
+    option: { required: newRating },
+    bookId: 35,
+    onClick: onClick,
+  });
 
   return (
     <>
@@ -41,7 +41,13 @@ function AddReviewForm({onClick} : OnClickProps) {
             className="flex h-52 w-full items-center justify-start gap-13 mobile:gap-9"
           />
         </div>
-        <Input type='text' title='내용' height="h-274" control={control} name="description" />
+        <Input
+          type="text"
+          title="내용"
+          height="h-274"
+          control={control}
+          name="description"
+        />
       </form>
       <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
         리뷰 작성하기
