@@ -19,7 +19,7 @@ function MyReviewCard({
 }: MyReviewType) {
   const [isSummarized, setIsSummarized] = useState(true);
   return (
-    <div className="flex min-h-140 w-full max-w-[1080px] flex-col mobile:min-h-115 mobile:w-330 ">
+    <div className="flex min-h-140 w-full max-w-[1080px] flex-col mobile:min-h-115 mobile:w-330 tablet:max-w-[710px]">
       <div
         role="card-container"
         className="relative flex justify-start gap-12
@@ -29,17 +29,15 @@ function MyReviewCard({
           <div
             role="book-img"
             className="relative h-102 min-w-102 bg-gray-1 text-center mobile:h-75 mobile:min-w-75">
-            {bookImgUrl ? (
-              <Image src={bookImgUrl} alt="book sample image" layout="fill" />
-            ) : null}
+            <Image src={bookImgUrl} alt="book sample image" layout="fill" />
           </div>
           <div className="flex w-4/5 flex-col items-start justify-start gap-4">
             <BookTitle
               title={bookTitle}
               fontSize={15}
-              classNames="max-w-[860px] w-[90%] truncate whitespace-nowrap"
+              classNames="max-w-[860px] w-[90%] truncate whitespace-nowrap mobile:w-220 line-clam-1"
             />
-            <BookAuthor authorList={[authors]} />
+            <BookAuthor authorList={[authors]} classNames="line-clamp-2" />
             <div className="absolute right-0 top-0 h-18 w-18 mobile:-right-10 mobile:-top-20">
               <KebabButton title1="수정하기" title2="삭제하기" />
             </div>
