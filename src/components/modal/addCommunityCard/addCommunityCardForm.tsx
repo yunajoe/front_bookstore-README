@@ -18,6 +18,7 @@ function AddCommunityCardForm({onClick} : OnClickProps) {
   const [search, setSearch] = useState('');
   const [CurrentPage, setCurrentPage] = useAtom(CurrentPageStateAtom);
 
+  //TODO:pagination데이터 필요
   const handleSearch = (value: string) => {
     setSearch(value);
     setCurrentPage(1);
