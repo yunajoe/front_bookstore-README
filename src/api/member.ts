@@ -47,3 +47,13 @@ const putProfileImage = async (data: ChangeImage) => {
 export const usePutProfileImage = (data: ChangeImage) => {
   return useUpdate(putProfileImage, data);
 };
+
+// 나의 리뷰 조회
+const getMyReviewList = async (id: number) => {
+  const result = await instance.get(`/member/reviews`);
+  return result.data.data;
+};
+
+export const useGetMyReviewList = (id: number) => {
+  return useFetch(QUERY_KEY.member, getMyReviewList, id);
+};
