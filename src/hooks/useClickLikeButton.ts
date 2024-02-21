@@ -10,12 +10,13 @@ function useClickLikeButton({ bookId = "-1", bookmarkId = -1, isBookmarked = fal
   const queryClient = useQueryClient();
 
   // 북마크하는 함수
-  const { mutate: handleCheckBookmarkMutate, isPending } = usePostBookmark({
-    bookId: Number(bookId),
+  const { mutate: handleCheckBookmarkMutate, isPending } = usePostBookmark(
+    Number(bookId),
+    {
     onMutate: () => {
       queryClient.cancelQueries();
     },
-    onSettle: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['bookmark', String(bookId)] });
     },
   });

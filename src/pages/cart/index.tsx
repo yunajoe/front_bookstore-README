@@ -17,10 +17,10 @@ function CartPage() {
   const [selectedItemArr, setSelectedItemArr] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalDiscount, setTotalDisCount] = useState(0);
-  const resetSelectedItemArr = () => setSelectedItemArr([]);
   const { data, isError, isLoading, isSuccess } = useGetBasKetQuery();
   const deleteBasketItemMutation = useDeleteBasketQuery();
 
+  const resetSelectedItemArr = () => setSelectedItemArr([]);
   const calcBookPlusCount = (
     wishList: CartItem[],
     item: CartItem,
@@ -63,16 +63,12 @@ function CartPage() {
   const filteredDataByNotTargetId = (arr: CartItem[], targetId: number) =>
     arr.filter((arrItem) => arrItem.basketId !== targetId);
 
-  const handleDeleteSelectedItems = () => {
+  const handleDeleteSelectedItems = async () => {
     const selectedBookMarkIds = selectedItemArr.map((item) => item.basketId);
-    deleteBasketItemMutation.mutate(selectedBookMarkIds.join(','));
-    const filteredData = wishListData.filter((item) => {
-      return (
-        selectedItemArr
-          .map((picked) => picked.basketId)
-          .indexOf(item.basketId) === -1
-      );
-    });
+    await deleteBasketItemMutation.mutateAsync(selectedBookMarkIds.join(','));
+    const filteredData = wishListData.filter(
+      (item) => !selectedBookMarkIds.includes(item.basketId),
+    );
     setWishListData(filteredData);
     resetSelectedItemArr();
   };
@@ -92,9 +88,10 @@ function CartPage() {
 
   useEffect(() => {
     if (data && isSuccess) {
-      setWishListData(data);
+      setWishListData([...data]);
+      setSelectedItemArr([...data]);
     }
-  }, [data]);
+  }, [isSuccess]);
 
   if (isError) return <div>Error loading data</div>;
 
@@ -169,15 +166,15 @@ function CartPage() {
                     <div
                       className="mx-20 mobile:mx-10"
                       onClick={() => {
-                        setSelectedItemArr((prev) => [...prev, item]);
                         const targetIdx = selectedItemArr.findIndex(
                           (clickedItem) =>
                             clickedItem.basketId === item.basketId,
                         );
-
                         if (targetIdx !== -1) {
                           selectedItemArr.splice(targetIdx, 1);
                           setSelectedItemArr([...selectedItemArr]);
+                        } else {
+                          setSelectedItemArr((prev) => [...prev, item]);
                         }
                       }}>
                       <div className="cursor-pointer">

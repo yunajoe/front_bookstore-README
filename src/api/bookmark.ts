@@ -1,5 +1,10 @@
 import { BookmarkParams, deleteBookmarkPath, postBookmarkPath } from '@/types/api/bookmark';
-import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
+import {
+  useDelete,
+  useFetch,
+  useUpdate,
+  useUpdateType,
+} from '@/utils/reactQuery';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -33,14 +38,21 @@ export const useGetOptionBookmark = (option: {
 };
 
 //찜 하기
-const postBookmark = async (option: postBookmarkPath) => {
-  const { bookId } = option;
+export const postBookmark = async (bookId: number) => {
   const result = await instance.post(`/bookmark/${bookId}`);
   return result.data.data;
 };
 
-export const usePostBookmark = (option: postBookmarkPath) => {
-  return useUpdate(postBookmark, option, option);
+export const usePostBookmark = (
+  bookId: number,
+  { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
+) => {
+  return useUpdate(postBookmark, bookId, {
+    onSuccess,
+    onError,
+    onSettled,
+    onMutate,
+  });
 };
 
 //찜 삭제
