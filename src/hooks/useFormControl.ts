@@ -6,7 +6,7 @@ interface UseFormControl<T> {
   Fn : (data: T) => UseMutationResult<any, Error, void, void>;
   bookId: number;
   option ?:  string | number | boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function useFormControl<T>( {Fn , bookId, option, onClick }: UseFormControl<T>) {

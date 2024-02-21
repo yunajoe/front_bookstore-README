@@ -7,15 +7,16 @@ import useFormControl from '@/hooks/useFormControl';
 import Input from '@/components/input/input';
 import { useState } from 'react';
 import { usePostReview } from '@/api/review';
+import { OnClickProps } from '@/types/onClickType';
 
-function AddReviewForm() {
+function AddReviewForm({onClick} : OnClickProps) {
   const [newRating, setNewRating] = useState(0);
   const {
     control,
     handleSubmit,
     isButtonActive,
     onSubmit,
-  } = useFormControl({Fn : usePostReview, option : newRating, bookId: 35});
+  } = useFormControl({Fn : usePostReview, option : newRating, bookId: 35, onClick: onClick});
 
   return (
     <>
