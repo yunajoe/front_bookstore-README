@@ -1,7 +1,7 @@
 import { BookOverviewType2 } from '@/types/bookOverviewType';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import LikeButton from '@/components/button/likeButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookRating from '@/components/book/bookRating/bookRating';
 import ActionButton from '@/components/button/actionButton';
 import Link from 'next/link';
@@ -14,15 +14,29 @@ import MobileBookOverViewCard from './bookOverviewMobile';
 import { useSetAtom } from 'jotai';
 import { CartItem } from '@/types/cartType';
 import { basketItemList } from '@/store/state';
+import { useUpdateBookmark } from '@/hooks/api/useUpdateBookmark';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setIsLikeCount] = useState(book.bookmarkCount);
+  const [isBookmarked, setIsBookMarked] = useState(book.bookmarks?.marked);
+  const [bookmarkCount, setBookmarkCount] = useState(book.bookmarkCount);
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
   const { addToBasket, isAddToBasketPending } = useAddToBasket({
     bookId: book.bookId,
   });
+
+  const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
+    bookId: book.bookId,
+    onChangeBookmarkCount: () => {
+      if (isBookmarked) {
+        setBookmarkCount((prev) => prev - 1);
+      } else {
+        setBookmarkCount((prev) => prev + 1);
+      }
+    },
+    onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
+  });
+
   const setNowPayItem = useSetAtom(basketItemList);
   const setNowPayItemList: CartItem[] = [
     {
@@ -35,19 +49,15 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     },
   ];
   const handleAddToBookmark = () => {
-    setIsLiked(!isLiked);
-    if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
-    else setIsLikeCount((prevCount) => prevCount - 1);
+    updateBookmark();
   };
 
-  const handleAddToBasket = async () => {
+  const handleAddToBasket = () => {
     addToBasket();
   };
 
   const handleAddForPayment = () => {
     setNowPayItem(setNowPayItemList);
-    //atom에 저장된거 확인했음!
-
     router.push('/order');
   };
 
@@ -69,6 +79,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
             bookId={book.bookId}
           />
         </Link>
+        <div>{book.bookmarks?.marked}</div>
 
         <div
           role="book-info"
@@ -135,8 +146,12 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
           className="flex flex-col items-end gap-30 mobile:absolute mobile:bottom-16 mobile:right-0
             tablet:absolute tablet:right-0">
           <div role="like-button" className="flex-center flex-col gap-2">
-            <LikeButton onClick={handleAddToBookmark} isLiked={isLiked} />
-            <span className="text-12 text-black">{likeCount}</span>
+            <LikeButton
+              onClick={handleAddToBookmark}
+              isLiked={isBookmarked}
+              disabled={isBookmarkPending}
+            />
+            <span className="text-12 text-black">{bookmarkCount}</span>
           </div>
           <div
             role="cart-button"

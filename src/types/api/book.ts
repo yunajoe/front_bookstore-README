@@ -21,7 +21,16 @@ export interface putBookPath {
   bookId: number;
 }
 
-export interface BookData {
+interface BookmarksType {
+  bookmarks: {
+    bookId: number;
+    bookmarkId: number;
+    marked: boolean;
+    memberId: number;
+  };
+}
+
+export interface BookData extends BookmarksType {
   bookId: number;
   bookTitle: string;
   description: string | null;
