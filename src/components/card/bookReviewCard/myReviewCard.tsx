@@ -8,6 +8,7 @@ import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import { MyReviewType } from '@/types/bookReviewType';
 import KebabButton from '@/components/button/kebab/kebabButton';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
+import Link from 'next/link';
 
 function MyReviewCard({
   bookId,
@@ -29,7 +30,9 @@ function MyReviewCard({
           <div
             role="book-img"
             className="relative h-102 min-w-102 bg-gray-1 text-center mobile:h-75 mobile:min-w-75">
-            <Image src={bookImgUrl} alt="book sample image" layout="fill" />
+            <Link href={`/bookdetail/${bookId}`}>
+              <Image src={bookImgUrl} alt="book sample image" layout="fill" />
+            </Link>
           </div>
           <div className="flex w-4/5 flex-col items-start justify-start gap-4">
             <BookTitle
