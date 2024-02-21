@@ -2,7 +2,6 @@ import { QUERY_KEY } from '@/constants/queryKey';
 import {
   GetCommunityOption,
   PostCommunityData,
-  PutCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
 import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';

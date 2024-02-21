@@ -56,7 +56,7 @@ function AddCommunityCardForm({
         name="content"
       />
       <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
-        글쓰기
+        {edit ? '수정하기' : '글쓰기'}
       </RegisterButton>
     </form>
   );
