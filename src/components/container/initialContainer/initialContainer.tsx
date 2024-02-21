@@ -28,10 +28,8 @@ function InitialContainer() {
   return (
     <>
       {loading &&
-        createPortal(
-          <LoadingSpinner />,
-          document.getElementById('portal') as HTMLDivElement,
-        )}
+          <LoadingSpinner />
+        }
     </>
   );
 }

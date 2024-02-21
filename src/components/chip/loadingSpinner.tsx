@@ -5,7 +5,7 @@ import BrandIcon from 'public/icons/BrandName.svg';
 
 function LoadingSpinner() {
   return (
-    <div className="flex-center absolute z-50 h-full w-full">
+    <div className="flex-center absolute z-[999] h-full w-full">
       <div className="flex-center absolute z-30 flex-col gap-10">
         <Image
           src={LogoIcon}
@@ -16,7 +16,7 @@ function LoadingSpinner() {
         />
         <Image src={BrandIcon} alt="브랜드 사진" width={56} height={18} />
       </div>
-      <div className="flex-center h-full w-full bg-black opacity-50"></div>
+      <div className="flex-center h-full w-full bg-white opacity-70"></div>
     </div>
   );
 }
