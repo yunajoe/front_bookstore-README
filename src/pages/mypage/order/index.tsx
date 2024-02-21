@@ -1,4 +1,3 @@
-// alt, shift, o
 import { getDeliveryList } from '@/api/delivery';
 import BookOrderCardList from '@/components/card/bookOrderCard/bookOrderCardList';
 import BookOrderEmptyCard from '@/components/card/bookOrderCard/bookOrderEmptyCard';
@@ -9,7 +8,6 @@ import MyOrderPageLayout from '@/components/layout/myOrderLayOut';
 import { ORDER_DROPDOWN_MENUS } from '@/constants/ORDER_DROPDOWN_MENUS';
 import { myOrderStatus } from '@/constants/myOrderStatus';
 import { QUERY_KEY } from '@/constants/queryKey';
-import { bookOrderTestData } from '@/pages/api/mock/bookOrderMock';
 import { DeliveryItem, OrderOverViewItem } from '@/types/deliveryType';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
