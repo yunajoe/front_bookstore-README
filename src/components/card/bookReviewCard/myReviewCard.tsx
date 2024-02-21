@@ -39,7 +39,7 @@ function MyReviewCard({
             />
             <BookAuthor authorList={[authors]} classNames="line-clamp-2" />
             <div className="absolute right-0 top-0 h-18 w-18 mobile:-right-10 mobile:-top-20">
-              <KebabButton title1="수정하기" title2="삭제하기" />
+              <KebabButton title1="수정하기" title2="삭제하기" id={reviewId} />
             </div>
             <div className="flex-center gap-10 whitespace-nowrap">
               <BookRating rating={5} />
