@@ -7,10 +7,17 @@ import BookRating from '@/components/book/bookRating/bookRating';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import { MyReviewType } from '@/types/bookReviewType';
 import KebabButton from '@/components/button/kebab/kebabButton';
+import BookTitle from '@/components/book/bookTitle/bookTitle';
 
-function MyReviewCard({ book, review }: MyReviewType) {
+function MyReviewCard({
+  bookId,
+  bookImgUrl,
+  bookTitle,
+  authors,
+  content,
+  reviewId,
+}: MyReviewType) {
   const [isSummarized, setIsSummarized] = useState(true);
-
   return (
     <div className="flex min-h-140 w-full max-w-[1080px] flex-col mobile:min-h-115 mobile:w-330 ">
       <div
@@ -22,27 +29,23 @@ function MyReviewCard({ book, review }: MyReviewType) {
           <div
             role="book-img"
             className="relative h-102 min-w-102 bg-gray-1 text-center mobile:h-75 mobile:min-w-75">
-            {book.imageUrl ? (
-              <Image
-                src={book.imageUrl}
-                alt="book sample image"
-                layout="fill"
-              />
+            {bookImgUrl ? (
+              <Image src={bookImgUrl} alt="book sample image" layout="fill" />
             ) : null}
           </div>
           <div className="flex w-4/5 flex-col items-start justify-start gap-4">
-            <div
-              role="book-title"
-              className="min-w-250 truncate whitespace-nowrap text-15 font-normal">
-              {book.title}
-            </div>
-            <BookAuthor authorList={book.authors} />
+            <BookTitle
+              title={bookTitle}
+              fontSize={15}
+              classNames="max-w-[860px] w-[90%] truncate whitespace-nowrap"
+            />
+            <BookAuthor authorList={[authors]} />
             <div className="absolute right-0 top-0 h-18 w-18 mobile:-right-10 mobile:-top-20">
               <KebabButton title1="수정하기" title2="삭제하기" />
             </div>
             <div className="flex-center gap-10 whitespace-nowrap">
-              <BookRating rating={review.reviewRating} />
-              <span className="text-14 text-gray-2">{review.createdAt}</span>
+              <BookRating rating={5} />
+              <span className="text-14 text-gray-2">{'2020-01-02'}</span>
             </div>
             <div
               role="content-div"
@@ -52,13 +55,13 @@ function MyReviewCard({ book, review }: MyReviewType) {
               <div
                 role="content"
                 className={`text-14 text-gray-3 ${isSummarized ? `truncate` : ''}`}>
-                {review.reviewContent}
+                {content}
               </div>
             </div>
             {isSummarized && (
               <button
                 onClick={() => setIsSummarized(false)}
-                className="text-primary absolute bottom-23 right-20 whitespace-nowrap text-14
+                className="absolute bottom-23 right-20 whitespace-nowrap text-14 text-primary
                 mobile:-bottom-3 mobile:right-0">
                 더보기
               </button>
@@ -66,8 +69,8 @@ function MyReviewCard({ book, review }: MyReviewType) {
           </div>
         </div>
       </div>
-      <div className="pt-32">
-        <div className="h-1 w-full border border-gray-1 tablet:hidden pc:hidden"></div>
+      <div className="pt-32  tablet:hidden pc:hidden">
+        <div className="h-1 w-full border border-gray-1"></div>
       </div>
     </div>
   );

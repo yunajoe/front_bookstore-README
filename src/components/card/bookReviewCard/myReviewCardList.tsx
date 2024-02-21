@@ -6,11 +6,19 @@ interface MyReviewCardListProps {
 }
 
 function MyReviewCardList({ myReviewData }: MyReviewCardListProps) {
+  console.log(myReviewData);
   return (
     <div className="flex flex-col gap-20 mobile:gap-25">
       {myReviewData.map((review) => (
         <div className="flex-center">
-          <MyReviewCard book={review.book} review={review.review} />
+          <MyReviewCard
+            authors={review?.authors}
+            bookId={review?.bookId}
+            bookImgUrl={review?.bookImgUrl}
+            bookTitle={review?.bookTitle}
+            content={review?.content}
+            reviewId={review?.reviewId}
+          />
         </div>
       ))}
     </div>

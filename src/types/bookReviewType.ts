@@ -15,8 +15,12 @@ interface ReviewType{
 
 /** 마이페이지/리뷰컴포넌트의 props 타입 */
 interface MyReviewType {
-  book: BookDetailCardType;
-  review: ReviewType;
+  authors: string;
+  bookId: number;
+  bookImgUrl: string;
+  bookTitle: string;
+  content: string;
+  reviewId: number;
 }
 
 /** 책의 전체 리뷰 정보를 받아올 때의 데이터 타입*/
