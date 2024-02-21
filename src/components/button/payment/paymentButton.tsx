@@ -74,8 +74,7 @@ function PaymentButton({ type }: PaymentButtonProps) {
         className="flex-center sticky bottom-0 z-[100] h-70 border-t border-gray-1 bg-white pc:hidden"
         onClick={handlePaymentButtonClick}>
         <div className="flex-center mx-40 h-50 w-full bg-primary text-white">
-          {' '}
-          {totalPrice}원 결제하기
+          {totalPrice.toLocaleString()}원 결제하기
         </div>
       </button>
     );
@@ -83,7 +82,7 @@ function PaymentButton({ type }: PaymentButtonProps) {
     <button
       className="flex-center h-70 w-full border-t border-gray-1 bg-primary  text-white mobile:hidden tablet:hidden"
       onClick={handlePaymentButtonClick}>
-      {totalPrice}원 결제하기
+      {totalPrice.toLocaleString()}원 결제하기
     </button>
   );
 }

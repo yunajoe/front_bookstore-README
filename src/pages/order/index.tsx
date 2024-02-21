@@ -4,7 +4,6 @@ import BookPaymentCardList from '@/components/card/bookPaymentCard/bookPaymentCa
 import { ReactElement } from 'react';
 import MainLayout from '@/components/layout/mainLayout';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
-import Link from 'next/link';
 import { basketItemList } from '@/store/state';
 import { useAtomValue } from 'jotai';
 import PaymentButton from '@/components/button/payment/paymentButton';
