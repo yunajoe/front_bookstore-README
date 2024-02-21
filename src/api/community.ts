@@ -26,7 +26,8 @@ export const useGetCommunity = (option: GetCommunityOption) => {
 //글 등록
 const postCommunity = async (data: PostCommunityData) => {
   const result = await instance.post('community', {
-    data,
+    memberId : data.option,
+    ...data,
   });
   return result.data;
 };

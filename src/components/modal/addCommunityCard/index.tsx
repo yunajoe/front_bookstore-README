@@ -7,7 +7,7 @@ function AddCommunityCard({ onClick }: OnClickProps) {
   return (
     <ModalLayout onClick={onClick} >
       <ModalContainer onClick={onClick} title='글쓰기'>
-        <AddCommunityCardForm/>
+        <AddCommunityCardForm onClick={onClick}/>
       </ModalContainer>
     </ModalLayout>
   );

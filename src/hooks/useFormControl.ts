@@ -1,23 +1,36 @@
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { UseMutationResult } from '@tanstack/react-query';
 
-function useFormControl(option ?:  string | number | boolean) {
-  const { control, handleSubmit, watch } = useForm({ mode: 'onChange' });
+interface UseFormControl<T> {
+  Fn : (data: T) => UseMutationResult<any, Error, void, void>;
+  bookId: number;
+  option ?:  string | number | boolean;
+  onClick: () => void;
+}
+
+function useFormControl<T>( {Fn , bookId, option, onClick }: UseFormControl<T>) {
+  const { control, handleSubmit, watch, getValues } = useForm({ mode: 'onChange' });
   const [isButtonActive, setIsButtonActive] = useState(false);
   const value = Object.values(watch()).every((el) => el);
 
+  const formData = {
+    option,
+    bookId,
+    content : getValues('content')
+  }
+  
+  const mutation = Fn(formData);
+  
+  const onSubmit = () => {
+    mutation.mutate()
+    onClick();
+  };
+
   useEffect(() => {
-    if (value && option) {
-      setIsButtonActive(true)
-    } else {
-      setIsButtonActive(false)
-    } 
+    setIsButtonActive(option ? value && !!option : value);
   }, [option, value])
 
-  //TODO:폼보낼 함수
-  const onSubmit = () => {
-    console.log('폼보내짐')
-  }
   return { control, handleSubmit, isButtonActive, onSubmit}
 }
 

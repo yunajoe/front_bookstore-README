@@ -6,14 +6,17 @@ import { useAtom } from 'jotai';
 import { CurrentPageStateAtom } from '@/store/state';
 import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previewBookInfoPagination';
 import Input from '@/components/input/input';
+import { usePostCommunity } from '@/api/community';
+import { useSession } from 'next-auth/react';
+import { PostCommunityData } from '@/types/api/community';
+import { OnClickProps } from '@/types/onClickType';
 
-function AddCommunityCardForm() {
-  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl();
+
+function AddCommunityCardForm({onClick} : OnClickProps) {
+  const {data:session} = useSession();
+  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl<PostCommunityData>({Fn:usePostCommunity, bookId:35, option:session?.memberId, onClick: onClick});
   const [search, setSearch] = useState('');
   const [CurrentPage, setCurrentPage] = useAtom(CurrentPageStateAtom);
-
-  //TODO : search, CurrentPage값 data fetch때 사용할 예정
-  console.log(search, CurrentPage)
 
   const handleSearch = (value: string) => {
     setSearch(value);
@@ -31,8 +34,8 @@ function AddCommunityCardForm() {
       <div className="flex-center h-323 w-full flex-col gap-22">
         {search && <PreviewBookInfoPagination search={search}/>}
       </div>
-      <Input type='text' title='내용' height="h-100" control={control} name="description" />
-      <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
+      <Input type='text' title='내용' height="h-100" control={control} name="content" />
+      <RegisterButton type="submit" disabled={isButtonActive ? true : false} >
         글쓰기
       </RegisterButton>
     </form>

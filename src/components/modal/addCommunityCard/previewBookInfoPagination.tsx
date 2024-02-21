@@ -15,7 +15,7 @@ function PreviewBookInfoPagination({search} : {search : string}) {
     endpoint: '',
     params: {
       bookId: '0',
-      limit: '6',
+      limit: '4',
       sort: 'POPULATION',
       ascending: false,
       search: search,

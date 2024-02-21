@@ -6,6 +6,7 @@ import LineIcon from '@/public/icons/Line.svg';
 import useFormControl from '@/hooks/useFormControl';
 import Input from '@/components/input/input';
 import { useState } from 'react';
+import { usePostReview } from '@/api/review';
 
 function AddReviewForm() {
   const [newRating, setNewRating] = useState(0);
@@ -14,7 +15,7 @@ function AddReviewForm() {
     handleSubmit,
     isButtonActive,
     onSubmit,
-  } = useFormControl(newRating);
+  } = useFormControl({Fn : usePostReview, option : newRating, bookId: 35});
 
   return (
     <>
