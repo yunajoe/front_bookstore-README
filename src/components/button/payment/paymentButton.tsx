@@ -1,3 +1,4 @@
+import { useGetMember } from '@/api/member';
 import useCalculateProductsPrice from '@/hooks/common/useCalculateProductsPrice';
 import useCalculateTotalPrice from '@/hooks/common/useCalculateTotalPrice';
 import { useRouter } from 'next/router';
@@ -34,6 +35,11 @@ function PaymentButton({ type }: PaymentButtonProps) {
           amount: totalPrice, // 가격
           buyer_email: useremail,
           buyer_name: username,
+          m_redirect_url:
+            window.location.protocol +
+            '//' +
+            window.location.host +
+            '/paymented', //TODO: 모바일 결제 시 이동페이지, 추후 수정
         },
         async function (rsp) {
           if (rsp.success) {
@@ -41,18 +47,6 @@ function PaymentButton({ type }: PaymentButtonProps) {
             console.log(rsp + '결제성공');
             router.push('/paymented');
             //결제 성공시 프로젝트 DB저장 요청
-
-            if (rsp.status === 200) {
-              // DB저장 성공시
-              alert('결제 완료!');
-              window.location.reload();
-            } else {
-              // 결제완료 후 DB저장 실패시
-              alert(
-                `error:[${rsp.status}]\n결제요청이 승인된 경우 관리자에게 문의바랍니다.`,
-              );
-              // DB저장 실패시 status에 따라 추가적인 작업 가능성
-            }
           } else if (rsp.success === false) {
             // 결제 실패시
             alert(rsp.error_msg);
@@ -61,10 +55,10 @@ function PaymentButton({ type }: PaymentButtonProps) {
       );
     }
   }
-
+  const { data } = useGetMember();
   // 결제 함수 호출
   function handlePaymentButtonClick() {
-    const user_email = 'ayjislove@gmail.com';
+    const user_email = data.email;
     const username = '안윤진';
     kakaoPay(user_email, username);
   }
