@@ -18,7 +18,6 @@ function BookMarkedPage() {
     [],
   );
   const [ref, isIntersecting] = useInfinite();
-
   const { data, isError, status, fetchNextPage, hasNextPage } =
     useBookMarkInfiniteQuery();
   const deleteBookMarkItemMutation = useDeleteBookMarkMuation();
@@ -83,7 +82,7 @@ function BookMarkedPage() {
             <div
               className="tablet: grid grid-cols-2 gap-x-20 gap-y-20 mobile:grid-cols-1 mobile:gap-y-10
                       tablet:grid-cols-1">
-              {wishListData.map((item) => {
+              {wishListData.map((item, index) => {
                 const selectedItems = filteredDataByTargetId(
                   selectedItemArr,
                   item.bookmarkId,
@@ -93,14 +92,14 @@ function BookMarkedPage() {
                 )[0];
                 return (
                   <div
-                    key={item.bookmarkId}
+                    key={index}
                     className={`relative flex items-center border-2 pb-43 pr-82 pt-40 ${
                       item.bookmarkId === pickedNum
                         ? 'border-primary'
                         : 'border-gray-1'
                     } rounded-[10px] bg-white`}>
                     <div
-                      className="absolute right-10 right-20 top-20 cursor-pointer mobile:top-10"
+                      className="absolute right-20 top-20 cursor-pointer mobile:top-10"
                       onClick={() => {
                         deleteBookMarkItemMutation.mutate(
                           String(item.bookmarkId),
@@ -109,6 +108,7 @@ function BookMarkedPage() {
                           wishListData,
                           item.bookmarkId,
                         );
+
                         setWishListData(filteredWishListData);
                       }}>
                       <Image
@@ -146,7 +146,11 @@ function BookMarkedPage() {
                       </div>
                     </div>
                     <div className="flex gap-x-20 rounded-[10px]">
-                      <PreviewBookInfo size="sm" image={item.bookImgUrl} />
+                      <PreviewBookInfo
+                        size="sm"
+                        bookId={item.bookId}
+                        image={item.bookImgUrl}
+                      />
                       <div className="mobile:w- flex w-274 flex-col gap-y-8 mobile:w-147">
                         <div className="line-clamp-2 break-all text-15 font-bold text-black">
                           {item.bookTitle}
