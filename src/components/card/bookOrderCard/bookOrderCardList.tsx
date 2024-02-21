@@ -2,7 +2,7 @@ import { OrderBookData } from '@/types/bookOrderType';
 import BookOrderCard from './bookOrderCard';
 import OrderCount from '@/components/container/orderDate/orderCount';
 
-interface BookOrderCardListProps {
+export interface BookOrderCardListProps {
   orderData: OrderBookData[];
 }
 

@@ -1,9 +1,16 @@
 import Image from 'next/image';
 
-// import { BookOrderType } from '@/types/bookOrderType';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
+export type BookOrderCardProps = {
+  bookTitle: string;
+  bookImgUrl: string;
+  bookPrice: number;
+  authors: string;
+  quantity: number;
+  deliveryStatus: string;
+};
 
 function BookOrderCard({
   bookTitle,
@@ -12,9 +19,7 @@ function BookOrderCard({
   authors,
   quantity,
   deliveryStatus,
-}: any) {
-  // if (!bookTitle || !order) return null;
-
+}: BookOrderCardProps) {
   return (
     <div
       role="card-container"
@@ -27,15 +32,17 @@ function BookOrderCard({
           <Image src={bookImgUrl} alt="책 표지 이미지" layout="fill" />
         ) : null}
       </div>
-      <div className="relative flex w-full flex-col items-start justify-start gap-12">
+      <div className="relative flex w-full flex-col items-start justify-start gap-12 truncate">
         <div className="flex w-full flex-col items-start justify-start gap-4">
           <BookTitle
             title={bookTitle}
             fontSize={15}
-            classNames="w-[70vw] truncate whitespace-nowrap"
+            classNames="w-[60vw] truncate whitespace-nowrap"
           />
-          <BookAuthor authorList={[authors]} />
-
+          <BookAuthor
+            authorList={[authors]}
+            classNames="w-[60vw] truncate whitespace-nowrap"
+          />
           <div className="flex gap-8">
             <span className="text-14 text-gray-3">{quantity}개</span>
             <BookPrice

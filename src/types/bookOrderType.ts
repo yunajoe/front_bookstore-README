@@ -10,7 +10,7 @@ export type OrderBookData = {
   orderBook: OrderBook[];
   createTime: string;
   updateTime: string;
-  deliveryStatus?: string;
+  deliveryStatus: string;
 };
 
 export type OrderBook = {
@@ -21,14 +21,4 @@ export type OrderBook = {
   authors: string;
   price: number;
   quantity: number;
-};
-
-//  배송지 정보
-
-export type DeliveryInfo = {
-  deliveryId: number;
-  name: string;
-  phone: string;
-  address: string;
-  message: string;
 };
