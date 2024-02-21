@@ -12,6 +12,7 @@ import Toast from '@/components/toast/toast';
 import 'react-toastify/dist/ReactToastify.css';
 import InitialContainer from '@/components/container/initialContainer/initialContainer';
 import { SessionProvider } from 'next-auth/react';
+import Script from 'next/script';
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,9 @@ export default function App({
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Script async src="https://cdn.iamport.kr/v1/iamport.js" />
+      <Script async src="https://code.jquery.com/jquery-1.12.4.min.js" />
+      <Script async src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" />
       <SessionProvider session={session}>
         <InitialContainer />
         <HydrationBoundary state={pageProps.dehydratedState}>

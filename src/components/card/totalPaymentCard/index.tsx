@@ -5,7 +5,7 @@ import { REQUIRED_FOR_PAYMENT } from 'src/constants/sign';
 import Link from 'next/link';
 import useCalculateTotalPrice from '@/hooks/common/useCalculateTotalPrice';
 import useCalculateProductsPrice from '@/hooks/common/useCalculateProductsPrice';
-
+import PaymentButton from '@/components/button/payment/paymentButton';
 interface TotalPriceCardProps {
   checkbox?: boolean;
   button?: boolean;
@@ -48,11 +48,8 @@ function TotalPriceCard({
           showLastButton={false}
         />
       )}
-      {button && (
-        <Link className="mobile:hidden tablet:hidden" href="/paymented">
-          <RegisterButton>{totalPrice.toString()}원 결제하기</RegisterButton>
-        </Link>
-      )}
+
+      {button && <PaymentButton />}
     </div>
   );
 }
