@@ -12,6 +12,7 @@ function CommunityCard({
   profileImg,
   userNickname,
   createAt,
+  bookId,
   bookCover,
   bookTitle,
   review,
@@ -67,7 +68,7 @@ function CommunityCard({
       </div>
       <EmojiButtonContainer />
       {isEditModalOpen && (
-        <AddCommunityCard onClick={handleEditModalOpenClick} />
+        <AddCommunityCard onClick={handleEditModalOpenClick} communityId={communityId} review={review} bookId={bookId} edit={true}/>
       )}
       {isAlertModalOpen && (
         <AlertModal

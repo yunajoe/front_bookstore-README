@@ -2,6 +2,7 @@ import { QUERY_KEY } from '@/constants/queryKey';
 import {
   GetCommunityOption,
   PostCommunityData,
+  PutCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
 import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
@@ -47,14 +48,15 @@ export const useDeleteCommunity = (communityId?: number) => {
 };
 
 //글 수정
-const putCommunity = async (option: PutCommunityOption) => {
-  const { communityId, data } = option;
-  const result = await instance.put(`community/${communityId}`, {
-    data,
+const putCommunity = async (putFormData: PutCommunityOption ) => {
+  const {option, content} = putFormData
+  
+  const result = await instance.put(`community/${option}`, {
+    content,
   });
   return result.data;
 };
 
-export const usePutCommunity = (option: PutCommunityOption) => {
-  return useUpdate(putCommunity, option);
+export const usePutCommunity = (putFormData : PutCommunityOption ) => {
+  return useUpdate(putCommunity, putFormData);
 };

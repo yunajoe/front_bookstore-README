@@ -30,12 +30,7 @@ export interface PostCommunityData {
   content: any;
 }
 
-export interface PutCommunityData {
-  title: string;
-  content: string;
-}
-
 export interface PutCommunityOption {
-  communityId: number;
-  data : PutCommunityData
+  option: number;
+  content : string;
 }

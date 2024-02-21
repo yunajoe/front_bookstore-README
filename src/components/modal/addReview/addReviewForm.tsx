@@ -16,7 +16,7 @@ function AddReviewForm({onClick} : OnClickProps) {
     handleSubmit,
     isButtonActive,
     onSubmit,
-  } = useFormControl({Fn : usePostReview, option : newRating, bookId: 35, onClick: onClick});
+  } = useFormControl({postFn : usePostReview, option : {required : newRating}, bookId: 35, onClick: onClick});
 
   return (
     <>
