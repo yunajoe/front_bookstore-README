@@ -25,12 +25,12 @@ export interface GetCommunityOption {
 
 export interface PostCommunityData {
   option?:string | number | boolean;
-  bookId: number;
+  bookId?: number;
   title?: string;
-  content: any;
+  content?: any;
 }
 
 export interface PutCommunityOption {
-  option: number;
-  content : string;
+  option?: number;
+  content?: string;
 }

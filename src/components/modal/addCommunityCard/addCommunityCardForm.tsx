@@ -8,7 +8,6 @@ import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previ
 import Input from '@/components/input/input';
 import { usePostCommunity, usePutCommunity } from '@/api/community';
 import { useSession } from 'next-auth/react';
-import { PostCommunityData, PutCommunityOption } from '@/types/api/community';
 import { AddCommunityCardProps } from '.';
 
 function AddCommunityCardForm({
@@ -19,10 +18,7 @@ function AddCommunityCardForm({
   review,
 }: AddCommunityCardProps) {
   const { data: session } = useSession();
-  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl<
-    PostCommunityData,
-    PutCommunityOption
-  >({
+  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
     postFn: usePostCommunity,
     putFn: usePutCommunity,
     edit: edit,
@@ -38,6 +34,7 @@ function AddCommunityCardForm({
   const handleSearch = (value: string) => {
     setSearch(value);
     setCurrentPage(1);
+    console.log(bookId, CurrentPage)
   };
 
   return (
