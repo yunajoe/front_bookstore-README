@@ -52,7 +52,7 @@ function MyReviewCard({
               }`}>
               <div
                 role="content"
-                className={`text-14 text-gray-3 ${isSummarized ? `truncate` : ''}`}>
+                className={`text-14 text-gray-3 ${isSummarized ? `truncate` : 'w-full whitespace-normal break-words'}`}>
                 {content}
               </div>
             </div>

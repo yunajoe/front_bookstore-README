@@ -6,6 +6,8 @@ import SkeletonBookOverviewCard from '@/components/skeleton/bookOverviewCard/ske
 export default function MyReviewPage() {
   const { data, isLoading } = useGetMyReviewList(1);
   let reviewList = data ?? [];
+  console.log(reviewList);
+
   return (
     <MainLayout>
       <div className="mx-auto flex w-full flex-col justify-center px-60 pb-100 mobile:px-15 tablet:px-40">
@@ -13,7 +15,9 @@ export default function MyReviewPage() {
           Array.from({
             length: 5,
           }).map((_, index) => (
-            <SkeletonBookOverviewCard key={index} size="sm" />
+            <div key={index} className="h-fit w-fit pb-20 mobile:pb-30">
+              <SkeletonBookOverviewCard size="sm" />
+            </div>
           ))
         ) : reviewList && reviewList?.length > 0 ? (
           <MyReviewCardList myReviewData={reviewList} />
