@@ -7,7 +7,7 @@ import TotalPriceCard from '@/components/card/totalPaymentCard';
 import Link from 'next/link';
 import { basketItemList } from '@/store/state';
 import { useAtomValue } from 'jotai';
-
+import PaymentButton from '@/components/button/payment/paymentButton';
 export default function Order() {
   const items = useAtomValue(basketItemList);
 
@@ -27,9 +27,7 @@ export default function Order() {
         <Link
           className="flex-center sticky bottom-0 h-70 w-full border-t border-gray-1 bg-white pc:hidden"
           href="/paymented">
-          <div className="mx-40 flex w-full">
-            <RegisterButton>결제하기</RegisterButton>
-          </div>
+          <PaymentButton />
         </Link>
       </div>
     </div>
