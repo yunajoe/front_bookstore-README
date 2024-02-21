@@ -29,7 +29,7 @@ function AddCommunityCardForm() {
         onSearch={handleSearch}
       />
       <div className="flex-center h-323 w-full flex-col gap-22">
-        <PreviewBookInfoPagination />
+        {search && <PreviewBookInfoPagination search={search}/>}
       </div>
       <Input type='text' title='내용' height="h-100" control={control} name="description" />
       <RegisterButton type="submit" disabled={isButtonActive ? true : false}>

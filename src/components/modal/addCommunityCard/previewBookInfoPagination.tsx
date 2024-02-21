@@ -1,3 +1,4 @@
+import { useGetBook } from '@/api/book';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import Pagination from '@/components/button/pagination';
 //TODO: api 연결 후 수정해야함
@@ -7,8 +8,19 @@ import { CurrentPageStateAtom } from '@/store/state';
 import { useAtom } from 'jotai';
 const bookOverviews = bookOverviewsMock.slice(0, 4);
 
-function PreviewBookInfoPagination() {
+function PreviewBookInfoPagination({search} : {search : string}) {
   const [currentPageState] = useAtom(CurrentPageStateAtom);
+  
+  const {data} = useGetBook({
+    endpoint: '',
+    params: {
+      bookId: '0',
+      limit: '6',
+      sort: 'POPULATION',
+      ascending: false,
+      search: search,
+    },
+  })
 
   return (
     <>
