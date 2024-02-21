@@ -10,9 +10,11 @@ import useFormatDate from '@/hooks/useFormatDate';
 import useCopyLink from '@/hooks/common/useCopyLink';
 
 interface BookDetailInfoProps {
+  bookId: string;
   bookTitle: string;
   categories: [string, string];
   isBookmarked: boolean;
+  handleBookmarkClick: () => void;
   bookmarkCount: number;
   authors?: string[];
   publisher?: string;
@@ -23,9 +25,11 @@ interface BookDetailInfoProps {
 }
 
 function BookDetailInfo({
+  bookId,
   bookTitle,
   categories,
   isBookmarked,
+  handleBookmarkClick,
   bookmarkCount,
   authors,
   publishedDate,
@@ -36,7 +40,6 @@ function BookDetailInfo({
 }: BookDetailInfoProps) {
   const customedPublishedDate = useFormatDate(publishedDate);
   const { copyURL } = useCopyLink();
-  const handleBookmarkClick = () => {};
 
   return (
     <article

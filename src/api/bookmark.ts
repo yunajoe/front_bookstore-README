@@ -1,5 +1,10 @@
-import { BookmarkParams, postBookmarkPath } from '@/types/api/bookmark';
-import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
+import { BookmarkParams, deleteBookmarkPath, postBookmarkPath } from '@/types/api/bookmark';
+import {
+  useDelete,
+  useFetch,
+  useUpdate,
+  useUpdateType,
+} from '@/utils/reactQuery';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -33,14 +38,21 @@ export const useGetOptionBookmark = (option: {
 };
 
 //찜 하기
-const postBookmark = async (option: postBookmarkPath) => {
-  const { bookId, memberId } = option;
-  const result = await instance.post(`/bookmark/${bookId}/${memberId}`);
+export const postBookmark = async (bookId: number) => {
+  const result = await instance.post(`/bookmark/${bookId}`);
   return result.data.data;
 };
 
-export const usePostBookmark = (option: postBookmarkPath) => {
-  return useUpdate(postBookmark, option);
+export const usePostBookmark = (
+  bookId: number,
+  { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
+) => {
+  return useUpdate(postBookmark, bookId, {
+    onSuccess,
+    onError,
+    onSettled,
+    onMutate,
+  });
 };
 
 //찜 삭제
@@ -65,6 +77,16 @@ export const deleteBookMarkItem = async (bookmarkId: string) => {
   return result.data;
 };
 
-export const useDeleteBookmark = (bookmarkId: string) => {
-  return useDelete(deleteBookmark, bookmarkId);
+export const useDeleteBookmark = (option: deleteBookmarkPath) => {
+  return useUpdate(deleteBookMarkItem, option.bookmarkId, option);
+};
+
+// 해당 책에 대한 찜 여부 조회
+const getIsBookmarked = async (bookId: string) => {
+  const result = await instance.get(`/bookmark/${bookId}/check`);
+  return result.data.data;
+};
+
+export const useGetIsBookmarked = ({ bookId="", enabled = true }) => {
+  return useFetch(QUERY_KEY.bookmark, getIsBookmarked, bookId, enabled);
 };

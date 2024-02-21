@@ -25,6 +25,7 @@
     "react-toastify": "^10.0.4"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20",
     "@types/react": "^18.2.48",
     "@types/react-datepicker": "^4.19.5",
