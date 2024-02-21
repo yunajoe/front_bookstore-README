@@ -15,15 +15,22 @@ const DcontentData = [
 const PcontentData = ['신용카드', '22,500원'];
 const orderDate = '2024.02.05';
 
-function OrderCompletedSection() {
+function OrderCompletedSection({
+  paymentDetail = true,
+}: {
+  paymentDetail?: boolean;
+}) {
   return (
     <div className="flex w-[1084px] flex-col gap-60 mobile:w-330 tablet:w-[688px] ">
-      <InfoCard
-        title="결제가 완료되었습니다!"
-        content={`주문일자 ${orderDate}`}
-      />
+      {paymentDetail && (
+        <InfoCard
+          title="결제가 완료되었습니다!"
+          content={`주문일자 ${orderDate}`}
+        />
+      )}
       <div className="flex gap-34">
-        <div className="flex w-[618px] flex-col gap-60 mobile:w-full tablet:w-full">
+        <div
+          className={`flex w-[618px] flex-col gap-60 mobile:w-full tablet:w-full ${paymentDetail ? 'mt-0' : 'mt-45'}`}>
           <TitleContentCard
             title="배송지 정보"
             titleData={DELIVERY_INFO}

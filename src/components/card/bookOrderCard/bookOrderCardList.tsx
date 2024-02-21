@@ -13,7 +13,7 @@ export interface BookOrderCardListProps {
 }
 
 function BookOrderCardList({ orderData }: BookOrderCardListProps) {
-  if (!orderData) return;
+  if (!orderData) return null;
 
   return (
     <div className="flex max-w-[1080px] flex-col">
