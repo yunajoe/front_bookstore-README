@@ -6,12 +6,14 @@ import useInfinite from '@/hooks/useInfinite';
 import MainLayout from './mainLayout';
 
 interface MyOrderPageLayoutProps {
+  dropDown: ReactNode;
   overview: ReactNode;
   orderDate?: ReactNode;
   main: ReactNode;
 }
 
 function MyOrderPageLayout({
+  dropDown,
   overview,
   orderDate,
   main,
@@ -31,7 +33,8 @@ function MyOrderPageLayout({
             className="mb-40 w-[1080px] mobile:w-330 tablet:w-[688px]">
             {overview}
           </div>
-          <div role="order-date" className="mb-20">
+          <div role="order-date" className="mb-200 flex">
+            {dropDown}
             {orderDate}
           </div>
           <div role="content">

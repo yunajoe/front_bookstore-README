@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 type OrderCountProps = {
-  orderDate: string;
+  orderDate?: string;
   orderCount: number;
   orderId: number;
 };

@@ -52,11 +52,19 @@ export const usePutDelivery = (option: PutDeliveryOption) => {
   return useUpdate(putDelivery, option);
 };
 
+// http://15.165.141.22:8080/delivery?deliveryStatus=ALL&startDate=2024-02-21&endDate=2024-02-21
+// 배송상태값, All, READY,DELIVERING, COMPLETE, EXCHANGE_AND_REFUND,CONFIRM, CANCEL
 // 회원배송목록조회
-export const getDeliveryList = async () => {
-  const result = await instance.get('delivery');
-  return result.data;
-};
+export const getDeliveryList = async () =>
+  // deliveryStatus: string,
+  // startData: string,
+  // endDate: string,
+  {
+    const result = await instance.get(
+      'delivery?deliveryStatus=ALL&startDate=2024-02-21&endDate=2024-02-21',
+    );
+    return result.data;
+  };
 
 type DeliveryStatus = {
   deliveryId: number;
