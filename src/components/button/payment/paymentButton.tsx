@@ -5,6 +5,10 @@ import { useRouter } from 'next/router';
 interface PaymentButtonProps {
   type?: 'mobile' | 'pc';
 }
+
+interface response {
+  success: boolean;
+}
 function PaymentButton({ type }: PaymentButtonProps) {
   const router = useRouter();
   const bookPrice = useCalculateProductsPrice();
@@ -41,15 +45,15 @@ function PaymentButton({ type }: PaymentButtonProps) {
             window.location.host +
             '/paymented', //TODO: 모바일 결제 시 이동페이지, 추후 수정
         },
-        async function (rsp) {
+        async function (rsp: response) {
           if (rsp.success) {
             //결제 성공시
             console.log(rsp + '결제성공');
             router.push('/paymented');
             //결제 성공시 프로젝트 DB저장 요청
-          } else if (rsp.success === false) {
+          } else {
             // 결제 실패시
-            alert(rsp.error_msg);
+            alert('결제에 실패했습니다.');
           }
         },
       );
