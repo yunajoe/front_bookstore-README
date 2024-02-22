@@ -6,11 +6,12 @@ import { useAtom } from 'jotai';
 import { CurrentPageStateAtom } from '@/store/state';
 import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previewBookInfoPagination';
 import Input from '@/components/input/input';
+import NoData from './noData';
 
 function AddCommunityCardForm() {
   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl();
   const [search, setSearch] = useState('');
-  const [CurrentPage, setCurrentPage] = useAtom(CurrentPageStateAtom);
+  const [_, setCurrentPage] = useAtom(CurrentPageStateAtom);
 
   const handleSearch = (value: string) => {
     setSearch(value);
@@ -26,9 +27,15 @@ function AddCommunityCardForm() {
         onSearch={handleSearch}
       />
       <div className="flex-center h-323 w-full flex-col gap-22">
-      {search && <PreviewBookInfoPagination search={search} />}
+        {search ? <PreviewBookInfoPagination search={search} /> : <NoData />}
       </div>
-      <Input type='text' title='내용' height="h-100" control={control} name="description" />
+      <Input
+        type="text"
+        title="내용"
+        height="h-100"
+        control={control}
+        name="description"
+      />
       <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
         글쓰기
       </RegisterButton>

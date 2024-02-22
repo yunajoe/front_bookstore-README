@@ -1,7 +1,5 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import Pagination from '@/components/button/pagination';
-//TODO: api 연결 후 수정해야함
-import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 import { CurrentPageStateAtom } from '@/store/state';
 import { useAtom } from 'jotai';
 import { useGetPageBook } from '@/api/book';
@@ -9,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { BookData } from '@/types/api/book';
 
 function PreviewBookInfoPagination({search} : {search : string}) {
-  const [CurrentPage, setCurrentPage] = useAtom(CurrentPageStateAtom);
+  const [CurrentPage] = useAtom(CurrentPageStateAtom);
   const [bookOverviews, setBookOverviews] = useState<BookData[]>([])
   
   const {data} = useGetPageBook({
