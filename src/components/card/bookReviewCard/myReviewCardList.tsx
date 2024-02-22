@@ -17,6 +17,8 @@ function MyReviewCardList({ myReviewData }: MyReviewCardListProps) {
             bookImgUrl={review?.bookImgUrl}
             bookTitle={review?.bookTitle}
             content={review?.content}
+            reviewRating={review?.reviewRating}
+            updateDate={review?.updateDate}
             reviewId={review?.reviewId}
           />
         </div>

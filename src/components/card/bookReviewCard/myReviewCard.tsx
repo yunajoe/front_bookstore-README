@@ -9,6 +9,7 @@ import { MyReviewType } from '@/types/bookReviewType';
 import KebabButton from '@/components/button/kebab/kebabButton';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import Link from 'next/link';
+import useFormatDate from '@/hooks/useFormatDate';
 
 function MyReviewCard({
   bookId,
@@ -16,9 +17,12 @@ function MyReviewCard({
   bookTitle,
   authors,
   content,
+  reviewRating,
+  updateDate,
   reviewId,
 }: MyReviewType) {
   const [isSummarized, setIsSummarized] = useState(true);
+  const formatDate = useFormatDate(updateDate);
   return (
     <div className="flex min-h-140 w-full max-w-[1080px] flex-col mobile:min-h-115 mobile:w-330 tablet:max-w-[710px]">
       <div
@@ -40,13 +44,13 @@ function MyReviewCard({
               fontSize={15}
               classNames="max-w-[860px] w-[90%] truncate whitespace-nowrap mobile:w-220 line-clam-1"
             />
-            <BookAuthor authorList={[authors]} classNames="line-clamp-2" />
+            <BookAuthor authorList={authors} classNames="line-clamp-2" />
             <div className="absolute right-0 top-0 h-18 w-18 mobile:-right-10 mobile:-top-20">
               <KebabButton title1="수정하기" title2="삭제하기" id={reviewId} />
             </div>
             <div className="flex-center gap-10 whitespace-nowrap">
-              <BookRating rating={5} />
-              <span className="text-14 text-gray-2">{'2020-01-02'}</span>
+              <BookRating rating={reviewRating} />
+              <span className="text-14 text-gray-2">{formatDate}</span>
             </div>
             <div
               role="content-div"

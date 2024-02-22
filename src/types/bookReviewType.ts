@@ -15,8 +15,10 @@ interface ReviewType{
 
 /** 마이페이지/리뷰컴포넌트의 props 타입 */
 interface MyReviewType {
-  authors: string;
+  authors: string[];
   bookId: number;
+  reviewRating: number;
+  updateDate: string;
   bookImgUrl: string;
   bookTitle: string;
   content: string;

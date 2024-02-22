@@ -6,7 +6,6 @@ import SkeletonBookOverviewCard from '@/components/skeleton/bookOverviewCard/ske
 export default function MyReviewPage() {
   const { data, isLoading } = useGetMyReviewList(1);
   let reviewList = data ?? [];
-  console.log(reviewList);
 
   return (
     <MainLayout>
