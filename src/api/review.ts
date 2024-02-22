@@ -19,22 +19,21 @@ export const useGetReview = (reviewId: number) => {
 };
 
 //리뷰 등록
-//TODO : api 나오면 interface type 수정필요
 interface PostReviewOption {
-  id: number;
-  data: string;
+  option?: number;
+  content?: string;
 }
 
-const postReview = async (option: PostReviewOption) => {
-  const { id, data } = option;
-  const result = await instance.post(`review/${id}`, {
-    data,
+const postReview = async (data: PostReviewOption) => {
+  const { option, content } = data;
+  const result = await instance.post(`review/${option}`, {
+    content,
   });
   return result.data;
 };
 
-export const usePostReview = (option: PostReviewOption) => {
-  return useUpdate(postReview, option);
+export const usePostReview = (data: PostReviewOption) => {
+  return useUpdate(postReview, data);
 };
 
 //리뷰 수정

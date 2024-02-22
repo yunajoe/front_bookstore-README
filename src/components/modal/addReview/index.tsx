@@ -7,7 +7,7 @@ function AddReview({onClick} : OnClickProps) {
   return (
     <ModalLayout onClick={onClick}>
       <ModalContainer onClick={onClick} title="리뷰 작성하기">
-        <AddReviewForm />
+        <AddReviewForm onClick={onClick}/>
       </ModalContainer>
     </ModalLayout>
   )

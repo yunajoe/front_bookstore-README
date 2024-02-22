@@ -26,7 +26,8 @@ export const useGetCommunity = (option: GetCommunityOption) => {
 //글 등록
 const postCommunity = async (data: PostCommunityData) => {
   const result = await instance.post('community', {
-    data,
+    memberId : data.option,
+    ...data,
   });
   return result.data;
 };
@@ -46,14 +47,15 @@ export const useDeleteCommunity = (communityId?: number) => {
 };
 
 //글 수정
-const putCommunity = async (option: PutCommunityOption) => {
-  const { communityId, data } = option;
-  const result = await instance.put(`community/${communityId}`, {
-    data,
+const putCommunity = async (putFormData: PutCommunityOption ) => {
+  const {option, content} = putFormData
+  
+  const result = await instance.put(`community/${option}`, {
+    content,
   });
   return result.data;
 };
 
-export const usePutCommunity = (option: PutCommunityOption) => {
-  return useUpdate(putCommunity, option);
+export const usePutCommunity = (putFormData : PutCommunityOption ) => {
+  return useUpdate(putCommunity, putFormData);
 };

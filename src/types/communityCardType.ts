@@ -21,6 +21,7 @@ export interface CommunityCardProps {
   profileImg: string;
   userNickname: string;
   createAt: string;
+  bookId: number;
   bookCover: string;
   bookTitle: string;
   review: string;
