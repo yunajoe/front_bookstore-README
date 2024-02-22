@@ -2,42 +2,61 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import Pagination from '@/components/button/pagination';
 import { CurrentPageStateAtom } from '@/store/state';
 import { useAtom } from 'jotai';
-import { useGetPageBook } from '@/api/book';
+import { useGetBook, useGetPageBook } from '@/api/book';
 import { useEffect, useState } from 'react';
 import { BookData } from '@/types/api/book';
-
-function PreviewBookInfoPagination({search} : {search : string}) {
+function PreviewBookInfoPagination({ search }: { search: string }) {
   const [CurrentPage] = useAtom(CurrentPageStateAtom);
-  const [bookOverviews, setBookOverviews] = useState<BookData[]>([])
-  console.log(window.innerWidth)
-  
-  const {data} = useGetPageBook({
-    navigationMethod: 'PAGINATION', 
+  const [bookOverviews, setBookOverviews] = useState<BookData[]>([]);
+  const [chooseBookId, setChooseBookId] = useState<number | null>(null);
+  const [chooseBook, setChooseBook] = useState<BookData>();
+
+  const { data } = useGetPageBook({
+    navigationMethod: 'PAGINATION',
     sortType: 'BESTSELLER',
     ascending: false,
     offset: String(CurrentPage - 1),
-    limit: window.innerWidth <= 769 ? String(3) : String(4),
+    limit: window.innerWidth <= 768 ? String(3) : String(4),
     search,
-  })
+  });
+
+  const { data : chooseBookData } = useGetBook({ endpoint: String(chooseBookId), params: {} });
+  console.log(chooseBookData)
+  useEffect(() => {
+    setChooseBook(chooseBookData?.data);
+  }, [chooseBookData])
+
 
   useEffect(() => {
-    setBookOverviews(data?.books)
-  },[data])
+    setBookOverviews(data?.books);
+  }, [data]);
 
   return (
     <>
-      <div className="flex justify-between w-[608px] mobile:w-291">
-        {bookOverviews?.map((bookOverview, index) => (
+      <div className="flex w-[608px] justify-between mobile:w-291">
+        {!chooseBook &&
+          bookOverviews?.map((bookOverview, index) => (
+            <PreviewBookInfo
+              key={index}
+              size="xs"
+              image={bookOverview.bookImgUrl}
+              title={bookOverview.bookTitle}
+              authorList={bookOverview.authors}
+              alignCenter
+              bookId={bookOverview.bookId}
+              community={true}
+              onClick={() => setChooseBookId(bookOverview.bookId)}
+            />
+          ))}
+        {chooseBook && (
           <PreviewBookInfo
-            key={index}
             size="xs"
-            image={bookOverview.bookImgUrl}
-            title={bookOverview.bookTitle}
-            authorList={bookOverview.authors}
-            alignCenter
-            bookId={bookOverview.bookId}
+            image={chooseBook.bookImgUrl}
+            title={chooseBook.bookTitle}
+            authorList={chooseBook.authors}
+            community={true}
           />
-        ))}
+        )}
       </div>
       <Pagination totalCount={data?.total} standard={4} />
     </>
