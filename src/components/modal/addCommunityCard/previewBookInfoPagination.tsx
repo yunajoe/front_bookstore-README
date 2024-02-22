@@ -6,12 +6,12 @@ import { useGetBook, useGetPageBook } from '@/api/book';
 import { useEffect, useState } from 'react';
 import { BookData } from '@/types/api/book';
 
-function PreviewBookInfoPagination({ search }: { search: string }) {
+function PreviewBookInfoPagination({ search }: { search: string}) {
   const [CurrentPage] = useAtom(CurrentPageStateAtom);
   const [bookOverviews, setBookOverviews] = useState<BookData[]>([]);
   const [chooseBookId, setChooseBookId] = useAtom(chooseBookIdAtom);
   const [chooseBook, setChooseBook] = useState<BookData>();
-
+  
   const { data } = useGetPageBook({
     navigationMethod: 'PAGINATION',
     sortType: 'BESTSELLER',
@@ -25,6 +25,7 @@ function PreviewBookInfoPagination({ search }: { search: string }) {
     endpoint: String(chooseBookId),
     params: {},
   });
+
   useEffect(() => {
     setChooseBook(chooseBookData?.data);
   }, [chooseBookData]);

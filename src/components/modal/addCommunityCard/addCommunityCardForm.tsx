@@ -33,10 +33,11 @@ function AddCommunityCardForm({
   const [_, setCurrentPage] = useAtom(CurrentPageStateAtom);
 
   const handleSearch = (value: string) => {
+    console.log(value.length)
     setSearch(value);
     setCurrentPage(1);
   };
-
+  
   return (
     <form
       className="flex w-full flex-col gap-40 overflow-scroll mobile:gap-20"
