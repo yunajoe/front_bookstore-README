@@ -9,7 +9,7 @@ export default function MyReviewPage() {
 
   return (
     <MainLayout>
-      <div className="flex-center mx-auto w-full flex-col px-60 pb-100 mobile:px-15 tablet:px-40">
+      <div className="mx-auto flex w-full flex-col items-center justify-center px-60 pb-100 mobile:px-15 tablet:px-40">
         {isLoading ? (
           Array.from({
             length: 5,
