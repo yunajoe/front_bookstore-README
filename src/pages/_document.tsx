@@ -4,10 +4,11 @@ export default function Document() {
   return (
     <Html lang="ko">
       <Head>
-        <meta
+        {/* <meta
           http-equiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
-        />
+        /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <body>
         <Main />
