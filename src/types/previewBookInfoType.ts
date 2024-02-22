@@ -1,7 +1,7 @@
 import { StaticImageData } from 'next/image';
 
 export interface PreviewBookInfoSizeProps {
-  size: 'sm' | 'md' | 'lg';
+  size: 'xs' |'sm' | 'md' | 'lg';
 }
 
 export interface PreviewBookInfoProps extends PreviewBookInfoSizeProps {

@@ -30,7 +30,7 @@ function PreviewBookInfo({
     width: `${IMAGE_SIZE[size].widthOnly}`,
     height: `h-${IMAGE_SIZE[size].heightNumber.pc} tablet:h-${IMAGE_SIZE[size].heightNumber.tablet} mobile:h-${IMAGE_SIZE[size].heightNumber.mobile} `,
   };
-
+  console.log(`${STYLE.width}`)
   return (
     <Link href={`/bookdetail/${bookId}`}>
       <div className={`relative flex flex-col ${STYLE.width}`}>

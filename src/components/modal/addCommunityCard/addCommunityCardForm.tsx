@@ -20,13 +20,13 @@ function AddCommunityCardForm() {
 
   return (
     <form
-      className="flex w-full flex-col gap-40 mobile:gap-20"
+      className="flex w-full flex-col gap-40 overflow-scroll mobile:gap-20"
       onSubmit={handleSubmit(onSubmit)}>
       <ModalSearchInput
         placeholder="책 제목, 작가 등을 검색해주세요"
         onSearch={handleSearch}
       />
-      <div className="flex-center h-323 w-full flex-col gap-22">
+      <div className="flex-center h-323 w-full flex-col gap-22 mobile:h-330 ">
         {search ? <PreviewBookInfoPagination search={search} /> : <NoData />}
       </div>
       <Input

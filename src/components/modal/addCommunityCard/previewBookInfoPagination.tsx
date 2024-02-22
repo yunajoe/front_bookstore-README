@@ -9,13 +9,14 @@ import { BookData } from '@/types/api/book';
 function PreviewBookInfoPagination({search} : {search : string}) {
   const [CurrentPage] = useAtom(CurrentPageStateAtom);
   const [bookOverviews, setBookOverviews] = useState<BookData[]>([])
+  console.log(window.innerWidth)
   
   const {data} = useGetPageBook({
     navigationMethod: 'PAGINATION', 
     sortType: 'BESTSELLER',
     ascending: false,
     offset: String(CurrentPage - 1),
-    limit: String(4),
+    limit: window.innerWidth <= 769 ? String(3) : String(4),
     search,
   })
 
@@ -25,11 +26,11 @@ function PreviewBookInfoPagination({search} : {search : string}) {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex justify-between w-[608px] mobile:w-291">
         {bookOverviews?.map((bookOverview, index) => (
           <PreviewBookInfo
             key={index}
-            size="sm"
+            size="xs"
             image={bookOverview.bookImgUrl}
             title={bookOverview.bookTitle}
             authorList={bookOverview.authors}
