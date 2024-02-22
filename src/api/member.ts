@@ -1,10 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import {
-  Signup,
-  Login,
-  ChangePassword,
-  ChangeProfile,
-} from '@/types/api/member';
+import { Signup, Login, ChangePassword } from '@/types/api/member';
 import { useFetch, useUpdate, useUpdateType } from '@/utils/reactQuery';
 import { instance, instanceFormData } from 'src/libs/instance';
 
@@ -55,6 +50,25 @@ export const usePutProfile = (
 ) => {
   return useUpdate(putProfile, data, { onSuccess, onError, onSettled });
 };
+
+// 선호장르 변경
+
+const putCustomGenre = async (categories: number[]) => {
+  const result = await instance.put('/member/categories', { categories });
+  return result.data;
+};
+
+export const usePutCustomGenre = (
+  categories: number[],
+  { onSuccess, onError, onSettled }: useUpdateType,
+) => {
+  return useUpdate(putCustomGenre, categories, {
+    onSuccess,
+    onError,
+    onSettled,
+  });
+};
+
 
 // 나의 리뷰 조회
 const getMyReviewList = async (id: number) => {
