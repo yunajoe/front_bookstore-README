@@ -16,7 +16,6 @@ function MainLayout({ children }: MainLayoutProps) {
   const [ref, isIntersecting] = useInfinite();
   const [, setPointVisible] = useAtom(pointVisibleAtom);
   const { status } = useSession();
-  const { data } = useGetBasKetQuery();
 
   useEffect(() => {
     setPointVisible(isIntersecting);
@@ -28,7 +27,6 @@ function MainLayout({ children }: MainLayoutProps) {
       <Script async src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" />
       <Header
         isLoggedIn={status === 'authenticated'}
-        numItemsOfCart={data?.length} // basketItems의 길이로 업데이트
       />
       <div className="relative grid auto-rows-auto place-items-center">
         <div className="h-20 w-300" ref={ref} />
