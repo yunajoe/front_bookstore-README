@@ -22,13 +22,18 @@ export const useGetBook = (option: GetBookOption) => {
 };
 
 //책 전체 infinite, pagination 둘다 가능
-export const getPageBook = async (params : BookParamsV2 ) => {
+const getPageBook = async (params : BookParamsV2 ) => {
   const result = await instance.get(`book/v2`, {
     params,
   })
 
   return result.data;
 }
+
+export const useGetPageBook = async (params : BookParamsV2) => {
+  return useFetch(QUERY_KEY.book, getPageBook, params)
+}
+
 
 //도서 조회수 증가
 const putBookView = async (option: putBookPath) => {
