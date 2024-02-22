@@ -3,7 +3,7 @@ import useFormControl from '@/hooks/useFormControl';
 import ModalSearchInput from '@/components/input/modalSearchInput';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
-import { CurrentPageStateAtom } from '@/store/state';
+import { CurrentPageStateAtom, chooseBookIdAtom } from '@/store/state';
 import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previewBookInfoPagination';
 import Input from '@/components/input/input';
 import NoData from './noData';
@@ -19,11 +19,12 @@ function AddCommunityCardForm({
   review,
 }: AddCommunityCardProps) {
   const { data: session } = useSession();
+  const [chooseBookId] = useAtom(chooseBookIdAtom);
   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
     postFn: usePostCommunity,
     putFn: usePutCommunity,
     edit: edit,
-    bookId: 35,
+    bookId: chooseBookId,
     option: {required : session?.memberId, optional : communityId},
     onClick: onClick,
     initialValue: { content: review },

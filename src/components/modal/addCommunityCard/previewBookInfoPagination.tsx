@@ -1,14 +1,15 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import Pagination from '@/components/button/pagination';
-import { CurrentPageStateAtom } from '@/store/state';
+import { CurrentPageStateAtom, chooseBookIdAtom } from '@/store/state';
 import { useAtom } from 'jotai';
 import { useGetBook, useGetPageBook } from '@/api/book';
 import { useEffect, useState } from 'react';
 import { BookData } from '@/types/api/book';
+
 function PreviewBookInfoPagination({ search }: { search: string }) {
   const [CurrentPage] = useAtom(CurrentPageStateAtom);
   const [bookOverviews, setBookOverviews] = useState<BookData[]>([]);
-  const [chooseBookId, setChooseBookId] = useState<number | null>(null);
+  const [chooseBookId, setChooseBookId] = useAtom(chooseBookIdAtom);
   const [chooseBook, setChooseBook] = useState<BookData>();
 
   const { data } = useGetPageBook({
@@ -20,11 +21,13 @@ function PreviewBookInfoPagination({ search }: { search: string }) {
     search,
   });
 
-  const { data : chooseBookData } = useGetBook({ endpoint: String(chooseBookId), params: {} });
+  const { data: chooseBookData } = useGetBook({
+    endpoint: String(chooseBookId),
+    params: {},
+  });
   useEffect(() => {
     setChooseBook(chooseBookData?.data);
-  }, [chooseBookData])
-
+  }, [chooseBookData]);
 
   useEffect(() => {
     setBookOverviews(data?.books);
@@ -57,7 +60,9 @@ function PreviewBookInfoPagination({ search }: { search: string }) {
           />
         )}
       </div>
-      <Pagination totalCount={data?.total} standard={4} />
+      {!chooseBook && bookOverviews && (
+        <Pagination totalCount={data?.total} standard={4} />
+      )}
     </>
   );
 }
