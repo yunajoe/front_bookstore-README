@@ -30,7 +30,7 @@ const getPageBook = async (params : BookParamsV2 ) => {
   return result.data;
 }
 
-export const useGetPageBook = async (params : BookParamsV2) => {
+export const useGetPageBook = (params : BookParamsV2) => {
   return useFetch(QUERY_KEY.book, getPageBook, params)
 }
 
