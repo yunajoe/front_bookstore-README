@@ -61,3 +61,9 @@ export interface BookData extends BookmarksType {
   updateDate: string | null;
   statics : BookStaticType;
 }
+
+export interface BookJotaiData {
+  bookImgUrl: string;
+  bookTitle: string;
+  authors: string[];
+}

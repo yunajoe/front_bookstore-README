@@ -3,13 +3,18 @@ import useFormControl from '@/hooks/useFormControl';
 import ModalSearchInput from '@/components/input/modalSearchInput';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
-import { CurrentPageStateAtom, chooseBookIdAtom } from '@/store/state';
+import {
+  CurrentPageStateAtom,
+  chooseBookAtom,
+  chooseBookIdAtom,
+} from '@/store/state';
 import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previewBookInfoPagination';
 import Input from '@/components/input/input';
 import NoData from './noData';
 import { usePostCommunity, usePutCommunity } from '@/api/community';
 import { useSession } from 'next-auth/react';
 import { AddCommunityCardProps } from '.';
+import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 
 function AddCommunityCardForm({
   onClick,
@@ -25,19 +30,19 @@ function AddCommunityCardForm({
     putFn: usePutCommunity,
     edit: edit,
     bookId: chooseBookId,
-    option: {required : session?.memberId, optional : communityId},
+    option: { required: session?.memberId, optional: communityId },
     onClick: onClick,
     initialValue: { content: review },
   });
   const [search, setSearch] = useState('');
   const [_, setCurrentPage] = useAtom(CurrentPageStateAtom);
+  const [chooseBook] = useAtom(chooseBookAtom);
 
   const handleSearch = (value: string) => {
-    console.log(value.length)
     setSearch(value);
     setCurrentPage(1);
   };
-  
+
   return (
     <form
       className="flex w-full flex-col gap-40 overflow-scroll mobile:gap-20"
@@ -47,7 +52,16 @@ function AddCommunityCardForm({
         onSearch={handleSearch}
       />
       <div className="flex-center h-323 w-full flex-col gap-22 mobile:h-330 ">
-        {search ? <PreviewBookInfoPagination search={search} /> : <NoData />}
+        {search ? <PreviewBookInfoPagination search={search} /> : !edit && <NoData />}
+        {edit && (
+          <PreviewBookInfo
+            size="xs"
+            image={chooseBook.bookImgUrl}
+            title={chooseBook.bookTitle}
+            authorList={chooseBook.authors}
+            community={true}
+          />
+        )}
       </div>
       <Input
         type="text"

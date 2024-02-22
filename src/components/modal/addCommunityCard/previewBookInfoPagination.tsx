@@ -1,16 +1,16 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import Pagination from '@/components/button/pagination';
-import { CurrentPageStateAtom, chooseBookIdAtom } from '@/store/state';
+import { CurrentPageStateAtom, chooseBookAtom, chooseBookIdAtom } from '@/store/state';
 import { useAtom } from 'jotai';
 import { useGetBook, useGetPageBook } from '@/api/book';
 import { useEffect, useState } from 'react';
-import { BookData } from '@/types/api/book';
+import { BookData, BookJotaiData } from '@/types/api/book';
 
 function PreviewBookInfoPagination({ search }: { search: string}) {
   const [CurrentPage] = useAtom(CurrentPageStateAtom);
   const [bookOverviews, setBookOverviews] = useState<BookData[]>([]);
   const [chooseBookId, setChooseBookId] = useAtom(chooseBookIdAtom);
-  const [chooseBook, setChooseBook] = useState<BookData>();
+  const [chooseBook, setChooseBook] = useAtom(chooseBookAtom);
   
   const { data } = useGetPageBook({
     navigationMethod: 'PAGINATION',
