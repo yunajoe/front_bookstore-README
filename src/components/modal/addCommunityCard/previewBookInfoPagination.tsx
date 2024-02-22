@@ -21,7 +21,6 @@ function PreviewBookInfoPagination({ search }: { search: string }) {
   });
 
   const { data : chooseBookData } = useGetBook({ endpoint: String(chooseBookId), params: {} });
-  console.log(chooseBookData)
   useEffect(() => {
     setChooseBook(chooseBookData?.data);
   }, [chooseBookData])
