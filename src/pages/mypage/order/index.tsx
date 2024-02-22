@@ -64,7 +64,6 @@ function MyOrderPage() {
       }
       orderDate={
         <OrderDate
-          // person={person}
           pastDate={selectedItem}
           startDate={startDate}
           endDate={endDate}
