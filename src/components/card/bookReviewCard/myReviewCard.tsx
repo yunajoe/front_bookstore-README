@@ -1,15 +1,15 @@
 /** 마이페이지에 들어갈 내가 쓴 리뷰 컴포넌트 */
 
 import { useState } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 
 import BookRating from '@/components/book/bookRating/bookRating';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
-import { MyReviewType } from '@/types/bookReviewType';
 import KebabButton from '@/components/button/kebab/kebabButton';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
-import Link from 'next/link';
 import useFormatDate from '@/hooks/useFormatDate';
+import { MyReviewData } from '@/types/api/review';
 
 function MyReviewCard({
   bookId,
@@ -20,9 +20,10 @@ function MyReviewCard({
   reviewRating,
   updateDate,
   reviewId,
-}: MyReviewType) {
+}: MyReviewData) {
   const [isSummarized, setIsSummarized] = useState(true);
   const formatDate = useFormatDate(updateDate);
+
   return (
     <div className="flex min-h-140 w-full max-w-[1080px] flex-col mobile:min-h-115 mobile:w-330 tablet:max-w-[710px]">
       <div

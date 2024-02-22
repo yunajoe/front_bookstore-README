@@ -1,12 +1,11 @@
-import { MyReviewType } from '@/types/bookReviewType';
 import MyReviewCard from './myReviewCard';
+import { MyReviewData } from '@/types/api/review';
 
 interface MyReviewCardListProps {
-  myReviewData: MyReviewType[];
+  myReviewData: MyReviewData[];
 }
 
 function MyReviewCardList({ myReviewData }: MyReviewCardListProps) {
-  console.log(myReviewData);
   return (
     <div className="flex flex-col gap-20 mobile:gap-25">
       {myReviewData.map((review) => (
