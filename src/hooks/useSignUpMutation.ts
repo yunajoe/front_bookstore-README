@@ -3,12 +3,13 @@ import { Login, Signup } from '@/types/api/member';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
+import { notify } from '@/components/toast/toast';
 
 function useSignUpMutation() {
   const router = useRouter();
   const loginMutation = useMutation({
     mutationFn: (data: Login) => postLogin(data),
-    // onSuccess: () => router.push('/'),
+    onSuccess: () => router.push('/'),
   });
 
   const createMemberMutation = useMutation({
@@ -25,7 +26,7 @@ function useSignUpMutation() {
     onError(error) {
       if (error instanceof AxiosError) {
         const message = error?.response?.data?.message;
-        alert(message);
+        notify({ type: 'error', text: message });
       }
     },
   });
