@@ -1,6 +1,5 @@
 import { OrderOverViewItem } from '@/types/deliveryType';
 
-// Score와 동일한 역할
 type ScoreRecord = Record<string, keyof OrderOverViewItem>;
 
 export const ORDERSTATUS: ScoreRecord = {
