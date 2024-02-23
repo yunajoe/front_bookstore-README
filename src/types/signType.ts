@@ -1,4 +1,5 @@
 export interface SignValueType {
+  nickname: string;
   email: string;
   password: string;
 }
