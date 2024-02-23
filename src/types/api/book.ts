@@ -19,6 +19,7 @@ export interface BookParamsV2 {
   offset?:string;
   limit?: string;
   search?: string;
+  enabled?: any;
 }
 
 export interface putBookPath {

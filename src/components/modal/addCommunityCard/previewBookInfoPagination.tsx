@@ -1,16 +1,18 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import Pagination from '@/components/button/pagination';
-import { CurrentPageStateAtom, chooseBookAtom, chooseBookIdAtom } from '@/store/state';
+import { CurrentPageStateAtom, chooseBookIdAtom } from '@/store/state';
 import { useAtom } from 'jotai';
 import { useGetBook, useGetPageBook } from '@/api/book';
 import { useEffect, useState } from 'react';
-import { BookData, BookJotaiData } from '@/types/api/book';
+import { BookData} from '@/types/api/book';
+import NoData from './noData';
 
 function PreviewBookInfoPagination({ search }: { search: string}) {
   const [CurrentPage] = useAtom(CurrentPageStateAtom);
   const [bookOverviews, setBookOverviews] = useState<BookData[]>([]);
-  const [chooseBookId, setChooseBookId] = useAtom(chooseBookIdAtom);
-  const [chooseBook, setChooseBook] = useAtom(chooseBookAtom);
+  const [_, setChooseBookId] = useAtom(chooseBookIdAtom);  //전역변수로 넘겨줄 책번호
+  const [LChooseBookId, setLChooseBookId] = useState<number | null>(null)
+  const [chooseBook, setChooseBook] = useState<BookData>();
   
   const { data } = useGetPageBook({
     navigationMethod: 'PAGINATION',
@@ -19,12 +21,19 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
     offset: String(CurrentPage - 1),
     limit: window.innerWidth <= 768 ? String(3) : String(4),
     search,
+    enabled: search,
   });
 
   const { data: chooseBookData } = useGetBook({
-    endpoint: String(chooseBookId),
+    endpoint: String(LChooseBookId),
     params: {},
+    enabled: LChooseBookId,
   });
+
+  const handleChooseBook = (id:number) => {
+    setChooseBookId(id);
+    setLChooseBookId(id);
+  }
 
   useEffect(() => {
     setChooseBook(chooseBookData?.data);
@@ -33,11 +42,13 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
   useEffect(() => {
     setBookOverviews(data?.books);
   }, [data]);
+  
+  if(!data) return <NoData />;
 
   return (
     <>
       <div className="flex w-[608px] justify-between mobile:w-291">
-        {!chooseBook &&
+        {(bookOverviews && !chooseBook) &&
           bookOverviews?.map((bookOverview, index) => (
             <PreviewBookInfo
               key={index}
@@ -48,10 +59,10 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
               alignCenter
               bookId={bookOverview.bookId}
               community={true}
-              onClick={() => setChooseBookId(bookOverview.bookId)}
+              onClick={() => handleChooseBook(bookOverview.bookId)}
             />
           ))}
-        {chooseBook && (
+        {(chooseBook ) && (
           <PreviewBookInfo
             size="xs"
             image={chooseBook.bookImgUrl}
@@ -61,7 +72,7 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
           />
         )}
       </div>
-      {!chooseBook && bookOverviews && (
+      {!chooseBookData && bookOverviews && (
         <Pagination totalCount={data?.total} standard={4} />
       )}
     </>

@@ -3,11 +3,7 @@ import useFormControl from '@/hooks/useFormControl';
 import ModalSearchInput from '@/components/input/modalSearchInput';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
-import {
-  CurrentPageStateAtom,
-  chooseBookAtom,
-  chooseBookIdAtom,
-} from '@/store/state';
+import { CurrentPageStateAtom, chooseBookIdAtom } from '@/store/state';
 import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previewBookInfoPagination';
 import Input from '@/components/input/input';
 import NoData from './noData';
@@ -15,6 +11,7 @@ import { usePostCommunity, usePutCommunity } from '@/api/community';
 import { useSession } from 'next-auth/react';
 import { AddCommunityCardProps } from '.';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import { useGetBook } from '@/api/book';
 
 function AddCommunityCardForm({
   onClick,
@@ -36,7 +33,12 @@ function AddCommunityCardForm({
   });
   const [search, setSearch] = useState('');
   const [_, setCurrentPage] = useAtom(CurrentPageStateAtom);
-  const [chooseBook] = useAtom(chooseBookAtom);
+
+  const { data: chooseBookData } = useGetBook({
+    endpoint: String(bookId),
+    params: {},
+    enabled: bookId,
+  });
 
   const handleSearch = (value: string) => {
     setSearch(value);
@@ -52,15 +54,21 @@ function AddCommunityCardForm({
         onSearch={handleSearch}
       />
       <div className="flex-center h-323 w-full flex-col gap-22 mobile:h-330 ">
-        {search ? <PreviewBookInfoPagination search={search} /> : !edit && <NoData />}
-        {edit && (
-          <PreviewBookInfo
-            size="xs"
-            image={chooseBook.bookImgUrl}
-            title={chooseBook.bookTitle}
-            authorList={chooseBook.authors}
-            community={true}
-          />
+        {search ? (
+          <PreviewBookInfoPagination search={search} />
+        ) : (
+          !edit && <NoData />
+        )}
+        {edit && chooseBookData && (
+          <div className="flex w-full justify-start">
+            <PreviewBookInfo
+              size="xs"
+              image={chooseBookData.data.bookImgUrl}
+              title={chooseBookData.data.bookTitle}
+              authorList={chooseBookData.data.authors}
+              community={true}
+            />
+          </div>
         )}
       </div>
       <Input

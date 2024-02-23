@@ -6,6 +6,7 @@ import { instance } from 'src/libs/instance';
 interface GetBookOption {
   endpoint?: string;
   params?: BookParams;
+  enabled?: any;
 }
 
 //책 전체 가져오기, 도서 단일 조회
@@ -18,7 +19,7 @@ export const getBook = async (option: GetBookOption) => {
 };
 
 export const useGetBook = (option: GetBookOption) => {
-  return useFetch(QUERY_KEY.book, getBook, option);
+  return useFetch(QUERY_KEY.book, getBook, option, option?.enabled);
 };
 
 //책 전체 infinite, pagination 둘다 가능
@@ -31,7 +32,7 @@ const getPageBook = async (params : BookParamsV2 ) => {
 }
 
 export const useGetPageBook = (params : BookParamsV2) => {
-  return useFetch(QUERY_KEY.book, getPageBook, params)
+  return useFetch(QUERY_KEY.book, getPageBook, params, params?.enabled)
 }
 
 
