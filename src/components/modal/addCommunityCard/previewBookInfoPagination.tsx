@@ -13,13 +13,14 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
   const [_, setChooseBookId] = useAtom(chooseBookIdAtom);  //전역변수로 넘겨줄 책번호
   const [LChooseBookId, setLChooseBookId] = useState<number | null>(null)
   const [chooseBook, setChooseBook] = useState<BookData>();
+  const limitValue = (typeof window !== 'undefined') ? window.innerWidth  : 0;
   
   const { data } = useGetPageBook({
     navigationMethod: 'PAGINATION',
     sortType: 'BESTSELLER',
     ascending: false,
     offset: String(CurrentPage - 1),
-    limit: window.innerWidth <= 768 ? String(3) : String(4),
+    limit: (limitValue && window.innerWidth <= 768) ? String(3) : String(4),
     search,
     enabled: search,
   });
