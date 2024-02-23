@@ -7,13 +7,16 @@ export interface AddReviewProps {
   bookId: number;
   bookTitle: string;
   authors: string;
+  edit?: boolean, 
+  reviewId?: number, 
+  review?: string, 
 }
 
-function AddReview({onClick, bookId, bookTitle, authors} : AddReviewProps) {
+function AddReview({onClick, bookId, bookTitle, authors, edit, reviewId, review } : AddReviewProps) {
   return (
     <ModalLayout onClick={onClick}>
       <ModalContainer onClick={onClick} title="리뷰 작성하기">
-        <AddReviewForm onClick={onClick} bookId={bookId} bookTitle={bookTitle} authors={authors}/>
+        <AddReviewForm onClick={onClick} bookId={bookId} bookTitle={bookTitle} authors={authors} edit={edit} reviewId={reviewId} review={review} />
       </ModalContainer>
     </ModalLayout>
   )

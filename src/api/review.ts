@@ -25,9 +25,9 @@ interface PostReviewOption {
 }
 
 const postReview = async (data: PostReviewOption) => {
-  const { option, content } = data;
-  const result = await instance.post(`review/${option}`, {
-    content,
+  const result = await instance.post('review', {
+    bookId: data.option,
+    ...data,
   });
   return result.data;
 };

@@ -28,13 +28,12 @@ function AddCommunityCardForm({
     initialValue: { content: review },
   });
   const [search, setSearch] = useState('');
-  const [CurrentPage, setCurrentPage] = useAtom(CurrentPageStateAtom);
+  const [_, setCurrentPage] = useAtom(CurrentPageStateAtom);
 
   //TODO:pagination데이터 필요
   const handleSearch = (value: string) => {
     setSearch(value);
     setCurrentPage(1);
-    console.log(bookId, CurrentPage)
   };
 
   return (

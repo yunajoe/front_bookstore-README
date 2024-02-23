@@ -39,6 +39,7 @@ function useFormControl ({
     bookId,
     ...content,
   };
+  console.log(postFormData)
   const putFormData = {
     option: option?.optional,
     ...content,

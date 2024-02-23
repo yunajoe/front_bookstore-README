@@ -6,16 +6,19 @@ import LineIcon from '@/public/icons/Line.svg';
 import useFormControl from '@/hooks/useFormControl';
 import Input from '@/components/input/input';
 import { useState } from 'react';
-import { usePostReview } from '@/api/review';
-import { AddReviewProps } from '.';
+import { usePostReview, usePutReview } from '@/api/review';
+import { AddReviewProps } from '@/components/modal/addReview';
 
-function AddReviewForm({ onClick, bookId, bookTitle, authors }: AddReviewProps ) {
+function AddReviewForm({ onClick, bookId, bookTitle, authors, edit, reviewId, review }: AddReviewProps ) {
   const [newRating, setNewRating] = useState(0);
   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
     postFn: usePostReview,
-    option: { required: newRating },
-    bookId: 35,
+    // putFn: usePutReview,
+    edit: edit,
+    bookId: bookId,
+    option: { required: newRating, optional: reviewId },
     onClick: onClick,
+    initialValue: {content : review},
   });
 
   return (
@@ -46,7 +49,7 @@ function AddReviewForm({ onClick, bookId, bookTitle, authors }: AddReviewProps )
           title="내용"
           height="h-274"
           control={control}
-          name="description"
+          name="content"
         />
       </form>
       <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
