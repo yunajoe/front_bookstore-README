@@ -1,5 +1,6 @@
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
+
 import kakaoIcon from 'public/icons/KakaoIcon.svg';
 import naverIcon from 'public/icons/NaverIcon.svg';
 import googleIcon from 'public/icons/GoogleIcon.svg';
