@@ -7,6 +7,7 @@ import BookmarkButton from '@/components/button/header/bookmarkButton';
 import HeaderLayout from '@/components/layout/headerLayout';
 import SignUpButton from '@/components/button/signUpButton';
 import ReadMeButton from '../button/header/readmeButton';
+import useGetBasKetQuery from '@/hooks/useGetBasKetQuery';
 
 export interface HeaderProps {
   isLoggedIn: boolean;
@@ -36,11 +37,9 @@ function NonLoggedInHeader() {
 }
 
 // 로그인한 상태의 헤더
-function LoggedInHeader({
-  numItemsOfCart,
-}: {
-  numItemsOfCart: number | undefined;
-}) {
+function LoggedInHeader() {
+  // authenticated 상태인 경우에만 useGetBasKetQuery() 호출
+  const { data } = useGetBasKetQuery();
   return (
     <div
       className="relative z-10 mx-15 flex h-50 min-w-fit max-w-full items-center
@@ -51,7 +50,7 @@ function LoggedInHeader({
         <SignOutButton />
         <Separator />
         <BookmarkButton />
-        <CartButton numItemsOfCart={numItemsOfCart} />
+        <CartButton numItemsOfCart={data?.length} />
         <MyPageButton />
       </div>
     </div>
@@ -59,10 +58,10 @@ function LoggedInHeader({
 }
 
 // 헤더 컴포넌트
-function Header({ isLoggedIn, numItemsOfCart }: HeaderProps) {
+function Header({ isLoggedIn }: HeaderProps) {
   return isLoggedIn ? (
     <HeaderLayout isLoggedIn={isLoggedIn}>
-      <LoggedInHeader numItemsOfCart={numItemsOfCart} />
+      <LoggedInHeader />
     </HeaderLayout>
   ) : (
     <HeaderLayout isLoggedIn={isLoggedIn}>

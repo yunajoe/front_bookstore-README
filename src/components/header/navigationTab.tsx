@@ -19,7 +19,7 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
 
   // 특정 페이지에서만 WritePostButton을 보이도록 조건을 설정
   const showWritePostButton =
-    currentPath === '/community' ||
+    (currentPath === '/community' && isLoggedIn )||
     (currentPath === '/community/writeme' && isLoggedIn);
 
   const toggleCategoryTab = () => {
@@ -48,12 +48,11 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
             <Link href="/community"> 커뮤니티</Link>
           </div>
         </div>
-        <div className="ml-auto flex items-center tablet:mr-40 pc:mr-60">
+        {showWritePostButton && <div className="ml-auto flex items-center tablet:mr-40 pc:mr-60">
           <WritePostButton
-            showButton={showWritePostButton}
             onClick={handleModalOpen}
           />
-        </div>
+        </div>}
       </div>
       {isCategoryTabVisible && <CategoryTab />}
       {isModalOpen && <AddCommunityCard onClick={handleModalOpen} />}

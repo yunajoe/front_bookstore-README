@@ -10,6 +10,8 @@ import KebabButton from '@/components/button/kebab/kebabButton';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import useFormatDate from '@/hooks/useFormatDate';
 import { MyReviewData } from '@/types/api/review';
+import AlertModal from '@/components/modal/alertModal';
+import AddCommunityCard from '@/components/modal/addCommunityCard';
 
 function MyReviewCard({
   bookId,
@@ -23,6 +25,12 @@ function MyReviewCard({
 }: MyReviewData) {
   const [isSummarized, setIsSummarized] = useState(true);
   const formatDate = useFormatDate(updateDate);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+
+  const handleEditModalOpenClick = () => {
+    setIsEditModalOpen(!isEditModalOpen);
+  };
 
   return (
     <div className="flex min-h-140 w-full max-w-[1080px] flex-col mobile:min-h-115 mobile:w-330 tablet:max-w-[710px]">
@@ -78,6 +86,16 @@ function MyReviewCard({
       <div className="pt-32  tablet:hidden pc:hidden">
         <div className="h-1 w-full border border-gray-1"></div>
       </div>
+      {isEditModalOpen && (
+        <AddCommunityCard onClick={handleEditModalOpenClick} />
+      )}
+      {isAlertModalOpen && (
+        <AlertModal
+          title="정말 삭제하시겠습니까?"
+          description="삭제한 글은 복구할 수 없습니다."
+          onClick={handleAlertModalOpenClick}
+        />
+      )}
     </div>
   );
 }

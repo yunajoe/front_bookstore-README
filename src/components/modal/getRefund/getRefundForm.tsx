@@ -1,26 +1,26 @@
-import TitleContentTable from '@/components/modal/addReview/titleContentTable';
-import Image from 'next/image';
-import LineIcon from '@/public/icons/Line.svg';
-import Radio from '@/components/input/radio';
-import RegisterButton from '@/components/button/register/registerButton';
-import useFormControl from '@/hooks/useFormControl';
-import DropDown from '@/components/dropDown/dropDown';
+// import TitleContentTable from '@/components/modal/addReview/titleContentTable';
+// import Image from 'next/image';
+// import LineIcon from '@/public/icons/Line.svg';
+// import Radio from '@/components/input/radio';
+// import RegisterButton from '@/components/button/register/registerButton';
+// import useFormControl from '@/hooks/useFormControl';
+// import DropDown from '@/components/dropDown/dropDown';
 import { useState } from 'react';
 import { REFUND } from '@/constants/dropDownMenu';
-import RefundPrice from '@/components/modal/getRefund/refundPrice';
-import Input from '@/components/input/input';
+// import RefundPrice from '@/components/modal/getRefund/refundPrice';
+// import Input from '@/components/input/input';
 
 function GetRefundForm() {
-  const [selectedItem, setSelectedItem] = useState(REFUND[0]);
-  const onSelectedItem = (menu: string) => {
-    setSelectedItem(menu);
-  };
-  const option = selectedItem.length === 0 ? false : selectedItem;
-  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl(option);
-
+//   const [selectedItem, setSelectedItem] = useState(REFUND[0]);
+//   const onSelectedItem = (menu: string) => {
+//     setSelectedItem(menu);
+//   };
+//   const option = selectedItem.length === 0 ? false : selectedItem;
+//   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl(option);
+      //TODO: 환불 api나오면 연결필요, 주석해제시 에러
   return (
     <>
-      <form
+      {/* <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-40 overflow-scroll">
         <TitleContentTable
@@ -70,7 +70,7 @@ function GetRefundForm() {
       </form>
       <RegisterButton disabled={isButtonActive}>
         교환/환불 신청하기
-      </RegisterButton>
+      </RegisterButton> */}
     </>
   );
 }
