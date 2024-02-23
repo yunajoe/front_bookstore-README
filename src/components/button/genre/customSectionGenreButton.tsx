@@ -17,7 +17,7 @@ function CustomSectionGenreButton({
 
   return (
     <button
-      className={`text-13 flex-center h-33 w-fit whitespace-nowrap rounded-[53px] border ${
+      className={`text-13 flex-center h-33 w-fit whitespace-nowrap rounded-[53px] border bg-white ${
         selected ? 'border-primary text-primary' : 'border-gray-1'
       } pc:text-14`}
       onClick={handleClick}>
