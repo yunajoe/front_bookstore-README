@@ -24,6 +24,7 @@ function BookOrderCardList({ orderData }: BookOrderCardListProps) {
                 {order.orderBook.map((bookData) => (
                   <BookOrderCard
                     key={bookData.bookId}
+                    bookId={bookData.orderBookId}
                     bookTitle={bookData.bookTitle}
                     bookImgUrl={bookData.bookImgUrl}
                     bookPrice={bookData.price}

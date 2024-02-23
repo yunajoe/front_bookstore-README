@@ -7,9 +7,9 @@ import useFormControl from '@/hooks/useFormControl';
 import Input from '@/components/input/input';
 import { useState } from 'react';
 import { usePostReview } from '@/api/review';
-import { OnClickProps } from '@/types/onClickType';
+import { AddReviewProps } from '.';
 
-function AddReviewForm({ onClick }: OnClickProps) {
+function AddReviewForm({ onClick, bookId, bookTitle, authors }: AddReviewProps ) {
   const [newRating, setNewRating] = useState(0);
   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
     postFn: usePostReview,
@@ -25,9 +25,9 @@ function AddReviewForm({ onClick }: OnClickProps) {
         onSubmit={handleSubmit(onSubmit)}>
         <TitleContentTable
           title1="책 제목"
-          content1="스물 아홉 생일, 1년 후 죽기로 결심하다"
+          content1={bookTitle}
           title2="저자"
-          content2="이제니"
+          content2={authors}
           truncate="truncate"
         />
         <Image src={LineIcon} alt="구분선" />

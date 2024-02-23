@@ -6,6 +6,7 @@ import BookTitle from '@/components/book/bookTitle/bookTitle';
 import { useState } from 'react';
 import AddReview from '@/components/modal/addReview';
 export type BookOrderCardProps = {
+  bookId: number;
   bookTitle: string;
   bookImgUrl: string;
   bookPrice: number;
@@ -15,6 +16,7 @@ export type BookOrderCardProps = {
 };
 
 function BookOrderCard({
+  bookId,
   bookTitle,
   bookImgUrl,
   bookPrice,
@@ -84,7 +86,7 @@ function BookOrderCard({
         </button>
       </div>
       {isReviewModalOpen && (
-        <AddReview onClick={handleReviewModalOpenClick} />
+        <AddReview onClick={handleReviewModalOpenClick} bookId={bookId} bookTitle={bookTitle} authors={authors} />
       )}
     </div>
   );
