@@ -53,17 +53,13 @@ function CustomSection() {
         cusTomSelectedGenreListQuery.data.memberCategory.length &&
         !selectedGenreId
       ) {
-        const shuffledGenres = cusTomSelectedGenreListQuery.data.memberCategory
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 3);
-        setSelectedGenreId(shuffledGenres[0].categoryId);
+        setSelectedGenreId(genreList[0].categoryId);
         setInitialDataLoaded(true); // 초기 데이터를 로드했음을 표시
       }
     } catch (error) {
       setSelectedGenreId(null);
     }
-  }, [cusTomSelectedGenreListQuery.data]);
-  console.log('selected' + selectedGenreId);
+  }, [cusTomSelectedGenreListQuery.data, selectedGenreId]);
 
   return (
     <div className="flex-center w-full bg-pink">

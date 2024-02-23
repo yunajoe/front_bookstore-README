@@ -39,7 +39,15 @@ function GenreSelection({
           </div>
         </div>
       ) : (
-        <RecommendationContent />
+        // 선택된 장르가 없는 경우에 대한 처리
+        <div>
+          <div className="text-24 font-bold mobile:text-20">
+            <span className="text-primary">맞춤 </span>도서를 가져왔어요
+          </div>
+          <div className="flex text-14 text-gray-3">
+            선호 장르를 선택해주세요
+          </div>
+        </div>
       )}
     </div>
   );
