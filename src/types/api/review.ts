@@ -18,3 +18,15 @@ export interface ReviewData {
   userNickname: string;
   profileImg?: string | null;
 }
+
+
+export interface MyReviewData {
+  reviewId: number;
+  bookId: number;
+  authors: string[];
+  reviewRating: number;
+  updateDate: string;
+  bookImgUrl: string;
+  bookTitle: string;
+  content: string;
+}
