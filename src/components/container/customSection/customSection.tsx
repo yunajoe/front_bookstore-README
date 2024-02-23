@@ -1,107 +1,101 @@
-import { useEffect, useState } from 'react';
-import CustomGenreButton from '@/components/button/genre/customGenreButton';
+import { useEffect, useMemo, useState } from 'react';
+import { CusTomBookType, PreferredGenre } from '@/types/customPageType';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import MoreLink from '@/components/button/moreLinkButton';
-import {
-  CustomBook,
-  CustomSectionMockData_3,
-} from '@/pages/api/mock/customSectionMock';
-import { StaticImageData } from 'next/image';
-import NonLoggedInCustomSection from '@/components/container/customSection/nonLoggedInCustomSection';
-import NonSelectedCustomSection from '@/components/container/customSection/nonSelectedCustomSection';
-import Link from 'next/link';
-interface CustomSectionProps {
-  isLoggedIn: boolean;
-  isGenreSelected: boolean;
-}
+import { filteredBooks } from '@/utils/compareBooks';
+import VacantCustomLayout from '@/components/layout/vacantCustomLayout';
+import { useQuery } from '@tanstack/react-query';
+import { getCustomCategoryList } from '@/api/category';
+import { getRandomBookList } from '@/api/book';
+import Skeleton from '@/components/skeleton/customSkeleton/skeleton';
+import GenreSelection from './genreSelection';
 
-function CustomSection({ isLoggedIn, isGenreSelected }: CustomSectionProps) {
-  const [selectedGenre, setSelectedGenre] = useState<string | null>(
-    CustomSectionMockData_3[0].category,
-  );
-  const [selectedBookList, setSelectedBookList] = useState<
-    {
-      bookId: number;
-      title: string;
-      authorList: string[];
-      bookImg: string | StaticImageData;
-    }[]
-  >([]);
+function CustomSection() {
+  const [selectedGenreId, setSelectedGenreId] = useState<string | null>(null);
+  const cusTomSelectedGenreListQuery = useQuery({
+    queryKey: ['category'],
+    queryFn: () => getCustomCategoryList(),
+    select: (data) => data.data,
+  });
+
+  const genreList = useMemo(() => {
+    try {
+      const shuffledGenres = cusTomSelectedGenreListQuery.data.memberCategory
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3);
+      return shuffledGenres.map((item: PreferredGenre) => {
+        return {
+          categoryId: item.categoryId,
+          title: item.subName,
+        };
+      });
+    } catch (error) {
+      return [];
+    }
+  }, [cusTomSelectedGenreListQuery.data]);
+
+  const selectedCategoryIds = selectedGenreId ? selectedGenreId : '';
+
+  const getRandomCustomBookList = useQuery({
+    queryKey: ['randomBook', selectedGenreId],
+    queryFn: () => getRandomBookList(selectedCategoryIds, true),
+    enabled: !!selectedCategoryIds,
+    select: (data) => filteredBooks(data.data.books),
+  });
 
   useEffect(() => {
-    // 처음 렌더링 시 selectedGenre에 해당하는 bookList 설정
-    const initialSelectedData = CustomSectionMockData_3.find(
-      (data) => data.category === selectedGenre,
-    );
-    setSelectedBookList(
-      initialSelectedData ? initialSelectedData.bookList : [],
-    );
-  }, [selectedGenre]);
+    try {
+      if (cusTomSelectedGenreListQuery.data.memberCategory.length) {
+        const shuffledGenres = cusTomSelectedGenreListQuery.data.memberCategory
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3);
+        setSelectedGenreId(shuffledGenres[0].categoryId);
+      }
+    } catch (error) {
+      setSelectedGenreId(null);
+    }
+  }, [cusTomSelectedGenreListQuery.data]);
 
-  const handleGenreClick = (genre: string) => {
-    setSelectedGenre((prevGenre) => (prevGenre === genre ? null : genre));
-  };
-
-  if (!isLoggedIn) {
-    return <NonLoggedInCustomSection />;
-  }
-
-  if (isLoggedIn && !isGenreSelected) {
-    return <NonSelectedCustomSection />;
-  }
+  if (
+    cusTomSelectedGenreListQuery.isLoading ||
+    !cusTomSelectedGenreListQuery.data.memberCategory
+  )
+    return <Skeleton />;
 
   return (
-    <div
-      className="flex-center bg-pink relative h-500 w-full mobile:h-[886px]
-        mobile:flex-col tablet:h-[665px] tablet:flex-col pc:gap-x-20">
-      <Link
-        href="/custom"
-        className="text-primary absolute right-60 top-20 flex tablet:top-60 pc:hidden">
-        더보기
-      </Link>
-      <div
-        className="flex-center mt-80 w-314 flex-col mobile:mx-auto mobile:mt-50 tablet:mx-auto
-          tablet:h-244 pc:h-342 pc:w-347">
-        <div className="mb-8 text-24 font-bold">
-          <span className="text-primary">맞춤도서</span>를 가져왔어요
+    <div className="flex w-full flex-col">
+      <div className="">
+        <div className="text-24 font-bold">
+          <span className="text-primary">맞춤 </span>도서를 가져왔어요
         </div>
-        <div className="mb-30 text-gray-4 mobile:mb-20">
-          선호 장르 분석을 통해 도서를 추천해요
-        </div>
-        <div className="flex-center mb-60 w-full flex-wrap gap-10 mobile:mb-40">
-          {CustomSectionMockData_3.map((data) => (
-            <CustomGenreButton
-              key={data.category}
-              title={data.category}
-              selected={selectedGenre === data.category}
-              onSelect={handleGenreClick}
-            />
-          ))}
-        </div>
+        <div className="text-gray-3">선호 장르 분석을 통해 도서를 추천해요</div>
       </div>
-
-      <div
-        className="flex-center pc:w-712 relative flex-wrap gap-x-20 mobile:mx-auto
-          mobile:w-330 mobile:gap-y-60 tablet:h-312 pc:justify-end">
-        {selectedBookList.length > 0 && (
-          <>
-            {selectedBookList.map((book: CustomBook, index: number) => (
-              <div className="relative" key={book.bookId}>
-                <div className="relative">
-                  <PreviewBookInfo
-                    size={'md'}
-                    title={book.title}
-                    authorList={book.authorList}
-                    image={book.bookImg || ''}
-                    bookId={book.bookId}
-                  />
-                  <MoreLink isVisible={index === 3} />
-                </div>
+      <GenreSelection
+        genreList={genreList}
+        selectedGenreId={selectedGenreId}
+        setSelectedGenreId={setSelectedGenreId}
+      />
+      {genreList.length === 0 ? null : getRandomCustomBookList?.data?.length ===
+        0 ? (
+        <VacantCustomLayout />
+      ) : (
+        <div className="grid grid-cols-5 gap-x-30 gap-y-40 mobile:grid-cols-2 mobile:gap-x-10 mobile:gap-y-30 mobile:pr-15 tablet:grid-cols-4 tablet:gap-x-20">
+          {getRandomCustomBookList.data?.map((book: CusTomBookType) => {
+            return (
+              <div key={book.bookId}>
+                <PreviewBookInfo
+                  size="lg"
+                  bookId={book.bookId}
+                  image={book.bookImgUrl}
+                  title={book.bookTitle}
+                  authorList={book.authors}
+                  price={book.price}
+                  isUnit={true}
+                />
               </div>
-            ))}
-          </>
-        )}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
