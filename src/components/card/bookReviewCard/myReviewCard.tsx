@@ -12,6 +12,7 @@ import useFormatDate from '@/hooks/useFormatDate';
 import { MyReviewData } from '@/types/api/review';
 import AlertModal from '@/components/modal/alertModal';
 import AddCommunityCard from '@/components/modal/addCommunityCard';
+import AddReview from '@/components/modal/addReview';
 
 function MyReviewCard({
   bookId,
@@ -25,11 +26,11 @@ function MyReviewCard({
 }: MyReviewData) {
   const [isSummarized, setIsSummarized] = useState(true);
   const formatDate = useFormatDate(updateDate);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
-  const handleEditModalOpenClick = () => {
-    setIsEditModalOpen(!isEditModalOpen);
+  const handleReviewModalOpenClick = () => {
+    setIsReviewModalOpen(!isReviewModalOpen);
   };
   const handleAlertModalOpenClick = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
@@ -89,8 +90,8 @@ function MyReviewCard({
       <div className="pt-32  tablet:hidden pc:hidden">
         <div className="h-1 w-full border border-gray-1"></div>
       </div>
-      {isEditModalOpen && (
-        <AddCommunityCard onClick={handleEditModalOpenClick} />
+      {isReviewModalOpen && (
+        <AddReview onClick={handleReviewModalOpenClick} />
       )}
       {isAlertModalOpen && (
         <AlertModal
