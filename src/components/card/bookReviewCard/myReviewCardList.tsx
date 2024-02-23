@@ -1,8 +1,8 @@
-import { MyReviewType } from '@/types/bookReviewType';
 import MyReviewCard from './myReviewCard';
+import { MyReviewData } from '@/types/api/review';
 
 interface MyReviewCardListProps {
-  myReviewData: MyReviewType[];
+  myReviewData: MyReviewData[];
 }
 
 function MyReviewCardList({ myReviewData }: MyReviewCardListProps) {
@@ -10,7 +10,16 @@ function MyReviewCardList({ myReviewData }: MyReviewCardListProps) {
     <div className="flex flex-col gap-20 mobile:gap-25">
       {myReviewData.map((review) => (
         <div className="flex-center">
-          <MyReviewCard book={review.book} review={review.review} />
+          <MyReviewCard
+            authors={review?.authors}
+            bookId={review?.bookId}
+            bookImgUrl={review?.bookImgUrl}
+            bookTitle={review?.bookTitle}
+            content={review?.content}
+            reviewRating={review?.reviewRating}
+            updateDate={review?.updateDate}
+            reviewId={review?.reviewId}
+          />
         </div>
       ))}
     </div>
