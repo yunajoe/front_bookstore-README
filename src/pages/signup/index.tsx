@@ -82,7 +82,6 @@ function SignUp() {
     }
 
     const personData = {
-      name: '없어져야하는필드입니다',
       email: email,
       password: password,
       nickname: nickname,
@@ -103,7 +102,7 @@ function SignUp() {
           <div className="flex-center mb-77 h-64">
             <Link
               href="/"
-              className="font-Inter text-primary text-24 font-bold">
+              className="font-Inter text-24 font-bold text-primary">
               Read Me
             </Link>
           </div>
@@ -200,7 +199,7 @@ function SignUp() {
           </form>
           <div className="mt-20 flex gap-x-4">
             <p className="text-gray-3">이미 아이디가 있으신가요?</p>
-            <Link href="/signin" className="text-primary font-normal">
+            <Link href="/signin" className="font-normal text-primary">
               로그인
             </Link>
           </div>

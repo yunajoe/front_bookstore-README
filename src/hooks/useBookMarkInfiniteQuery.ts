@@ -1,37 +1,41 @@
 import { getBookMarkList } from '@/api/bookmark';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
-const LIMIT = 8
+const LIMIT = 8;
 function useBookMarkInfiniteQuery() {
-    const {
+  const { data, status, isError, fetchNextPage, hasNextPage } =
+    useInfiniteQuery({
+      queryKey: ['bookMarkUserId'],
+      queryFn: async ({ pageParam }) => {
+        const result = await getBookMarkList(pageParam, LIMIT);
+        return {
+          ...result,
+          pageParam: pageParam,
+        };
+      },
+      getNextPageParam: (lastPage) => {
+        return lastPage.data.cursorId === -1
+          ? undefined
+          : lastPage.pageParam + 1;
+      },
+      initialPageParam: 0,
+    });
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    return () => {
+      queryClient.resetQueries({ queryKey: ['bookMarkUserId'] });
+    };
+  }, []);
+  return {
     data,
+    isError,
     status,
-    isError,    
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteQuery({
-    queryKey: ['bookMarkUserId'],
-    queryFn: async ({ pageParam }) => {
-      const result = await getBookMarkList(pageParam, LIMIT);
-      return {
-        ...result,
-        pageParam: pageParam,
-      }
-    },
-    getNextPageParam: (lastPage) => {
-      return lastPage.data.cursorId === -1 ? undefined : lastPage.pageParam + 1
-    },
-    initialPageParam: 0,
-  })
-  return (
-      {
-      data,
-      isError,
-      status,
-      fetchNextPage,
-      hasNextPage,
-   }
-  )
+  };
 }
 
-export default useBookMarkInfiniteQuery
+export default useBookMarkInfiniteQuery;
