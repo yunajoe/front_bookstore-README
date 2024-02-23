@@ -8,8 +8,13 @@ import { getCustomCategoryList } from '@/api/category';
 import { getRandomBookList } from '@/api/book';
 import GenreSelection from './genreSelection';
 import Link from 'next/link';
+import NonLoggedInCustomSection from './nonLoggedInCustomSection';
+import NonSelectedCustomSection from './nonSelectedCustomSection';
 
-function CustomSection() {
+interface CustomSectionProps {
+  isLoggedIn: boolean;
+}
+function CustomSection({ isLoggedIn }: CustomSectionProps) {
   const [selectedGenreId, setSelectedGenreId] = useState<string | null>(null);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
 
@@ -59,19 +64,21 @@ function CustomSection() {
       setSelectedGenreId(null);
     }
   }, [cusTomSelectedGenreListQuery.data, selectedGenreId]);
+  if (!isLoggedIn) return <NonLoggedInCustomSection />;
 
   return (
     <div className="flex-center w-full bg-pink">
-      <div className="flex-center w-full max-w-[1200px] mobile:h-[940px] mobile:flex-col tablet:h-[655px] tablet:flex-col pc:flex pc:h-500 pc:items-center">
-        <GenreSelection
-          genreList={genreList}
-          selectedGenreId={selectedGenreId}
-          setSelectedGenreId={setSelectedGenreId}
-        />
-        {genreList.length === 0 ? null : getRandomCustomBookList?.data
-            ?.length === 0 ? (
-          <VacantCustomLayout />
-        ) : (
+      {genreList.length === 0 ? (
+        <NonSelectedCustomSection />
+      ) : getRandomCustomBookList?.data?.length === 0 ? (
+        <VacantCustomLayout />
+      ) : (
+        <div className="flex-center w-full max-w-[1200px] mobile:h-[940px] mobile:flex-col tablet:h-[655px] tablet:flex-col pc:flex pc:h-500 pc:items-center">
+          <GenreSelection
+            genreList={genreList}
+            selectedGenreId={selectedGenreId}
+            setSelectedGenreId={setSelectedGenreId}
+          />
           <div className="mobile:flex-center relative flex  flex-wrap gap-x-30 mobile:mx-15  mobile:mb-60 mobile:mt-40 mobile:w-360 mobile:gap-x-10 mobile:gap-y-35 mobile:pr-15 tablet:mt-63 tablet:gap-x-20 pc:ml-75 pc:mr-60 pc:justify-between">
             {getRandomCustomBookList.isLoading ? (
               <div></div>
@@ -118,8 +125,8 @@ function CustomSection() {
               )
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
