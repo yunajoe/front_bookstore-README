@@ -1,7 +1,15 @@
-type SortType = 'STAR' | 'REVIEW' |'VIEW' | 'POPULATION'| 'PRICE'| 'NEWEST'| 'BESTSELLER'| 'ID'
+type SortType =
+  | 'STAR'
+  | 'REVIEW'
+  | 'VIEW'
+  | 'POPULATION'
+  | 'PRICE'
+  | 'NEWEST'
+  | 'BESTSELLER'
+  | 'ID';
 
 export interface Sort {
-  sort?: SortType // 정렬 기준입니다(STAR REVIEW VIEW POPULATION PRICE ID)
+  sort?: SortType; // 정렬 기준입니다(STAR REVIEW VIEW POPULATION PRICE ID)
 }
 
 export interface BookParams extends Sort {
@@ -15,8 +23,8 @@ export interface BookParamsV2 {
   navigationMethod: 'INFINITE_SCROLL' | 'PAGINATION';
   sortType: SortType;
   ascending: true | false;
-  cursorId?:string;
-  offset?:string;
+  cursorId?: string;
+  offset?: string;
   limit?: string;
   search?: string;
   enabled?: any;
@@ -60,11 +68,5 @@ export interface BookData extends BookmarksType {
   quantityCount: number | null;
   createDate: string;
   updateDate: string | null;
-  statics : BookStaticType;
-}
-
-export interface BookJotaiData {
-  bookImgUrl: string;
-  bookTitle: string;
-  authors: string[];
+  statics: BookStaticType;
 }

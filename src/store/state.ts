@@ -1,7 +1,6 @@
 import { PayMentAtom } from '@/types/cartType';
 import { atom } from 'jotai';
 import { CategoryAtomType, CategoryType } from '@/types/api/category';
-import { BookJotaiData } from '@/types/api/book';
 
 export const countAtom = atom(0);
 
@@ -12,12 +11,6 @@ export const CurrentPageArrayIndexAtom = atom(0);
 export const CurrentPageStateAtom = atom(1);
 
 export const chooseBookIdAtom = atom(0);
-
-export const chooseBookAtom = atom<BookJotaiData>({
-  bookImgUrl: '',
-  bookTitle: '',
-  authors: [],
-})
 
 // 장바구니 money Atom
 export const basketItemList = atom<PayMentAtom[]>([]);
