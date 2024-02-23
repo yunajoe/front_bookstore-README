@@ -6,18 +6,35 @@ import { useAtom } from 'jotai';
 import { CurrentPageStateAtom } from '@/store/state';
 import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previewBookInfoPagination';
 import Input from '@/components/input/input';
+import { usePostCommunity, usePutCommunity } from '@/api/community';
+import { useSession } from 'next-auth/react';
+import { AddCommunityCardProps } from '.';
 
-function AddCommunityCardForm() {
-  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl();
+function AddCommunityCardForm({
+  onClick,
+  edit,
+  communityId,
+  bookId,
+  review,
+}: AddCommunityCardProps) {
+  const { data: session } = useSession();
+  const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
+    postFn: usePostCommunity,
+    putFn: usePutCommunity,
+    edit: edit,
+    bookId: 35,
+    option: {required : session?.memberId, optional : communityId},
+    onClick: onClick,
+    initialValue: { content: review },
+  });
   const [search, setSearch] = useState('');
   const [CurrentPage, setCurrentPage] = useAtom(CurrentPageStateAtom);
 
-  //TODO : search, CurrentPage값 data fetch때 사용할 예정
-  console.log(search, CurrentPage)
-
+  //TODO:pagination데이터 필요
   const handleSearch = (value: string) => {
     setSearch(value);
     setCurrentPage(1);
+    console.log(bookId, CurrentPage)
   };
 
   return (
@@ -29,11 +46,17 @@ function AddCommunityCardForm() {
         onSearch={handleSearch}
       />
       <div className="flex-center h-323 w-full flex-col gap-22">
-        <PreviewBookInfoPagination />
+        {search && <PreviewBookInfoPagination search={search} />}
       </div>
-      <Input type='text' title='내용' height="h-100" control={control} name="description" />
+      <Input
+        type="text"
+        title="내용"
+        height="h-100"
+        control={control}
+        name="content"
+      />
       <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
-        글쓰기
+        {edit ? '수정하기' : '글쓰기'}
       </RegisterButton>
     </form>
   );

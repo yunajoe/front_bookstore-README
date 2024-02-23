@@ -1,12 +1,7 @@
 interface WriteButtonProps {
-  showButton: boolean;
   onClick: () => void;
 }
-function WritePostButton({ showButton, onClick }: WriteButtonProps) {
-  if (!showButton) {
-    return null; // 렌더링하지 않음
-  }
-
+function WritePostButton({onClick }: WriteButtonProps) {
   return (
     <button
       className="flex-center text-primary border-primary relative ml-auto h-40 w-108 rounded-md

@@ -24,18 +24,13 @@ export interface GetCommunityOption {
 }
 
 export interface PostCommunityData {
-  memberId: number;
-  bookId: number;
-  title: string;
-  content: string;
-}
-
-export interface PutCommunityData {
-  title: string;
-  content: string;
+  option?:string | number | boolean;
+  bookId?: number;
+  title?: string;
+  content?: any;
 }
 
 export interface PutCommunityOption {
-  communityId: number;
-  data : PutCommunityData
+  option?: number;
+  content?: string;
 }

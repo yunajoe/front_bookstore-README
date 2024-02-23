@@ -1,7 +1,7 @@
-import React from 'react';
+import { ReactNode } from 'react';
 export interface KebabDropDownButtonProps {
-  title1: string | React.ReactNode; // Link 연결도 가능하게 하기 위해 변경
-  title2: string | React.ReactNode;
+  title1: string | ReactNode; // Link 연결도 가능하게 하기 위해 변경
+  title2: string | ReactNode;
   color?: string;
   onClickTitle1?: () => void; // onClick prop 추가
   onClickTitle2?: () => void; // onClick prop 추가
