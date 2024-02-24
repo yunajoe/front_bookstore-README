@@ -12,6 +12,7 @@ import useFormatDate from '@/hooks/useFormatDate';
 import { MyReviewData } from '@/types/api/review';
 import AlertModal from '@/components/modal/alertModal';
 import AddReview from '@/components/modal/addReview';
+import { useDeleteReview } from '@/api/review';
 
 function MyReviewCard({
   bookId,
@@ -97,6 +98,8 @@ function MyReviewCard({
           title="정말 삭제하시겠습니까?"
           description="삭제한 글은 복구할 수 없습니다."
           onClick={handleAlertModalOpenClick}
+          Fn={useDeleteReview}
+          id={reviewId}
         />
       )}
     </div>

@@ -57,12 +57,12 @@ export const usePutReview = (putFormData: PutReviewOption) => {
 };
 
 //리뷰 삭제
-const deleteReview = async (id: number) => {
+const deleteReview = async (id?: number) => {
   const result = await instance.delete(`review/${id}`);
   return result.data;
 };
 
-export const useDeleteReview = (id: number) => {
+export const useDeleteReview = (id?: number) => {
   return useDelete(deleteReview, id);
 };
 
