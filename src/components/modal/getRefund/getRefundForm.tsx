@@ -12,7 +12,7 @@ import Input from '@/components/input/input';
 import { usePutDelivery } from '@/api/delivery';
 import { GetRefund } from '.';
 
-function GetRefundForm({onClick, deliveryId} : GetRefund) {
+function GetRefundForm({onClick, deliveryId, bookTitle, authors} : GetRefund) {
   const [selectedItem, setSelectedItem] = useState(REFUND[0]);
   const onSelectedItem = (menu: string) => {
     setSelectedItem(menu);
@@ -32,9 +32,9 @@ function GetRefundForm({onClick, deliveryId} : GetRefund) {
         className="flex flex-col gap-40 overflow-scroll">
         <TitleContentTable
           title1="책 제목"
-          content1="스물 아홉 생일, 1년 후 죽기로 결심하다"
+          content1={bookTitle}
           title2="저자"
-          content2="이제니"
+          content2={authors}
         />
         <Image src={LineIcon} alt="구분선" />
         <div className="flex">

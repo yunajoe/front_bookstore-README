@@ -86,7 +86,7 @@ function BookOrderCard({
           리뷰쓰기
         </button>
         {isGetRefundFormModalOpen && (
-          <GetRefund onClick={handleGetRefundFormModalOpen} deliveryId={deliveryId} />
+          <GetRefund onClick={handleGetRefundFormModalOpen} deliveryId={deliveryId} bookTitle={bookTitle} authors={authors} />
         )}
       </div>
     </div>
