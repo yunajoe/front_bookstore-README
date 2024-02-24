@@ -27,7 +27,7 @@ function useFormControl ({
   initialValue,
 }: UseFormControl) {
   const { control, handleSubmit, watch, getValues } = useForm({
-    mode: 'onChange',
+    mode: 'onSubmit',
     defaultValues: initialValue || {},
   });
   const [isButtonActive, setIsButtonActive] = useState(false);
@@ -39,8 +39,10 @@ function useFormControl ({
     bookId,
     ...content,
   };
+  
   const putFormData = {
     option: option?.optional,
+    required: option?.required,
     ...content,
   };
 
