@@ -53,6 +53,8 @@ function MyOrderPage() {
     };
   });
 
+  console.log(orderData)
+
   return (
     <MyOrderPageLayout
       dropDown={
