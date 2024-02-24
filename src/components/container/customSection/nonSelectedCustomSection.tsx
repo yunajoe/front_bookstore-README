@@ -8,7 +8,7 @@ function NonSelectedCustomSection() {
       <Link
         className="flex-center h-50 w-256 rounded-[5px] border border-primary bg-white text-14
           text-primary"
-        href="/mypage/genre">
+        href="/mypage/setting/selectGenre">
         선호 장르 선택하러 가기
       </Link>
     </div>
