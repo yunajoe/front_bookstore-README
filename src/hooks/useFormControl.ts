@@ -44,8 +44,9 @@ function useFormControl ({
   };
   
   const putFormData = {
-    option: option?.optional,
     required: option?.required,
+    option: option?.optional,
+    id,
     ...content,
   };
 

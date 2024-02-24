@@ -10,6 +10,7 @@ export type OrderBookData = {
   orderBook: OrderBook[];
   createTime: string;
   updateTime: string;
+  deliveryId: number;
   deliveryStatus: string;
 };
 
@@ -21,5 +22,4 @@ export type OrderBook = {
   authors: string;
   price: number;
   quantity: number;
-  deliveryId: number;
 };

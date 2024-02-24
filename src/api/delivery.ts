@@ -4,7 +4,6 @@ import { useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 import { FormData } from '@/hooks/useFormControl';
 
-//TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
 
 //배달상태조회
 const getDelivery = async (id: number) => {
@@ -36,7 +35,7 @@ export const usePostDelivery = (option: PostDeliveryOption) => {
 };
 
 //배달상태 수정
-const putDelivery = async (data: FormData   ) => {
+const putDelivery = async (data: FormData) => {
   const result = await instance.put('delivery', {
     deliveryId: data.id,
     deliveryStatus: data.option,

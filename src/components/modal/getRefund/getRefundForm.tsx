@@ -17,6 +17,7 @@ function GetRefundForm({onClick, deliveryId, bookTitle, authors} : GetRefund) {
   const onSelectedItem = (menu: string) => {
     setSelectedItem(menu);
   };
+  
   const option = selectedItem.length === 0 ? undefined : selectedItem;
   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
     putFn: usePutDelivery,
@@ -75,10 +76,10 @@ function GetRefundForm({onClick, deliveryId, bookTitle, authors} : GetRefund) {
           }
         />
         <RefundPrice refundPrice="19,800" />
+        <RegisterButton type='submit' disabled={isButtonActive}>
+          교환/환불 신청하기
+        </RegisterButton>
       </form>
-      <RegisterButton disabled={isButtonActive}>
-        교환/환불 신청하기
-      </RegisterButton>
     </>
   );
 }
