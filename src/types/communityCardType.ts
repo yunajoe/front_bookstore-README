@@ -25,6 +25,7 @@ export interface CommunityCardProps {
   bookCover: string;
   bookTitle: string;
   review: string;
+  emojiInfo: CommunityEmojiInfo;
   kebab?: boolean;
 }
 
@@ -34,7 +35,7 @@ interface CommunityCardBookInfo {
   bookTitle: string;
 }
 
-interface CommunityEmojiInfo {
+export interface CommunityEmojiInfo {
   emojiId: number;
   emojis: Emojis[];
 }

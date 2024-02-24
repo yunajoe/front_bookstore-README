@@ -6,8 +6,6 @@ import NoProfileImg from '@/public/icons/Noprofile.svg';
 import { useState } from 'react';
 import AlertModal from '@/components/modal/alertModal';
 import AddCommunityCard from '@/components/modal/addCommunityCard';
-import { useAtom } from 'jotai';
-import { chooseBookIdAtom } from '@/store/state';
 import { useDeleteCommunity } from '@/api/community';
 
 function CommunityCard({
@@ -19,6 +17,7 @@ function CommunityCard({
   bookCover,
   bookTitle,
   review,
+  emojiInfo,
   kebab = false,
 }: CommunityCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -69,9 +68,18 @@ function CommunityCard({
         </p>
         <p className="h-60 text-14 font-light text-gray-3">{review}</p>
       </div>
-      <EmojiButtonContainer />
+      <EmojiButtonContainer
+        emojiId={emojiInfo.emojiId}
+        emojis={emojiInfo.emojis}
+      />
       {isEditModalOpen && (
-        <AddCommunityCard onClick={handleEditModalOpenClick} communityId={communityId} review={review} bookId={bookId} edit={true}/>
+        <AddCommunityCard
+          onClick={handleEditModalOpenClick}
+          communityId={communityId}
+          review={review}
+          bookId={bookId}
+          edit={true}
+        />
       )}
       {isAlertModalOpen && (
         <AlertModal
