@@ -11,11 +11,18 @@ function HeaderSearchInput() {
     router.push(`/search?term=${encodeURIComponent(searchTerm)}`);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="relative z-10 inline-flex w-3/6">
       <input
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="w-full max-w-full rounded-[71px] border border-gray-1 px-20 py-2 pr-20
           tablet:h-56 pc:h-56"
       />
