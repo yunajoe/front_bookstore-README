@@ -19,7 +19,7 @@ function SidebarLayout({ pageName, children }: SidebarLayoutProps) {
           className="flex h-full w-full flex-col items-start pl-245 pr-60 pt-20 mobile:px-15
             mobile:pt-0 tablet:pl-217 tablet:pr-40">
           <aside
-            className="absolute left-40 top-40 h-[994px] w-[163px] mobile:static mobile:z-[100] mobile:h-35
+            className="absolute left-40 top-40 h-[994px] w-[163px] mobile:static mobile:h-35
               mobile:w-full tablet:w-[155px]">
             <Sidebar pageName={pageName} />
           </aside>
