@@ -1,7 +1,7 @@
 import {
   CommunityPagesProps,
-  CommunityCardsProps,
-} from '@/types/communityCardType';
+  CommunityCardsProps
+} from '@/types/api/community';
 import CommunityCard from './communityCard';
 
 interface CommunityCardListProps {

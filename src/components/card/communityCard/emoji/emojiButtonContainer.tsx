@@ -1,6 +1,6 @@
 import EmojiButton from '@/components/card/communityCard/emoji/emojiButton';
 import { EMOJI_ICON } from '@/constants/communityEmoji';
-import { CommunityEmojiInfo } from '@/types/communityCardType';
+import { CommunityEmojiInfo } from '@/types/api/community';
 
 type EmojiType = keyof typeof EMOJI_ICON;
 
@@ -12,6 +12,7 @@ function EmojiButtonContainer({ emojiId, emojis }: CommunityEmojiInfo) {
           key={index}
           emoji={EMOJI_ICON[emoji.emojiType as EmojiType]}
           count={emoji.emojiNum}
+          status={emoji.emojiCheck}
         />
       ))}
     </div>

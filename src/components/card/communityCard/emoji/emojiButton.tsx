@@ -1,14 +1,17 @@
 import Image from 'next/image';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 interface EmojiButtonProps {
   emoji: StaticImport;
   count: number;
+  status: boolean;
 }
 
-function EmojiButton({ emoji, count }: EmojiButtonProps) {
+function EmojiButton({ emoji, count, status }: EmojiButtonProps) {
   const [isCount, setIsCount] = useState(count);
-  const [isClick, setIsClick] = useState(false);
+  const [isClick, setIsClick] = useState(status);
+  const queryClient = useQueryClient();
 
   const handleCountToggle = () => {
     setIsClick(!isClick);

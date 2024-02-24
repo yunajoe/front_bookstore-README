@@ -60,3 +60,24 @@ const putCommunity = async (putFormData: PutCommunityOption ) => {
 export const usePutCommunity = (putFormData : PutCommunityOption ) => {
   return useUpdate(putCommunity, putFormData);
 };
+
+//커뮤니티 이모지 상태 토클
+interface PostCommunityEmoji {
+  type: string;
+  check: boolean;
+  communityId: number;
+}
+
+const postCommunityEmoji = async (data: PostCommunityEmoji) => {
+  const result = await instance.post(`community/${data.communityId}/emoji`, {
+    type: data.type,
+    check: data.check,
+    communityId : data.communityId
+  })
+
+  return result.data
+}
+
+const usePostCommunityEmoji = (data: PostCommunityEmoji) => {
+  return useUpdate(postCommunityEmoji, data);
+} 

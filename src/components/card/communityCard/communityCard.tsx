@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import EmojiButtonContainer from '@/components/card/communityCard/emoji/emojiButtonContainer';
 import KebabButton from '@/components/button/kebab/kebabButton';
-import { CommunityCardProps } from '@/types/communityCardType';
+import { CommunityCardProps } from '@/types/api/community';
 import NoProfileImg from '@/public/icons/Noprofile.svg';
 import { useState } from 'react';
 import AlertModal from '@/components/modal/alertModal';
