@@ -1,11 +1,15 @@
 import { instance } from 'src/libs/instance';
 
-type SocialType = "KAKAO" | "NAVER" | "GOOGLE";
+export type SocialType = "KAKAO" | "NAVER" | "GOOGLE";
 
 // 소셜 auth api
 export const getSocialAuth = async (socialType: SocialType) => {
-  const result = await instance.get(`social/auth/${socialType}`);
-  return result.data;
+  try {
+    const result = await instance.get(`social/auth/${socialType}`);
+    return result;
+  } catch (e) {
+    return e;
+  }
 };
 
 export const getSocialLogin = async (socialType: SocialType, code: string) => {
