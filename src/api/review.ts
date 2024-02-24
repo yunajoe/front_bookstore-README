@@ -25,7 +25,6 @@ interface PostReviewOption {
 }
 
 export const postReview = async (data: PostReviewOption) => {
-  console.log(data)
   const result = await instance.post('review', {
     reviewRating: data.option,
     ...data,
