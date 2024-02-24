@@ -19,7 +19,7 @@ function CustomSection({ isLoggedIn }: CustomSectionProps) {
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
 
   const cusTomSelectedGenreListQuery = useQuery({
-    queryKey: ['category'],
+    queryKey: ['custom-category'],
     queryFn: () => getCustomCategoryList(),
     select: (data) => data.data,
     staleTime: Infinity,
