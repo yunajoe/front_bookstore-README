@@ -29,6 +29,7 @@ function BookOrderCardList({ orderData }: BookOrderCardListProps) {
                     bookPrice={bookData.price}
                     quantity={bookData.quantity}
                     authors={bookData.authors}
+                    deliveryId={bookData.deliveryId}
                     deliveryStatus={order.deliveryStatus}
                   />
                 ))}

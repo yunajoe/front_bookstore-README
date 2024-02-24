@@ -10,6 +10,7 @@ export type BookOrderCardProps = {
   bookPrice: number;
   authors: string;
   quantity: number;
+  deliveryId: number;
   deliveryStatus: string;
 };
 
@@ -19,6 +20,7 @@ function BookOrderCard({
   bookPrice,
   authors,
   quantity,
+  deliveryId,
   deliveryStatus,
 }: BookOrderCardProps) {
   const [isGetRefundFormModalOpen, setIsGetRefundFormModalOpen] =
@@ -84,7 +86,7 @@ function BookOrderCard({
           리뷰쓰기
         </button>
         {isGetRefundFormModalOpen && (
-          <GetRefund onClick={handleGetRefundFormModalOpen} />
+          <GetRefund onClick={handleGetRefundFormModalOpen} deliveryId={deliveryId} />
         )}
       </div>
     </div>

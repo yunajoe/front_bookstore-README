@@ -21,4 +21,5 @@ export type OrderBook = {
   authors: string;
   price: number;
   quantity: number;
+  deliveryId: number;
 };

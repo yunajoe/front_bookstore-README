@@ -48,12 +48,13 @@ function MyOrderPage() {
 
   const orderData = getMyOrderQuery?.data?.map((item: DeliveryItem) => {
     return {
+      deliveryId : item.deliveryId,
       ...item.orderDto,
       deliveryStatus: item.deliveryStatus,
     };
   });
 
-  console.log(orderData)
+  console.log(getMyOrderQuery.data)
 
   return (
     <MyOrderPageLayout

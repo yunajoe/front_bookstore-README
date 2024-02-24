@@ -1,13 +1,17 @@
-import { OnClickProps } from '@/types/onClickType';
 import ModalContainer from '@/components/modal/modalContainer';
 import ModalLayout from '@/components/modal/modalLayout';
 import GetRefundForm from '@/components/modal/getRefund/getRefundForm';
 
-function GetRefund({ onClick }: OnClickProps) {
+export interface GetRefund {
+  onClick: () => void;
+  deliveryId: number;
+}
+
+function GetRefund({ onClick, deliveryId }: GetRefund) {
   return (
     <ModalLayout onClick={onClick}>
       <ModalContainer onClick={onClick} title="교환/환불 신청하기">
-        <GetRefundForm />
+        <GetRefundForm onClick={onClick} deliveryId={deliveryId} />
       </ModalContainer>
     </ModalLayout>
   );
