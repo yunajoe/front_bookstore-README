@@ -1,8 +1,9 @@
 import Image from 'next/image';
-
+import GetRefund from '@/components/modal/getRefund';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
+import { useState } from 'react';
 export type BookOrderCardProps = {
   bookTitle: string;
   bookImgUrl: string;
@@ -20,6 +21,13 @@ function BookOrderCard({
   quantity,
   deliveryStatus,
 }: BookOrderCardProps) {
+  const [isGetRefundFormModalOpen, setIsGetRefundFormModalOpen] =
+    useState(false);
+
+  const handleGetRefundFormModalOpen = () => {
+    setIsGetRefundFormModalOpen(!isGetRefundFormModalOpen);
+  };
+
   return (
     <div
       role="card-container"
@@ -65,7 +73,8 @@ function BookOrderCard({
         {deliveryStatus !== '구매 확정' && (
           <button
             className="flex-center h-40 w-130 rounded-md border-2 border-primary bg-white text-primary
-          mobile:w-full">
+          mobile:w-full"
+            onClick={handleGetRefundFormModalOpen}>
             교환/환불
           </button>
         )}
@@ -74,6 +83,9 @@ function BookOrderCard({
             mobile:w-full">
           리뷰쓰기
         </button>
+        {isGetRefundFormModalOpen && (
+          <GetRefund onClick={handleGetRefundFormModalOpen} />
+        )}
       </div>
     </div>
   );
