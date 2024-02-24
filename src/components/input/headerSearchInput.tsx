@@ -11,7 +11,7 @@ function HeaderSearchInput() {
     router.push(`/search?term=${encodeURIComponent(searchTerm)}`);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: { key: string; }) => {
     if (e.key === 'Enter') {
       handleSearch();
     }
