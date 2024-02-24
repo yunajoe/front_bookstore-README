@@ -10,10 +10,7 @@ function Search() {
   return (
     <SidebarLayout>
       <Spacing height={[0, 0, 20]} />
-      <EventSection
-        adsSizeClassName="w-[525px] h-[483px] tablet:w-297 tablet:h-275 mobile:w-330 mobile:h-178"
-        eventSizeClassName="w-[340px] h-[483px] tablet:w-194 tablet:h-275 mobile:w-330 mobile:h-90"
-      />
+      <EventSection eventSize={'category'} />
       <Spacing height={[120, 80, 80]} />
       <SearchBookList term={term?.toString()} />
     </SidebarLayout>
