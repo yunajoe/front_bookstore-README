@@ -4,7 +4,12 @@ import {
   PostCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
-import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
+import {
+  useDelete,
+  useFetch,
+  useUpdate,
+  useUpdateType,
+} from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //커뮤니티 글 전체조회, 내가쓴글 조회,
@@ -26,7 +31,7 @@ export const useGetCommunity = (option: GetCommunityOption) => {
 //글 등록
 const postCommunity = async (data: PostCommunityData) => {
   const result = await instance.post('community', {
-    memberId : data.option,
+    memberId: data.option,
     ...data,
   });
   return result.data;
@@ -47,9 +52,9 @@ export const useDeleteCommunity = (communityId?: number) => {
 };
 
 //글 수정
-const putCommunity = async (putFormData: PutCommunityOption ) => {
-  const {option, required, content} = putFormData
-  
+const putCommunity = async (putFormData: PutCommunityOption) => {
+  const { option, required, content } = putFormData;
+
   const result = await instance.put(`community/${option}`, {
     content,
     rating: required,
@@ -57,7 +62,7 @@ const putCommunity = async (putFormData: PutCommunityOption ) => {
   return result.data;
 };
 
-export const usePutCommunity = (putFormData : PutCommunityOption ) => {
+export const usePutCommunity = (putFormData: PutCommunityOption) => {
   return useUpdate(putCommunity, putFormData);
 };
 
@@ -72,12 +77,20 @@ const postCommunityEmoji = async (data: PostCommunityEmoji) => {
   const result = await instance.post(`community/${data.communityId}/emoji`, {
     type: data.type,
     check: data.check,
-    communityId : data.communityId
-  })
+    communityId: data.communityId,
+  });
 
-  return result.data
-}
+  return result.data;
+};
 
-const usePostCommunityEmoji = (data: PostCommunityEmoji) => {
-  return useUpdate(postCommunityEmoji, data);
-} 
+export const usePostCommunityEmoji = (
+  data: PostCommunityEmoji,
+  { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
+) => {
+  return useUpdate(postCommunityEmoji, data, {
+    onSuccess,
+    onError,
+    onSettled,
+    onMutate,
+  });
+};

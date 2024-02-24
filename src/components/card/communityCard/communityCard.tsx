@@ -69,6 +69,7 @@ function CommunityCard({
         <p className="h-60 text-14 font-light text-gray-3">{review}</p>
       </div>
       <EmojiButtonContainer
+        communityId={communityId}
         emojiId={emojiInfo.emojiId}
         emojis={emojiInfo.emojis}
       />
