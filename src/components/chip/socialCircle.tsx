@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { MouseEventHandler } from 'react';
 
+import { SocialType, getSocialAuth } from '@/api/social';
+
 import kakaoIcon from 'public/icons/KakaoIcon.svg';
 import naverIcon from 'public/icons/NaverIcon.svg';
 import googleIcon from 'public/icons/GoogleIcon.svg';
@@ -9,9 +11,10 @@ function SocialCircle({ id = 'KAKAO', width = 36, height = 36 }) {
   const handleSocialAuth: MouseEventHandler = (e) => {
     e.preventDefault();
     const { id } = e.target as HTMLButtonElement;
+    const error = getSocialAuth(id as SocialType);
+    console.log(error);
     /*
     TODO
-      const a = getSocialAuth(id as SocialType); 
       이후 성공하면 code 값 받아서 getSocialLogin(id) 로 get,
       실패하면 return 하는 api 처리 훅 짜기. 이때 useFetch 훅을 써서 onSuccess로 연결.
       그리고 getSocialLogin까지 성공하면 받은 토큰과 유저 데이터를 
