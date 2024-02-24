@@ -13,14 +13,13 @@ function AddReviewForm({ onClick, bookId, bookTitle, authors, edit, reviewId, re
   const [newRating, setNewRating] = useState(0);
   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
     postFn: usePostReview,
-    // putFn: usePutReview,
+    putFn: usePutReview,
     edit: edit,
     bookId: bookId,
     option: { required: newRating, optional: reviewId },
     onClick: onClick,
     initialValue: {content : review},
   });
-  // console.log(isButtonActive)
 
   return (
     <>
@@ -52,10 +51,10 @@ function AddReviewForm({ onClick, bookId, bookTitle, authors, edit, reviewId, re
           control={control}
           name="content"
         />
+        <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
+          리뷰 작성하기
+        </RegisterButton>
       </form>
-      <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
-        리뷰 작성하기
-      </RegisterButton>
     </>
   );
 }
