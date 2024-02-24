@@ -54,8 +54,6 @@ function MyOrderPage() {
     };
   });
 
-  console.log(getMyOrderQuery.data)
-
   return (
     <MyOrderPageLayout
       dropDown={

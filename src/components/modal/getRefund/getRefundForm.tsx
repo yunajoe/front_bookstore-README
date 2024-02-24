@@ -10,7 +10,7 @@ import { REFUND } from '@/constants/dropDownMenu';
 import RefundPrice from '@/components/modal/getRefund/refundPrice';
 import Input from '@/components/input/input';
 import { usePutDelivery } from '@/api/delivery';
-import { GetRefund } from '.';
+import { GetRefund } from '@/components/modal/getRefund/';
 
 function GetRefundForm({onClick, deliveryId, bookTitle, authors} : GetRefund) {
   const [selectedItem, setSelectedItem] = useState(REFUND[0]);
@@ -20,8 +20,9 @@ function GetRefundForm({onClick, deliveryId, bookTitle, authors} : GetRefund) {
   const option = selectedItem.length === 0 ? undefined : selectedItem;
   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
     putFn: usePutDelivery,
-    bookId: deliveryId,
-    option: {required: option},
+    id: deliveryId,
+    edit: true,
+    option: {required: option, optional: 'EXCHANGE_AND_REFUND'},
     onClick: onClick,
   });
 
