@@ -11,7 +11,6 @@ import BookTitle from '@/components/book/bookTitle/bookTitle';
 import useFormatDate from '@/hooks/useFormatDate';
 import { MyReviewData } from '@/types/api/review';
 import AlertModal from '@/components/modal/alertModal';
-import AddCommunityCard from '@/components/modal/addCommunityCard';
 import AddReview from '@/components/modal/addReview';
 
 function MyReviewCard({
@@ -59,7 +58,7 @@ function MyReviewCard({
             />
             <BookAuthor authorList={authors} classNames="line-clamp-2" />
             <div className="absolute right-0 top-0 h-18 w-18 mobile:-right-10 mobile:-top-20">
-              <KebabButton title1="수정하기" title2="삭제하기" id={reviewId} />
+              <KebabButton title1="수정하기" title2="삭제하기" onClickTitle1={handleReviewModalOpenClick} onClickTitle2={handleAlertModalOpenClick} id={reviewId} />
             </div>
             <div className="flex-center gap-10 whitespace-nowrap">
               <BookRating rating={reviewRating} />
@@ -91,7 +90,7 @@ function MyReviewCard({
         <div className="h-1 w-full border border-gray-1"></div>
       </div>
       {isReviewModalOpen && (
-        <AddReview onClick={handleReviewModalOpenClick} />
+        <AddReview onClick={handleReviewModalOpenClick} bookId={bookId} bookTitle={bookTitle} authors={authors} review={content} rating={reviewRating}/>
       )}
       {isAlertModalOpen && (
         <AlertModal

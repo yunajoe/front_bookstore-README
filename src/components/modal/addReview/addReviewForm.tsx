@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { usePostReview, usePutReview } from '@/api/review';
 import { AddReviewProps } from '@/components/modal/addReview';
 
-function AddReviewForm({ onClick, bookId, bookTitle, authors, edit, reviewId, review }: AddReviewProps ) {
+function AddReviewForm({ onClick, bookId, bookTitle, authors, edit, reviewId, review, rating }: AddReviewProps ) {
   const [newRating, setNewRating] = useState(0);
   const { control, handleSubmit, isButtonActive, onSubmit } = useFormControl({
     postFn: usePostReview,
@@ -30,14 +30,14 @@ function AddReviewForm({ onClick, bookId, bookTitle, authors, edit, reviewId, re
           title1="책 제목"
           content1={bookTitle}
           title2="저자"
-          content2={authors}
+          content2={Array.isArray(authors) ? authors.join(', ') : authors}
           truncate="truncate"
         />
         <Image src={LineIcon} alt="구분선" />
         <div className="text-b-b flex h-87 flex-col justify-between text-16">
           별점 평가
           <BookRating
-            rating={newRating}
+            rating={rating ? rating : newRating}
             setNewRating={setNewRating}
             size="lg"
             onClick={true}
