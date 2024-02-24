@@ -40,8 +40,8 @@ export const usePostReview = (data: PostReviewOption) => {
 //리뷰 수정
 //TODO : api 나오면 interface type 수정필요
 interface PutReviewOption {
-  option: number;  //id
-  content: string; //review 내용
+  option?: number;  //id
+  content?: string; //review 내용
 }
 
 const putReview = async (putFormData: PutReviewOption) => {
