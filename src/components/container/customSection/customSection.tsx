@@ -85,16 +85,16 @@ function CustomSection({ isLoggedIn }: CustomSectionProps) {
             ) : (
               getRandomCustomBookList.data?.map(
                 (book: CusTomBookType, index: number) => (
-                  <div key={book.bookId} className="mt-17">
+                  <div key={book.bookId} className="relative mt-17">
                     {index === 3 && (
-                      <div className="absolute right-3 top-0 mobile:hidden">
+                      <div className="absolute right-3 top-[-30px] mobile:hidden">
                         <Link href="/custom" className="text-primary">
                           더보기
                         </Link>
                       </div>
                     )}
                     {index === 1 && (
-                      <div className="absolute right-0 top-0 tablet:hidden pc:hidden">
+                      <div className="absolute right-0 top-[-30px] tablet:hidden pc:hidden">
                         <Link href="/custom" className="text-primary">
                           더보기
                         </Link>
