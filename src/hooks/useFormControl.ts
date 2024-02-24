@@ -44,8 +44,8 @@ function useFormControl ({
     option: option?.optional,
     ...content,
   };
-
-  const mutation = edit && putFn ? putFn(putFormData) : postFn(postFormData);
+  
+  const mutation = (edit && putFn) ? putFn(putFormData) : postFn(postFormData);
 
   const onSubmit = () => {
     mutation.mutate();

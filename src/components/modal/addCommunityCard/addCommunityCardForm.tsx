@@ -35,6 +35,7 @@ function AddCommunityCardForm({
     setSearch(value);
     setCurrentPage(1);
   };
+  console.log(isButtonActive)
 
   return (
     <form

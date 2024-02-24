@@ -20,6 +20,7 @@ function AddReviewForm({ onClick, bookId, bookTitle, authors, edit, reviewId, re
     onClick: onClick,
     initialValue: {content : review},
   });
+  // console.log(isButtonActive)
 
   return (
     <>
