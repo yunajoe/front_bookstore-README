@@ -54,7 +54,6 @@ export default function BookDetailPage() {
   });
 
   useEffect(() => {
-    console.log(isError);
     if (isError) {
       router.push('/404');
     }

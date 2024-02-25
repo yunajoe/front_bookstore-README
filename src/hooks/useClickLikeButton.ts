@@ -2,9 +2,12 @@ import { useQueryClient  } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { useDeleteBookmark, usePostBookmark } from "@/api/bookmark";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function useClickLikeButton({ bookId = "-1", bookmarkId = -1, isBookmarked = false }) {
-
+  const { status } = useSession();
+  const router = useRouter();
   // 옵티미스틱 상태
   const [bookmarkState, setBookmarkState] = useState(isBookmarked);
   const queryClient = useQueryClient();
@@ -34,6 +37,9 @@ function useClickLikeButton({ bookId = "-1", bookmarkId = -1, isBookmarked = fal
 
   const handleBookmarkClick = () => {
     if (isPending) return;
+    if (status === 'unauthenticated') {
+      router.push("/signin");
+    }
 
     setBookmarkState(!isBookmarked);
     if (isBookmarked) {
