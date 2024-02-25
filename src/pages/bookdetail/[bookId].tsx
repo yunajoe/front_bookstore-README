@@ -14,7 +14,7 @@ import Spacing from '@/components/container/spacing/spacing';
 import SideOrderNavigator from '@/components/orderNavigator/sideOrderNavigator';
 import FooterOrderNavitgator from '@/components/orderNavigator/footerOrderNavitgator';
 import SkeletonBookDetailCard from '@/components/skeleton/bookDetailCard/skeleton';
-import useClickLikeButton from '@/hooks/useClickLikeButton';
+import useClickBookmarkButton from '@/hooks/useClickBookmarkButton';
 
 type BookDetailNavLocationType = 'information' | 'review' | 'currency';
 
@@ -41,13 +41,14 @@ export default function BookDetailPage() {
   // 로그인 한 상태라면 찜 여부 체크하기
   const { data: bookmarkData } = useGetIsBookmarked({
     bookId: String(bookId),
-    enabled: status === 'authenticated',
   });
-  const { bookmarkState, handleBookmarkClick } = useClickLikeButton({
-    bookId: String(bookId),
-    bookmarkId: bookmarkData?.bookmarkId ?? -1,
-    isBookmarked: bookmarkData?.marked ?? false,
-  });
+
+  const { isBookmarked, bookmarkCount, isBookmarkPending, updateBookmark } =
+    useClickBookmarkButton({
+      bookId: Number(bookId),
+      marked: bookmarkData?.marked ?? false,
+      count: bookData?.bookmarkCount,
+    });
 
   const { mutate: handleViewCountMutate } = usePutBook({
     bookId: Number(bookId),
@@ -62,7 +63,6 @@ export default function BookDetailPage() {
       handleViewCountMutate();
     }
   }, [status, isError]);
-
   return (
     <MainLayout>
       <section className="flex-center flex w-full max-w-[1200px] gap-34 p-40 mobile:flex-col mobile:p-19">
@@ -71,14 +71,15 @@ export default function BookDetailPage() {
         ) : (
           <BookDetailCard
             bookId={bookId as string}
+            isBookmarkPending={isBookmarkPending}
             bookImgUrl={bookData.bookImgUrl}
             bookTitle={bookData.bookTitle}
             price={bookData.price}
             categories={bookData.categories}
             authors={bookData.authors}
-            bookmarkCount={bookData.bookmarkCount}
-            isBookmarked={bookmarkState}
-            handleBookmarkClick={handleBookmarkClick}
+            bookmarkCount={bookmarkCount}
+            isBookmarked={isBookmarked}
+            handleBookmarkClick={updateBookmark}
             publishedDate={bookData.publishedDate}
             publisher={bookData.publisher}
             averageRating={bookData.averageRating}
@@ -122,8 +123,9 @@ export default function BookDetailPage() {
               bookImgUrl={bookData?.bookImgUrl ?? './'}
               bookTitle={bookData?.bookTitle}
               authors={bookData?.authors}
-              isBookmarked={bookmarkState}
-              handleBookmarkClick={handleBookmarkClick}
+              isBookmarked={isBookmarked}
+              isBookmarkPending={isBookmarkPending}
+              handleBookmarkClick={updateBookmark}
               price={bookData?.price ?? 0}
               orderCount={orderCount}
               setOrderCount={setOrderCount}
@@ -136,8 +138,9 @@ export default function BookDetailPage() {
           bookImgUrl={bookData?.bookImgUrl ?? './'}
           bookTitle={bookData?.bookTitle}
           authors={bookData?.authors}
-          isBookmarked={bookmarkState}
-          handleBookmarkClick={handleBookmarkClick}
+          isBookmarked={isBookmarked}
+          isBookmarkPending={isBookmarkPending}
+          handleBookmarkClick={updateBookmark}
           price={bookData?.price ?? 0}
           orderCount={orderCount}
           setOrderCount={setOrderCount}
