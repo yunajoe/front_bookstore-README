@@ -10,6 +10,7 @@ import { BookData } from '@/types/api/book';
 import EventSection from '@/components/container/eventSection/eventSection';
 import { AdImage, EVENT_IMAGES } from '@/constants/eventImages';
 import { useSession } from 'next-auth/react';
+import Footer from '@/components/footer/footer';
 
 function Home() {
   const { status } = useSession();
@@ -56,6 +57,7 @@ function Home() {
 
       <TodayBestSection />
       <BestSellerSection page="main" bookList={bestList} />
+      <Footer />
     </>
   );
 }
