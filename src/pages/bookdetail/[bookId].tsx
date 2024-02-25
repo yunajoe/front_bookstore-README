@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { useGetBook, usePutBook } from '@/api/book';
-import { useGetIsBookmarked } from '@/api/bookmark';
+import { getIsBookmarked } from '@/api/bookmark';
 import MainLayout from '@/components/layout/mainLayout';
 import BookDetailCard from '@/components/card/bookDetailCard/bookDetailCard';
 import BookDetailNav from '@/components/button/bookDetailNav';
@@ -39,8 +40,10 @@ export default function BookDetailPage() {
   let bookData = data?.data;
 
   // 로그인 한 상태라면 찜 여부 체크하기
-  const { data: bookmarkData } = useGetIsBookmarked({
-    bookId: String(bookId),
+  const { data: bookmarkData } = useQuery({
+    queryKey: ['temp'],
+    queryFn: () => getIsBookmarked(String(bookId)),
+    enabled: status === 'authenticated',
   });
 
   const { isBookmarked, bookmarkCount, isBookmarkPending, updateBookmark } =
@@ -63,6 +66,7 @@ export default function BookDetailPage() {
       handleViewCountMutate();
     }
   }, [status, isError]);
+
   return (
     <MainLayout>
       <section className="flex-center flex w-full max-w-[1200px] gap-34 p-40 mobile:flex-col mobile:p-19">
