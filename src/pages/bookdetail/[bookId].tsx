@@ -33,8 +33,11 @@ export default function BookDetailPage() {
     params: {
       bookId: String(bookId),
     },
+    enabled: !!bookId,
   });
+
   let bookData = data?.data;
+
   // 로그인 한 상태라면 찜 여부 체크하기
   const { data: bookmarkData } = useGetIsBookmarked({
     bookId: String(bookId),
@@ -51,11 +54,15 @@ export default function BookDetailPage() {
   });
 
   useEffect(() => {
+    console.log(isError);
+    if (isError) {
+      router.push('/404');
+    }
     if (status === 'authenticated') {
       // 로그인 한 상태라면 조회수 1 증가
       handleViewCountMutate();
     }
-  }, [status]);
+  }, [status, isError]);
 
   return (
     <MainLayout>
