@@ -47,8 +47,10 @@ function MyOrderPage() {
   }, [getMyOrderQuery.data]);
 
   const orderData = getMyOrderQuery?.data?.map((item: DeliveryItem) => {
+
     return {
       ...item.orderDto,
+      createDate: item.createDate,  
       deliveryStatus: item.deliveryStatus,
     };
   });

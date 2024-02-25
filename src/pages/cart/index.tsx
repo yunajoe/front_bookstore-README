@@ -192,7 +192,11 @@ function CartPage() {
                     </div>
                     <div className="relative flex w-full flex-1 mobile:static">
                       <div className="flex gap-x-20 rounded-[10px]">
-                        <PreviewBookInfo size="sm" image={item.bookImgUrl} />
+                        <PreviewBookInfo
+                          size="sm"
+                          image={item.bookImgUrl}
+                          bookId={item.bookId}
+                        />
                         <div className="flex flex-col gap-y-8">
                           <div className="flex flex-col">
                             <div
