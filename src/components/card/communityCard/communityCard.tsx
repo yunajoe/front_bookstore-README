@@ -53,7 +53,7 @@ function CommunityCard({
         border-solid border-gray-1 py-20 mobile:max-w-330 tablet:max-w-334">
       <div className="flex items-center px-20">
         <div
-          className={`relative h-48 w-48 overflow-hidden rounded-full ${profile ? classNames('z-40 hover:opacity-50 hover:cursor-pointer') : ''} `}
+          className={`relative h-48 w-48 overflow-hidden rounded-full ${profile ? classNames('z-40 hover:cursor-pointer hover:opacity-50') : ''} `}
           onClick={handleProfileOpenClick}>
           <Image src={profileImg ?? NoProfileImg} alt="프로필이미지" fill />
         </div>
@@ -110,7 +110,12 @@ function CommunityCard({
           id={communityId}
         />
       )}
-      {isProfileModalOpen && <ProfileModal onClick={handleProfileOpenClick} profileData={profileData} />}
+      {isProfileModalOpen && (
+        <ProfileModal
+          onClick={handleProfileOpenClick}
+          profileData={profileData}
+        />
+      )}
     </div>
   );
 }
