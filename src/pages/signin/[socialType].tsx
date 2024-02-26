@@ -35,9 +35,11 @@ function SocialPage() {
       window.location.href = result.url;
     }
   };
+
   useEffect(() => {
     handleSocialLogin();
   }, []);
+
   return;
 }
 
