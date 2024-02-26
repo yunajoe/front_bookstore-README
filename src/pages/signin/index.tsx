@@ -111,9 +111,9 @@ function SignIn() {
             SNS로 로그인/회원가입
           </p>
           <div className="flex w-184 justify-between">
-            {/* <SocialCircle id="NAVER" width={36} height={36} />
+            <SocialCircle id="NAVER" width={36} height={36} />
             <SocialCircle id="KAKAO" width={24} height={22} />
-            <SocialCircle id="GOOGLE" width={38} height={26} /> */}
+            <SocialCircle id="GOOGLE" width={38} height={26} />
           </div>
         </div>
       </div>
