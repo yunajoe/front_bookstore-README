@@ -16,7 +16,7 @@ function EmojiButtonContainer({ emojiId, emojis, communityId }: EmojiButtonConta
           emoji={EMOJI_ICON[emoji.emojiType as EmojiType]}
           emojiType={emoji.emojiType}
           count={emoji.emojiNum}
-          status={emoji.emojiCheck}
+          status={emoji.memberCheck}
           communityId={communityId}
         />
       ))}

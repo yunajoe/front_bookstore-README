@@ -81,7 +81,7 @@ export interface CommunityEmojiInfo {
 interface Emojis {
   emojiNum: number;
   emojiType: string;
-  emojiCheck: boolean;
+  memberCheck: boolean;
 }
 
 interface CommunityWriter {

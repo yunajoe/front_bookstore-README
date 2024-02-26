@@ -74,10 +74,12 @@ interface PostCommunityEmoji {
 }
 
 const postCommunityEmoji = async (data: PostCommunityEmoji) => {
-  const result = await instance.post(`community/${data.communityId}/emoji`, {
-    type: data.type,
-    check: data.check,
-    communityId: data.communityId,
+  const result = await instance.post(`community/${data.communityId}/emoji`,{},{
+    params: {
+      type: data.type,
+      check: String(data.check),
+      communityId: String(data.communityId),
+    }
   });
 
   return result.data;
