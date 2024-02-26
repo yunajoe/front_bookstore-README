@@ -90,11 +90,12 @@ const postCommunityEmoji = async (data: PostCommunityEmoji) => {
 export const usePostCommunityEmoji = (
   data: PostCommunityEmoji,
   { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
+  cache : boolean,
 ) => {
   return useUpdate(postCommunityEmoji, data, {
     onSuccess,
     onError,
     onSettled,
     onMutate,
-  });
+  }, cache);
 };

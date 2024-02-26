@@ -48,13 +48,14 @@ function useUpdateCommunityEmoji({
         }
         notify({
           type: 'error',
-          text: '찜하기에 실패했어요 😫',
+          text: '이모지로 반응하기 실패했어요 😫',
         });
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: queryKey });
       },
     },
+    false,
   );
 
   return { updateEmoji: mutate, isEmojiPending: isPending };
