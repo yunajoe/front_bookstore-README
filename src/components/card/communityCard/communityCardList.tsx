@@ -7,9 +7,10 @@ import CommunityCard from './communityCard';
 interface CommunityCardListProps {
   communityData: CommunityPagesProps[];
   kebab?: boolean;
+  profile?: boolean;
 }
 
-function CommunityCardList({ communityData, kebab }: CommunityCardListProps) {
+function CommunityCardList({ communityData, kebab, profile}: CommunityCardListProps) {
   return (
     <>
       {communityData?.map((data, index) => {
@@ -30,7 +31,9 @@ function CommunityCardList({ communityData, kebab }: CommunityCardListProps) {
                   bookTitle={card?.bookInfo.bookTitle}
                   review={card?.content}
                   emojiInfo={card?.emojiInfo}
+                  writer={card.writer}
                   kebab={kebab}
+                  profile={profile}
                 />
               );
             })}

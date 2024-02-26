@@ -12,12 +12,14 @@ interface CommunityLayoutProps {
   isSelected: string;
   kebab?: boolean;
   memberId?: number;
+  profile?: boolean;
 }
 
 function CommunityLayout({
   isSelected,
   kebab,
   memberId,
+  profile,
 }: CommunityLayoutProps) {
   const [ref, isIntersecting] = useInfinite();
   const { data, hasNextPage, isRefetching } = useCustomInfiniteQuery({
@@ -61,7 +63,7 @@ function CommunityLayout({
             />
             {
               //@ts-ignore
-              <CommunityCardList communityData={data?.pages} kebab={kebab} />
+                <CommunityCardList communityData={data?.pages} kebab={kebab} profile={profile}/>
             }
           </>
         )}

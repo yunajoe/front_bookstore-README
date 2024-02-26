@@ -65,7 +65,10 @@ export interface CommunityCardProps {
   bookTitle: string;
   review: string;
   emojiInfo: CommunityEmojiInfo;
+  writer: CommunityWriter;
   kebab?: boolean;
+  profile?: boolean;
+  memberId?: number;
 }
 
 interface CommunityCardBookInfo {
@@ -86,7 +89,7 @@ interface Emojis {
 }
 
 interface CommunityWriter {
-  numberId: number;
+  memberId: number;
   nickname: string;
   profileImg: string;
 }

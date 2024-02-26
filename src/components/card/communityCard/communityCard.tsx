@@ -7,6 +7,8 @@ import { useState } from 'react';
 import AlertModal from '@/components/modal/alertModal';
 import AddCommunityCard from '@/components/modal/addCommunityCard';
 import { useDeleteCommunity } from '@/api/community';
+import { useSession } from 'next-auth/react';
+import classNames from 'classnames';
 
 function CommunityCard({
   communityId,
@@ -18,10 +20,14 @@ function CommunityCard({
   bookTitle,
   review,
   emojiInfo,
+  writer,
   kebab = false,
+  profile = false,
 }: CommunityCardProps) {
+  const { data: session } = useSession(); 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const handleEditModalOpenClick = () => {
     setIsEditModalOpen(!isEditModalOpen);
@@ -30,13 +36,27 @@ function CommunityCard({
   const handleAlertModalOpenClick = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
   };
+
+  const handleProfileOpenClick = () => {
+    if (profile && session?.accessToken) {
+      setIsProfileModalOpen(!isProfileModalOpen)
+    }
+    return null;
+  }
+
   return (
     <div
       className="relative flex h-439 w-347 flex-col gap-20 rounded-[10px] border-[1px]
         border-solid border-gray-1 py-20 mobile:max-w-330 tablet:max-w-334">
       <div className="flex items-center px-20">
-        <div className="relative h-48 w-48 overflow-hidden rounded-full">
-          <Image src={profileImg ?? NoProfileImg} alt="프로필이미지" fill />
+        <div
+          className={`relative h-48 w-48 overflow-hidden rounded-full ${profile ? classNames('z-40 hover:opacity-50') : ''} `}
+          onClick={handleProfileOpenClick}>
+          <Image
+            src={profileImg ?? NoProfileImg}
+            alt="프로필이미지"
+            fill
+          />
         </div>
         <div className="flex flex-col justify-start py-5 pl-12">
           <p className="text-14 font-bold text-gray-4">{userNickname}</p>
