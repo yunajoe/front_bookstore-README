@@ -1,15 +1,12 @@
-import { QUERY_KEY } from '@/constants/queryKey';
-import {
-  GetCommunityOption,
-  PostCommunityData,
-  PutCommunityOption,
-} from '@/types/api/community';
 import {
   useDelete,
   useFetch,
   useUpdate,
   useUpdateType,
 } from '@/utils/reactQuery';
+import { QUERY_KEY } from '@/constants/queryKey';
+import { FormData } from '@/hooks/useFormControl';
+import { GetCommunityOption } from '@/types/api/community';
 import { instance } from 'src/libs/instance';
 
 //커뮤니티 글 전체조회, 내가쓴글 조회,
@@ -29,15 +26,16 @@ export const useGetCommunity = (option: GetCommunityOption) => {
 };
 
 //글 등록
-const postCommunity = async (data: PostCommunityData) => {
+const postCommunity = async (data: FormData) => {
   const result = await instance.post('community', {
-    memberId: data.option,
-    ...data,
+    memberId: data.required,
+    bookId: data.id,
+    content: data.content,
   });
   return result.data;
 };
 
-export const usePostCommunity = (data: PostCommunityData) => {
+export const usePostCommunity = (data: FormData) => {
   return useUpdate(postCommunity, data);
 };
 
@@ -52,7 +50,7 @@ export const useDeleteCommunity = (communityId?: number) => {
 };
 
 //글 수정
-const putCommunity = async (putFormData: PutCommunityOption) => {
+const putCommunity = async (putFormData: FormData) => {
   const { option, required, content } = putFormData;
 
   const result = await instance.put(`community/${option}`, {
@@ -62,7 +60,7 @@ const putCommunity = async (putFormData: PutCommunityOption) => {
   return result.data;
 };
 
-export const usePutCommunity = (putFormData: PutCommunityOption) => {
+export const usePutCommunity = (putFormData: FormData) => {
   return useUpdate(putCommunity, putFormData);
 };
 
@@ -74,13 +72,17 @@ interface PostCommunityEmoji {
 }
 
 const postCommunityEmoji = async (data: PostCommunityEmoji) => {
-  const result = await instance.post(`community/${data.communityId}/emoji`,{},{
-    params: {
-      type: data.type,
-      check: String(data.check),
-      communityId: String(data.communityId),
-    }
-  });
+  const result = await instance.post(
+    `community/${data.communityId}/emoji`,
+    {},
+    {
+      params: {
+        type: data.type,
+        check: String(data.check),
+        communityId: String(data.communityId),
+      },
+    },
+  );
 
   return result.data;
 };

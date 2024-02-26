@@ -8,7 +8,7 @@ export interface BookOrderCardListProps {
 
 function BookOrderCardList({ orderData }: BookOrderCardListProps) {
   if (!orderData) return null;
-
+  
   return (
     <div className="flex max-w-[1080px] flex-col">
       <div className="flex flex-col gap-40">
@@ -17,7 +17,7 @@ function BookOrderCardList({ orderData }: BookOrderCardListProps) {
             <div key={order.orderId} className="flex flex-col gap-20">
               <OrderCount
                 orderCount={order.orderBook.length}
-                orderDate={order.createTime}
+                orderDate={order.createDate}
                 orderId={order.orderId}
               />
               <div className="flex flex-col gap-20">
@@ -30,6 +30,7 @@ function BookOrderCardList({ orderData }: BookOrderCardListProps) {
                     bookPrice={bookData.price}
                     quantity={bookData.quantity}
                     authors={bookData.authors}
+                    deliveryId={order.deliveryId}
                     deliveryStatus={order.deliveryStatus}
                   />
                 ))}

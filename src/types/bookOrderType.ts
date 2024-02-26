@@ -1,15 +1,17 @@
 export type ChangedOrderBookData = {
   orderId: number;
   orderBook: OrderBook[];
-  createTime: string;
-  updateTime: string;
+  createDate: string;
+  updateDate: string;
 };
 
 export type OrderBookData = {
   orderId: number;
+  createDate: string;
   orderBook: OrderBook[];
-  createTime: string;
-  updateTime: string;
+  createTime?: string;
+  updateTime?: string;
+  deliveryId: number;
   deliveryStatus: string;
 };
 
