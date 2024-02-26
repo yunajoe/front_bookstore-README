@@ -24,7 +24,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const { addToBasket, isAddToBasketPending } = useAddToBasket({
     bookId: book.bookId,
   });
-  const authors = useEditAuthorsName(book?.authors);
+  const authors = useEditAuthorsName({ authors: book?.authors });
   const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
     bookId: book.bookId,
     onChangeBookmarkCount: () => {

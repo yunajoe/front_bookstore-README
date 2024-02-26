@@ -8,7 +8,7 @@ function BookAuthors({ alignCenter, authorList }: BookAuthorsProps) {
   return (
     <div
       className={`truncate text-14 text-gray-3 ${alignCenter ? 'text-center' : ''}`}>
-      {useEditAuthorsName(authorList.join(', '))}
+      {useEditAuthorsName({ authors: authorList.join(', ') })}
     </div>
   );
 }
