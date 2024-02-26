@@ -9,6 +9,8 @@ import AddCommunityCard from '@/components/modal/addCommunityCard';
 import { useDeleteCommunity } from '@/api/community';
 import { useSession } from 'next-auth/react';
 import classNames from 'classnames';
+import ProfileModal from '@/components/modal/profile';
+import { useGetMember } from '@/api/member';
 
 function CommunityCard({
   communityId,
@@ -24,10 +26,11 @@ function CommunityCard({
   kebab = false,
   profile = false,
 }: CommunityCardProps) {
-  const { data: session } = useSession(); 
+  const { data: session } = useSession();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const { data: profileData } = useGetMember(writer.memberId);
 
   const handleEditModalOpenClick = () => {
     setIsEditModalOpen(!isEditModalOpen);
@@ -39,10 +42,10 @@ function CommunityCard({
 
   const handleProfileOpenClick = () => {
     if (profile && session?.accessToken) {
-      setIsProfileModalOpen(!isProfileModalOpen)
+      setIsProfileModalOpen(!isProfileModalOpen);
     }
     return null;
-  }
+  };
 
   return (
     <div
@@ -52,11 +55,7 @@ function CommunityCard({
         <div
           className={`relative h-48 w-48 overflow-hidden rounded-full ${profile ? classNames('z-40 hover:opacity-50') : ''} `}
           onClick={handleProfileOpenClick}>
-          <Image
-            src={profileImg ?? NoProfileImg}
-            alt="프로필이미지"
-            fill
-          />
+          <Image src={profileImg ?? NoProfileImg} alt="프로필이미지" fill />
         </div>
         <div className="flex flex-col justify-start py-5 pl-12">
           <p className="text-14 font-bold text-gray-4">{userNickname}</p>
@@ -111,6 +110,7 @@ function CommunityCard({
           id={communityId}
         />
       )}
+      {isProfileModalOpen && <ProfileModal onClick={handleProfileOpenClick} profileData={profileData} />}
     </div>
   );
 }
