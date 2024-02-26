@@ -15,15 +15,17 @@ function SocialCircle({ id = 'KAKAO', width = 36, height = 36 }) {
     그리고 getSocialLogin까지 성공하면 받은 토큰과 유저 데이터를 
     session에 저장하는 코드까지 짜고 확인하기
   */
+  const authLink =
+    id === 'KAKAO'
+      ? process.env.NEXT_PUBLIC_KAKAO_AUTH_LINK!
+      : id === 'NAVER'
+        ? process.env.NEXT_PUBLIC_NAVER_AUTH_LINK!
+        : id === 'Google'
+          ? process.env.NEXT_PUBLIC_GOOGLE_AUTH_LINK!
+          : '/';
   return (
     <Link
-      href={
-        id === 'KAKAO'
-          ? process.env.NEXT_PUBLIC_KAKAO_AUTH_LINK!
-          : id === 'NAVER'
-            ? process.env.NEXT_PUBLIC_NAVER_AUTH_LINK!
-            : process.env.NEXT_PUBLIC_GOOGLE_AUTH_LINK!
-      }
+      href={authLink}
       className="flex-center h-48 w-48 rounded-full border-2 border-solid border-gray-1">
       <Image
         id={id}
