@@ -23,7 +23,7 @@ function SocialCircle({ id = 'KAKAO', width = 36, height = 36 }) {
         : id === 'Google'
           ? process.env.NEXT_PUBLIC_GOOGLE_AUTH_LINK!
           : '/';
-  console.log(authLink);
+  console.log("authLink: ", authLink);
   return (
     <Link
       href={authLink}
