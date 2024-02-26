@@ -1,6 +1,6 @@
 /* string 배열형 author 값을 받아 author 리스트를 출력하는 컴포넌트
  */
-
+import useEditAuthorsName from '@/hooks/common/useEditAutorsName';
 interface BookAuthorProps {
   authorList?: string[] | null;
   publisher?: string;
@@ -14,15 +14,14 @@ function BookAuthor({
   fontSize,
   classNames,
 }: BookAuthorProps) {
-  if (!authorList || authorList.length < 1) return null;
-
-  let nameList = authorList.join(', ');
+  let nameList = authorList?.join(', ');
   nameList += publisher ? ` | ${publisher}` : '';
+  const authors = useEditAuthorsName(nameList);
   return (
     <div
       className={`${classNames ?? ``} text-14 text-gray-3`}
       style={{ fontSize: fontSize }}>
-      {nameList}
+      {authors}
     </div>
   );
 }
