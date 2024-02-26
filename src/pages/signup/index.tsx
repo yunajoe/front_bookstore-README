@@ -19,7 +19,7 @@ import {
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import useSignUpMutation from '@/hooks/useSignUpMutation';
-import { TERMS_TITLES } from '@/constants/sign';
+import { SING_UP_TERMS_CONTENT } from '@/constants/termsContent';
 
 function SignUp() {
   const method = useForm<SignUpValueType>({
@@ -123,7 +123,7 @@ function SignUp() {
             onSubmit={handleSubmit(onSubmit)}
             className="flex w-full flex-col">
             <fieldset>
-              <label className="mb-12 inline-block w-full text-left text-16 font-bold text-gray-6">
+              <label className="mb-12 inline-block w-full text-left text-16 font-bold">
                 이메일
               </label>
               <TextInput
@@ -171,7 +171,7 @@ function SignUp() {
               </div>
             </fieldset>
             <fieldset>
-              <label className="w-full text-left text-16 font-bold text-gray-6">
+              <label className="w-full text-left text-16 font-bold">
                 닉네임
               </label>
               <p className="mb-12 mt-4 w-full text-left text-15 text-gray-3">
@@ -192,7 +192,11 @@ function SignUp() {
               <TermsCheckbox
                 title="약관동의"
                 entire="전체동의"
-                checkContent={TERMS_TITLES}
+                checkContent={[
+                  SING_UP_TERMS_CONTENT.ageLimit,
+                  SING_UP_TERMS_CONTENT.termsOfUse,
+                  SING_UP_TERMS_CONTENT.userInformation,
+                ]}
               />
             </fieldset>
             <RegisterButton>회원가입</RegisterButton>

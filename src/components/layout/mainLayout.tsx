@@ -5,7 +5,6 @@ import useInfinite from '@/hooks/useInfinite';
 import { useAtom } from 'jotai';
 import { pointVisibleAtom } from '@/store/state'; // basketItemList 추가
 import { useSession } from 'next-auth/react';
-import useGetBasKetQuery from '@/hooks/useGetBasKetQuery';
 import Script from 'next/script';
 
 interface MainLayoutProps {
