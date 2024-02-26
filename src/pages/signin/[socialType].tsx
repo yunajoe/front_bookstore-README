@@ -37,7 +37,6 @@ function SocialPage() {
   useEffect(() => {
     handleSocialLogin();
   }, []);
-
   return;
 }
 
