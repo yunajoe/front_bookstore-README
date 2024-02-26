@@ -24,6 +24,7 @@ function SocialCircle({ id = 'KAKAO', width = 36, height = 36 }) {
           ? process.env.NEXT_PUBLIC_GOOGLE_AUTH_LINK!
           : '/';
   console.log("authLink: ", authLink);
+  console.log("process 체크: ", process.env.NEXT_PUBLIC_KAKAO_AUTH_LINK);
 
   return (
     <Link
