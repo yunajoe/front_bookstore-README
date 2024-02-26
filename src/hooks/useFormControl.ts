@@ -28,7 +28,7 @@ function useFormControl ({
   onClick,
   initialValue,
 }: UseFormControl) {
-  console.log(option)
+  
   const { control, handleSubmit, watch, getValues } = useForm({
     mode: 'onSubmit',
     defaultValues: initialValue || {},

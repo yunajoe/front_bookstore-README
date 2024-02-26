@@ -18,7 +18,7 @@ function EmojiButton({
   status,
   communityId,
 }: EmojiButtonProps) {
-  console.log(status)
+  
   const [isCount, setIsCount] = useState(count);
   const [isClick, setIsClick] = useState(status);
   const { updateEmoji, isEmojiPending } = useUpdateCommunityEmoji({
