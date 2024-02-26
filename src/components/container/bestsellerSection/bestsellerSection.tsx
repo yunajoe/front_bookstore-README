@@ -16,7 +16,7 @@ function BestSellerSection({ page, bookList }: BestSellerSectionProps) {
   const gapXClass =
     page === 'main'
       ? 'pc:gap-x-30 tablet:gap-x-20 mobile:gap-x-10'
-      : ' pc:gap-x-20 tablet:gap-x-20 mobile:gap-x-10';
+      : ' pc:gap-x-20 tablet:gap-x-15 mobile:gap-x-10';
 
   return (
     <div
@@ -64,7 +64,7 @@ function BestSellerSection({ page, bookList }: BestSellerSectionProps) {
         {bookList?.map((book, index) => (
           <PreviewBookInfo
             key={book.bookId}
-            size={'sm'}
+            size={page === 'main' ? 'sm' : 'lg'}
             title={book.bookTitle}
             image={book.bookImgUrl}
             authorList={book.authors}
