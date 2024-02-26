@@ -31,6 +31,24 @@ export default NextAuth({
         }
       },
     }),
+    CredentialsProvider({
+      id: 'social-credentials',
+      name: 'credentials',
+      type: 'credentials',
+      credentials: {
+        email: { type: 'text' },
+        socialType: { type: 'text' },
+        memberId: { type: 'text' },
+        accessToken: {type: "text"},
+      },
+      async authorize(credentials): Promise<any> {
+        if (!credentials?.accessToken) { throw new Error('Wrong User');}
+        return {
+          accessToken: credentials?.accessToken,
+          memberId: credentials?.memberId, 
+        };
+      },
+    }),
   ],
   callbacks: {
     async signIn({ user }) {
