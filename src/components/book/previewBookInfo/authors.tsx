@@ -1,4 +1,4 @@
-import useEditAuthorsName from '@/hooks/common/useEditAutorsName';
+import useEditAuthorsName from '@/hooks/common/useEditAuthorsName';
 interface BookAuthorsProps {
   alignCenter?: boolean;
   authorList: string[];

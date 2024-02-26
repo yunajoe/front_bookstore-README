@@ -14,7 +14,7 @@ import { useSetAtom } from 'jotai';
 import { PayMentAtom } from '@/types/cartType';
 import { basketItemList } from '@/store/state';
 import { useUpdateBookmark } from '@/hooks/api/useUpdateBookmark';
-import useEditAuthorsName from '@/hooks/common/useEditAutorsName';
+import useEditAuthorsName from '@/hooks/common/useEditAuthorsName';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isBookmarked, setIsBookMarked] = useState(book.bookmarks?.marked);
