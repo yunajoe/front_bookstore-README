@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 function SocialPage() {
   const router = useRouter();
   const { socialType, code } = router.query;
-  const myType: SocialType = socialType === "kakao" ? "KAKAO" : socialType === "google" ? "GOOGLE" : "NAVER";
+  // const myType: SocialType = socialType === "kakao" ? "KAKAO" : socialType === "google" ? "GOOGLE" : "NAVER";
   const { data } = useQuery({
     queryKey: [""],
-    queryFn: () => getSocialLogin(myType, code as string),
+    queryFn: () => getSocialLogin(socialType as SocialType, code as string),
     enabled: !!socialType
   })
   console.log(data);
