@@ -22,6 +22,7 @@ function SocialPage() {
   });
   let token = data ? data?.Authentication.substr(7) : '';
   const words = data ? data?.Authentication.split(' ') : [''];
+  console.log('data: ', data);
   console.log("data's Authentication: ", data?.Authentication);
   console.log('token: ', token);
   console.log('words[1]: ', words[words.length - 1]);
@@ -39,7 +40,6 @@ function SocialPage() {
       window.location.href = result.url;
     }
   };
-
   useEffect(() => {
     handleSocialLogin();
   }, []);
