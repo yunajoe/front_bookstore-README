@@ -15,16 +15,12 @@ function SocialPage() {
         ? 'GOOGLE'
         : 'NAVER';
 
-  console.log('type: ', myType);
-  console.log('code: ', code);
-
-  const { data, isSuccess, isError, error, isLoading } = useQuery({
-    queryKey: [''],
+  const { data } = useQuery({
+    queryKey: ['social-login'],
     queryFn: () => getSocialLogin(myType, code as string),
     enabled: !!code,
     retry: 5,
   });
-  console.log(data);
 
   const handleSocialLogin = async () => {
     if (data) {
@@ -39,16 +35,6 @@ function SocialPage() {
       });
       router.push('/');
     }
-    if (isError) {
-      console.log('error found!!: ', error);
-    }
-    if (isSuccess) {
-      console.log('success found!!: ', isSuccess);
-    }
-    if (isLoading) {
-      console.log('is loading...!!: ', isLoading);
-    }
-    console.log('data: ', data);
   };
   useEffect(() => {
     handleSocialLogin();
