@@ -15,13 +15,6 @@ interface PaymentButtonProps {
   isAllChecked?: boolean;
 }
 
-/*TODO
-1. 새로운 배송지 선택 시 refresh
-2. 기본 배송지 선택 시 getMember
-3. 기본 배송지 클릭 시 post
-
-*/
-
 interface response {
   success: boolean;
 }
@@ -87,7 +80,7 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
             router.push('/paymented');
           } else {
             // 결제 실패시
-            notify({ type: 'error', text: '결제에 실패했습니다.' });
+            notify({ type: 'error', text: '결제에 실패했어요 😭' });
           }
         },
       );

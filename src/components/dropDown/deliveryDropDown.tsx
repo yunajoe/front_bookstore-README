@@ -39,7 +39,7 @@ function DeliveryDropDown() {
   };
 
   return (
-    <div className="flex w-full flex-col gap-y-12">
+    <div className="z-[100] flex w-full flex-col gap-y-12">
       <DropDown
         menus={DELIVERY_MENU}
         selectedItem={selectedItem}
