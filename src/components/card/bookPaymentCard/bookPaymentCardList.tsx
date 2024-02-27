@@ -12,13 +12,14 @@ function BookPaymentCardList({ bookData, label }: BookPaymentCardListProps) {
       className="flex w-[618px] flex-col text-black mobile:w-330 tablet:w-[688px]">
       <h1 className="mb-20 text-18 font-bold">{label}</h1>
       <div role="list-section" className="flex flex-col gap-20">
-        {bookData.map((data, id) => (
+        {bookData?.map((data, id) => (
           <BookPaymentCard
             key={id}
-            bookId={data.bookId}
+            bookId={data.orderBookId}
             imageUrl={data.bookImgUrl}
+            authors={data.authors}
             cost={data.price}
-            count={data.count}
+            count={data.quantity}
             title={data.bookTitle}
           />
         ))}
