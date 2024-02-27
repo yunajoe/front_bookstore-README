@@ -24,6 +24,7 @@ function SocialPage() {
     enabled: !!code,
     retry: 5,
   });
+  console.log(data);
 
   const handleSocialLogin = async () => {
     if (data) {
@@ -51,7 +52,7 @@ function SocialPage() {
   };
   useEffect(() => {
     handleSocialLogin();
-  }, []);
+  }, [data]);
 
   return;
 }
