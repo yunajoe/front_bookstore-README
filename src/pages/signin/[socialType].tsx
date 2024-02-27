@@ -47,7 +47,7 @@ function SocialPage() {
     if (isLoading) {
       console.log('is loading...!!: ', isLoading);
     }
-    console.log(data);
+    console.log('data: ', data);
   };
   useEffect(() => {
     handleSocialLogin();
