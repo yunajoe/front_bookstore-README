@@ -74,7 +74,6 @@ function CartPage() {
     setWishListData(filteredData);
     resetSelectedItemArr();
   };
-
   useEffect(() => {
     const totalPrice = selectedItemArr.reduce((acc, item) => {
       acc += item.price * item.count;
