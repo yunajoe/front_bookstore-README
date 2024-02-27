@@ -29,4 +29,5 @@ export interface DeliveryOrderBookInfo {
   orderBookId: number;
   price: number;
   quantity: number;
+  count?: number;
 }
