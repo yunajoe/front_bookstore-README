@@ -97,7 +97,7 @@ function CartPage() {
 
   if (isError) return <div>Error loading data</div>;
 
-  if (!state) return <CartSkeleton></CartSkeleton>;
+  if (!state) return <CartSkeleton />;
 
   return (
     <MainLayout>
