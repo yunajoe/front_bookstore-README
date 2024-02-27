@@ -40,7 +40,7 @@ export default function BookDetailPage() {
 
   // 로그인 한 상태라면 찜 여부 체크하기
   const { data: bookmarkData } = useQuery({
-    queryKey: ['temp'],
+    queryKey: ['bookmark'],
     queryFn: () => getIsBookmarked(String(bookId)),
     enabled: status === 'authenticated',
   });
@@ -48,9 +48,8 @@ export default function BookDetailPage() {
   const [isBookmarked, setIsBookMarked] = useState(
     bookmarkData?.isBookmarked ?? false,
   );
-  const [bookmarkCount, setBookmarkCount] = useState(
-    data?.data.bookmarkCount ?? -1,
-  );
+  const [bookmarkCount, setBookmarkCount] = useState(data?.data.bookmarkCount);
+
   const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
     bookId: Number(bookId),
     onChangeBookmarkCount: () => {
@@ -92,11 +91,9 @@ export default function BookDetailPage() {
             categories={bookData.categories}
             authors={bookData.authors}
             bookmarkCount={
-              bookmarkCount >= 0 ? bookmarkCount : bookData.bookmarkCount
+              bookmarkCount > 0 ? bookmarkCount : bookData.bookmarkCount
             }
-            isBookmarked={
-              bookmarkData ? bookmarkData.isBookmared : isBookmarked
-            }
+            isBookmarked={isBookmarked}
             handleBookmarkClick={updateBookmark}
             publishedDate={bookData.publishedDate}
             publisher={bookData.publisher}
