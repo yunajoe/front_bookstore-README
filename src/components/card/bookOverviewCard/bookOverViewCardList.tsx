@@ -1,6 +1,6 @@
-import BookOverviewCard from './bookOverViewCard';
+import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard'
 import { BookData } from '@/types/api/book';
-import BookOverviewEmptyCard from './bookOverviewEmptyCard';
+import BookOverviewEmptyCard from '@/components/card/bookOverviewCard/bookOverviewEmptyCard';
 import SkeletonBookOverviewCard from '@/components/skeleton/bookOverviewCard/skeleton';
 
 interface BookOverViewCardListProps {

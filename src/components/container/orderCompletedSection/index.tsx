@@ -4,22 +4,33 @@ import TitleContentCard from '@/components/card/titleContentCard';
 import { bookOrderTestData2 } from '@/pages/api/mock/bookOrderMock';
 import { DELIVERY_INFO, PAYMENT_INFO } from 'src/constants/payment';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
+import { DeliveryOrderBookInfo } from '@/types/api/delivery';
 
-//TODO : data 받을 예정. 예시임
-const DcontentData = [
-  '리드미',
-  '01012345678',
-  '(12345) 경남 성남시 분당구 불정로 6 그린팩토리',
-  '부재 시 경비실에 맡겨주세요',
-];
-const PcontentData = ['신용카드', '22,500원'];
-const orderDate = '2024.02.05';
+interface OrderCompletedSectionProps {
+  orderDate?: string;
+  paymentDetail?: boolean;
+  name: string;
+  phone: string;
+  address: string;
+  message: string;
+  paymentAmount: number;
+  paymentMethod: string;
+  bookData: DeliveryOrderBookInfo[];
+}
 
 function OrderCompletedSection({
+  orderDate = '2023.04.01',
   paymentDetail = true,
-}: {
-  paymentDetail?: boolean;
-}) {
+  name,
+  phone,
+  address,
+  message,
+  paymentAmount,
+  paymentMethod,
+  bookData,
+}: OrderCompletedSectionProps) {
+  const DcontentData = [name, phone, address, message]
+  const PcontentData = [paymentMethod, String(paymentAmount)]
   return (
     <div className="flex w-[1084px] flex-col gap-60 mobile:w-330 tablet:w-[688px] ">
       {paymentDetail && (
@@ -41,12 +52,13 @@ function OrderCompletedSection({
             titleData={PAYMENT_INFO}
             contentData={PcontentData}
           />
-          <BookPaymentCardList bookData={bookOrderTestData2} label="주문상품" />
+          <BookPaymentCardList bookData={bookData} label="주문상품" />
           <div className="w-full pc:hidden">
             <TotalPriceCard
               checkbox={false}
               button={false}
               color="text-primary"
+              price={paymentAmount}
             />
           </div>
         </div>
@@ -55,6 +67,7 @@ function OrderCompletedSection({
             checkbox={false}
             button={false}
             color="text-primary"
+            price={paymentAmount}
           />
         </div>
       </div>

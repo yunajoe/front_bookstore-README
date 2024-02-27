@@ -1,4 +1,4 @@
-import Percentage from './percentage';
+import Percentage from '@/components/book/percentage/percentage';
 
 /** 상품상세페이지 리뷰 총평을 보여주는 컴포넌트 */
 interface ReviewOverviewCardProps {

@@ -13,6 +13,7 @@ interface TotalPriceCardProps {
   color?: string;
   delivery?: number;
   discount?: number;
+  price?: number;
 }
 interface FormDataType {
   selectAll: boolean;
@@ -22,11 +23,13 @@ function TotalPriceCard({
   checkbox = true,
   button = true,
   color,
+  price,
   discount = 0,
 }: TotalPriceCardProps) {
-  const bookPrice = useCalculateProductsPrice();
+  const bookPrice = price ? price : useCalculateProductsPrice();
   const delivery = bookPrice > 30000 ? 0 : 3000;
   const totalPrice = useCalculateTotalPrice({
+    Price: bookPrice,
     delivery: delivery,
     discount: discount,
   });

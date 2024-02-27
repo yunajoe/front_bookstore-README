@@ -31,7 +31,7 @@ function BestSellerSection({ page, bookList }: BestSellerSectionProps) {
         )}
       </div>
       <div
-        className={`flex-center flex flex-wrap justify-start gap-y-62 overflow-auto mobile:hidden tablet:hidden ${gapXClass}`}>
+        className={`flex-center flex flex-wrap justify-start gap-y-62 mobile:hidden tablet:hidden ${gapXClass}`}>
         {bookList?.map((book, index) => (
           <PreviewBookInfo
             key={book.bookId}

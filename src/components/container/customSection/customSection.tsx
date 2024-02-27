@@ -6,10 +6,10 @@ import VacantCustomLayout from '@/components/layout/vacantCustomLayout';
 import { useQuery } from '@tanstack/react-query';
 import { getCustomCategoryList } from '@/api/category';
 import { getRandomBookList } from '@/api/book';
-import GenreSelection from './genreSelection';
+import GenreSelection from '@/components/container/customSection/genreSelection';
 import Link from 'next/link';
-import NonLoggedInCustomSection from './nonLoggedInCustomSection';
-import NonSelectedCustomSection from './nonSelectedCustomSection';
+import NonLoggedInCustomSection from '@/components/container/customSection/nonLoggedInCustomSection';
+import NonSelectedCustomSection from '@/components/container/customSection/nonSelectedCustomSection';
 
 interface CustomSectionProps {
   isLoggedIn: boolean;
@@ -68,7 +68,7 @@ function CustomSection({ isLoggedIn }: CustomSectionProps) {
   if (!isLoggedIn) return <NonLoggedInCustomSection />;
 
   return (
-    <div className="flex-center w-full bg-pink">
+    <div className="flex-center bg-custom-gradient w-full">
       {genreList.length === 0 ? (
         <NonSelectedCustomSection />
       ) : getRandomCustomBookList?.data?.length === 0 ? (

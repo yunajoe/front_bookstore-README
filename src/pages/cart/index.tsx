@@ -32,7 +32,7 @@ function CartPage() {
       (data) => data.basketId === item.basketId,
     );
     if (itemIdx > -1) {
-      let clickedCount = wishList[itemIdx].count + 1;
+      let clickedCount = wishList[itemIdx].quantity + 1;
       setter((prev) =>
         prev.map((ele, index) =>
           index === itemIdx ? { ...ele, count: clickedCount } : ele,
@@ -50,7 +50,7 @@ function CartPage() {
       (data) => data.basketId === item.basketId,
     );
     if (itemIdx > -1) {
-      let clickedCount = wishList[itemIdx].count - 1;
+      let clickedCount = wishList[itemIdx].quantity - 1;
       setter((prev) =>
         prev.map((ele, index) =>
           index === itemIdx ? { ...ele, count: clickedCount } : ele,
@@ -77,14 +77,14 @@ function CartPage() {
 
   useEffect(() => {
     const totalPrice = selectedItemArr.reduce((acc, item) => {
-      acc += item.price * item.count;
+      acc += item.price * item.quantity;
       return acc;
     }, 0);
     setTotalAmount(totalPrice);
   }, [selectedItemArr]);
 
   const bookTotalCount = selectedItemArr.reduce((acc, item) => {
-    acc += item.count;
+    acc += item.quantity;
     return acc;
   }, 0);
 
@@ -242,7 +242,7 @@ function CartPage() {
                                 setSelectedItemArr,
                               );
                             }}
-                            count={item.count}
+                            count={item.quantity}
                           />
                         </div>
                       </div>
@@ -251,8 +251,8 @@ function CartPage() {
                             mobile:w-full mobile:flex-row mobile:justify-between mobile:border-t-2 mobile:px-20
                             mobile:py-16">
                         <span className="text-20 font-bold text-black">
-                          {(item.count && item.count > 0
-                            ? item.price * item.count
+                          {(item.quantity && item.quantity > 0
+                            ? item.price * item.quantity
                             : item.price
                           )
                             .toString()
