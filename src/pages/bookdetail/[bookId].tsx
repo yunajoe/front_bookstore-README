@@ -14,7 +14,7 @@ import Spacing from '@/components/container/spacing/spacing';
 import SideOrderNavigator from '@/components/orderNavigator/sideOrderNavigator';
 import FooterOrderNavitgator from '@/components/orderNavigator/footerOrderNavitgator';
 import SkeletonBookDetailCard from '@/components/skeleton/bookDetailCard/skeleton';
-import useClickBookmarkButton from '@/hooks/useClickBookmarkButton';
+import { useUpdateBookmark } from '@/hooks/api/useUpdateBookmark';
 
 type BookDetailNavLocationType = 'information' | 'review' | 'currency';
 
@@ -45,12 +45,23 @@ export default function BookDetailPage() {
     enabled: status === 'authenticated',
   });
 
-  const { isBookmarked, bookmarkCount, isBookmarkPending, updateBookmark } =
-    useClickBookmarkButton({
-      bookId: Number(bookId),
-      marked: bookmarkData?.marked ?? false,
-      count: bookData?.bookmarkCount,
-    });
+  const [isBookmarked, setIsBookMarked] = useState(
+    bookmarkData?.isBookmarked ?? false,
+  );
+  const [bookmarkCount, setBookmarkCount] = useState(
+    data?.data.bookmarkCount ?? -1,
+  );
+  const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
+    bookId: Number(bookId),
+    onChangeBookmarkCount: () => {
+      if (isBookmarked) {
+        setBookmarkCount(bookmarkCount - 1);
+      } else {
+        setBookmarkCount(bookmarkCount + 1);
+      }
+    },
+    onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
+  });
 
   const { mutate: handleViewCountMutate } = usePutBook({
     bookId: Number(bookId),
@@ -80,8 +91,12 @@ export default function BookDetailPage() {
             price={bookData.price}
             categories={bookData.categories}
             authors={bookData.authors}
-            bookmarkCount={bookmarkCount}
-            isBookmarked={isBookmarked}
+            bookmarkCount={
+              bookmarkCount >= 0 ? bookmarkCount : bookData.bookmarkCount
+            }
+            isBookmarked={
+              bookmarkData ? bookmarkData.isBookmared : isBookmarked
+            }
             handleBookmarkClick={updateBookmark}
             publishedDate={bookData.publishedDate}
             publisher={bookData.publisher}
@@ -122,18 +137,20 @@ export default function BookDetailPage() {
           </div>
 
           <div className="hidden pc:flex pc:pt-50">
-            <SideOrderNavigator
-              bookId={bookId as string}
-              bookImgUrl={bookData?.bookImgUrl ?? './'}
-              bookTitle={bookData?.bookTitle}
-              authors={bookData?.authors}
-              isBookmarked={isBookmarked}
-              isBookmarkPending={isBookmarkPending}
-              handleBookmarkClick={updateBookmark}
-              price={bookData?.price ?? 0}
-              orderCount={orderCount}
-              setOrderCount={setOrderCount}
-            />
+            {location === 'information' && (
+              <SideOrderNavigator
+                bookId={bookId as string}
+                bookImgUrl={bookData?.bookImgUrl ?? './'}
+                bookTitle={bookData?.bookTitle}
+                authors={bookData?.authors}
+                isBookmarked={isBookmarked}
+                isBookmarkPending={isBookmarkPending}
+                handleBookmarkClick={updateBookmark}
+                price={bookData?.price ?? 0}
+                orderCount={orderCount}
+                setOrderCount={setOrderCount}
+              />
+            )}
           </div>
         </section>
 

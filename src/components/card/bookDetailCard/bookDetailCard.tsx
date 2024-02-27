@@ -12,7 +12,7 @@ interface BookDetailCardProps {
   price: number;
   categories: [string, string];
   authors: string[];
-  bookmarkCount: number;
+  bookmarkCount?: number;
   isBookmarked: boolean;
   handleBookmarkClick: () => void;
   publishedDate: string;
