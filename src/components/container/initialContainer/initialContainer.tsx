@@ -25,13 +25,7 @@ function InitialContainer() {
   }, []);
 
   useGetCategory();
-  return (
-    <>
-      {loading &&
-          <LoadingSpinner />
-        }
-    </>
-  );
+  return <>{loading && <LoadingSpinner />}</>;
 }
 
 export default InitialContainer;
