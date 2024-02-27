@@ -36,7 +36,6 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     },
     onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
   });
-
   const setNowPayItem = useSetAtom(basketItemList);
   const setNowPayItemList: PayMentAtom[] = [
     {
@@ -51,7 +50,6 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const handleAddToBookmark = () => {
     updateBookmark();
   };
-
   const handleAddToBasket = () => {
     addToBasket();
   };

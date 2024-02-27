@@ -1,6 +1,7 @@
 import { PayMentAtom } from '@/types/api/cart';
 import { atom } from 'jotai';
 import { CategoryAtomType, CategoryType } from '@/types/api/category';
+import { SocialType } from '@/api/social';
 
 export const countAtom = atom(0);
 
@@ -25,3 +26,6 @@ export const CategoryListAtom = atom<CategoryAtomType>({
 export const LocatedCategoryAtom = atom<CategoryType>({
   mainId: 0,
 });
+
+// 사용자가 로그인했을 때 소셜로 한 건지, 일반으로 한 건지 체크하는 전역상태
+export const SigninMethodAtom = atom<SocialType | undefined | null>(null);
