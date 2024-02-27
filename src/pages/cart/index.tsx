@@ -11,8 +11,10 @@ import { useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import CheckedCheckBoxIcon from '@/public/icons/CheckedCheckBox.svg';
 import CheckBoxIcon from '@/public/icons/CheckBox.svg';
+import CartSkeleton from '@/components/skeleton/cart/cartSkeleton';
 
 function CartPage() {
+  const [state, setState] = useState(false);
   const [wishListData, setWishListData] = useState<CartItem[]>([]);
   const [selectedItemArr, setSelectedItemArr] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -90,12 +92,13 @@ function CartPage() {
     if (data && isSuccess) {
       setWishListData([...data]);
       setSelectedItemArr([...data]);
+      setState(true);
     }
   }, [isSuccess]);
 
   if (isError) return <div>Error loading data</div>;
 
-  if (isLoading) return <div>Loading...</div>;
+  if (!state) return <CartSkeleton></CartSkeleton>;
 
   return (
     <MainLayout>

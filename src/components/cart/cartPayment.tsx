@@ -35,17 +35,15 @@ function CartPayment({
 
   const setBasketItemList = useSetAtom(basketItemList);
 
-  const handleMovePayMentPage = () => {
-    // 수정된 배열을 사용하여 setBasketItemList 함수 호출
-    setBasketItemList(selectedItemArr);
-    // 페이지 이동
+  const handleMovePayMentPage = () => {  
+    setBasketItemList(selectedItemArr);  
     router.push('/order');
   };
 
   return (
     <div
-      className="top- sticky mt-127 flex h-fit w-340 flex-col rounded-[10px]
-        border-2 border-solid border-gray-1 p-30 mobile:mb-165 mobile:mt-20 mobile:w-full mobile:p-20
+      className="sticky mt-127 flex h-fit w-340 flex-col rounded-[10px] border-2
+        border-solid border-gray-1 p-30 mobile:mb-165 mobile:mt-20 mobile:w-full mobile:p-20 tablet:mt-110
         tablet:w-216 tablet:p-20">
       <div className="mb-20 flex justify-between">
         <span className="text-15 font-normal text-black">총 상품 금액</span>

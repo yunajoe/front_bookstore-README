@@ -4,23 +4,29 @@ import { useEffect } from 'react';
 
 const LIMIT = 8;
 function useBookMarkInfiniteQuery() {
-  const { data, status, isError, fetchNextPage, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ['bookMarkUserId'],
-      queryFn: async ({ pageParam }) => {
-        const result = await getBookMarkList(pageParam, LIMIT);
-        return {
-          ...result,
-          pageParam: pageParam,
-        };
-      },
-      getNextPageParam: (lastPage) => {
-        return lastPage.data.cursorId === -1
-          ? undefined
-          : lastPage.pageParam + 1;
-      },
-      initialPageParam: 0,
-    });
+  const {
+    data,
+    status,
+    isError,
+   isSuccess,
+    isLoading,
+    isPending,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['bookMarkUserId'],
+    queryFn: async ({ pageParam }) => {
+      const result = await getBookMarkList(pageParam, LIMIT);
+      return {
+        ...result,
+        pageParam: pageParam,
+      };
+    },
+    getNextPageParam: (lastPage) => {
+      return lastPage.data.cursorId === -1 ? undefined : lastPage.pageParam + 1;
+    },
+    initialPageParam: 0,
+  });
 
   const queryClient = useQueryClient();
 
@@ -35,6 +41,9 @@ function useBookMarkInfiniteQuery() {
     status,
     fetchNextPage,
     hasNextPage,
+    isSuccess,
+    isLoading,
+    isPending,
   };
 }
 
