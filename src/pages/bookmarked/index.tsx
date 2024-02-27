@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react';
 import CheckedCheckBoxIcon from '@/public/icons/CheckedCheckBox.svg';
 import CheckBoxIcon from '@/public/icons/CheckBox.svg';
 import MainLayout from '@/components/layout/mainLayout';
-import CustomSkeleton from '@/components/skeleton/customSkeleton/skeleton';
 import BookMarkSkeleton from '@/components/skeleton/bookMarked/bookMarkSkeleton';
 function BookMarkedPage() {
   const [state, setState] = useState(false);
