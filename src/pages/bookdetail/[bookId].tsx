@@ -74,13 +74,10 @@ export default function BookDetailPage() {
       // 로그인 한 상태라면 조회수 1 증가
       handleViewCountMutate();
     }
-  }, [status, isError]);
-
-  useEffect(() => {
     queryClient.invalidateQueries({
       queryKey: ['book'],
     });
-  }, []);
+  }, [status, isError]);
 
   return (
     <MainLayout>
