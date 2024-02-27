@@ -58,6 +58,7 @@ function OrderCompletedSection({
               checkbox={false}
               button={false}
               color="text-primary"
+              price={paymentAmount}
             />
           </div>
         </div>
@@ -66,6 +67,7 @@ function OrderCompletedSection({
             checkbox={false}
             button={false}
             color="text-primary"
+            price={paymentAmount}
           />
         </div>
       </div>
