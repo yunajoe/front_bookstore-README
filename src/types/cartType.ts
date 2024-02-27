@@ -13,6 +13,6 @@ export type PayMentAtom = {
   bookImgUrl: string;
   bookTitle: string;
   price: number;
-  count: number;
+  quantity: number;
   authors: string[];
 };
