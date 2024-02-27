@@ -16,6 +16,6 @@ export type PayMentAtom = {
   bookTitle: string;
   price: number;
   quantity?: number;
-  count?: number;
+  count: number;
   authors: string[];
 };
