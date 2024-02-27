@@ -4,7 +4,7 @@ import BookLabelGrayIcon from '@/public/icons/BookLabelGrayIcon.svg';
 import BookLabelSecondaryIcon from '@/public/icons/BookLabelSecondaryIcon.png';
 import BookLabelBottomIcon from '@/public/icons/BookLabelBottomIcon.svg';
 import BookLabelBottomGrayIcon from '@/public/icons/BookLabelBottomGrayIcon.svg';
-import { PreviewBookInfoProps } from '@/types/previewBookInfoType';
+import { PreviewBookInfoProps } from '@/types/api/previewBookInfoType';
 import { IMAGE_SIZE } from 'src/constants/style/previewBookImageSize';
 import BookTitle from '@/components/book/previewBookInfo/title';
 import BookAuthors from '@/components/book/previewBookInfo/authors';

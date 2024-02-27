@@ -4,7 +4,7 @@
  * TODO 하드코딩해놨습니다 추후 수정 예정
  */
 
-import { BookDetailNavLocationType } from '@/types/bookDetailtype';
+import { BookDetailNavLocationType } from '@/types/api/book';
 import { MouseEventHandler } from 'react';
 
 interface BookDetailNavProps {

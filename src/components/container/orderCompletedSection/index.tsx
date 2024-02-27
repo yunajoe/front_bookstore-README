@@ -3,7 +3,7 @@ import InfoCard from '@/components/card/infoCard';
 import TitleContentCard from '@/components/card/titleContentCard';
 import { DELIVERY_INFO, PAYMENT_INFO } from 'src/constants/payment';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
-import { DeliveryOrderBookInfo } from '@/types/api/delivery';
+import { DeliveryItem, OrderBook } from '@/types/api/delivery';
 
 interface OrderCompletedSectionProps {
   orderDate?: string;
@@ -14,7 +14,7 @@ interface OrderCompletedSectionProps {
   message: string;
   paymentAmount: number;
   paymentMethod: string;
-  bookData: DeliveryOrderBookInfo[];
+  bookData: OrderBook[];
 }
 
 function OrderCompletedSection({

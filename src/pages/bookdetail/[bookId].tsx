@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { useGetBook, usePutBook } from '@/api/book';
 import { getIsBookmarked } from '@/api/bookmark';
 import MainLayout from '@/components/layout/mainLayout';
@@ -22,11 +23,13 @@ export default function BookDetailPage() {
   const router = useRouter();
   const { status } = useSession();
   const { bookId } = router.query;
+
   // 페이지 하단 상품정보, 리뷰, 배송교환환불 탭을 나타내는 state
   const [location, setLocation] =
     useState<BookDetailNavLocationType>('information');
   // 책 구매 수량 state
   const [orderCount, setOrderCount] = useState(1);
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useGetBook({
     endpoint: `${bookId}/detail`,
@@ -36,21 +39,17 @@ export default function BookDetailPage() {
     enabled: !!bookId,
   });
 
-  let bookData = data?.data;
-
   // 로그인 한 상태라면 찜 여부 체크하기
   const { data: bookmarkData } = useQuery({
-    queryKey: ['temp'],
+    queryKey: ['book', 'bookmark'],
     queryFn: () => getIsBookmarked(String(bookId)),
-    enabled: status === 'authenticated',
+    enabled: !!(status === 'authenticated' && bookId),
   });
 
-  const [isBookmarked, setIsBookMarked] = useState(
-    bookmarkData?.isBookmarked ?? false,
-  );
-  const [bookmarkCount, setBookmarkCount] = useState(
-    data?.data.bookmarkCount ?? -1,
-  );
+  let bookData = data?.data;
+  const [isBookmarked, setIsBookMarked] = useState(bookmarkData?.marked);
+  const [bookmarkCount, setBookmarkCount] = useState(bookData?.bookmarkCount);
+
   const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
     bookId: Number(bookId),
     onChangeBookmarkCount: () => {
@@ -75,6 +74,9 @@ export default function BookDetailPage() {
       // 로그인 한 상태라면 조회수 1 증가
       handleViewCountMutate();
     }
+    queryClient.invalidateQueries({
+      queryKey: ['book'],
+    });
   }, [status, isError]);
 
   return (
@@ -92,11 +94,9 @@ export default function BookDetailPage() {
             categories={bookData.categories}
             authors={bookData.authors}
             bookmarkCount={
-              bookmarkCount >= 0 ? bookmarkCount : bookData.bookmarkCount
+              bookmarkCount > 0 ? bookmarkCount : bookData.bookmarkCount
             }
-            isBookmarked={
-              bookmarkData ? bookmarkData.isBookmared : isBookmarked
-            }
+            isBookmarked={isBookmarked}
             handleBookmarkClick={updateBookmark}
             publishedDate={bookData.publishedDate}
             publisher={bookData.publisher}

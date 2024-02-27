@@ -1,7 +1,7 @@
 import CarouselCard from '@/components/carousel/carouselCard';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
 import { BookData } from '@/types/api/book';
-import { ResponSive } from '@/types/carouselType';
+import { ResponSive } from '@/types/api/carouselType';
 import { inrange } from '@/utils/inrange';
 import registDragEvent from '@/utils/registerDragEvent';
 import Image from 'next/image';

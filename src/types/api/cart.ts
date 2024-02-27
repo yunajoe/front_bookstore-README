@@ -4,7 +4,7 @@ export type CartItem = {
   bookImgUrl: string;
   bookTitle: string;
   price: number;
-  quantity: number;
+  count: number;
   authors: string[];
 };
 
@@ -16,6 +16,10 @@ export type PayMentAtom = {
   bookTitle: string;
   price: number;
   quantity?: number;
+<<<<<<< HEAD:src/types/cartType.ts
+=======
+  count?: number;
+>>>>>>> develop:src/types/api/cart.ts
   authors: string[];
   count: number;
 };

@@ -1,4 +1,4 @@
-import { OrderOverViewItem } from '@/types/deliveryType';
+import { OrderOverViewItem } from '@/types/api/delivery';
 
 type ScoreRecord = Record<string, keyof OrderOverViewItem>;
 

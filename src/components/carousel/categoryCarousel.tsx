@@ -1,6 +1,6 @@
 import CarouselCard from '@/components/carousel/carouselCard';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
-import { EnvType, NewBook, ResponSive } from '@/types/carouselType';
+import { EnvType, NewBook, ResponSive } from '@/types/api/carouselType';
 import { inrange } from '@/utils/inrange';
 import registDragEvent from '@/utils/registerDragEvent';
 import Image from 'next/image';
@@ -77,8 +77,7 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
     setCurrentIndex(boundaryIndex);
     transformCarousel(boundaryIndex);
   };
-  useEffect(resetCurrentIndex, [env]);  
-
+  useEffect(resetCurrentIndex, [env]);
 
   return (
     <div className="relative w-[895px] overflow-hidden bg-white mobile:w-330 tablet:w-[511px]">

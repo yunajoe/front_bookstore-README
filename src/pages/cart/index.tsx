@@ -5,14 +5,16 @@ import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
 import useDeleteBasketQuery from '@/hooks/useDeleteBasketQuery';
 import useGetBasKetQuery from '@/hooks/useGetBasKetQuery';
-import { CartItem } from '@/types/cartType';
+import { CartItem } from '@/types/api/cart';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import CheckedCheckBoxIcon from '@/public/icons/CheckedCheckBox.svg';
 import CheckBoxIcon from '@/public/icons/CheckBox.svg';
+import CartSkeleton from '@/components/skeleton/cart/cartSkeleton';
 
 function CartPage() {
+  const [state, setState] = useState(false);
   const [wishListData, setWishListData] = useState<CartItem[]>([]);
   const [selectedItemArr, setSelectedItemArr] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -30,7 +32,7 @@ function CartPage() {
       (data) => data.basketId === item.basketId,
     );
     if (itemIdx > -1) {
-      let clickedCount = wishList[itemIdx].quantity + 1;
+      let clickedCount = wishList[itemIdx].count + 1;
       setter((prev) =>
         prev.map((ele, index) =>
           index === itemIdx ? { ...ele, count: clickedCount } : ele,
@@ -48,7 +50,7 @@ function CartPage() {
       (data) => data.basketId === item.basketId,
     );
     if (itemIdx > -1) {
-      let clickedCount = wishList[itemIdx].quantity - 1;
+      let clickedCount = wishList[itemIdx].count - 1;
       setter((prev) =>
         prev.map((ele, index) =>
           index === itemIdx ? { ...ele, count: clickedCount } : ele,
@@ -75,14 +77,15 @@ function CartPage() {
 
   useEffect(() => {
     const totalPrice = selectedItemArr.reduce((acc, item) => {
-      acc += item.price * item.quantity;
+      acc += item.price * item.count;
       return acc;
     }, 0);
+    console.log(selectedItemArr, totalPrice);
     setTotalAmount(totalPrice);
   }, [selectedItemArr]);
 
   const bookTotalCount = selectedItemArr.reduce((acc, item) => {
-    acc += item.quantity;
+    acc += item.count;
     return acc;
   }, 0);
 
@@ -90,12 +93,13 @@ function CartPage() {
     if (data && isSuccess) {
       setWishListData([...data]);
       setSelectedItemArr([...data]);
+      setState(true);
     }
   }, [isSuccess]);
 
   if (isError) return <div>Error loading data</div>;
 
-  if (isLoading) return <div>Loading...</div>;
+  if (!state) return <CartSkeleton></CartSkeleton>;
 
   return (
     <MainLayout>
@@ -239,7 +243,7 @@ function CartPage() {
                                 setSelectedItemArr,
                               );
                             }}
-                            count={item.quantity}
+                            count={item.count}
                           />
                         </div>
                       </div>
@@ -248,8 +252,8 @@ function CartPage() {
                             mobile:w-full mobile:flex-row mobile:justify-between mobile:border-t-2 mobile:px-20
                             mobile:py-16">
                         <span className="text-20 font-bold text-black">
-                          {(item.quantity && item.quantity > 0
-                            ? item.price * item.quantity
+                          {(item.count && item.count > 0
+                            ? item.price * item.count
                             : item.price
                           )
                             .toString()
