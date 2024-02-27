@@ -3,6 +3,14 @@ import { notify } from '@/components/toast/toast';
 import useCalculateProductsPrice from '@/hooks/common/useCalculateProductsPrice';
 import useCalculateTotalPrice from '@/hooks/common/useCalculateTotalPrice';
 import { useRouter } from 'next/router';
+import { deliveryInfoAtom } from '@/store/deliveryInfo';
+import { useAtom, useAtomValue } from 'jotai';
+import { basketItemList } from '@/store/state';
+import { DeliveryOrderBook, postAxiosDelivery } from '@/api/delivery';
+import { PostDeliveryOption } from '@/api/delivery';
+import { usePostDeliveryMutation } from '@/hooks/usePostDeliveryMutatation';
+import { useGetOrderTitle } from '@/hooks/common/useGetOrderTitle';
+import { deliveryIdAtom } from '@/store/deliveryInfo';
 interface PaymentButtonProps {
   isAllChecked?: boolean;
 }
@@ -11,13 +19,33 @@ interface response {
   success: boolean;
 }
 function PaymentButton({ isAllChecked }: PaymentButtonProps) {
+  const deliveryInfo = useAtomValue(deliveryInfoAtom);
+  const [deliveryId, setDeliveryId] = useAtom(deliveryIdAtom);
+  const booksInfo = useAtomValue(basketItemList);
   const router = useRouter();
   const bookPrice = useCalculateProductsPrice();
+  const member = useGetMember();
+  let clicked = false;
   const delivery = bookPrice > 10000 ? 0 : 3000;
   const totalPrice = useCalculateTotalPrice({
     delivery: delivery,
     discount: 0,
   });
+
+  // orderbooks 초기화
+  const orderBooks: DeliveryOrderBook[] = [];
+  const basketIds: (number | undefined)[] = [];
+
+  // booksInfo 반복문을 사용하여 orderbooks에 bookid와 count를 추가
+  booksInfo.forEach((book) => {
+    orderBooks.push({
+      bookId: book.bookId,
+      quantity: book.count,
+    });
+    if (book?.basketId) basketIds.push(book?.basketId);
+  });
+
+  const orderTitle = useGetOrderTitle();
   // 결제창 함수
   function kakaoPay(useremail: string, username: string) {
     if (typeof window !== 'undefined') {
@@ -36,7 +64,7 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
           pg: 'kakaopay.TC0ONETIME', // PG사 코드표에서 선택
           pay_method: 'card', // 결제 방식
           merchant_uid: 'IMP' + makeMerchantUid, // 결제 고유 번호
-          name: '리드미', // 제품명
+          name: orderTitle, // 상품명
           amount: totalPrice, // 가격
           buyer_email: useremail,
           buyer_name: username,
@@ -49,9 +77,7 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
         async function (rsp: response) {
           if (rsp.success) {
             //결제 성공시
-            console.log(rsp + '결제성공');
             router.push('/paymented');
-            //결제 성공시 프로젝트 DB저장 요청
           } else {
             // 결제 실패시
             alert('결제에 실패했습니다.');
@@ -61,16 +87,41 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
     }
   }
   const { data } = useGetMember();
-  // 결제 함수 호출
-  function handlePaymentButtonClick() {
-    if (isAllChecked) {
-      const user_email = data.email;
-      const username = '안윤진';
-      kakaoPay(user_email, username);
-    } else {
+
+  const orderInfo: PostDeliveryOption = {
+    name: deliveryInfo.name,
+    phone: deliveryInfo.phone,
+    address: deliveryInfo.address,
+    message: deliveryInfo.message || '',
+    paymentMethod: 'KAKAO_PAY',
+    paymentAmount: totalPrice,
+    basketIds: basketIds,
+    orderBooks: orderBooks,
+    basicAddress: deliveryInfo?.isDefault || false,
+    // enabled: clicked && isAllChecked,
+  };
+
+  const isAllSubmitted: boolean =
+    !!deliveryInfo.name && !!deliveryInfo.phone && !!deliveryInfo.address;
+
+  const mutate = usePostDeliveryMutation(orderInfo);
+  async function handlePaymentButtonClick() {
+    clicked = !clicked;
+    if (isAllChecked && isAllSubmitted) {
+      // const user_email = data?.email;
+      // const username = data?.name;
+      // kakaoPay(user_email, username);
+      router.push('/paymented');
+      setDeliveryId(await postAxiosDelivery(orderInfo));
+    } else if (!isAllChecked) {
       notify({
         type: 'error',
-        text: '모든약관에 동의하셔야 합니다. ✅',
+        text: '모든약관에 동의하셔야 합니다.',
+      });
+    } else if (!isAllSubmitted) {
+      notify({
+        type: 'error',
+        text: '모든 배송 정보를 작성하셔야 합니다.',
       });
     }
   }
