@@ -50,7 +50,6 @@ function SocialPage() {
     }
     console.log('data: ', data);
   };
-
   useEffect(() => {
     handleSocialLogin();
   }, [data]);
