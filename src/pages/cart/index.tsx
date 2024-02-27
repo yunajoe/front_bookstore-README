@@ -32,7 +32,7 @@ function CartPage() {
       (data) => data.basketId === item.basketId,
     );
     if (itemIdx > -1) {
-      let clickedCount = wishList[itemIdx].quantity + 1;
+      let clickedCount = wishList[itemIdx].count + 1;
       setter((prev) =>
         prev.map((ele, index) =>
           index === itemIdx ? { ...ele, count: clickedCount } : ele,
@@ -50,7 +50,7 @@ function CartPage() {
       (data) => data.basketId === item.basketId,
     );
     if (itemIdx > -1) {
-      let clickedCount = wishList[itemIdx].quantity - 1;
+      let clickedCount = wishList[itemIdx].count - 1;
       setter((prev) =>
         prev.map((ele, index) =>
           index === itemIdx ? { ...ele, count: clickedCount } : ele,
@@ -77,14 +77,15 @@ function CartPage() {
 
   useEffect(() => {
     const totalPrice = selectedItemArr.reduce((acc, item) => {
-      acc += item.price * item.quantity;
+      acc += item.price * item.count;
       return acc;
     }, 0);
+    console.log(selectedItemArr, totalPrice);
     setTotalAmount(totalPrice);
   }, [selectedItemArr]);
 
   const bookTotalCount = selectedItemArr.reduce((acc, item) => {
-    acc += item.quantity;
+    acc += item.count;
     return acc;
   }, 0);
 
@@ -242,7 +243,7 @@ function CartPage() {
                                 setSelectedItemArr,
                               );
                             }}
-                            count={item.quantity}
+                            count={item.count}
                           />
                         </div>
                       </div>
@@ -251,8 +252,8 @@ function CartPage() {
                             mobile:w-full mobile:flex-row mobile:justify-between mobile:border-t-2 mobile:px-20
                             mobile:py-16">
                         <span className="text-20 font-bold text-black">
-                          {(item.quantity && item.quantity > 0
-                            ? item.price * item.quantity
+                          {(item.count && item.count > 0
+                            ? item.price * item.count
                             : item.price
                           )
                             .toString()
