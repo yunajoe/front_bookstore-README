@@ -1,7 +1,8 @@
 import { PayMentAtom } from '@/types/cartType';
-import BookPaymentCard from './bookPaymentCard';
+import BookPaymentCard from '@/components/card/bookPaymentCard/bookPaymentCard';
+import { DeliveryOrderBookInfo } from '@/types/api/delivery';
 interface BookPaymentCardListProps {
-  bookData: PayMentAtom[];
+  bookData: PayMentAtom[] | DeliveryOrderBookInfo[];
   label: string;
 }
 
@@ -16,10 +17,11 @@ function BookPaymentCardList({ bookData, label }: BookPaymentCardListProps) {
           <BookPaymentCard
             key={id}
             bookId={data.bookId}
+            title={data.bookTitle}
+            authors={data.authors}
             imageUrl={data.bookImgUrl}
             cost={data.price}
-            count={data.count}
-            title={data.bookTitle}
+            count={data.quantity}
           />
         ))}
       </div>

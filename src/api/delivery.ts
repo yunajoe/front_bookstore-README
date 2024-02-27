@@ -5,12 +5,12 @@ import { instance } from 'src/libs/instance';
 import { FormData } from '@/hooks/useFormControl';
 
 //배달상태조회
-const getDelivery = async (id: number) => {
+const getDelivery = async (id?: string) => {
   const result = await instance.get(`delivery/${id}`);
-  return result.data;
+  return result.data.data;
 };
 
-export const useGetDelivery = (id: number) => {
+export const useGetDelivery = (id?: string) => {
   return useFetch(QUERY_KEY.delivery, getDelivery, id);
 };
 

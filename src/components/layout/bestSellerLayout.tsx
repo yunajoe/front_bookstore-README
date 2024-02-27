@@ -3,7 +3,7 @@ import ScrollToTopButton from '@/components/button/scrollToTopButton';
 import useInfinite from '@/hooks/useInfinite';
 import { useAtom } from 'jotai';
 import { pointVisibleAtom } from '@/store/state';
-import MainLayout from './mainLayout';
+import MainLayout from '@/components/layout/mainLayout';
 
 interface BestSellerPageLayoutProps {
   sideBar?: ReactNode;

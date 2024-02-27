@@ -1,8 +1,6 @@
 import React from 'react';
 import CustomSectionGenreButton from '@/components/button/genre/customSectionGenreButton';
 import { SelectedGenre } from '@/types/customPageType';
-import Link from 'next/link';
-import RecommendationContent from './recommendationContent';
 
 interface GenreSelectionProps {
   genreList: SelectedGenre[];

@@ -65,7 +65,7 @@ export interface BookData extends BookmarksType {
   bookImgUrl: string;
   publisher: string;
   publishedDate: string;
-  quantityCount: number | null;
+  quantityCount: number;
   createDate: string;
   updateDate: string | null;
   statics: BookStaticType;

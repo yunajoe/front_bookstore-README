@@ -12,7 +12,7 @@ export const bookOrderTestData2: PayMentAtom[] = [
     bookTitle: '첫 번째 책 이름이 길어요오오오오오오오오오오',
     price: 17000,
     authors: ['저자 A', '저자 B'],
-    count: 1,
+    quantity: 1,
   },
 ];
 

@@ -35,7 +35,7 @@ function usePayNowItem({
       bookTitle: bookTitle,
       price: price,
       authors: authors,
-      count: count,
+      quantity: count,
     },
   ];
 

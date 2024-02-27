@@ -6,10 +6,10 @@ import React from 'react';
 type OrderCountProps = {
   orderDate: string;
   orderCount: number;
-  orderId: number;
+  deliveryId: number;
 };
 
-function OrderCount({ orderId, orderDate, orderCount }: OrderCountProps) {
+function OrderCount({ deliveryId, orderDate, orderCount }: OrderCountProps) {
   const { year, month, day } = convertDate(orderDate);
 
   return (
@@ -22,7 +22,7 @@ function OrderCount({ orderId, orderDate, orderCount }: OrderCountProps) {
           <div className="ml-23 mr-18 h-12 w-1 bg-gray-1"></div>
           <span className="text-14 text-gray-3">주문 {orderCount}건</span>
         </div>
-        <Link className="flex" href={`/mypage/order/${orderId}`}>
+        <Link className="flex" href={`/mypage/order/${deliveryId}`}>
           <span className="text-15">주문상세</span>
           <Image
             src="/icons/RightArrow.svg"
