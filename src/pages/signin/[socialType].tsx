@@ -20,9 +20,13 @@ function SocialPage() {
     enabled: !!socialType,
     retry: 3,
   });
+  let token = data ? data?.Authentication.substr(7) : '';
+  const words = data ? data?.Authentication.split(' ') : [''];
+  console.log("data's Authentication: ", data?.Authentication);
+  console.log('token: ', token);
+  console.log('words[1]: ', words[words.length - 1]);
 
   const handleSocialLogin = async () => {
-    let token = data?.Authentication.substr(7);
     const result = await signIn('social-credentials', {
       email: data?.email,
       socialType: myType,
