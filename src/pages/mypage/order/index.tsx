@@ -1,8 +1,4 @@
-import {
-  DeliveryStatus,
-  getDeliveryList,
-  putDeliveryStatus,
-} from '@/api/delivery';
+import { getDeliveryList } from '@/api/delivery';
 import BookOrderCardList from '@/components/card/bookOrderCard/bookOrderCardList';
 import BookOrderEmptyCard from '@/components/card/bookOrderCard/bookOrderEmptyCard';
 import OrderDate from '@/components/container/orderDate/orderDate';
@@ -12,10 +8,9 @@ import MyOrderPageLayout from '@/components/layout/myOrderLayOut';
 import { ORDER_DROPDOWN_MENUS } from '@/constants/ORDER_DROPDOWN_MENUS';
 import { myOrderStatus } from '@/constants/myOrderStatus';
 import { QUERY_KEY } from '@/constants/queryKey';
-import { OrderBookData } from '@/types/bookOrderType';
 import { DeliveryItem, OrderOverViewItem } from '@/types/deliveryType';
 import { convertDate } from '@/utils/convertDate';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
 function MyOrderPage() {

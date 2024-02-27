@@ -18,7 +18,7 @@ function BookOrderCardList({ orderData }: BookOrderCardListProps) {
               <OrderCount
                 orderCount={order.orderBook.length}
                 orderDate={order.createDate}
-                orderId={order.orderId}
+                deliveryId={order.deliveryId}
               />
               <div className="flex flex-col gap-20">
                 {order.orderBook.map((bookData) => (
