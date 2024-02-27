@@ -3,11 +3,11 @@ import OrderCompletedSection from '@/components/container/orderCompletedSection'
 import MainLayout from '@/components/layout/mainLayout';
 import { ReactElement, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { DeliveryInfo } from '@/types/api/delivery';
+import { DeliveryItem } from '@/types/api/delivery';
 
 function MyPageOrderDetail() {
   const { query } = useRouter();
-  const [deliveryData, setDeliveryData] = useState<DeliveryInfo>()
+  const [deliveryData, setDeliveryData] = useState<DeliveryItem>()
   const { data } = useGetDelivery(query?.orderId as string);
   
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { PayMentAtom } from '@/types/cartType';
+import { PayMentAtom } from '@/types/api/cart';
 import { atom } from 'jotai';
 import { CategoryAtomType, CategoryType } from '@/types/api/category';
 import { SocialType } from '@/api/social';

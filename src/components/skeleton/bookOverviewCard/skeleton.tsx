@@ -1,4 +1,4 @@
-import { PreviewBookInfoSizeProps } from '@/types/previewBookInfoType';
+import { PreviewBookInfoSizeProps } from '@/types/api/previewBookInfoType';
 import { SKELETON_COMMON_STYLE } from 'src/constants/style/skeletonCommonStyle';
 import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 

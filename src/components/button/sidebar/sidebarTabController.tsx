@@ -13,15 +13,15 @@ import { useRef } from 'react';
 import SidebarTab from '@/components/button/sidebar/sidebarTab';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
-import { SidebarProps } from '@/types/sidebarType';
+import { SidebarProps } from '@/types/api/sidebarType';
 import { CategoryListAtom } from '@/store/state';
 import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 
-function SidebarTabController({pageName}: SidebarProps) {
+function SidebarTabController({ pageName }: SidebarProps) {
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const { env } = useCarouselEnv();
-  const [categoryList,] = useAtom(CategoryListAtom);
+  const [categoryList] = useAtom(CategoryListAtom);
   const { mainId, subId, categoryId, subName } = useCheckCategoryUrl();
 
   const locatedTitle = subName ?? '전체보기';
@@ -44,11 +44,7 @@ function SidebarTabController({pageName}: SidebarProps) {
           />
         </div>
       </button>
-      {(showOptions || env !== 'mobile') && (
-        <SidebarTab
-          pageName={pageName}
-        />
-      )}
+      {(showOptions || env !== 'mobile') && <SidebarTab pageName={pageName} />}
     </>
   );
 }

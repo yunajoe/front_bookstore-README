@@ -121,6 +121,7 @@ function BookOrderCard({
             deliveryId={deliveryId}
             bookTitle={bookTitle}
             authors={authors}
+            bookPrice={bookPrice}
           />
         )}
       </div>

@@ -1,4 +1,4 @@
-function RefundPrice({ refundPrice }: { refundPrice: string }) {
+function RefundPrice({ refundPrice }: { refundPrice: number }) {
   return (
     <div className="flex flex-col items-start gap-20 text-16 font-light">
       <div className="text-b-b text-16">

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { SidebarProps } from '@/types/sidebarType';
+import { SidebarProps } from '@/types/api/sidebarType';
 import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 
 function classNames<T>(...classes: Array<T>) {
@@ -44,7 +44,7 @@ function SidebarRegionButton({ pageName }: SidebarProps) {
         isLeft={true}
         isSelected={mainId === 0}
       />
-      <div className="mobile:bg-primary relative z-10 h-11 w-[1px] bg-gray-1 mobile:h-37"></div>
+      <div className="relative z-10 h-11 w-[1px] bg-gray-1 mobile:h-37 mobile:bg-primary"></div>
       <StyledLink
         title="외국"
         link={`/foreign/${pageName ?? ''}`}

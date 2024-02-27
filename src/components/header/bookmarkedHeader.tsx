@@ -1,8 +1,8 @@
-import { BookMarkListData } from '@/types/bookMarkType';
-import Image from 'next/image';
-import { SetStateAction } from 'react';
-import CheckedCheckBoxIcon from '@/public/icons/CheckedCheckBox.svg';
-import CheckBoxIcon from '@/public/icons/CheckBox.svg';
+import { BookMarkListData } from "@/types/api/bookmark";
+import Image from "next/image";
+import { SetStateAction } from "react";
+import CheckedCheckBoxIcon from "@/public/icons/CheckedCheckBox.svg"
+import CheckBoxIcon from "@/public/icons/CheckBox.svg"
 
 type BookMarkedHeaderProps = {
   wishListData: BookMarkListData[];

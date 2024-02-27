@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useEffect, useRef, useState } from 'react';
 import DefaultUserProfile from '@/public/images/DefaultUserProfile.png';
 import { TextInput } from '@/components/input/signInput/signInput';
-import { EditProfileType } from '@/types/editProfileTypes';
+import { EditProfileType } from '@/types/api/editProfileTypes';
 import RegisterButton from '@/components/button/register/registerButton';
 import { useGetMember } from '@/api/member';
 import { useEditProfile } from '@/hooks/api/useEditProfile';
