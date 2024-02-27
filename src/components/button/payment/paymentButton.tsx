@@ -11,6 +11,7 @@ import { PostDeliveryOption } from '@/api/delivery';
 //import { usePostDeliveryMutation } from '@/hooks/usePostDeliveryMutatation';
 import { useGetOrderTitle } from '@/hooks/common/useGetOrderTitle';
 import { deliveryIdAtom } from '@/store/deliveryInfo';
+import useAddressSplitter from '@/hooks/common/useAddressSplitter';
 interface PaymentButtonProps {
   isAllChecked?: boolean;
 }
@@ -87,7 +88,55 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
             router.push('/paymented');
           } else {
             // 결제 실패시
-            alert('결제에 실패했습니다.');
+            notify({ type: 'error', text: '결제에 실패했습니다.' });
+          }
+        },
+      );
+    }
+  }
+
+  function inicisPay(
+    useremail: string,
+    username: string,
+    userphone: string,
+    userAddr: string,
+    userPostcode: string,
+  ) {
+    if (typeof window !== 'undefined') {
+      const IMP = window.IMP;
+      const today = new Date();
+      const hours = today.getHours(); // 시
+      const minutes = today.getMinutes(); // 분
+      const seconds = today.getSeconds(); // 초
+      const milliseconds = today.getMilliseconds();
+      const makeMerchantUid =
+        `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;
+
+      IMP.init('imp33057768'); // 가맹점 식별코드
+      IMP.request_pay(
+        {
+          pg: 'html5_inicis', // PG사 코드표에서 선택
+          pay_method: 'card', // 결제 방식
+          merchant_uid: 'INIpayTest' + makeMerchantUid, // 결제 고유 번호
+          name: orderTitle, // 상품명
+          amount: totalPrice, // 가격
+          buyer_email: useremail,
+          buyer_name: username,
+          buyer_tel: userphone,
+          buyer_addr: userAddr,
+          buyer_postcode: userPostcode,
+          m_redirect_url:
+            window.location.protocol +
+            '//' +
+            window.location.host +
+            '/paymented',
+        },
+        async function (rsp: response) {
+          if (!rsp.success) {
+            notify({ type: 'error', text: '결제에 실패했습니다.' });
+            router.push('/order');
+          } else {
+            router.push('/paymented');
           }
         },
       );
@@ -100,25 +149,29 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
     phone: deliveryInfo.phone,
     address: deliveryInfo.address,
     message: deliveryInfo.message || '',
-    paymentMethod: 'KAKAO_PAY',
+    paymentMethod: 'card',
     paymentAmount: totalPrice,
     basketIds: basketIds,
     orderBooks: orderBooks,
     basicAddress: deliveryInfo.isDefault || false,
     // enabled: clicked && isAllChecked,
   };
-  console.log('디폴트다용22' + deliveryInfo.name);
+
   const isAllSubmitted: boolean =
     !!deliveryInfo.name && !!deliveryInfo.phone && !!deliveryInfo.address;
-
+  const userAddr = useAddressSplitter({ address: deliveryInfo.address })[1];
+  const userPostcode = useAddressSplitter({ address: deliveryInfo.address })[0];
   // const mutate = usePostDeliveryMutation(orderInfo);
   async function handlePaymentButtonClick() {
     clicked = !clicked;
     if (isAllChecked && isAllSubmitted) {
-      // const user_email = data?.email;
-      // const username = deliveryInfo.name;
+      const user_email = data?.email;
+      const username = deliveryInfo.name;
+      const userphone = deliveryInfo.phone;
+
+      inicisPay(user_email, username, userphone, userAddr, userPostcode);
       // kakaoPay(user_email, username);
-      router.push('/paymented');
+
       const { data: id } = await postAxiosDelivery(orderInfo);
       setDeliveryId(id);
     } else if (!isAllChecked) {
