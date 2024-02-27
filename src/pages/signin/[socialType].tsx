@@ -22,13 +22,13 @@ function SocialPage() {
     enabled: !!socialType,
     retry: 3,
   });
-  let token = data ? data?.Authentication.substr(7) : '';
 
   const handleSocialLogin = async () => {
     if (!data) {
       router.push('/signin');
       return;
     }
+    let token = data ? data?.Authentication.substr(7) : '';
     const result = await signIn('social-credentials', {
       email: data?.email,
       socialType: myType,
