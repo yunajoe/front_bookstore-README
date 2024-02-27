@@ -18,18 +18,15 @@ function SocialPage() {
   console.log('type: ', myType);
   console.log('code: ', code);
 
-  const { data } = useQuery({
+  const { data, isSuccess, isError, error } = useQuery({
     queryKey: [''],
     queryFn: () => getSocialLogin(myType, code as string),
     enabled: !!code,
-    retry: 3,
+    retry: 10,
   });
 
   const handleSocialLogin = async () => {
-    if (!data) {
-      router.push('/signin');
-      return;
-    } else {
+    if (data) {
       let token = data ? data?.Authentication.substr(7) : '';
       const result = await signIn('social-credentials', {
         email: data?.email,
@@ -42,8 +39,13 @@ function SocialPage() {
       console.log(result);
       router.push('/');
     }
+    if (isError) {
+      console.log('error found!!: ', error);
+    }
+    if (isSuccess) {
+      console.log('success found!!: ', isSuccess);
+    }
   };
-
   useEffect(() => {
     handleSocialLogin();
   }, []);
