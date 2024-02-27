@@ -14,20 +14,21 @@ function SocialPage() {
         ? 'GOOGLE'
         : 'NAVER';
 
+  console.log('type: ', myType);
+  console.log('code: ', code);
   const { data } = useQuery({
     queryKey: [''],
     queryFn: () => getSocialLogin(myType, code as string),
     enabled: !!socialType,
     retry: 3,
   });
-  let token = data ? data?.Authentication.substr(7) : '';
-  const words = data ? data?.Authentication.split(' ') : [''];
-  console.log('data: ', data);
-  console.log("data's Authentication: ", data?.Authentication);
-  console.log('token: ', token);
-  console.log('words[1]: ', words[words.length - 1]);
 
   const handleSocialLogin = async () => {
+    if (!data) {
+      router.push('/signin');
+      return;
+    }
+    let token = data ? data?.Authentication.substr(7) : '';
     const result = await signIn('social-credentials', {
       email: data?.email,
       socialType: myType,
@@ -40,6 +41,7 @@ function SocialPage() {
       window.location.href = result.url;
     }
   };
+
   useEffect(() => {
     handleSocialLogin();
   }, []);
