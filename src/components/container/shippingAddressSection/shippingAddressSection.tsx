@@ -50,14 +50,8 @@ function ShippingAddressSection() {
         isDefault={isDefault}
         handleOptionChange={handleOptionChange}
       />
-      <RecipientInput
-        isDefault={isDefault}
-        value={data?.deliveries?.slice(-1)[0]?.name}
-      />
-      <PhoneNumberInput
-        isDefault={isDefault}
-        value={data?.deliveries?.slice(-1)[0]?.phone}
-      />
+      <RecipientInput isDefault={isDefault} value={data?.name} />
+      <PhoneNumberInput isDefault={isDefault} value={data?.phone} />
       <AddressInput
         isDefault={isDefault}
         addressLines={[addressLine[0], addressLine[1], addressLine[2]]}

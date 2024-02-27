@@ -17,7 +17,8 @@ interface PaymentButtonProps {
 
 /*TODO
 1. 새로운 배송지 선택 시 refresh
-2.
+2. 기본 배송지 선택 시 getMember
+3. 기본 배송지 클릭 시 post
 
 */
 
@@ -103,19 +104,19 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
     paymentAmount: totalPrice,
     basketIds: basketIds,
     orderBooks: orderBooks,
-    basicAddress: deliveryInfo?.isDefault || false,
+    basicAddress: deliveryInfo.isDefault || false,
     // enabled: clicked && isAllChecked,
   };
-
+  console.log('디폴트다용22' + deliveryInfo.name);
   const isAllSubmitted: boolean =
     !!deliveryInfo.name && !!deliveryInfo.phone && !!deliveryInfo.address;
 
- // const mutate = usePostDeliveryMutation(orderInfo);
+  // const mutate = usePostDeliveryMutation(orderInfo);
   async function handlePaymentButtonClick() {
     clicked = !clicked;
     if (isAllChecked && isAllSubmitted) {
       // const user_email = data?.email;
-      // const username = data?.name;
+      // const username = deliveryInfo.name;
       // kakaoPay(user_email, username);
       router.push('/paymented');
       setDeliveryId(await postAxiosDelivery(orderInfo));

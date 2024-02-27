@@ -7,6 +7,7 @@ import AddressLabel from './addressLabel';
 import AddressInputField from './addressInputField';
 import AddressTextArea from './addressTextArea';
 import { deliveryInfoAtom } from '@/store/deliveryInfo';
+import { useGetMember } from '@/api/member';
 // AddressInput 컴포넌트
 interface AddressInputProps {
   isDefault: boolean;
@@ -19,6 +20,7 @@ function AddressInput({ isDefault, addressLines }: AddressInputProps) {
   const [isFindAddressModalOpen, setIsFindAddressModalOpen] = useState(false);
   const [customAddressLine, setCustomAddressLine] = useState('');
   const [, setDeliveryInfo] = useAtom(deliveryInfoAtom);
+
   const handleFindAddressModalOpen = () => {
     setIsFindAddressModalOpen(!isFindAddressModalOpen);
   };
