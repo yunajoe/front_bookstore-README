@@ -9,7 +9,7 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
 import { useAddToBasket } from '@/hooks/api/useAddToBasket';
-import MobileBookOverViewCard from './bookOverviewMobile';
+import MobileBookOverViewCard from '@/components/card/bookOverviewCard/bookOverviewMobile';
 import { useSetAtom } from 'jotai';
 import { PayMentAtom } from '@/types/cartType';
 import { basketItemList } from '@/store/state';

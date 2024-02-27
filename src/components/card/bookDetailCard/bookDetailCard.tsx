@@ -1,8 +1,8 @@
 /** 책 상세페이지에 들어갈 카드 컴포넌트 */
 
 import useEditAuthorsName from '@/hooks/common/useEditAuthorsName';
-import BookDetailImg from './bookDetailImg';
-import BookDetailInfo from './bookDetailInfo';
+import BookDetailImg from '@/components/card/bookDetailCard/bookDetailImg';
+import BookDetailInfo from '@/components/card/bookDetailCard/bookDetailInfo';
 import StaticOrderNavigator from '@/components/orderNavigator/staticOrderNavigator';
 
 interface BookDetailCardProps {

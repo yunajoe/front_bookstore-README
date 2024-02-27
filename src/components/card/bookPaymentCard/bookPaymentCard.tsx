@@ -2,7 +2,7 @@ import { THOUSAND_UNIT } from 'src/constants/price';
 import Link from 'next/link';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
-import BookPaymentCost from './bookPaymentCost';
+import BookPaymentCost from '@/components/card/bookPaymentCard/bookPaymentCost';
 
 interface BookPaymentCardProps {
   bookId: number | undefined;

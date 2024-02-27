@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { useGetBook, useGetPageBook } from '@/api/book';
 import { useEffect, useState } from 'react';
 import { BookData} from '@/types/api/book';
-import NoData from './noData';
+import NoData from '@/components/modal/addCommunityCard/noData';
 
 function PreviewBookInfoPagination({ search }: { search: string}) {
   const [CurrentPage] = useAtom(CurrentPageStateAtom);

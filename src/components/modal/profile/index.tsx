@@ -1,7 +1,5 @@
-import ModalContainer from '@/components/modal/modalContainer';
 import ModalLayout from '@/components/modal/modalLayout';
-import { OnClickProps } from '@/types/api/onClickType';
-import ProfileModalForm from './profileModalForm';
+import ProfileModalForm from '@/components/modal/profile/profileModalForm';
 import { Member } from '@/types/api/member';
 
 interface ProfileModalProps {

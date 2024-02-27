@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useUpdateBookmark } from './api/useUpdateBookmark';
+import { useUpdateBookmark } from '@/hooks/api/useUpdateBookmark';
 
 function useClickBookmarkButton({bookId=0, marked=false, count=0}) {
   const [isBookmarked, setIsBookMarked] = useState(marked);

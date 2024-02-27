@@ -1,4 +1,4 @@
-import { REQUIRED_FOR_PAYMENT, TERMS_TITLES } from './sign';
+import { REQUIRED_FOR_PAYMENT, TERMS_TITLES } from '@/constants/sign';
 
 export const SING_UP_TERMS_CONTENT = {
   ageLimit: {

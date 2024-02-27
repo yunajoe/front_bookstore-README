@@ -1,6 +1,6 @@
 // 장바구니 담기 버튼 로직
 import { useSession } from 'next-auth/react';
-import { useAddToBasket } from './api/useAddToBasket';
+import { useAddToBasket } from '@/hooks/api/useAddToBasket';
 import { useRouter } from 'next/router';
 
 interface AddItemBasketProps {

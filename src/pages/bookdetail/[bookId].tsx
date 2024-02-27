@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-
 import { useGetBook, usePutBook } from '@/api/book';
 import { getIsBookmarked } from '@/api/bookmark';
 import MainLayout from '@/components/layout/mainLayout';

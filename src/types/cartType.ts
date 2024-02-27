@@ -4,7 +4,7 @@ export type CartItem = {
   bookImgUrl: string;
   bookTitle: string;
   price: number;
-  count: number;
+  quantity: number;
   authors: string[];
 };
 

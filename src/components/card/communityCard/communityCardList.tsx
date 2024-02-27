@@ -2,7 +2,7 @@ import {
   CommunityPagesProps,
   CommunityCardsProps
 } from '@/types/api/community';
-import CommunityCard from './communityCard';
+import CommunityCard from '@/components/card/communityCard/communityCard';
 
 interface CommunityCardListProps {
   communityData: CommunityPagesProps[];

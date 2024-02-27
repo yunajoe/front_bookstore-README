@@ -3,9 +3,9 @@ import FindAddress from '@/components/modal/findAddress';
 import { useState } from 'react';
 import { useAtom } from 'jotai'; // Jotai의 useAtom 함수를 불러옵니다.
 import { zipNoAtom, roadAddrAtom } from '@/store/address';
-import AddressLabel from './addressLabel';
-import AddressInputField from './addressInputField';
-import AddressTextArea from './addressTextArea';
+import AddressLabel from '@/components/input/delivery/addressLabel';
+import AddressInputField from '@/components/input/delivery/addressInputField';
+import AddressTextArea from '@/components/input/delivery/addressTextArea';
 // AddressInput 컴포넌트
 interface AddressInputProps {
   isDefault: boolean;

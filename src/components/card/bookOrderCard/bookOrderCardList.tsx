@@ -1,5 +1,5 @@
 import { OrderBookData } from '@/types/bookOrderType';
-import BookOrderCard from './bookOrderCard';
+import BookOrderCard from '@/components/card/bookOrderCard/bookOrderCard';
 import OrderCount from '@/components/container/orderDate/orderCount';
 
 export interface BookOrderCardListProps {
