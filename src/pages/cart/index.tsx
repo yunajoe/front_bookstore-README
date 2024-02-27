@@ -80,7 +80,6 @@ function CartPage() {
       acc += item.price * item.count;
       return acc;
     }, 0);
-    console.log(selectedItemArr, totalPrice);
     setTotalAmount(totalPrice);
   }, [selectedItemArr]);
 
