@@ -6,7 +6,7 @@ import TotalPriceCard from '@/components/card/totalPaymentCard';
 import { deliveryIdAtom } from '@/store/deliveryInfo';
 import { useAtom } from 'jotai';
 import { useGetDelivery } from '@/api/delivery';
-//TODO : data 받을 예정. 예시임
+import useFormatDate from '@/hooks/useFormatDate';
 
 function OrderCompletedSection({
   paymentDetail = true,
@@ -14,7 +14,7 @@ function OrderCompletedSection({
   paymentDetail?: boolean;
 }) {
   const [deliveryId, setDeliveryId] = useAtom(deliveryIdAtom);
-  const data = useGetDelivery(deliveryId?.data || null);
+  const data = useGetDelivery(deliveryId);
   const DcontentData = [
     data?.data?.name,
     data?.data?.phone,
@@ -23,7 +23,7 @@ function OrderCompletedSection({
   ];
 
   const PcontentData = [data?.data?.paymentMethod, data?.data?.paymentAmount];
-  const orderDate = data?.data?.createDate;
+  const orderDate = useFormatDate(data?.data?.createDate);
   return (
     <div className="flex w-[1084px] flex-col gap-60 mobile:w-330 tablet:w-[688px] ">
       {paymentDetail && (

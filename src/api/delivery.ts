@@ -26,12 +26,12 @@ export interface DeliveryId {
   deliveryId: number;
 }
 //배달상태조회
-const getDelivery = async (id: number) => {
+const getDelivery = async (id: number | null) => {
   const result = await instance.get(`delivery/${id}`);
   return result.data.data;
 };
 
-export const useGetDelivery = (id: number) => {
+export const useGetDelivery = (id: number | null) => {
   return useFetch(QUERY_KEY.delivery, getDelivery, id);
 };
 

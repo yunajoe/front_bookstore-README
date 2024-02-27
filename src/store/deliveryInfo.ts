@@ -9,4 +9,4 @@ export const deliveryInfoAtom = atom<DeliveryInfo>({
   isDefault: false,
 });
 
-export const deliveryIdAtom = atom(null);
+export const deliveryIdAtom = atom<number | null>(null);

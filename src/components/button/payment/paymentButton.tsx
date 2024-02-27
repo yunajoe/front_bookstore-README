@@ -119,7 +119,8 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
       // const username = deliveryInfo.name;
       // kakaoPay(user_email, username);
       router.push('/paymented');
-      setDeliveryId(await postAxiosDelivery(orderInfo));
+      const { data: id } = await postAxiosDelivery(orderInfo);
+      setDeliveryId(id);
     } else if (!isAllChecked) {
       notify({
         type: 'error',
