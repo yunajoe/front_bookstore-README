@@ -7,7 +7,7 @@ import BookPaymentCost from './bookPaymentCost';
 interface BookPaymentCardProps {
   bookId: number | undefined;
   imageUrl: string;
-  authors?: string[];
+  authors?: string[] | string;
   title: string;
   cost: number;
   count?: number;
@@ -47,8 +47,10 @@ function BookPaymentCard({
             className="min-w-250 text-15 font-normal mobile:w-185 mobile:min-w-0">
             {title}
           </div>
-          <div role="book-author-publisher" className="flex-center gap-4">
-            <BookAuthor authorList={authors} />
+          <div
+            role="book-author-publisher"
+            className="flex-center gap-4 text-14 text-gray-3">
+            {Array.isArray(authors) ? authors.join(', ') : authors}
           </div>
           <div
             role="book-price"

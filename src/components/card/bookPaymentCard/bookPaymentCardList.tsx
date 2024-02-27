@@ -17,10 +17,11 @@ function BookPaymentCardList({ bookData, label }: BookPaymentCardListProps) {
           <BookPaymentCard
             key={id}
             bookId={data.bookId}
+            title={data.bookTitle}
+            authors={data.authors}
             imageUrl={data.bookImgUrl}
             cost={data.price}
             count={data.count}
-            title={data.bookTitle}
           />
         ))}
       </div>
