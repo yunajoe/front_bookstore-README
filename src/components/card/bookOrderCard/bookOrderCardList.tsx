@@ -1,4 +1,4 @@
-import { OrderBookData } from '@/types/bookOrderType';
+import { OrderBookData } from '@/types/api/order';
 import BookOrderCard from '@/components/card/bookOrderCard/bookOrderCard';
 import OrderCount from '@/components/container/orderDate/orderCount';
 

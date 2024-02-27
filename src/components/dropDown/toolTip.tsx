@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import { createPortal } from 'react-dom';
 import useResizeEffect from '@/hooks/useResizeEffect';
-import { LocationType } from '@/types/toolTipType';  
+import { LocationType } from '@/types/api/toolTipType';  
 
 type ToolTipTypes = {
   toolTipText: string;

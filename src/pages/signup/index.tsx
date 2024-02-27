@@ -6,7 +6,7 @@ import {
 } from '@/components/input/signInput/signInput';
 import SocialCircle from '@/components/chip/socialCircle';
 import TermsCheckbox from '@/components/container/terms/terms';
-import { SignUpValueType } from '@/types/signType';
+import { SignUpValueType } from '@/types/api/auth';
 import {
   checkEmail,
   checkEmailValidation,

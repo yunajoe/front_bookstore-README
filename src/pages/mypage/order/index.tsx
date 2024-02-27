@@ -8,7 +8,7 @@ import MyOrderPageLayout from '@/components/layout/myOrderLayOut';
 import { ORDER_DROPDOWN_MENUS } from '@/constants/ORDER_DROPDOWN_MENUS';
 import { myOrderStatus } from '@/constants/myOrderStatus';
 import { QUERY_KEY } from '@/constants/queryKey';
-import { DeliveryItem, OrderOverViewItem } from '@/types/deliveryType';
+import { DeliveryItem, OrderOverViewItem } from '@/types/api/delivery';
 import { convertDate } from '@/utils/convertDate';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';

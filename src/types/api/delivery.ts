@@ -1,32 +1,40 @@
-export interface DeliveryInfo {
-  address: string;
-  createDate: String;
+export type DeliveryItem = {
   deliveryId: number;
-  deliveryStatus: string;
-  email: string;
-  memberId: number;
-  message: string;
+  deliveryStatus: keyof OrderOverViewItem;
   name: string;
-  nickname: string;
-  orderDto: DeliveryOrderBook;
-  paymentAmount: number;
-  paymentMethod: string;
   phone: string;
-  socialId: number | null;
+  address: string;
+  message: string;
+  paymentMethod: string;
+  paymentAmount: number;
+  memberId: number;
+  nickname: string;
+  email: string;
+  socialId: any;
+  orderDto: OrderDto;
+  createDate: string;
   updateDate: string;
-}
+};
 
-interface DeliveryOrderBook {
+export interface OrderDto {
   orderId: number;
-  orderBook : DeliveryOrderBookInfo[]
+  orderBook: OrderBook[];
 }
 
-export interface DeliveryOrderBookInfo {
-  authors: string;
-  bookId: number;
-  bookImgUrl: string;
-  bookTitle: string;
+export interface OrderBook {
   orderBookId: number;
+  bookId: number;
+  bookTitle: string;
+  authors: string;
+  bookImgUrl: string;
   price: number;
   quantity: number;
 }
+
+export type OrderOverViewItem = {
+  '배송 준비중': number;
+  배송중: number;
+  배송완료: number;
+  '교환/환불': number;
+  구매확정: number;
+};
