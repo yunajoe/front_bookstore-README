@@ -72,7 +72,7 @@ export const getDeliveryList = async (
   return result.data;
 };
 
-type DeliveryStatus = {
+export type DeliveryStatus = {
   deliveryId: number;
   deliveryStatus: string;
 };
