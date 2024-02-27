@@ -22,11 +22,12 @@ function SocialPage() {
   });
 
   const handleSocialLogin = async () => {
+    let token = data?.Authentication.substr(7);
     const result = await signIn('social-credentials', {
       email: data?.email,
       socialType: myType,
       memberId: data?.memberId,
-      accessToken: data?.Authentication,
+      accessToken: token,
       redirect: false,
       callbackUrl: '/',
     });
@@ -34,9 +35,11 @@ function SocialPage() {
       window.location.href = result.url;
     }
   };
+
   useEffect(() => {
     handleSocialLogin();
   }, []);
+
   return;
 }
 
