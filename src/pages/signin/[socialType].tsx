@@ -15,11 +15,11 @@ function SocialPage() {
         ? 'GOOGLE'
         : 'NAVER';
 
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['social-login'],
     queryFn: () => getSocialLogin(myType, code as string),
     enabled: !!code,
-    retry: 5,
+    retry: 3,
   });
 
   const handleSocialLogin = async () => {
@@ -34,6 +34,9 @@ function SocialPage() {
         callbackUrl: '/',
       });
       router.push('/');
+    }
+    if (isError && !isLoading) {
+      router.push('/signin');
     }
   };
   useEffect(() => {
