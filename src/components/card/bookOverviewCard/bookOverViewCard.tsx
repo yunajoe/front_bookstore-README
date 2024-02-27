@@ -50,7 +50,6 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const handleAddToBookmark = () => {
     updateBookmark();
   };
-
   const handleAddToBasket = () => {
     addToBasket();
   };
