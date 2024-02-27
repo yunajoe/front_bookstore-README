@@ -44,7 +44,7 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
     setBookOverviews(data?.books);
   }, [data]);
   
-  if(!data) return <NoData />;
+  if(!data || search.length === 0) return <NoData />;
 
   return (
     <>
