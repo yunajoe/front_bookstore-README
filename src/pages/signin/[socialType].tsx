@@ -23,7 +23,6 @@ function SocialPage() {
   });
 
   const handleSocialLogin = async () => {
-    console.log(data);
     if (data) {
       let token = data ? data?.data.Authentication.substr(7) : '';
       const result = await signIn('social-credentials', {
