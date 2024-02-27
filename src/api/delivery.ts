@@ -82,3 +82,13 @@ export const putDeliveryStatus = async (data: DeliveryStatus) => {
   const result = await instance.put('delivery', data);
   return result.data;
 };
+
+export async function postAxiosDelivery(params: PostDeliveryOption) {
+  try {
+    const response = await instance.post(`/delivery`, params);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return 'error';
+  }
+}

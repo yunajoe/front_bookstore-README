@@ -8,12 +8,18 @@ import { useAtom, useAtomValue } from 'jotai';
 import { basketItemList } from '@/store/state';
 import { DeliveryOrderBook, postAxiosDelivery } from '@/api/delivery';
 import { PostDeliveryOption } from '@/api/delivery';
-import { usePostDeliveryMutation } from '@/hooks/usePostDeliveryMutatation';
+//import { usePostDeliveryMutation } from '@/hooks/usePostDeliveryMutatation';
 import { useGetOrderTitle } from '@/hooks/common/useGetOrderTitle';
 import { deliveryIdAtom } from '@/store/deliveryInfo';
 interface PaymentButtonProps {
   isAllChecked?: boolean;
 }
+
+/*TODO
+1. 새로운 배송지 선택 시 refresh
+2.
+
+*/
 
 interface response {
   success: boolean;
@@ -104,7 +110,7 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
   const isAllSubmitted: boolean =
     !!deliveryInfo.name && !!deliveryInfo.phone && !!deliveryInfo.address;
 
-  const mutate = usePostDeliveryMutation(orderInfo);
+ // const mutate = usePostDeliveryMutation(orderInfo);
   async function handlePaymentButtonClick() {
     clicked = !clicked;
     if (isAllChecked && isAllSubmitted) {
