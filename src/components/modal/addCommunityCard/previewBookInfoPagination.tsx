@@ -48,7 +48,7 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
 
   return (
     <>
-      <div className="flex w-[608px] justify-between mobile:w-291">
+      <div className="flex w-[608px] justify-start gap-20 mobile:w-291 mobile:gap-6">
         {(bookOverviews && !chooseBook) &&
           bookOverviews?.map((bookOverview, index) => (
             <PreviewBookInfo
