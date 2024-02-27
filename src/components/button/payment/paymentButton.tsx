@@ -87,7 +87,7 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
             router.push('/paymented');
           } else {
             // 결제 실패시
-            alert('결제에 실패했습니다.');
+            notify({ type: 'error', text: '결제에 실패했습니다.' });
           }
         },
       );
@@ -105,20 +105,16 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
     basketIds: basketIds,
     orderBooks: orderBooks,
     basicAddress: deliveryInfo.isDefault || false,
-    // enabled: clicked && isAllChecked,
   };
-  console.log('디폴트다용22' + deliveryInfo.name);
   const isAllSubmitted: boolean =
     !!deliveryInfo.name && !!deliveryInfo.phone && !!deliveryInfo.address;
 
-  // const mutate = usePostDeliveryMutation(orderInfo);
   async function handlePaymentButtonClick() {
     clicked = !clicked;
     if (isAllChecked && isAllSubmitted) {
-      // const user_email = data?.email;
-      // const username = deliveryInfo.name;
-      // kakaoPay(user_email, username);
-      router.push('/paymented');
+      const user_email = data?.email;
+      const username = deliveryInfo.name;
+      kakaoPay(user_email, username);
       const { data: id } = await postAxiosDelivery(orderInfo);
       setDeliveryId(id);
     } else if (!isAllChecked) {

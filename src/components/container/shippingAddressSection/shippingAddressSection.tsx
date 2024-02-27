@@ -13,23 +13,23 @@ import { notify } from '@/components/toast/toast';
 
 function ShippingAddressSection() {
   const { data } = useGetMember(); // data를 따로 추출합니다.
-  const newestInfo = data?.address;
+
   const [isDefault, setIsDefault] = useState(false); // 기본값을 false로 설정합니다.
   const [deliveryInfo, setDeliveryInfo] = useAtom(deliveryInfoAtom);
   const handleOptionChange = () => {
     setIsDefault(!isDefault);
     if (!isDefault) {
       // 기본값이 false일 때 실행합니다.
-      if (!newestInfo?.address) {
+      if (!data?.address) {
         notify({
           type: 'error',
           text: '기본 배송지 데이터가 없어요 😭',
         });
       } else {
         setDeliveryInfo({
-          address: newestInfo?.address,
-          name: newestInfo?.name,
-          phone: newestInfo?.phone,
+          address: data?.address,
+          name: data?.name,
+          phone: data?.phone,
           isDefault: true,
         });
       }
@@ -41,7 +41,7 @@ function ShippingAddressSection() {
   };
 
   const addressLine = useAddressSplitter({
-    address: newestInfo?.address,
+    address: data?.address,
   });
   return (
     <div className="flex w-full flex-col gap-y-12 text-16 pc:mx-93">
