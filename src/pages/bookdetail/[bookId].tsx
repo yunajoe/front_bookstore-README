@@ -123,18 +123,20 @@ export default function BookDetailPage() {
           </div>
 
           <div className="hidden pc:flex pc:pt-50">
-            <SideOrderNavigator
-              bookId={bookId as string}
-              bookImgUrl={bookData?.bookImgUrl ?? './'}
-              bookTitle={bookData?.bookTitle}
-              authors={bookData?.authors}
-              isBookmarked={isBookmarked}
-              isBookmarkPending={isBookmarkPending}
-              handleBookmarkClick={updateBookmark}
-              price={bookData?.price ?? 0}
-              orderCount={orderCount}
-              setOrderCount={setOrderCount}
-            />
+            {location === 'information' && (
+              <SideOrderNavigator
+                bookId={bookId as string}
+                bookImgUrl={bookData?.bookImgUrl ?? './'}
+                bookTitle={bookData?.bookTitle}
+                authors={bookData?.authors}
+                isBookmarked={isBookmarked}
+                isBookmarkPending={isBookmarkPending}
+                handleBookmarkClick={updateBookmark}
+                price={bookData?.price ?? 0}
+                orderCount={orderCount}
+                setOrderCount={setOrderCount}
+              />
+            )}
           </div>
         </section>
 
