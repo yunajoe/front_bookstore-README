@@ -8,12 +8,14 @@ function SetDefaultAddressButton() {
   const [isClicked, setIsClicked] = useState(false);
   const [isDefault, setIsDefault] = useState(false);
   const [deliveryInfo, setDeliveryInfo] = useAtom(deliveryInfoAtom);
+
   const handleClick = () => {
-    setIsClicked((prevState) => !prevState); // 이전 상태를 반전시킴
-    setIsDefault(isClicked);
+    // 버튼이 클릭되면 isDefault를 반전시키고, 동시에 deliveryInfo의 isDefault도 변경합니다.
+    setIsClicked((prevState) => !prevState);
+    setIsDefault((prevState) => !prevState); // isDefault 상태를 반전시킴
     setDeliveryInfo((prevDeliveryInfo) => ({
       ...prevDeliveryInfo,
-      isDefault: isDefault,
+      isDefault: !isDefault, // isDefault 값을 반전시킴
     }));
   };
 
