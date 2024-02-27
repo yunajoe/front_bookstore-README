@@ -5,10 +5,13 @@ import useShowDropDown from '@/hooks/useShowDropDown';
 import { MutableRefObject, useRef } from 'react';
 import router from 'next/router';
 import { signOut } from 'next-auth/react';
+import { useAtom } from 'jotai';
+import { SigninMethodAtom } from '@/store/state';
 
 function MyPageButton() {
   const ref = useRef() as MutableRefObject<HTMLImageElement>;
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
+  const [_, setSigninMethod] = useAtom(SigninMethodAtom);
 
   const handleKebabClick = () => {
     setShowOptions(!showOptions);
@@ -19,7 +22,8 @@ function MyPageButton() {
   };
 
   const handleLogoutClick = () => {
-    signOut({callbackUrl:'/signin'})
+    setSigninMethod(null);
+    signOut({ callbackUrl: '/signin' });
   };
 
   return (
