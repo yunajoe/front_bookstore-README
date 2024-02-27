@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useUpdateBookmark } from './api/useUpdateBookmark';
 
-function useClickBookmarkButton({bookId=0, marked=false, count=0}) {
+function useClickBookmarkButton({ bookId = 0, marked = false, count = 0 }) {
   const [isBookmarked, setIsBookMarked] = useState(marked);
   const [bookmarkCount, setBookmarkCount] = useState(count);
   
@@ -16,7 +16,6 @@ function useClickBookmarkButton({bookId=0, marked=false, count=0}) {
     },
     onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
   });
-
   return {
     updateBookmark, isBookmarkPending, isBookmarked, bookmarkCount
   }
