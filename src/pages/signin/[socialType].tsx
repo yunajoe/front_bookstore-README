@@ -18,25 +18,24 @@ function SocialPage() {
   console.log('type: ', myType);
   console.log('code: ', code);
 
-  const { data, isSuccess, isError, error } = useQuery({
+  const { data, isSuccess, isError, error, isLoading } = useQuery({
     queryKey: [''],
     queryFn: () => getSocialLogin(myType, code as string),
     enabled: !!code,
-    retry: 10,
+    retry: 5,
   });
 
   const handleSocialLogin = async () => {
     if (data) {
-      let token = data ? data?.Authentication.substr(7) : '';
+      let token = data ? data?.data.Authentication.substr(7) : '';
       const result = await signIn('social-credentials', {
-        email: data?.email,
+        email: data?.data.email,
         socialType: myType,
-        memberId: data?.memberId,
+        memberId: data?.data.memberId,
         accessToken: token,
         redirect: false,
         callbackUrl: '/',
       });
-      console.log(result);
       router.push('/');
     }
     if (isError) {
@@ -45,6 +44,10 @@ function SocialPage() {
     if (isSuccess) {
       console.log('success found!!: ', isSuccess);
     }
+    if (isLoading) {
+      console.log('is loading...!!: ', isLoading);
+    }
+    console.log(data);
   };
   useEffect(() => {
     handleSocialLogin();
