@@ -46,7 +46,6 @@ function SocialPage() {
       console.log('success found!!: ', isSuccess);
     }
   };
-
   useEffect(() => {
     handleSocialLogin();
   }, []);
