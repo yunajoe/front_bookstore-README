@@ -1,4 +1,4 @@
-import { OnClickProps } from '@/types/onClickType';
+import { OnClickProps } from '@/types/api/onClickType';
 import ModalContainer from '@/components/modal/modalContainer';
 import ModalLayout from '@/components/modal/modalLayout';
 import FindAddressForm from '@/components/modal/findAddress/findAddressForm';

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import CategoryIcon from '@/public/icons/CategoryIcon.svg';
-import { OnClickProps } from '@/types/onClickType';
+import { OnClickProps } from '@/types/api/onClickType';
 
 function CategoryTabButton({ onClick }: OnClickProps) {
   return (

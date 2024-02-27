@@ -3,7 +3,7 @@ import ScrollToTopButton from '@/components/button/scrollToTopButton';
 import { useAtom } from 'jotai';
 import { pointVisibleAtom } from '@/store/state';
 import useInfinite from '@/hooks/useInfinite';
-import MainLayout from './mainLayout';
+import MainLayout from '@/components/layout/mainLayout';
 
 interface MyOrderPageLayoutProps {
   dropDown: ReactNode;

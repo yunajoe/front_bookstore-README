@@ -29,6 +29,7 @@ export interface DeliveryId {
 const getDelivery = async (id: number | null) => {
   const result = await instance.get(`delivery/${id}`);
   return result.data.data;
+  return result.data.data;
 };
 
 export const useGetDelivery = (id: number | null) => {

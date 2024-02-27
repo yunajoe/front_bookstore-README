@@ -6,7 +6,7 @@ import { useAtom } from 'jotai';
 import { CurrentPageStateAtom, chooseBookIdAtom } from '@/store/state';
 import PreviewBookInfoPagination from '@/components/modal/addCommunityCard/previewBookInfoPagination';
 import Input from '@/components/input/input';
-import NoData from './noData';
+import NoData from '@/components/modal/addCommunityCard/noData';
 import { usePostCommunity, usePutCommunity } from '@/api/community';
 import { useSession } from 'next-auth/react';
 import { AddCommunityCardProps } from '.';

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import ScrollToTopButton from '@/components/button/scrollToTopButton';
-import MainLayout from './mainLayout';
+import MainLayout from '@/components/layout/mainLayout';
 
 interface SettingPageLayoutProps {
   main: ReactNode;

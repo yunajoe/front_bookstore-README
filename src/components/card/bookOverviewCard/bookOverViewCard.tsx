@@ -9,7 +9,7 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
 import { useAddToBasket } from '@/hooks/api/useAddToBasket';
-import MobileBookOverViewCard from './bookOverviewMobile';
+import MobileBookOverViewCard from '@/components/card/bookOverviewCard/bookOverviewMobile';
 import { useSetAtom } from 'jotai';
 import { PayMentAtom } from '@/types/cartType';
 import { basketItemList } from '@/store/state';
@@ -45,7 +45,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
       bookTitle: book.bookTitle,
       price: book.price,
       authors: book.authors,
-      count: 1,
+      quantity: book.quantityCount,
     },
   ];
   const handleAddToBookmark = () => {
