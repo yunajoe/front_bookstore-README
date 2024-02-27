@@ -3,7 +3,7 @@
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 
-import { PayMentAtom } from '@/types/cartType';
+import { PayMentAtom } from '@/types/api/cart';
 import { basketItemList } from '@/store/state';
 import { useSession } from 'next-auth/react';
 

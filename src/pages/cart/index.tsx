@@ -5,7 +5,7 @@ import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
 import useDeleteBasketQuery from '@/hooks/useDeleteBasketQuery';
 import useGetBasKetQuery from '@/hooks/useGetBasKetQuery';
-import { CartItem } from '@/types/cartType';
+import { CartItem } from '@/types/api/cart';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';

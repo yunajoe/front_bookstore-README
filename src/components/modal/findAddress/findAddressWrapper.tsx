@@ -1,4 +1,4 @@
-import { Address } from '@/types/address';
+import { Address } from '@/types/api/address';
 import AddressItem from '@/components/modal/findAddress/AddressItem';
 
 function FindAddressWrapper({ addressData }: { addressData: Address[] }) {

@@ -1,4 +1,4 @@
-import { BookOverviewType } from '@/types/bookOverviewType';
+import { BookOverviewType } from '@/types/api/bookOverviewType';
 import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
 import TestImage2 from '@/public/images/SampleBookCover2.jpeg';
 import TestImage3 from '@/public/images/SampleBookCover3.jpeg';

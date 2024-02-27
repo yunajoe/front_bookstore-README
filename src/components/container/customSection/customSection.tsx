@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { CusTomBookType, PreferredGenre } from '@/types/customPageType';
+import { CusTomBookType, PreferredGenre } from '@/types/api/customPageType';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import { filteredBooks } from '@/utils/compareBooks';
 import VacantCustomLayout from '@/components/layout/vacantCustomLayout';

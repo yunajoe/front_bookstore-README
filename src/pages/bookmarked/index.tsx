@@ -4,7 +4,7 @@ import BookMarkedHeader from '@/components/header/bookmarkedHeader';
 import useBookMarkInfiniteQuery from '@/hooks/useBookMarkInfiniteQuery';
 import useDeleteBookMarkMuation from '@/hooks/useDeleteBookMarkMuation';
 import useInfinite from '@/hooks/useInfinite';
-import { BookMarkListData } from '@/types/bookMarkType';
+import { BookMarkListData } from '@/types/api/bookmark';
 import { threeDigitCommma } from '@/utils/threeDigitComma';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';

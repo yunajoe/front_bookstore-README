@@ -1,4 +1,4 @@
-import { BookOverviewType2 } from '@/types/bookOverviewType';
+import { BookOverviewType2 } from '@/types/api/bookOverviewType';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import LikeButton from '@/components/button/likeButton';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ import formatDate from '@/hooks/useFormatDate';
 import { useAddToBasket } from '@/hooks/api/useAddToBasket';
 import MobileBookOverViewCard from '@/components/card/bookOverviewCard/bookOverviewMobile';
 import { useSetAtom } from 'jotai';
-import { PayMentAtom } from '@/types/cartType';
+import { PayMentAtom } from '@/types/api/cart';
 import { basketItemList } from '@/store/state';
 import { useUpdateBookmark } from '@/hooks/api/useUpdateBookmark';
 import useEditAuthorsName from '@/hooks/common/useEditAuthorsName';

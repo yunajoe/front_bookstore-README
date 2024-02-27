@@ -70,3 +70,5 @@ export interface BookData extends BookmarksType {
   updateDate: string | null;
   statics: BookStaticType;
 }
+
+export type BookDetailNavLocationType = 'information' | 'review' | 'currency';

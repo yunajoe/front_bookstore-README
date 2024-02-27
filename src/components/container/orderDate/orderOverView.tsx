@@ -1,5 +1,5 @@
 import { ORDERSTATUS } from '@/constants/orderStatus';
-import { OrderOverViewItem } from '@/types/deliveryType';
+import { OrderOverViewItem } from '@/types/api/delivery';
 import React from 'react';
 
 export type OrderOverViewProps = {

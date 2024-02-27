@@ -7,13 +7,14 @@ export interface GetRefund {
   deliveryId: number;
   bookTitle: string;
   authors: string;
+  bookPrice: number;
 }
 
-function GetRefund({ onClick, deliveryId, bookTitle, authors }: GetRefund) {
+function GetRefund({ onClick, deliveryId, bookTitle, authors, bookPrice }: GetRefund) {
   return (
     <ModalLayout onClick={onClick}>
       <ModalContainer onClick={onClick} title="교환/환불 신청하기">
-        <GetRefundForm onClick={onClick} deliveryId={deliveryId} bookTitle={bookTitle} authors={authors} />
+        <GetRefundForm onClick={onClick} deliveryId={deliveryId} bookTitle={bookTitle} authors={authors} bookPrice={bookPrice}/>
       </ModalContainer>
     </ModalLayout>
   );

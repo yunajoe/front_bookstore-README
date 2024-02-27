@@ -4,7 +4,7 @@ import {
   CusTomBookType,
   PreferredGenre,
   SelectedGenre,
-} from '@/types/customPageType';
+} from '@/types/api/customPageType';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import CustomPageGenreButton from '@/components/button/genre/customPageGenreButton';
 import Link from 'next/link';

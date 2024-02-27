@@ -1,5 +1,5 @@
 import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';
-import { CartItem } from '@/types/cartType';
+import { CartItem } from '@/types/api/cart';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';

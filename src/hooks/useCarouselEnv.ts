@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { EnvType } from '@/types/carouselType';
+import { EnvType } from '@/types/api/carouselType';
 import useClientEffect from '@/hooks/useClientEffect';
 import useResizeEffect from '@/hooks/useResizeEffect';
 

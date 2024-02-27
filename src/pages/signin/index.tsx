@@ -4,7 +4,7 @@ import {
   PasswordInput,
   TextInput,
 } from '@/components/input/signInput/signInput';
-import { SignValueType } from '@/types/signType';
+import { SignValueType } from '@/types/api/auth';
 import { checkEmail } from '@/utils/checkSignInSignOut';
 import Image from 'next/image';
 import Link from 'next/link';

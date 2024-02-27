@@ -1,5 +1,5 @@
 import { atom, useAtom } from 'jotai';
-import { Address } from '@/types/address';
+import { Address } from '@/types/api/address';
 export const zipNoAtom = atom('');
 export const roadAddrAtom = atom('');
 export const jibunAddrAtom = atom('');
