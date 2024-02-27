@@ -1,8 +1,9 @@
-import { SocialType, getSocialLogin } from '@/api/social';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { useEffect } from 'react';
+
+import { SocialType, getSocialLogin } from '@/api/social';
 
 function SocialPage() {
   const router = useRouter();
@@ -16,10 +17,11 @@ function SocialPage() {
 
   console.log('type: ', myType);
   console.log('code: ', code);
+
   const { data } = useQuery({
     queryKey: [''],
     queryFn: () => getSocialLogin(myType, code as string),
-    enabled: !!socialType,
+    enabled: !!code,
     retry: 3,
   });
 
@@ -27,18 +29,18 @@ function SocialPage() {
     if (!data) {
       router.push('/signin');
       return;
-    }
-    let token = data ? data?.Authentication.substr(7) : '';
-    const result = await signIn('social-credentials', {
-      email: data?.email,
-      socialType: myType,
-      memberId: data?.memberId,
-      accessToken: token,
-      redirect: false,
-      callbackUrl: '/',
-    });
-    if (result && result?.url && typeof window !== 'undefined') {
-      window.location.href = result.url;
+    } else {
+      let token = data ? data?.Authentication.substr(7) : '';
+      const result = await signIn('social-credentials', {
+        email: data?.email,
+        socialType: myType,
+        memberId: data?.memberId,
+        accessToken: token,
+        redirect: false,
+        callbackUrl: '/',
+      });
+      console.log(result);
+      router.push('/');
     }
   };
 
