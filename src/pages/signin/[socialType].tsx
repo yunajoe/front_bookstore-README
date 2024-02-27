@@ -17,6 +17,7 @@ function SocialPage() {
 
   console.log('type: ', myType);
   console.log('code: ', code);
+
   const { data } = useQuery({
     queryKey: [''],
     queryFn: () => getSocialLogin(myType, code as string),
