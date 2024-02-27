@@ -1,25 +1,29 @@
 import BookPaymentCardList from '@/components/card/bookPaymentCard/bookPaymentCardList';
 import InfoCard from '@/components/card/infoCard';
 import TitleContentCard from '@/components/card/titleContentCard';
-import { bookOrderTestData2 } from '@/pages/api/mock/bookOrderMock';
 import { DELIVERY_INFO, PAYMENT_INFO } from 'src/constants/payment';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
-
+import { deliveryIdAtom } from '@/store/deliveryInfo';
+import { useAtom } from 'jotai';
+import { useGetDelivery } from '@/api/delivery';
 //TODO : data 받을 예정. 예시임
-const DcontentData = [
-  '리드미',
-  '01012345678',
-  '(12345) 경남 성남시 분당구 불정로 6 그린팩토리',
-  '부재 시 경비실에 맡겨주세요',
-];
-const PcontentData = ['신용카드', '22,500원'];
-const orderDate = '2024.02.05';
 
 function OrderCompletedSection({
   paymentDetail = true,
 }: {
   paymentDetail?: boolean;
 }) {
+  const [deliveryId, setDeliveryId] = useAtom(deliveryIdAtom);
+  const data = useGetDelivery(deliveryId?.data || null);
+  const DcontentData = [
+    data?.data?.name,
+    data?.data?.phone,
+    data?.data?.address,
+    data?.data?.message,
+  ];
+
+  const PcontentData = [data?.data?.paymentMethod, data?.data?.paymentAmount];
+  const orderDate = data?.data?.createDate;
   return (
     <div className="flex w-[1084px] flex-col gap-60 mobile:w-330 tablet:w-[688px] ">
       {paymentDetail && (
@@ -41,7 +45,10 @@ function OrderCompletedSection({
             titleData={PAYMENT_INFO}
             contentData={PcontentData}
           />
-          <BookPaymentCardList bookData={bookOrderTestData2} label="주문상품" />
+          <BookPaymentCardList
+            bookData={data?.data?.orderDto.orderBook}
+            label="주문상품"
+          />
           <div className="w-full pc:hidden">
             <TotalPriceCard
               checkbox={false}
