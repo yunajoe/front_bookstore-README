@@ -2,7 +2,6 @@ import LoadingSpinner from '@/components/chip/loadingSpinner';
 import useGetCategory from '@/hooks/useGetCategory';
 import { Router } from 'next/router';
 import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 
 function InitialContainer() {
   const [loading, setLoading] = useState(false);
@@ -25,13 +24,7 @@ function InitialContainer() {
   }, []);
 
   useGetCategory();
-  return (
-    <>
-      {loading &&
-          <LoadingSpinner />
-        }
-    </>
-  );
+  return <>{loading && <LoadingSpinner />}</>;
 }
 
 export default InitialContainer;

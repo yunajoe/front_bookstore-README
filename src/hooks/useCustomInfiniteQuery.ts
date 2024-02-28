@@ -30,7 +30,7 @@ function useCustomInfiniteQuery({
   getNextPageParamsFunc,
   selectFunc,
 }: useCustomInfiniteQueryProps) {
-  const { fetchNextPage, isFetchingNextPage, hasNextPage, isRefetching, data } =
+  const { fetchNextPage, isFetchingNextPage, hasNextPage, isRefetching, data, isLoading } =
     useInfiniteQuery({
       queryKey: [...queryKey],
       queryFn: ({ pageParam = initialCursorId }) => {
@@ -55,7 +55,7 @@ function useCustomInfiniteQuery({
     }
   }, [refetchTrigger, isRefetching, hasNextPage])
 
-  return {data, isFetchingNextPage, isRefetching, hasNextPage };
+  return {data, isFetchingNextPage, isRefetching, hasNextPage, isLoading };
 }
 
 export default useCustomInfiniteQuery
