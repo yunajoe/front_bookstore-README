@@ -8,9 +8,9 @@ import { useAtom, useAtomValue } from 'jotai';
 import { basketItemList } from '@/store/state';
 import { DeliveryOrderBook, postAxiosDelivery } from '@/api/delivery';
 import { PostDeliveryOption } from '@/api/delivery';
-//import { usePostDeliveryMutation } from '@/hooks/usePostDeliveryMutatation';
 import { useGetOrderTitle } from '@/hooks/common/useGetOrderTitle';
 import { deliveryIdAtom } from '@/store/deliveryInfo';
+import useAddressSplitter from '@/hooks/common/useAddressSplitter';
 interface PaymentButtonProps {
   isAllChecked?: boolean;
 }
@@ -24,7 +24,6 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
   const booksInfo = useAtomValue(basketItemList);
   const router = useRouter();
   const bookPrice = useCalculateProductsPrice();
-  const member = useGetMember();
   let clicked = false;
   const delivery = bookPrice > 10000 ? 0 : 3000;
   const totalPrice = useCalculateTotalPrice({
@@ -47,7 +46,14 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
 
   const orderTitle = useGetOrderTitle();
   // 결제창 함수
-  function kakaoPay(useremail: string, username: string) {
+
+  function inicisPay(
+    useremail: string,
+    username: string,
+    userphone: string,
+    userAddr: string,
+    userPostcode: string,
+  ) {
     if (typeof window !== 'undefined') {
       const IMP = window.IMP;
       const today = new Date();
@@ -61,26 +67,28 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
       IMP.init('imp33057768'); // 가맹점 식별코드
       IMP.request_pay(
         {
-          pg: 'kakaopay.TC0ONETIME', // PG사 코드표에서 선택
+          pg: 'html5_inicis', // PG사 코드표에서 선택
           pay_method: 'card', // 결제 방식
-          merchant_uid: 'IMP' + makeMerchantUid, // 결제 고유 번호
+          merchant_uid: 'INIpayTest' + makeMerchantUid, // 결제 고유 번호
           name: orderTitle, // 상품명
           amount: totalPrice, // 가격
           buyer_email: useremail,
           buyer_name: username,
+          buyer_tel: userphone,
+          buyer_addr: userAddr,
+          buyer_postcode: userPostcode,
           m_redirect_url:
             window.location.protocol +
             '//' +
             window.location.host +
-            '/paymented', //TODO: 모바일 결제 시 이동페이지, 추후 수정
+            '/paymented',
         },
         async function (rsp: response) {
-          if (rsp.success) {
-            //결제 성공시
-            router.push('/paymented');
+          if (!rsp.success) {
+            notify({ type: 'error', text: '결제에 실패했습니다.' });
+            router.push('/order');
           } else {
-            // 결제 실패시
-            notify({ type: 'error', text: '결제에 실패했어요 😭' });
+            router.push('/paymented');
           }
         },
       );
@@ -93,21 +101,27 @@ function PaymentButton({ isAllChecked }: PaymentButtonProps) {
     phone: deliveryInfo.phone,
     address: deliveryInfo.address,
     message: deliveryInfo.message || '',
-    paymentMethod: 'KAKAO_PAY',
+    paymentMethod: 'card',
     paymentAmount: totalPrice,
     basketIds: basketIds,
     orderBooks: orderBooks,
     basicAddress: deliveryInfo.isDefault || false,
   };
+
   const isAllSubmitted: boolean =
     !!deliveryInfo.name && !!deliveryInfo.phone && !!deliveryInfo.address;
-
+  const userAddr = useAddressSplitter({ address: deliveryInfo.address })[1];
+  const userPostcode = useAddressSplitter({ address: deliveryInfo.address })[0];
   async function handlePaymentButtonClick() {
     clicked = !clicked;
     if (isAllChecked && isAllSubmitted) {
       const user_email = data?.email;
       const username = deliveryInfo.name;
-      kakaoPay(user_email, username);
+      const userphone = deliveryInfo.phone;
+
+      inicisPay(user_email, username, userphone, userAddr, userPostcode);
+  
+
       const { data: id } = await postAxiosDelivery(orderInfo);
       setDeliveryId(id);
     } else if (!isAllChecked) {
