@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useGetBook, usePutBook } from '@/api/book';
 import { getIsBookmarked } from '@/api/bookmark';
@@ -15,7 +15,7 @@ import Spacing from '@/components/container/spacing/spacing';
 import SideOrderNavigator from '@/components/orderNavigator/sideOrderNavigator';
 import FooterOrderNavitgator from '@/components/orderNavigator/footerOrderNavitgator';
 import SkeletonBookDetailCard from '@/components/skeleton/bookDetailCard/skeleton';
-import useClickBookmarkButton from '@/hooks/useClickBookmarkButton';
+import { useUpdateBookmark } from '@/hooks/api/useUpdateBookmark';
 
 type BookDetailNavLocationType = 'information' | 'review' | 'currency';
 
@@ -23,11 +23,13 @@ export default function BookDetailPage() {
   const router = useRouter();
   const { status } = useSession();
   const { bookId } = router.query;
+
   // 페이지 하단 상품정보, 리뷰, 배송교환환불 탭을 나타내는 state
   const [location, setLocation] =
     useState<BookDetailNavLocationType>('information');
   // 책 구매 수량 state
   const [orderCount, setOrderCount] = useState(1);
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useGetBook({
     endpoint: `${bookId}/detail`,
@@ -37,21 +39,28 @@ export default function BookDetailPage() {
     enabled: !!bookId,
   });
 
-  let bookData = data?.data;
-
   // 로그인 한 상태라면 찜 여부 체크하기
   const { data: bookmarkData } = useQuery({
-    queryKey: ['temp'],
+    queryKey: ['book', 'bookmark'],
     queryFn: () => getIsBookmarked(String(bookId)),
-    enabled: status === 'authenticated',
+    enabled: !!(status === 'authenticated' && bookId),
   });
 
-  const { isBookmarked, bookmarkCount, isBookmarkPending, updateBookmark } =
-    useClickBookmarkButton({
-      bookId: Number(bookId),
-      marked: bookmarkData?.marked ?? false,
-      count: bookData?.bookmarkCount,
-    });
+  let bookData = data?.data;
+  const [isBookmarked, setIsBookMarked] = useState(bookmarkData?.marked);
+  const [bookmarkCount, setBookmarkCount] = useState(bookData?.bookmarkCount);
+
+  const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
+    bookId: Number(bookId),
+    onChangeBookmarkCount: () => {
+      if (isBookmarked) {
+        setBookmarkCount(bookmarkCount - 1);
+      } else {
+        setBookmarkCount(bookmarkCount + 1);
+      }
+    },
+    onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
+  });
 
   const { mutate: handleViewCountMutate } = usePutBook({
     bookId: Number(bookId),
@@ -65,6 +74,9 @@ export default function BookDetailPage() {
       // 로그인 한 상태라면 조회수 1 증가
       handleViewCountMutate();
     }
+    queryClient.invalidateQueries({
+      queryKey: ['book'],
+    });
   }, [status, isError]);
 
   return (
@@ -81,7 +93,9 @@ export default function BookDetailPage() {
             price={bookData.price}
             categories={bookData.categories}
             authors={bookData.authors}
-            bookmarkCount={bookmarkCount}
+            bookmarkCount={
+              bookmarkCount > 0 ? bookmarkCount : bookData.bookmarkCount
+            }
             isBookmarked={isBookmarked}
             handleBookmarkClick={updateBookmark}
             publishedDate={bookData.publishedDate}
@@ -123,18 +137,20 @@ export default function BookDetailPage() {
           </div>
 
           <div className="hidden pc:flex pc:pt-50">
-            <SideOrderNavigator
-              bookId={bookId as string}
-              bookImgUrl={bookData?.bookImgUrl ?? './'}
-              bookTitle={bookData?.bookTitle}
-              authors={bookData?.authors}
-              isBookmarked={isBookmarked}
-              isBookmarkPending={isBookmarkPending}
-              handleBookmarkClick={updateBookmark}
-              price={bookData?.price ?? 0}
-              orderCount={orderCount}
-              setOrderCount={setOrderCount}
-            />
+            {location === 'information' && (
+              <SideOrderNavigator
+                bookId={bookId as string}
+                bookImgUrl={bookData?.bookImgUrl ?? './'}
+                bookTitle={bookData?.bookTitle}
+                authors={bookData?.authors}
+                isBookmarked={isBookmarked}
+                isBookmarkPending={isBookmarkPending}
+                handleBookmarkClick={updateBookmark}
+                price={bookData?.price ?? 0}
+                orderCount={orderCount}
+                setOrderCount={setOrderCount}
+              />
+            )}
           </div>
         </section>
 

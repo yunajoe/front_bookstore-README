@@ -16,7 +16,7 @@ interface BookDetailInfoProps {
   categories: [string, string];
   isBookmarked: boolean;
   handleBookmarkClick: () => void;
-  bookmarkCount: number;
+  bookmarkCount?: number;
   authors?: string[] | string;
   publisher?: string;
   publishedDate: string;

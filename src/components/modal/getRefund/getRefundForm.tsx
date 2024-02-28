@@ -12,7 +12,7 @@ import Input from '@/components/input/input';
 import { usePutDelivery } from '@/api/delivery';
 import { GetRefund } from '@/components/modal/getRefund/';
 
-function GetRefundForm({onClick, deliveryId, bookTitle, authors} : GetRefund) {
+function GetRefundForm({onClick, deliveryId, bookTitle, authors, bookPrice} : GetRefund) {
   const [selectedItem, setSelectedItem] = useState(REFUND[0]);
   const onSelectedItem = (menu: string) => {
     setSelectedItem(menu);
@@ -75,7 +75,7 @@ function GetRefundForm({onClick, deliveryId, bookTitle, authors} : GetRefund) {
             />
           }
         />
-        <RefundPrice refundPrice="19,800" />
+        <RefundPrice refundPrice={bookPrice} />
         <RegisterButton type='submit' disabled={isButtonActive}>
           교환/환불 신청하기
         </RegisterButton>

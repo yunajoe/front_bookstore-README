@@ -1,7 +1,5 @@
-import ModalContainer from '@/components/modal/modalContainer';
 import ModalLayout from '@/components/modal/modalLayout';
-import { OnClickProps } from '@/types/onClickType';
-import ProfileModalForm from './profileModalForm';
+import ProfileModalForm from '@/components/modal/profile/profileModalForm';
 import { Member } from '@/types/api/member';
 
 interface ProfileModalProps {
@@ -12,7 +10,12 @@ interface ProfileModalProps {
 function ProfileModal({ onClick, profileData }: ProfileModalProps) {
   return (
     <ModalLayout onClick={onClick}>
-      <ProfileModalForm onClick={onClick} profileImage={profileData.profileImage} email={profileData.email} nickname={profileData.nickname} />
+      <ProfileModalForm
+        onClick={onClick}
+        profileImage={profileData.profileImage}
+        email={profileData.email}
+        nickname={profileData.nickname}
+      />
     </ModalLayout>
   );
 }

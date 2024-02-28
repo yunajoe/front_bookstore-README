@@ -1,4 +1,4 @@
-import MyReviewCard from './myReviewCard';
+import MyReviewCard from '@/components/card/bookReviewCard/myReviewCard';
 import { MyReviewData } from '@/types/api/review';
 
 interface MyReviewCardListProps {

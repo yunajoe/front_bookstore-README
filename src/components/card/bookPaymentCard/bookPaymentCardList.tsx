@@ -1,7 +1,8 @@
-import { PayMentAtom } from '@/types/cartType';
-import BookPaymentCard from './bookPaymentCard';
+import { PayMentAtom } from '@/types/api/cart';
+import BookPaymentCard from '@/components/card/bookPaymentCard/bookPaymentCard';
+import { OrderBook } from '@/types/api/delivery';
 interface BookPaymentCardListProps {
-  bookData: PayMentAtom[];
+  bookData: PayMentAtom[] | OrderBook[];
   label: string;
 }
 

@@ -2,9 +2,9 @@
 
 import { ReactNode } from 'react';
 
-import MainLayout from './mainLayout';
+import MainLayout from '@/components/layout/mainLayout';
 import Sidebar from '@/components/sidebar/sidebar';
-import { SidebarProps } from '@/types/sidebarType';
+import { SidebarProps } from '@/types/api/sidebarType';
 
 interface SidebarLayoutProps extends SidebarProps {
   children?: ReactNode;

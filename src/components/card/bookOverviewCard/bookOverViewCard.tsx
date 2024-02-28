@@ -1,4 +1,4 @@
-import { BookOverviewType2 } from '@/types/bookOverviewType';
+import { BookOverviewType2 } from '@/types/api/bookOverviewType';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import LikeButton from '@/components/button/likeButton';
 import { useState } from 'react';
@@ -9,9 +9,9 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
 import { useAddToBasket } from '@/hooks/api/useAddToBasket';
-import MobileBookOverViewCard from './bookOverviewMobile';
+import MobileBookOverViewCard from '@/components/card/bookOverviewCard/bookOverviewMobile';
 import { useSetAtom } from 'jotai';
-import { PayMentAtom } from '@/types/cartType';
+import { PayMentAtom } from '@/types/api/cart';
 import { basketItemList } from '@/store/state';
 import { useUpdateBookmark } from '@/hooks/api/useUpdateBookmark';
 import useEditAuthorsName from '@/hooks/common/useEditAuthorsName';
@@ -36,7 +36,6 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     },
     onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
   });
-
   const setNowPayItem = useSetAtom(basketItemList);
   const setNowPayItemList: PayMentAtom[] = [
     {
@@ -45,13 +44,13 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
       bookTitle: book.bookTitle,
       price: book.price,
       authors: book.authors,
-      count: 1,
+      quantity: book.quantityCount,
+      count: book.quantityCount,
     },
   ];
   const handleAddToBookmark = () => {
     updateBookmark();
   };
-
   const handleAddToBasket = () => {
     addToBasket();
   };

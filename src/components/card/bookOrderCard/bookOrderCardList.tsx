@@ -1,5 +1,5 @@
-import { OrderBookData } from '@/types/bookOrderType';
-import BookOrderCard from './bookOrderCard';
+import { OrderBookData } from '@/types/api/order';
+import BookOrderCard from '@/components/card/bookOrderCard/bookOrderCard';
 import OrderCount from '@/components/container/orderDate/orderCount';
 
 export interface BookOrderCardListProps {
@@ -18,7 +18,7 @@ function BookOrderCardList({ orderData }: BookOrderCardListProps) {
               <OrderCount
                 orderCount={order.orderBook.length}
                 orderDate={order.createDate}
-                orderId={order.orderId}
+                deliveryId={order.deliveryId}
               />
               <div className="flex flex-col gap-20">
                 {order.orderBook.map((bookData) => (

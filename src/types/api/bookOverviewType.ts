@@ -1,5 +1,5 @@
 import { StaticImageData } from 'next/image';
-import { BookData } from './api/book';
+import { BookData } from '@/types/api/book';
 
 interface BookOverviewType {
   book: {

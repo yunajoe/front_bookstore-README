@@ -3,27 +3,33 @@ import InfoCard from '@/components/card/infoCard';
 import TitleContentCard from '@/components/card/titleContentCard';
 import { DELIVERY_INFO, PAYMENT_INFO } from 'src/constants/payment';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
-import { deliveryIdAtom } from '@/store/deliveryInfo';
-import { useAtom } from 'jotai';
-import { useGetDelivery } from '@/api/delivery';
-import useFormatDate from '@/hooks/useFormatDate';
+import { DeliveryItem, OrderBook } from '@/types/api/delivery';
+
+interface OrderCompletedSectionProps {
+  orderDate?: string;
+  paymentDetail?: boolean;
+  name: string;
+  phone: string;
+  address: string;
+  message: string;
+  paymentAmount: number;
+  paymentMethod: string;
+  bookData: OrderBook[];
+}
 
 function OrderCompletedSection({
+  orderDate = '2023.04.01',
   paymentDetail = true,
-}: {
-  paymentDetail?: boolean;
-}) {
-  const [deliveryId, setDeliveryId] = useAtom(deliveryIdAtom);
-  const data = useGetDelivery(deliveryId);
-  const DcontentData = [
-    data?.data?.name,
-    data?.data?.phone,
-    data?.data?.address,
-    data?.data?.message,
-  ];
-
-  const PcontentData = [data?.data?.paymentMethod, data?.data?.paymentAmount];
-  const orderDate = useFormatDate(data?.data?.createDate);
+  name,
+  phone,
+  address,
+  message,
+  paymentAmount,
+  paymentMethod,
+  bookData,
+}: OrderCompletedSectionProps) {
+  const DcontentData = [name, phone, address, message]
+  const PcontentData = [paymentMethod, String(paymentAmount)]
   return (
     <div className="flex w-[1084px] flex-col gap-60 mobile:w-330 tablet:w-[688px] ">
       {paymentDetail && (
@@ -45,15 +51,13 @@ function OrderCompletedSection({
             titleData={PAYMENT_INFO}
             contentData={PcontentData}
           />
-          <BookPaymentCardList
-            bookData={data?.data?.orderDto.orderBook}
-            label="주문상품"
-          />
+          <BookPaymentCardList bookData={bookData} label="주문상품" />
           <div className="w-full pc:hidden">
             <TotalPriceCard
               checkbox={false}
               button={false}
               color="text-primary"
+              price={paymentAmount}
             />
           </div>
         </div>
@@ -62,6 +66,7 @@ function OrderCompletedSection({
             checkbox={false}
             button={false}
             color="text-primary"
+            price={paymentAmount}
           />
         </div>
       </div>

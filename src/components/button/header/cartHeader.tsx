@@ -1,4 +1,4 @@
-import { CartItem } from '@/types/cartType';
+import { CartItem } from '@/types/api/cart';
 import { SetStateAction } from 'jotai';
 import Image from 'next/image';
 import React from 'react';

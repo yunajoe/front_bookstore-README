@@ -1,4 +1,4 @@
-import { PreviewBookInfoSizeProps } from '@/types/previewBookInfoType';
+import { PreviewBookInfoSizeProps } from '@/types/api/previewBookInfoType';
 import { IMAGE_SIZE } from 'src/constants/style/previewBookImageSize';
 
 function SkeletonPreviewBookImage({ size }: PreviewBookInfoSizeProps) {

@@ -60,6 +60,7 @@ function BookOrderCard({
       deliveryStatus: 'CONFIRM',
     });
   };
+  
   return (
     <div
       role="card-container"
@@ -120,6 +121,7 @@ function BookOrderCard({
             deliveryId={deliveryId}
             bookTitle={bookTitle}
             authors={authors}
+            bookPrice={bookPrice}
           />
         )}
       </div>

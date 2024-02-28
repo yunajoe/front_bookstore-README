@@ -3,7 +3,7 @@
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 
-import { PayMentAtom } from '@/types/cartType';
+import { PayMentAtom } from '@/types/api/cart';
 import { basketItemList } from '@/store/state';
 import { useSession } from 'next-auth/react';
 
@@ -35,16 +35,17 @@ function usePayNowItem({
       bookTitle: bookTitle,
       price: price,
       authors: authors,
+      quantity: count,
       count: count,
     },
   ];
 
   const handlePayNowButton = () => {
-    if (status === "unauthenticated") {
-      router.push("/signin");
-    return;
+    if (status === 'unauthenticated') {
+      router.push('/signin');
+      return;
     }
-    
+
     setNowPayItem(setNowPayItemList);
     router.push('/order');
   };

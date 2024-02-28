@@ -4,12 +4,12 @@ import BookLabelGrayIcon from '@/public/icons/BookLabelGrayIcon.svg';
 import BookLabelSecondaryIcon from '@/public/icons/BookLabelSecondaryIcon.png';
 import BookLabelBottomIcon from '@/public/icons/BookLabelBottomIcon.svg';
 import BookLabelBottomGrayIcon from '@/public/icons/BookLabelBottomGrayIcon.svg';
-import { PreviewBookInfoProps } from '@/types/previewBookInfoType';
+import { PreviewBookInfoProps } from '@/types/api/previewBookInfoType';
 import { IMAGE_SIZE } from 'src/constants/style/previewBookImageSize';
-import BookTitle from './title';
-import BookAuthors from './authors';
-import BookPrice from './price';
-import BookCategory from './category';
+import BookTitle from '@/components/book/previewBookInfo/title';
+import BookAuthors from '@/components/book/previewBookInfo/authors';
+import BookPrice from '@/components/book/previewBookInfo/price';
+import BookCategory from '@/components/book/previewBookInfo/category';
 import Link from 'next/link';
 
 function PreviewBookInfo({
@@ -49,7 +49,7 @@ function PreviewBookInfo({
           />
           {ranking && (
             <div
-              className={`shadow-indigo-500/40 absolute shadow-lg ${itemsStart ? 'left-17 top-[-2px]' : ' bottom-[-2px] right-0'}`}>
+              className={`shadow-indigo-500/40 absolute shadow-lg ${itemsStart ? 'left-8 top-[-2px]' : ' bottom-[-2px] right-[-2px]'}`}>
               <Image
                 src={
                   itemsStart

@@ -1,4 +1,4 @@
-import { SignUpValueType, SignValueType } from '@/types/signType';
+import { SignUpValueType } from '@/types/api/auth';
 import React from 'react';
 import type { FieldErrors } from 'react-hook-form';
 
